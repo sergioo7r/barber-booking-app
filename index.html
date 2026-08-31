@@ -70,14 +70,14 @@
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans bg-[#0c0c0c] text-zinc-100">
+<body class="min-h-full flex flex-col justify-between font-sans bg-[#0c0c0c] text-zinc-100" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
-       VISTA PÚBLICA (ESTRUCTURA VERTICAL LIMPIA 100% SIN SOLAPAMIENTOS)
+       VISTA PÚBLICA (LANDING PAGE + RESERVAS)
        =================================================================================== -->
   <div id="public-view" class="w-full">
 
-    <!-- NAVBAR FLOTANTE CON SELECTOR ES / EN -->
+    <!-- NAVBAR FLOTANTE CON SELECTOR DROPDOWN DE IDIOMAS (CON ICONO TRADUCCIÓN A/文) -->
     <nav class="sticky top-0 z-40 w-full editorial-glass border-b border-white/[0.08]">
       <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
         <a href="#" class="flex items-center gap-2.5 group">
@@ -88,31 +88,61 @@
           </div>
           <div>
             <span class="font-serif tracking-tight text-sm font-bold text-white block leading-tight">El Barrio</span>
-            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-medium block">Barbershop</span>
+            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-medium block">Barbershop · Triana</span>
           </div>
         </a>
 
-        <!-- SELECTOR RÁPIDO Y LIMPIO ES / EN -->
-        <div class="flex items-center bg-zinc-900 border border-white/10 rounded-full p-0.5 shadow-sm">
+        <!-- DROPDOWN ELEGANTE DE IDIOMAS (ES, EN, FR, IT, DE) CON SÍMBOLO A/文 -->
+        <div class="relative" id="lang-dropdown-container">
           <button
-            id="lang-btn-es"
-            onclick="setLanguage('es')"
-            class="px-2.5 py-1 rounded-full text-xs font-bold transition-all bg-white text-black shadow-sm"
+            id="lang-dropdown-btn"
+            type="button"
+            onclick="toggleLanguageDropdown(event)"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-accent-gold/50 text-xs font-semibold text-zinc-200 transition-all shadow-sm"
+            aria-label="Seleccionar idioma"
           >
-            ES
+            <!-- Icono Traducción A/文 -->
+            <svg class="w-3.5 h-3.5 text-accent-gold" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+            </svg>
+            <span id="active-lang-flag" class="text-xs">🇪🇸</span>
+            <span id="active-lang-text" class="uppercase font-bold tracking-wider text-[11px]">ES</span>
+            <svg class="w-3 h-3 text-zinc-500 transition-transform duration-200" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
           </button>
-          <button
-            id="lang-btn-en"
-            onclick="setLanguage('en')"
-            class="px-2.5 py-1 rounded-full text-xs font-semibold text-zinc-400 hover:text-white transition-all"
+
+          <!-- Menú Flotante Dropdown -->
+          <div
+            id="lang-dropdown-menu"
+            class="hidden absolute right-0 mt-2 w-36 py-1.5 rounded-2xl bg-[#141416]/95 border border-white/10 backdrop-blur-2xl shadow-2xl z-50 overflow-hidden"
           >
-            EN
-          </button>
+            <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs text-zinc-200 hover:bg-white/[0.08] transition-colors">
+              <span class="flex items-center gap-2"><span>🇪🇸</span> Español</span>
+              <span id="check-es" class="text-accent-gold font-bold">✓</span>
+            </button>
+            <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs text-zinc-200 hover:bg-white/[0.08] transition-colors">
+              <span class="flex items-center gap-2"><span>🇬🇧</span> English</span>
+              <span id="check-en" class="text-accent-gold font-bold hidden">✓</span>
+            </button>
+            <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs text-zinc-200 hover:bg-white/[0.08] transition-colors">
+              <span class="flex items-center gap-2"><span>🇫🇷</span> Français</span>
+              <span id="check-fr" class="text-accent-gold font-bold hidden">✓</span>
+            </button>
+            <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs text-zinc-200 hover:bg-white/[0.08] transition-colors">
+              <span class="flex items-center gap-2"><span>🇮🇹</span> Italiano</span>
+              <span id="check-it" class="text-accent-gold font-bold hidden">✓</span>
+            </button>
+            <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs text-zinc-200 hover:bg-white/[0.08] transition-colors">
+              <span class="flex items-center gap-2"><span>🇩🇪</span> Deutsch</span>
+              <span id="check-de" class="text-accent-gold font-bold hidden">✓</span>
+            </button>
+          </div>
         </div>
       </div>
     </nav>
 
-    <!-- CONTENEDOR PRINCIPAL CON FLUJO EN BLOQUE AISLADO -->
+    <!-- CONTENEDOR PRINCIPAL CON FLUJO AISLADO -->
     <main class="max-w-md mx-auto px-4 pt-5 sm:px-5">
 
       <!-- ==================== 1. HERO SECTION ==================== -->
@@ -129,7 +159,7 @@
             <svg class="w-3 h-3 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 7.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="9" r="2.5"/>
             </svg>
-            <span id="hero-badge-location">Casco Antiguo, Sevilla</span>
+            <span id="hero-badge-location">Calle Castilla, Triana, Sevilla</span>
           </div>
         </div>
 
@@ -138,7 +168,7 @@
             Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal
           </h1>
           <p class="text-xs sm:text-sm text-zinc-400 mt-2.5 leading-relaxed font-normal" id="hero-subtitle">
-            Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el centro histórico de Sevilla.
+            Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en Triana, Sevilla.
           </p>
         </div>
 
@@ -148,13 +178,13 @@
             class="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-white text-black font-semibold text-xs uppercase tracking-wider shadow-lg hover:bg-zinc-200 transition-all"
             id="hero-cta"
           >
-            <span>Reservar Cita</span>
+            <span>Reservar cita</span>
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
             </svg>
           </a>
           <a
-            href="https://maps.google.com/?q=Calle+Mayor+14+Sevilla"
+            href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
             target="_blank"
             rel="noopener noreferrer"
             class="h-12 w-12 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-300 hover:text-white hover:border-white/20 transition-all shrink-0"
@@ -167,15 +197,14 @@
         </div>
       </section>
 
-      <!-- ==================== 2. GALERÍA BENTO GRID (TOTALMENTE INDEPENDIENTE) ==================== -->
+      <!-- ==================== 2. GALERÍA BENTO GRID ==================== -->
       <section class="w-full pb-8">
         <div class="flex items-center justify-between px-1 mb-2.5">
-          <h2 class="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold" id="gallery-title">El Espacio & La Experiencia</h2>
+          <h2 class="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold" id="gallery-title">El espacio & la experiencia</h2>
           <span class="text-[10px] text-accent-gold font-medium tracking-wide" id="gallery-tag">Tradición & Estilo</span>
         </div>
 
         <div class="grid grid-cols-3 gap-2.5 w-full">
-          <!-- Foto Principal (Izquierda) -->
           <div class="col-span-2 aspect-[4/3] rounded-2xl overflow-hidden relative border border-white/[0.08] bg-zinc-900">
             <img
               src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80"
@@ -184,11 +213,10 @@
               loading="lazy"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-              <span class="text-[10px] font-medium text-white/90 truncate" id="photo-tag-1">Atención individual y sobria</span>
+              <span class="text-[10px] font-medium text-white/90 truncate" id="photo-tag-1">Atención individual en Triana</span>
             </div>
           </div>
 
-          <!-- Fotos Secundarias (Derecha) -->
           <div class="col-span-1 flex flex-col gap-2.5">
             <div class="flex-1 rounded-xl overflow-hidden relative border border-white/[0.08] bg-zinc-900 aspect-[4/3]">
               <img
@@ -210,16 +238,15 @@
         </div>
       </section>
 
-      <!-- ==================== 3. MÓDULO DE RESERVA (SECCIÓN SEPARADA CON MARGEN CLARO) ==================== -->
+      <!-- ==================== 3. MÓDULO DE RESERVA ==================== -->
       <section id="booking-module" class="w-full pt-6 border-t border-white/[0.08] scroll-mt-20">
 
-        <!-- Cabecera del módulo -->
         <div class="mb-6">
           <span class="text-[10px] uppercase tracking-widest text-accent-gold font-semibold block mb-1" id="module-pretitle">Agenda tu cita</span>
-          <h2 class="font-serif text-2xl font-bold text-white tracking-tight" id="module-title">Reserva de Servicios</h2>
+          <h2 class="font-serif text-2xl font-bold text-white tracking-tight" id="module-title">Reserva de servicios</h2>
         </div>
 
-        <!-- PASO 1: SELECCIÓN DE SERVICIO -->
+        <!-- PASO 1: SERVICIOS -->
         <div class="mb-7">
           <div class="flex items-center justify-between px-1 mb-3">
             <div class="flex items-center gap-2">
@@ -237,15 +264,13 @@
           <div class="flex items-center justify-between px-1 mb-3">
             <div class="flex items-center gap-2">
               <span class="w-5 h-5 rounded-full bg-white/[0.08] border border-white/10 text-[10px] font-bold text-white flex items-center justify-center">2</span>
-              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-2">Fecha y hora</h3>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-2">Selecciona fecha y hora</h3>
             </div>
             <span class="text-[11px] text-accent-gold font-medium tracking-tight" id="selected-date-summary"></span>
           </div>
 
-          <!-- Carrusel de días -->
           <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1 mb-4" id="days-container"></div>
 
-          <!-- Horas Mañana / Tarde -->
           <div class="space-y-3.5">
             <div>
               <div class="flex items-center gap-1.5 mb-2 px-1 text-zinc-500">
@@ -269,19 +294,19 @@
           </div>
         </div>
 
-        <!-- PASO 3: DATOS DEL CLIENTE -->
+        <!-- PASO 3: TUS DATOS DE CONTACTO -->
         <div class="mb-8">
           <div class="flex items-center justify-between px-1 mb-3">
             <div class="flex items-center gap-2">
               <span class="w-5 h-5 rounded-full bg-white/[0.08] border border-white/10 text-[10px] font-bold text-white flex items-center justify-center">3</span>
-              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-3">Tus datos</h3>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-3">Tus datos de contacto</h3>
             </div>
             <span class="text-[11px] text-zinc-500 font-medium" id="lbl-direct-whatsapp">WhatsApp directo</span>
           </div>
 
           <div class="p-4 rounded-2xl bg-surface-card border border-surface-border space-y-3.5 shadow-xl">
             <div>
-              <label for="client-name" class="block text-[11px] font-medium text-zinc-400 mb-1" id="lbl-name">Nombre y apellido *</label>
+              <label for="client-name" class="block text-[11px] font-medium text-zinc-400 mb-1" id="lbl-name">Nombre *</label>
               <input
                 type="text"
                 id="client-name"
@@ -317,11 +342,11 @@
           <div class="flex items-start justify-between gap-2">
             <div>
               <span class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold" id="footer-location-title">Ubicación del Local</span>
-              <p class="text-sm font-semibold text-white mt-0.5" id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo, Sevilla</p>
+              <p class="text-sm font-semibold text-white mt-0.5" id="txt-shop-address">Calle Castilla, Triana, Sevilla</p>
               <p class="text-xs text-zinc-400 mt-0.5" id="footer-hours">Lunes a Sábado · 10:00 - 20:00</p>
             </div>
             <a
-              href="https://maps.google.com/?q=Calle+Mayor+14+Sevilla"
+              href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
               target="_blank"
               rel="noopener noreferrer"
               class="px-3 py-1.5 rounded-lg bg-white/[0.06] border border-white/10 text-xs font-semibold text-white hover:bg-white hover:text-black transition-all inline-flex items-center gap-1.5 shrink-0"
@@ -339,14 +364,14 @@
               <svg class="w-3.5 h-3.5 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
               </svg>
-              <span id="txt-payment-notice">Pago en local (Efectivo / Bizum / Tarjeta)</span>
+              <span id="txt-payment-notice">Pago en local en efectivo o Bizum</span>
             </div>
             <span class="text-zinc-500 font-mono text-[10px]" id="txt-no-fees">Sin comisiones</span>
           </div>
         </div>
 
         <div class="flex items-center justify-between text-[11px] text-zinc-500 py-3">
-          <p id="txt-footer-policy">Barbería El Barrio · Sevilla</p>
+          <p id="txt-footer-policy">Barbería El Barrio · Triana, Sevilla</p>
           <button onclick="openPinModal()" class="flex items-center gap-1 text-zinc-500 hover:text-zinc-300 transition-colors py-1 px-2 rounded">
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -367,7 +392,7 @@
     <div class="w-full max-w-md mx-auto flex items-center gap-3">
       <div class="flex-1 min-w-0 pr-1">
         <div class="flex items-center gap-2">
-          <span class="text-[10px] uppercase font-bold tracking-widest text-accent-gold truncate" id="sticky-service-label">Corte de pelo</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-accent-gold truncate" id="sticky-service-label">Corte clásico</span>
           <span class="text-xs font-bold text-white shrink-0" id="sticky-price-label">15 €</span>
         </div>
         <p class="text-[11px] text-zinc-400 truncate mt-0.5" id="sticky-date-label">Elige día y hora</p>
@@ -383,7 +408,7 @@
         <svg class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.5.07-1.14.1-3.32-.8-2.6-1.08-4.27-3.72-4.4-3.89-.13-.17-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .36.01.52.01.17 0 .4-.06.62.47.24.57.81 1.97.88 2.12.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.28.11 1.79.84 2.1 1 .31.15.52.23.6.36.07.14.07.8-.17 1.48z"/>
         </svg>
-        <span id="txt-cta-button">Confirmar reserva</span>
+        <span id="txt-cta-button">Confirmar reserva vía WhatsApp</span>
       </button>
     </div>
   </div>
@@ -411,7 +436,7 @@
       <div class="p-3.5 rounded-xl bg-zinc-950/70 border border-zinc-800 text-left space-y-2 text-xs">
         <div class="flex justify-between items-center border-b border-zinc-800/80 pb-2">
           <span class="text-zinc-400" id="lbl-summary-service">Servicio:</span>
-          <span class="font-semibold text-white" id="success-summary-service">Corte de pelo (15 €)</span>
+          <span class="font-semibold text-white" id="success-summary-service">Corte clásico (15 €)</span>
         </div>
         <div class="flex justify-between items-center border-b border-zinc-800/80 pb-2">
           <span class="text-zinc-400" id="lbl-summary-date">Fecha y hora:</span>
@@ -419,7 +444,7 @@
         </div>
         <div class="flex justify-between items-center text-[11px] pt-0.5">
           <span class="text-zinc-400" id="lbl-summary-location">Lugar:</span>
-          <span class="text-zinc-300 font-medium truncate">Calle Mayor, 14 (Sevilla)</span>
+          <span class="text-zinc-300 font-medium truncate">Calle Castilla, Triana, Sevilla</span>
         </div>
       </div>
 
@@ -651,34 +676,289 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT
+       JAVASCRIPT: SISTEMA DE INTERNACIONALIZACIÓN (i18n) REACTIVO Y COMPLETO
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
 
+    const LANGUAGES = {
+      es: { code: 'es', label: 'Español', flag: '🇪🇸', prefix: '+34 ' },
+      en: { code: 'en', label: 'English', flag: '🇬🇧', prefix: '+44 ' },
+      fr: { code: 'fr', label: 'Français', flag: '🇫🇷', prefix: '+33 ' },
+      it: { code: 'it', label: 'Italiano', flag: '🇮🇹', prefix: '+39 ' },
+      de: { code: 'de', label: 'Deutsch', flag: '🇩🇪', prefix: '+49 ' }
+    };
+
+    // DICCIONARIO COMPLETO PARA TURISTAS EN SEVILLA (TRIANA / CALLE CASTILLA)
+    const I18N = {
+      es: {
+        flag: "🇪🇸",
+        badgeStatus: "Abierto hoy · 10:00 a 20:00",
+        badgeLocation: "Calle Castilla, Triana, Sevilla",
+        heroTitle: 'Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal',
+        heroSubtitle: "Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en Triana, Sevilla.",
+        heroCta: "Reservar cita",
+        galleryTitle: "El espacio & la experiencia",
+        galleryTag: "Tradición & Estilo",
+        photoTag1: "Atención individual en Triana",
+        modulePretitle: "Agenda tu cita",
+        moduleTitle: "Reserva de servicios",
+        step1Title: "1. Selecciona el servicio",
+        subStep1: "Precios oficiales",
+        step2Title: "2. Selecciona fecha y hora",
+        step3Title: "3. Tus datos de contacto",
+        lblDirectWhatsapp: "WhatsApp directo",
+        lblName: "Nombre *",
+        namePlaceholder: "Ej. Carlos Mendoza",
+        lblPhone: "Teléfono (WhatsApp) *",
+        phonePlaceholder: "+34 612 345 678",
+        prefixHint: "Con prefijo (+34...)",
+        shiftMorning: "Mañana",
+        shiftAfternoon: "Tarde",
+        footerLocationTitle: "Ubicación del Local",
+        footerHours: "Lunes a Sábado · 10:00 - 20:00",
+        paymentNotice: "Pago en local en efectivo o Bizum",
+        noFees: "Sin comisiones",
+        footerPolicy: "Barbería El Barrio · Triana, Sevilla",
+        closedDay: "Cerrado este día",
+        ctaButton: "Confirmar reserva vía WhatsApp",
+        chooseDatePrompt: "Elige día y hora",
+        modalSuccessTitle: "¡Reserva enviada!",
+        modalSuccessDesc: "Hemos abierto WhatsApp para enviar tu mensaje directo al peluquero.",
+        lblSummaryService: "Servicio:",
+        lblSummaryDate: "Fecha y hora:",
+        lblSummaryLocation: "Lugar:",
+        lblAddCalendar: "Añadir a tu calendario:",
+        btnCloseSuccess: "Entendido",
+        daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
+        monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+        today: "Hoy",
+        tomorrow: "Mañana",
+        waMessage: (s, d, t, n, ph) =>
+          `[ES 🇪🇸] Nueva reserva: ${s} | ${d} a las ${t} | Cliente: ${n} | Teléfono: ${ph} | Pago en local (Triana, Sevilla)`
+      },
+      en: {
+        flag: "🇬🇧",
+        badgeStatus: "Open today · 10:00 AM to 8:00 PM",
+        badgeLocation: "Calle Castilla, Triana, Seville",
+        heroTitle: 'Traditional Barbering <span class="italic font-normal text-accent-gold">&</span> Grooming',
+        heroSubtitle: "Classic scissor cut, hot towel shave ritual, and beard shaping in Triana, Seville.",
+        heroCta: "Book appointment",
+        galleryTitle: "The space & atmosphere",
+        galleryTag: "Tradition & Style",
+        photoTag1: "Individual attention in Triana",
+        modulePretitle: "Book your visit",
+        moduleTitle: "Service booking",
+        step1Title: "1. Select your service",
+        subStep1: "Official rates",
+        step2Title: "2. Select date and time",
+        step3Title: "3. Your contact details",
+        lblDirectWhatsapp: "Direct WhatsApp",
+        lblName: "Name *",
+        namePlaceholder: "e.g. John Miller",
+        lblPhone: "Phone (WhatsApp) *",
+        phonePlaceholder: "+44 7123 456789",
+        prefixHint: "With country code (+44...)",
+        shiftMorning: "Morning",
+        shiftAfternoon: "Afternoon",
+        footerLocationTitle: "Shop Location",
+        footerHours: "Monday to Saturday · 10:00 AM - 8:00 PM",
+        paymentNotice: "Payment on-site (Cash / Card)",
+        noFees: "No extra fees",
+        footerPolicy: "El Barrio Barbershop · Triana, Seville",
+        closedDay: "Closed on this date",
+        ctaButton: "Confirm booking via WhatsApp",
+        chooseDatePrompt: "Select date and time",
+        modalSuccessTitle: "Booking request sent!",
+        modalSuccessDesc: "We opened WhatsApp to send your direct message to the barber.",
+        lblSummaryService: "Service:",
+        lblSummaryDate: "Date & Time:",
+        lblSummaryLocation: "Location:",
+        lblAddCalendar: "Add to your calendar:",
+        btnCloseSuccess: "Got it",
+        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        today: "Today",
+        tomorrow: "Tomorrow",
+        waMessage: (s, d, t, n, ph) =>
+          `[EN 🇬🇧] New booking: ${s} | ${d} at ${t} | Client: ${n} | Phone: ${ph} | Payment on-site (Triana, Seville)`
+      },
+      fr: {
+        flag: "🇫🇷",
+        badgeStatus: "Ouvert aujourd'hui · 10:00 à 20:00",
+        badgeLocation: "Calle Castilla, Triana, Séville",
+        heroTitle: 'Barbier Traditionnel <span class="italic font-normal text-accent-gold">&</span> Soins Masculins',
+        heroSubtitle: "Coupe classique aux ciseaux, rasage à la serviette chaude et taille de barbe à Triana, Séville.",
+        heroCta: "Prendre rendez-vous",
+        galleryTitle: "Le salon & l'ambiance",
+        galleryTag: "Tradition & Style",
+        photoTag1: "Attention individuelle à Triana",
+        modulePretitle: "Prenez rendez-vous",
+        moduleTitle: "Réservation de services",
+        step1Title: "1. Choisissez la prestation",
+        subStep1: "Tarifs officiels",
+        step2Title: "2. Choisissez date et heure",
+        step3Title: "3. Vos coordonnées",
+        lblDirectWhatsapp: "WhatsApp direct",
+        lblName: "Nom *",
+        namePlaceholder: "Ex. Jean Dupont",
+        lblPhone: "Téléphone (WhatsApp) *",
+        phonePlaceholder: "+33 612 345 678",
+        prefixHint: "Avec indicatif (+33...)",
+        shiftMorning: "Matin",
+        shiftAfternoon: "Après-midi",
+        footerLocationTitle: "Emplacement du Salon",
+        footerHours: "Lundi au Samedi · 10:00 - 20:00",
+        paymentNotice: "Paiement sur place (Espèces / Carte)",
+        noFees: "Sans frais supplémentaires",
+        footerPolicy: "Barbería El Barrio · Triana, Séville",
+        closedDay: "Fermé cette date",
+        ctaButton: "Confirmer la réservation via WhatsApp",
+        chooseDatePrompt: "Choisissez la date et l'heure",
+        modalSuccessTitle: "Réservation envoyée !",
+        modalSuccessDesc: "WhatsApp a été ouvert pour transmettre votre message au barbier.",
+        lblSummaryService: "Prestation :",
+        lblSummaryDate: "Date et heure :",
+        lblSummaryLocation: "Lieu :",
+        lblAddCalendar: "Ajouter au calendrier :",
+        btnCloseSuccess: "Compris",
+        daysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+        monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"],
+        today: "Aujourd'hui",
+        tomorrow: "Demain",
+        waMessage: (s, d, t, n, ph) =>
+          `[FR 🇫🇷] Nouvelle réservation: ${s} | ${d} à ${t} | Client: ${n} | Téléphone: ${ph} | Paiement sur place (Triana, Séville)`
+      },
+      it: {
+        flag: "🇮🇹",
+        badgeStatus: "Aperto oggi · 10:00 - 20:00",
+        badgeLocation: "Calle Castilla, Triana, Siviglia",
+        heroTitle: 'Barberia Tradizionale <span class="italic font-normal text-accent-gold">&</span> Cura Maschile',
+        heroSubtitle: "Taglio classico a forbice, rasatura con panno caldo e modellatura barba a Triana, Siviglia.",
+        heroCta: "Prenota appuntamento",
+        galleryTitle: "Lo spazio & l'esperienza",
+        galleryTag: "Tradizione & Stile",
+        photoTag1: "Attenzione individuale a Triana",
+        modulePretitle: "Prenota la tua visita",
+        moduleTitle: "Prenotazione servizi",
+        step1Title: "1. Scegli il servizio",
+        subStep1: "Listino ufficiale",
+        step2Title: "2. Seleziona data e ora",
+        step3Title: "3. I tuoi dati di contatto",
+        lblDirectWhatsapp: "WhatsApp diretto",
+        lblName: "Nome *",
+        namePlaceholder: "Es. Marco Rossi",
+        lblPhone: "Telefono (WhatsApp) *",
+        phonePlaceholder: "+39 340 1234567",
+        prefixHint: "Con prefisso (+39...)",
+        shiftMorning: "Mattina",
+        shiftAfternoon: "Pomeriggio",
+        footerLocationTitle: "Posizione del Salone",
+        footerHours: "Lunedì a Sabato · 10:00 - 20:00",
+        paymentNotice: "Pagamento in loco (Contanti / Carta)",
+        noFees: "Nessuna commissione",
+        footerPolicy: "Barbería El Barrio · Triana, Siviglia",
+        closedDay: "Chiuso in questa data",
+        ctaButton: "Conferma prenotazione via WhatsApp",
+        chooseDatePrompt: "Scegli giorno e ora",
+        modalSuccessTitle: "Prenotazione inviata!",
+        modalSuccessDesc: "Abbiamo aperto WhatsApp per inviare il tuo messaggio al barbiere.",
+        lblSummaryService: "Servizio:",
+        lblSummaryDate: "Data e ora:",
+        lblSummaryLocation: "Luogo:",
+        lblAddCalendar: "Aggiungi al calendario:",
+        btnCloseSuccess: "Ho capito",
+        daysShort: ["Dom", "Lun", "Mar", "Mer", "Gio", "Ven", "Sab"],
+        monthsShort: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
+        today: "Oggi",
+        tomorrow: "Domani",
+        waMessage: (s, d, t, n, ph) =>
+          `[IT 🇮🇹] Nuova prenotazione: ${s} | ${d} alle ore ${t} | Cliente: ${n} | Telefono: ${ph} | Pagamento in loco (Triana, Siviglia)`
+      },
+      de: {
+        flag: "🇩🇪",
+        badgeStatus: "Heute geöffnet · 10:00 bis 20:00 Uhr",
+        badgeLocation: "Calle Castilla, Triana, Sevilla",
+        heroTitle: 'Traditioneller Barbier <span class="italic font-normal text-accent-gold">&</span> Pflege',
+        heroSubtitle: "Klassischer Scherenschnitt, Heißtuch-Rasur und Bartpflege in Triana, Sevilla.",
+        heroCta: "Termin buchen",
+        galleryTitle: "Der Salon & die Atmosphäre",
+        galleryTag: "Tradition & Stil",
+        photoTag1: "Individuelle Betreuung in Triana",
+        modulePretitle: "Termin vereinbaren",
+        moduleTitle: "Dienstleistung buchen",
+        step1Title: "1. Dienstleistung wählen",
+        subStep1: "Offizielle Preise",
+        step2Title: "2. Datum & Uhrzeit wählen",
+        step3Title: "3. Ihre Kontaktdaten",
+        lblDirectWhatsapp: "Direkt per WhatsApp",
+        lblName: "Name *",
+        namePlaceholder: "z.B. Max Mustermann",
+        lblPhone: "Telefon (WhatsApp) *",
+        phonePlaceholder: "+49 170 1234567",
+        prefixHint: "Mit Vorwahl (+49...)",
+        shiftMorning: "Vormittag",
+        shiftAfternoon: "Nachmittag",
+        footerLocationTitle: "Standort des Salons",
+        footerHours: "Montag bis Samstag · 10:00 - 20:00 Uhr",
+        paymentNotice: "Zahlung vor Ort (Bar / Karte)",
+        noFees: "Keine Zusatzgebühren",
+        footerPolicy: "Barbería El Barrio · Triana, Sevilla",
+        closedDay: "An diesem Tag geschlossen",
+        ctaButton: "Termin per WhatsApp bestätigen",
+        chooseDatePrompt: "Wählen Sie Datum und Uhrzeit",
+        modalSuccessTitle: "Buchung gesendet!",
+        modalSuccessDesc: "WhatsApp wurde geöffnet, um Ihre Nachricht an den Barbier zu senden.",
+        lblSummaryService: "Dienstleistung:",
+        lblSummaryDate: "Datum & Uhrzeit:",
+        lblSummaryLocation: "Ort:",
+        lblAddCalendar: "Zum Kalender hinzufügen:",
+        btnCloseSuccess: "Verstanden",
+        daysShort: ["So", "Mo", "Di", "Mi", "Do", "Fr", "Sa"],
+        monthsShort: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
+        today: "Heute",
+        tomorrow: "Morgen",
+        waMessage: (s, d, t, n, ph) =>
+          `[DE 🇩🇪] Neue Online-Buchung: ${s} | ${d} um ${t} Uhr | Kunde: ${n} | Telefon: ${ph} | Zahlung vor Ort (Triana, Sevilla)`
+      }
+    };
+
+    // SERVICIOS TRADUCIDOS
     const SERVICES_TRANSLATIONS = {
       1: {
-        es: { name: "Corte de pelo", desc: "Lavado, corte a tijera/máquina y peinado", duration: "30 min" },
-        en: { name: "Haircut", desc: "Wash, scissor/clipper cut and styling", duration: "30 min" }
+        es: { name: "Corte clásico", desc: "Lavado, corte a tijera/máquina y peinado", duration: "30 min" },
+        en: { name: "Classic Haircut", desc: "Wash, scissor/clipper cut and styling", duration: "30 min" },
+        fr: { name: "Coupe classique", desc: "Shampoing, coupe aux ciseaux et coiffage", duration: "30 min" },
+        it: { name: "Taglio classico", desc: "Lavaggio, taglio a forbice e piega", duration: "30 min" },
+        de: { name: "Klassischer Haarschnitt", desc: "Haarwäsche, Schnitt mit Schere & Styling", duration: "30 Min." }
       },
       2: {
         es: { name: "Corte + Barba", desc: "Corte completo y perfilado con toalla caliente", duration: "45 min" },
-        en: { name: "Haircut + Beard", desc: "Full haircut and hot towel beard shaping", duration: "45 min" }
+        en: { name: "Haircut + Beard", desc: "Full haircut and hot towel beard shaping", duration: "45 min" },
+        fr: { name: "Coupe + Barbe", desc: "Coupe complète et soin barbe à la serviette chaude", duration: "45 min" },
+        it: { name: "Taglio + Barba", desc: "Taglio completo e cura barba con panno caldo", duration: "45 min" },
+        de: { name: "Haarschnitt + Bart", desc: "Kompletter Schnitt & Heißtuch-Bartpflege", duration: "45 Min." }
       },
       3: {
         es: { name: "Arreglo de barba", desc: "Perfilado a navaja, toalla caliente y bálsamo", duration: "20 min" },
-        en: { name: "Beard Trim & Shape", desc: "Razor shaping, hot towel and conditioning balm", duration: "20 min" }
+        en: { name: "Beard Grooming", desc: "Razor shaping, hot towel and conditioning balm", duration: "20 min" },
+        fr: { name: "Taille de barbe", desc: "Traçage au rasoir, serviette chaude et baume", duration: "20 min" },
+        it: { name: "Rifinitura barba", desc: "Modellatura a rasoio, panno caldo e balsamo", duration: "20 min" },
+        de: { name: "Bartpflege & Konturen", desc: "Messerrasur, Heißtuch und Bartbalsam", duration: "20 Min." }
       },
       4: {
         es: { name: "Corte infantil / Senior", desc: "Menores de 12 años y jubilados", duration: "25 min" },
-        en: { name: "Kids & Senior Haircut", desc: "Under 12 years old and seniors", duration: "25 min" }
+        en: { name: "Kids & Senior Haircut", desc: "Under 12 years old and seniors", duration: "25 min" },
+        fr: { name: "Coupe Enfant / Senior", desc: "Moins de 12 ans et seniors", duration: "25 min" },
+        it: { name: "Taglio Bambino / Senior", desc: "Bambini sotto i 12 anni e pensionati", duration: "25 min" },
+        de: { name: "Kinder- & Seniorenhaarschnitt", desc: "Kinder unter 12 Jahren und Senioren", duration: "25 Min." }
       }
     };
 
     const DEFAULT_SERVICES = [
-      { id: 1, name: "Corte de pelo", duration: "30 min", price: 15, durationMin: 30, desc: "Lavado, corte a tijera/máquina y peinado", active: true },
-      { id: 2, name: "Corte + Barba", duration: "45 min", price: 24, durationMin: 45, desc: "Corte y perfilado con toalla caliente", active: true },
-      { id: 3, name: "Arreglo de barba", duration: "20 min", price: 12, durationMin: 20, desc: "Perfilado a navaja y aceites esenciales", active: true },
+      { id: 1, name: "Corte clásico", duration: "30 min", price: 15, durationMin: 30, desc: "Lavado, corte a tijera/máquina y peinado", active: true },
+      { id: 2, name: "Corte + Barba", duration: "45 min", price: 24, durationMin: 45, desc: "Corte completo y perfilado con toalla caliente", active: true },
+      { id: 3, name: "Arreglo de barba", duration: "20 min", price: 12, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y bálsamo", active: true },
       { id: 4, name: "Corte infantil / Senior", duration: "25 min", price: 13, durationMin: 25, desc: "Menores de 12 años y jubilados", active: true }
     ];
 
@@ -710,8 +990,8 @@
       getAppointments() {
         const data = localStorage.getItem('barber_appointments');
         return data ? JSON.parse(data) : [
-          { id: 101, name: "Carlos Mendoza", phone: "+34 612 345 678", service: "Corte de pelo", date: getTodayKey(), time: "11:00", status: "confirmed" },
-          { id: 102, name: "Lucas Vidal", phone: "+34 655 443 221", service: "Corte + Barba", date: getTodayKey(), time: "12:30", status: "confirmed" }
+          { id: 101, name: "Carlos Mendoza", phone: "+34 612 345 678", service: "Corte clásico", date: getTodayKey(), time: "11:00", status: "confirmed" },
+          { id: 102, name: "Jean Dupont", phone: "+33 655 443 221", service: "Corte + Barba", date: getTodayKey(), time: "12:30", status: "confirmed" }
         ];
       },
       saveAppointments(appts) {
@@ -729,98 +1009,120 @@
       lastBooking: null
     };
 
-    const i18n = {
-      es: {
-        heroStatus: "Abierto hoy · 10:00 a 20:00",
-        heroLocation: "Casco Antiguo, Sevilla",
-        heroTitle: 'Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal',
-        heroSubtitle: "Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el centro histórico de Sevilla.",
-        heroCta: "Reservar Cita",
-        galleryTitle: "El Espacio & La Experiencia",
-        galleryTag: "Tradición & Estilo",
-        photoTag1: "Atención individual y sobria",
-        modulePretitle: "Agenda tu cita",
-        moduleTitle: "Reserva de Servicios",
-        step1Title: "1. Selecciona el servicio",
-        subStep1: "Precios oficiales",
-        step2Title: "2. Fecha y hora",
-        step3Title: "3. Tus datos",
-        lblDirectWhatsapp: "WhatsApp directo",
-        lblName: "Nombre y apellido *",
-        namePlaceholder: "Ej. Carlos Mendoza",
-        lblPhone: "Teléfono (WhatsApp) *",
-        phonePlaceholder: "+34 612 345 678",
-        prefixHint: "Con prefijo (+34...)",
-        shiftMorning: "Mañana",
-        shiftAfternoon: "Tarde",
-        footerLocationTitle: "Ubicación del Local",
-        footerHours: "Lunes a Sábado · 10:00 - 20:00",
-        paymentNotice: "Pago en local (Efectivo / Bizum / Tarjeta)",
-        noFees: "Sin comisiones",
-        footerPolicy: "Barbería El Barrio · Sevilla",
-        closedDay: "Cerrado este día",
-        ctaButton: "Confirmar reserva",
-        chooseDatePrompt: "Elige día y hora",
-        modalSuccessTitle: "¡Reserva enviada!",
-        modalSuccessDesc: "Hemos abierto WhatsApp para enviar tu mensaje directo al peluquero.",
-        lblSummaryService: "Servicio:",
-        lblSummaryDate: "Fecha y hora:",
-        lblSummaryLocation: "Lugar:",
-        lblAddCalendar: "Añadir a tu calendario:",
-        btnCloseSuccess: "Entendido",
-        daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
-        monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        today: "Hoy",
-        tomorrow: "Mañana",
-        waMessage: (s, d, t, n, ph) =>
-          `Nueva reserva web: ${s} | ${d} a las ${t} | Cliente: ${n} | Teléfono: ${ph} | Pago en local`
-      },
-      en: {
-        heroStatus: "Open today · 10:00 AM to 8:00 PM",
-        heroLocation: "Old Town, Seville",
-        heroTitle: 'Traditional Barbering <span class="italic font-normal text-accent-gold">&</span> Grooming',
-        heroSubtitle: "Classic scissor cut, hot towel shave ritual, and beard shaping in the historic center of Seville.",
-        heroCta: "Book Appointment",
-        galleryTitle: "The Shop & Atmosphere",
-        galleryTag: "Tradition & Style",
-        photoTag1: "Individual attention & craft",
-        modulePretitle: "Book your appointment",
-        moduleTitle: "Service Booking",
-        step1Title: "1. Select Service",
-        subStep1: "Official rates",
-        step2Title: "2. Date & Time",
-        step3Title: "3. Your Details",
-        lblDirectWhatsapp: "Direct WhatsApp",
-        lblName: "Full name *",
-        namePlaceholder: "e.g. John Miller",
-        lblPhone: "Phone (WhatsApp) *",
-        phonePlaceholder: "+44 7123 456789",
-        prefixHint: "With country code (+44...)",
-        shiftMorning: "Morning",
-        shiftAfternoon: "Afternoon",
-        footerLocationTitle: "Shop Location",
-        footerHours: "Monday to Saturday · 10:00 AM - 8:00 PM",
-        paymentNotice: "Pay on-site (Cash / Bizum / Card)",
-        noFees: "No extra fees",
-        footerPolicy: "El Barrio Barbershop · Seville",
-        closedDay: "Closed on this date",
-        ctaButton: "Confirm booking",
-        chooseDatePrompt: "Select date and time",
-        modalSuccessTitle: "Booking request sent!",
-        modalSuccessDesc: "We opened WhatsApp to send your direct message to the barber.",
-        lblSummaryService: "Service:",
-        lblSummaryDate: "Date & Time:",
-        lblSummaryLocation: "Location:",
-        lblAddCalendar: "Add to your calendar:",
-        btnCloseSuccess: "Got it",
-        daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
-        monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        today: "Today",
-        tomorrow: "Tomorrow",
-        waMessage: (s, d, t, n, ph) =>
-          `New booking request: ${s} | ${d} at ${t} | Name: ${n} | Phone: ${ph} | Payment on-site`
+    // Auto-detección inteligente por navegador del turista
+    function autoDetectLanguage() {
+      const saved = localStorage.getItem('barber_user_lang');
+      if (saved && I18N[saved]) return saved;
+
+      const navLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+      if (navLang.startsWith('en')) return 'en';
+      if (navLang.startsWith('fr')) return 'fr';
+      if (navLang.startsWith('it')) return 'it';
+      if (navLang.startsWith('de')) return 'de';
+      return 'es';
+    }
+
+    function toggleLanguageDropdown(event) {
+      if (event) event.stopPropagation();
+      const menu = document.getElementById('lang-dropdown-menu');
+      const chevron = document.getElementById('lang-chevron');
+      const isHidden = menu.classList.contains('hidden');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        menu.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
       }
-    };
+    }
+
+    function handleGlobalClick(event) {
+      const container = document.getElementById('lang-dropdown-container');
+      const menu = document.getElementById('lang-dropdown-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (container && !container.contains(event.target) && menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function changeLanguage(langCode) {
+      if (!I18N[langCode]) return;
+      state.lang = langCode;
+      localStorage.setItem('barber_user_lang', langCode);
+
+      // Actualizar Navbar Dropdown
+      const l = LANGUAGES[langCode];
+      document.getElementById('active-lang-flag').textContent = l.flag;
+      document.getElementById('active-lang-text').textContent = langCode.toUpperCase();
+
+      // Actualizar ticks en menú
+      ['es', 'en', 'fr', 'it', 'de'].forEach(code => {
+        const check = document.getElementById(`check-${code}`);
+        if (check) {
+          if (code === langCode) check.classList.remove('hidden');
+          else check.classList.add('hidden');
+        }
+      });
+
+      toggleLanguageDropdown();
+      updateLanguageTexts();
+      renderServices();
+      generateCalendarDays();
+      validateForm();
+    }
+
+    function updateLanguageTexts() {
+      const t = I18N[state.lang] || I18N.es;
+      
+      // Hero & Badges
+      document.getElementById('hero-badge-status').textContent = t.badgeStatus;
+      document.getElementById('hero-badge-location').textContent = t.badgeLocation;
+      document.getElementById('hero-title').innerHTML = t.heroTitle;
+      document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+      document.getElementById('hero-cta').querySelector('span').textContent = t.heroCta;
+      
+      // Secciones
+      document.getElementById('gallery-title').textContent = t.galleryTitle;
+      document.getElementById('gallery-tag').textContent = t.galleryTag;
+      document.getElementById('photo-tag-1').textContent = t.photoTag1;
+      document.getElementById('module-pretitle').textContent = t.modulePretitle;
+      document.getElementById('module-title').textContent = t.moduleTitle;
+      document.getElementById('title-step-1').textContent = t.step1Title;
+      document.getElementById('sub-step-1').textContent = t.subStep1;
+      document.getElementById('title-step-2').textContent = t.step2Title;
+      document.getElementById('title-step-3').textContent = t.step3Title;
+      
+      // Formulario
+      document.getElementById('lbl-direct-whatsapp').textContent = t.lblDirectWhatsapp;
+      document.getElementById('lbl-name').textContent = t.lblName;
+      document.getElementById('client-name').placeholder = t.namePlaceholder;
+      document.getElementById('lbl-phone').textContent = t.lblPhone;
+      document.getElementById('client-phone').placeholder = t.phonePlaceholder;
+      document.getElementById('lbl-prefix-hint').textContent = t.prefixHint;
+      document.getElementById('txt-shift-morning').textContent = t.shiftMorning;
+      document.getElementById('txt-shift-afternoon').textContent = t.shiftAfternoon;
+      
+      // Footer
+      document.getElementById('footer-location-title').textContent = t.footerLocationTitle;
+      document.getElementById('footer-hours').textContent = t.footerHours;
+      document.getElementById('txt-payment-notice').textContent = t.paymentNotice;
+      document.getElementById('txt-no-fees').textContent = t.noFees;
+      document.getElementById('txt-footer-policy').textContent = t.footerPolicy;
+      document.getElementById('txt-cta-button').textContent = t.ctaButton;
+
+      // Modal de éxito
+      document.getElementById('modal-success-title').textContent = t.modalSuccessTitle;
+      document.getElementById('modal-success-desc').textContent = t.modalSuccessDesc;
+      document.getElementById('lbl-summary-service').textContent = t.lblSummaryService;
+      document.getElementById('lbl-summary-date').textContent = t.lblSummaryDate;
+      document.getElementById('lbl-summary-location').textContent = t.lblSummaryLocation;
+      document.getElementById('lbl-add-calendar').textContent = t.lblAddCalendar;
+      document.getElementById('btn-close-success').textContent = t.btnCloseSuccess;
+
+      updateStickyBar();
+    }
 
     function getLocalizedService(service) {
       const lang = state.lang || 'es';
@@ -834,78 +1136,6 @@
         };
       }
       return service;
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      setLanguage('es');
-      renderServices();
-      generateCalendarDays();
-      validateForm();
-    });
-
-    function setLanguage(langCode) {
-      state.lang = langCode;
-
-      const btnEs = document.getElementById('lang-btn-es');
-      const btnEn = document.getElementById('lang-btn-en');
-
-      if (langCode === 'es') {
-        btnEs.className = "px-2.5 py-1 rounded-full text-xs font-bold transition-all bg-white text-black shadow-sm";
-        btnEn.className = "px-2.5 py-1 rounded-full text-xs font-semibold text-zinc-400 hover:text-white transition-all";
-      } else {
-        btnEn.className = "px-2.5 py-1 rounded-full text-xs font-bold transition-all bg-white text-black shadow-sm";
-        btnEs.className = "px-2.5 py-1 rounded-full text-xs font-semibold text-zinc-400 hover:text-white transition-all";
-      }
-
-      updateLanguageTexts();
-      renderServices();
-      generateCalendarDays();
-      validateForm();
-    }
-
-    function updateLanguageTexts() {
-      const t = i18n[state.lang] || i18n.es;
-      
-      document.getElementById('hero-badge-status').textContent = t.heroStatus;
-      document.getElementById('hero-badge-location').textContent = t.heroLocation;
-      document.getElementById('hero-title').innerHTML = t.heroTitle;
-      document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
-      document.getElementById('hero-cta').querySelector('span').textContent = t.heroCta;
-      document.getElementById('gallery-title').textContent = t.galleryTitle;
-      document.getElementById('gallery-tag').textContent = t.galleryTag;
-      document.getElementById('photo-tag-1').textContent = t.photoTag1;
-      
-      document.getElementById('module-pretitle').textContent = t.modulePretitle;
-      document.getElementById('module-title').textContent = t.moduleTitle;
-      document.getElementById('title-step-1').textContent = t.step1Title;
-      document.getElementById('sub-step-1').textContent = t.subStep1;
-      document.getElementById('title-step-2').textContent = t.step2Title;
-      document.getElementById('title-step-3').textContent = t.step3Title;
-      document.getElementById('lbl-direct-whatsapp').textContent = t.lblDirectWhatsapp;
-      document.getElementById('lbl-name').textContent = t.lblName;
-      document.getElementById('client-name').placeholder = t.namePlaceholder;
-      document.getElementById('lbl-phone').textContent = t.lblPhone;
-      document.getElementById('client-phone').placeholder = t.phonePlaceholder;
-      document.getElementById('lbl-prefix-hint').textContent = t.prefixHint;
-      document.getElementById('txt-shift-morning').textContent = t.shiftMorning;
-      document.getElementById('txt-shift-afternoon').textContent = t.shiftAfternoon;
-      
-      document.getElementById('footer-location-title').textContent = t.footerLocationTitle;
-      document.getElementById('footer-hours').textContent = t.footerHours;
-      document.getElementById('txt-payment-notice').textContent = t.paymentNotice;
-      document.getElementById('txt-no-fees').textContent = t.noFees;
-      document.getElementById('txt-footer-policy').textContent = t.footerPolicy;
-      document.getElementById('txt-cta-button').textContent = t.ctaButton;
-
-      document.getElementById('modal-success-title').textContent = t.modalSuccessTitle;
-      document.getElementById('modal-success-desc').textContent = t.modalSuccessDesc;
-      document.getElementById('lbl-summary-service').textContent = t.lblSummaryService;
-      document.getElementById('lbl-summary-date').textContent = t.lblSummaryDate;
-      document.getElementById('lbl-summary-location').textContent = t.lblSummaryLocation;
-      document.getElementById('lbl-add-calendar').textContent = t.lblAddCalendar;
-      document.getElementById('btn-close-success').textContent = t.btnCloseSuccess;
-
-      updateStickyBar();
     }
 
     function renderServices() {
@@ -959,7 +1189,7 @@
 
     function generateCalendarDays() {
       const container = document.getElementById('days-container');
-      const t = i18n[state.lang] || i18n.es;
+      const t = I18N[state.lang] || I18N.es;
       const closedDates = STORE.getClosedDates();
       const days = [];
       const today = new Date();
@@ -1038,7 +1268,7 @@
       if (!state.selectedDate) return;
       const [y, m, d] = state.selectedDate.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
-      const t = i18n[state.lang] || i18n.es;
+      const t = I18N[state.lang] || I18N.es;
       const dayName = t.daysShort[dateObj.getDay()];
       const monthName = t.monthsShort[dateObj.getMonth()];
 
@@ -1054,7 +1284,7 @@
 
       const closedDates = STORE.getClosedDates();
       if (closedDates.includes(state.selectedDate)) {
-        morningEl.innerHTML = `<div class="col-span-4 py-3 text-center text-xs text-zinc-500 bg-surface-card border border-zinc-800 rounded-lg">${(i18n[state.lang] || i18n.es).closedDay}</div>`;
+        morningEl.innerHTML = `<div class="col-span-4 py-3 text-center text-xs text-zinc-500 bg-surface-card border border-zinc-800 rounded-lg">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
         afternoonEl.innerHTML = '';
         return;
       }
@@ -1124,7 +1354,7 @@
     function updateStickyBar() {
       const services = STORE.getServices();
       const rawService = services.find(s => s.id === state.selectedServiceId);
-      const t = i18n[state.lang] || i18n.es;
+      const t = I18N[state.lang] || I18N.es;
 
       const serviceLabel = document.getElementById('sticky-service-label');
       const priceLabel = document.getElementById('sticky-price-label');
@@ -1204,7 +1434,7 @@
 
       const [y, m, d] = state.selectedDate.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
-      const t = i18n[state.lang] || i18n.es;
+      const t = I18N[state.lang] || I18N.es;
       const dateFormatted = `${t.daysShort[dateObj.getDay()]}, ${d} ${t.monthsShort[dateObj.getMonth()]}`;
 
       const phone = (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233');
@@ -1242,8 +1472,8 @@
       const endIso = formatIso(endDate);
 
       const title = `Barbería El Barrio — ${booking.serviceName}`;
-      const details = `Cita de barbería para ${booking.clientName}. Pago en el local (${booking.price} €). Tel: ${booking.clientPhone}`;
-      const location = `Calle Mayor, 14, Casco Antiguo, Sevilla`;
+      const details = `Cita para ${booking.clientName}. Tel: ${booking.clientPhone}. Pago en el local (${booking.price} €).`;
+      const location = `Calle Castilla, Triana, Sevilla`;
 
       return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startIso}/${endIso}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
     }
@@ -1274,7 +1504,7 @@ CALSCALE:GREGORIAN
 BEGIN:VEVENT
 SUMMARY:Barbería El Barrio — ${b.serviceName}
 DESCRIPTION:Cita confirmada para ${b.clientName}. Pago en el local (${b.price} €).
-LOCATION:Calle Mayor, 14, Casco Antiguo, Sevilla
+LOCATION:Calle Castilla, Triana, Sevilla
 DTSTART:${dtStart}
 DTEND:${dtEnd}
 STATUS:CONFIRMED
@@ -1378,7 +1608,7 @@ END:VCALENDAR`;
       container.innerHTML = todayAppts.map(appt => {
         const isToday = appt.date === todayKey;
         const cleanPhone = appt.phone.replace(/\D/g, '');
-        const confirmMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para hoy a las ${appt.time} en Barbería El Barrio. ¡Te esperamos!`);
+        const confirmMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para hoy a las ${appt.time} en Barbería El Barrio (Calle Castilla, Triana). ¡Te esperamos!`);
         const waLink = `https://wa.me/${cleanPhone}?text=${confirmMsg}`;
 
         return `
@@ -1594,6 +1824,29 @@ END:VCALENDAR`;
       renderAdminServices();
       renderServices();
     }
+
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', () => {
+      const detected = autoDetectLanguage();
+      state.lang = detected;
+      
+      // Marcar visualmente el activo
+      const l = LANGUAGES[detected];
+      document.getElementById('active-lang-flag').textContent = l.flag;
+      document.getElementById('active-lang-text').textContent = detected.toUpperCase();
+      ['es', 'en', 'fr', 'it', 'de'].forEach(code => {
+        const check = document.getElementById(`check-${code}`);
+        if (check) {
+          if (code === detected) check.classList.remove('hidden');
+          else check.classList.add('hidden');
+        }
+      });
+
+      updateLanguageTexts();
+      renderServices();
+      generateCalendarDays();
+      validateForm();
+    });
   </script>
 </body>
 </html>
