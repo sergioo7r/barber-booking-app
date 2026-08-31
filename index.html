@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-[#0a0a0c] text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
+<html lang="es" class="h-full bg-[#0c0c0c] text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#0a0a0c" />
-  <title>Barbería El Barrio — Reserva & Gestión</title>
+  <meta name="theme-color" content="#0c0c0c" />
+  <title>Barbería El Barrio — Barbería Tradicional & Cuidado Masculino</title>
 
-  <!-- Tipografía: Inter -->
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -19,14 +19,20 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
           },
           colors: {
             surface: {
-              DEFAULT: '#111114',
-              card: '#16161a',
-              border: '#242429',
-              hover: '#1d1d22'
+              DEFAULT: '#121212',
+              card: '#161616',
+              border: 'rgba(255, 255, 255, 0.08)',
+              hover: '#1c1c1c'
+            },
+            accent: {
+              gold: '#c5a880',
+              goldLight: '#e6caa3',
+              emerald: '#10b981'
             }
           }
         }
@@ -40,7 +46,7 @@
       box-sizing: border-box;
     }
     body {
-      padding-bottom: calc(100px + env(safe-area-inset-bottom, 20px));
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 24px));
     }
     input, button, select, textarea {
       touch-action: manipulation;
@@ -52,149 +58,313 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+    .editorial-glass {
+      background: rgba(12, 12, 12, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans bg-[#0a0a0c] text-zinc-100">
+<body class="min-h-full flex flex-col justify-between font-sans bg-[#0c0c0c] text-zinc-100">
 
   <!-- ===================================================================================
-       VISTA PÚBLICA DE RESERVAS (CLIENTE)
+       VISTA PÚBLICA (LANDING PAGE + RESERVAS)
        =================================================================================== -->
-  <div id="public-view" class="w-full max-w-md mx-auto px-4 pt-5 sm:px-5 space-y-6">
+  <div id="public-view" class="w-full">
 
-    <!-- CABECERA -->
-    <header class="flex items-start justify-between pb-4 border-b border-zinc-800">
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span class="text-xs text-zinc-400 font-medium" id="txt-status">Abierto hoy · 10:00 a 20:00</span>
+    <!-- BARRA DE NAVEGACIÓN SUPERIOR FIJA -->
+    <nav class="sticky top-0 z-40 w-full editorial-glass border-b border-white/[0.08]">
+      <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+        <a href="#" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-accent-gold group-hover:border-accent-gold/40 transition-colors">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/>
+            </svg>
+          </div>
+          <div>
+            <span class="font-serif tracking-tight text-sm font-bold text-white block leading-tight">El Barrio</span>
+            <span class="text-[9px] uppercase tracking-widest text-zinc-500 font-medium block">Barbershop</span>
+          </div>
+        </a>
+
+        <!-- SELECTOR DE IDIOMAS MULTIPAÍS (CON ICONO A/文) -->
+        <div class="relative">
+          <button
+            id="btn-language-selector"
+            onclick="toggleLanguageModal()"
+            class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-zinc-900/90 border border-white/10 hover:border-accent-gold/40 text-xs font-semibold text-zinc-200 transition-all shadow-sm"
+          >
+            <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
+            </svg>
+            <span id="active-lang-badge" class="uppercase font-bold tracking-wider text-[11px]">ES</span>
+            <svg class="w-3 h-3 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
         </div>
-        <h1 class="text-xl font-bold text-white tracking-tight mt-1" id="txt-shop-name">Barbería El Barrio</h1>
-        <p class="text-xs text-zinc-400 mt-0.5" id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo, Sevilla</p>
       </div>
+    </nav>
 
-      <!-- BOTÓN SELECTOR DE IDIOMAS (CON ICONO TRADUCCIÓN A/文) -->
-      <div class="relative">
-        <button
-          id="btn-language-selector"
-          onclick="toggleLanguageModal()"
-          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-xs font-semibold text-zinc-200 transition-all shadow-sm"
-          title="Cambiar idioma / Change language"
-        >
-          <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
-          </svg>
-          <span id="active-lang-badge" class="uppercase font-bold tracking-wider">ES</span>
-          <svg class="w-3 h-3 text-zinc-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
-          </svg>
-        </button>
-      </div>
-    </header>
+    <!-- CONTENEDOR PRINCIPAL CON ESPACIADO PROPORCIONAL -->
+    <div class="max-w-md mx-auto px-4 pt-5 sm:px-5 space-y-10">
 
-    <!-- FORMULARIO DE RESERVA -->
-    <main class="space-y-6">
-
-      <!-- PASO 1: SERVICIOS -->
-      <section class="space-y-2.5">
-        <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-1">1. Servicio</h2>
-        <div class="space-y-2" id="services-container"></div>
-      </section>
-
-      <!-- PASO 2: DÍA Y HORA -->
-      <section class="space-y-3">
-        <div class="flex items-center justify-between">
-          <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-2">2. Día y hora</h2>
-          <span class="text-xs text-zinc-300 font-medium" id="selected-date-summary"></span>
-        </div>
-
-        <!-- Días -->
-        <div class="flex gap-2 overflow-x-auto no-scrollbar py-0.5 -mx-1 px-1" id="days-container"></div>
-
-        <!-- Horas -->
-        <div class="space-y-3 pt-1">
-          <div>
-            <span class="text-[11px] font-medium text-zinc-500 block mb-1.5" id="txt-shift-morning">Mañana</span>
-            <div class="grid grid-cols-4 gap-1.5" id="morning-slots-container"></div>
+      <!-- ==================== 1. HERO SECTION ==================== -->
+      <section class="space-y-4 pt-1">
+        <!-- Badges de estado -->
+        <div class="flex items-center gap-2 flex-wrap">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] font-medium text-zinc-300">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span id="hero-badge-status">Abierto hoy · 10:00 a 20:00</span>
           </div>
-          <div>
-            <span class="text-[11px] font-medium text-zinc-500 block mb-1.5" id="txt-shift-afternoon">Tarde</span>
-            <div class="grid grid-cols-4 gap-1.5" id="afternoon-slots-container"></div>
+          <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] font-medium text-zinc-400">
+            <svg class="w-3 h-3 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 7.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="9" r="2.5"/>
+            </svg>
+            <span id="hero-badge-location">Casco Antiguo, Sevilla</span>
           </div>
         </div>
-      </section>
 
-      <!-- PASO 3: TUS DATOS -->
-      <section class="space-y-2.5">
-        <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-3">3. Tus datos</h2>
-        
-        <div class="space-y-2.5 bg-surface-card border border-surface-border p-3.5 rounded-xl">
-          <div>
-            <label for="client-name" class="block text-xs text-zinc-400 mb-1" id="lbl-name">Nombre y apellido</label>
-            <input
-              type="text"
-              id="client-name"
-              autocomplete="name"
-              placeholder="Ej. Carlos Mendoza"
-              class="w-full h-11 bg-zinc-950 border border-zinc-800 rounded-lg px-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
-              oninput="validateForm()"
-            />
-          </div>
-
-          <div>
-            <label for="client-phone" class="block text-xs text-zinc-400 mb-1" id="lbl-phone">Teléfono (WhatsApp)</label>
-            <input
-              type="tel"
-              id="client-phone"
-              autocomplete="tel"
-              placeholder="Ej. +34 612 345 678"
-              class="w-full h-11 bg-zinc-950 border border-zinc-800 rounded-lg px-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-zinc-500 transition-colors"
-              oninput="validateForm()"
-            />
-          </div>
+        <!-- Título y subtítulo -->
+        <div>
+          <h1 class="font-serif text-3xl sm:text-[34px] font-semibold text-white tracking-tight leading-[1.18]" id="hero-title">
+            Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal
+          </h1>
+          <p class="text-xs sm:text-sm text-zinc-400 mt-2.5 leading-relaxed font-normal" id="hero-subtitle">
+            Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el centro histórico de Sevilla.
+          </p>
         </div>
-      </section>
 
-      <!-- AVISO PAGO Y GOOGLE MAPS -->
-      <section class="pt-1">
-        <div class="p-3 rounded-lg bg-zinc-900/60 border border-zinc-800/80 flex items-center justify-between text-xs text-zinc-400">
-          <span id="txt-payment-notice">Pago en el local (Efectivo / Bizum / Tarjeta)</span>
+        <!-- Botón Reservar -->
+        <div class="pt-1 flex items-center gap-3">
+          <a
+            href="#booking-module"
+            class="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl bg-white text-black font-semibold text-xs uppercase tracking-wider shadow-lg hover:bg-zinc-200 transition-all"
+            id="hero-cta"
+          >
+            <span>Reservar Cita</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+          </a>
           <a
             href="https://maps.google.com/?q=Calle+Mayor+14+Sevilla"
             target="_blank"
             rel="noopener noreferrer"
-            class="text-zinc-300 hover:text-white underline underline-offset-2"
+            class="h-12 w-12 rounded-xl bg-white/[0.04] border border-white/[0.08] flex items-center justify-center text-zinc-300 hover:text-white hover:border-white/20 transition-all"
+            title="Ver en Google Maps"
           >
-            Google Maps
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+            </svg>
           </a>
         </div>
       </section>
 
-    </main>
+      <!-- ==================== 2. GALERÍA BENTO GRID ==================== -->
+      <section class="space-y-3">
+        <div class="flex items-center justify-between px-1">
+          <h2 class="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold" id="gallery-title">El Espacio & La Experiencia</h2>
+          <span class="text-[10px] text-accent-gold font-medium tracking-wide">Tradición & Estilo</span>
+        </div>
 
-    <!-- FOOTER CON ACCESO AL PANEL ADMIN -->
-    <footer class="pt-4 pb-6 border-t border-zinc-900 flex items-center justify-between text-xs text-zinc-600">
-      <p id="txt-footer-policy">Barbería El Barrio · Sevilla</p>
-      <button onclick="openPinModal()" class="flex items-center gap-1 text-zinc-500 hover:text-zinc-300 transition-colors py-1 px-2 rounded">
-        <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-        </svg>
-        <span>Admin</span>
-      </button>
-    </footer>
+        <div class="grid grid-cols-3 gap-2.5 h-44 sm:h-48">
+          <div class="col-span-2 relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-zinc-900">
+            <img
+              src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=80"
+              alt="Sillón de barbería clásico"
+              class="w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-500 filter brightness-90"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-3">
+              <span class="text-[11px] font-medium text-white/90" id="photo-tag-1">Sillones clásicos y atención individual</span>
+            </div>
+          </div>
 
+          <div class="grid grid-rows-2 gap-2.5">
+            <div class="relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-zinc-900">
+              <img
+                src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80"
+                alt="Corte y navaja"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 filter brightness-90"
+                loading="lazy"
+              />
+            </div>
+            <div class="relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-zinc-900">
+              <img
+                src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=400&q=80"
+                alt="Herramientas profesionales"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 filter brightness-90"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. MÓDULO DE RESERVA ==================== -->
+      <section id="booking-module" class="scroll-mt-20 pt-2 space-y-8">
+
+        <!-- Cabecera del módulo -->
+        <div class="border-b border-white/[0.08] pb-3.5">
+          <span class="text-[10px] uppercase tracking-widest text-accent-gold font-semibold block mb-1">Agenda tu cita</span>
+          <h2 class="font-serif text-2xl font-bold text-white tracking-tight" id="module-title">Reserva de Servicios</h2>
+        </div>
+
+        <!-- PASO 1: SELECCIÓN DE SERVICIO -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-white/[0.08] border border-white/10 text-[10px] font-bold text-white flex items-center justify-center">1</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-1">Selecciona el servicio</h3>
+            </div>
+            <span class="text-[11px] text-zinc-500 font-medium" id="sub-step-1">Precios oficiales</span>
+          </div>
+
+          <div class="space-y-2.5" id="services-container"></div>
+        </div>
+
+        <!-- PASO 2: DÍA Y HORA -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-white/[0.08] border border-white/10 text-[10px] font-bold text-white flex items-center justify-center">2</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-2">Fecha y hora</h3>
+            </div>
+            <span class="text-[11px] text-accent-gold font-medium tracking-tight" id="selected-date-summary"></span>
+          </div>
+
+          <!-- Carrusel de días -->
+          <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1" id="days-container"></div>
+
+          <!-- Cuadrícula de horas -->
+          <div class="mt-3.5 space-y-3.5">
+            <div>
+              <div class="flex items-center gap-1.5 mb-1.5 px-1 text-zinc-500">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+                <p class="text-[10px] uppercase font-semibold tracking-wider" id="txt-shift-morning">Mañana</p>
+              </div>
+              <div class="grid grid-cols-4 gap-1.5" id="morning-slots-container"></div>
+            </div>
+
+            <div>
+              <div class="flex items-center gap-1.5 mb-1.5 px-1 text-zinc-500">
+                <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+                <p class="text-[10px] uppercase font-semibold tracking-wider" id="txt-shift-afternoon">Tarde</p>
+              </div>
+              <div class="grid grid-cols-4 gap-1.5" id="afternoon-slots-container"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 3: DATOS DEL CLIENTE -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between px-1">
+            <div class="flex items-center gap-2">
+              <span class="w-5 h-5 rounded-full bg-white/[0.08] border border-white/10 text-[10px] font-bold text-white flex items-center justify-center">3</span>
+              <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-3">Tus datos</h3>
+            </div>
+            <span class="text-[11px] text-zinc-500 font-medium">WhatsApp directo</span>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-surface-card border border-surface-border space-y-3.5 shadow-xl">
+            <div>
+              <label for="client-name" class="block text-[11px] font-medium text-zinc-400 mb-1" id="lbl-name">Nombre y apellido *</label>
+              <input
+                type="text"
+                id="client-name"
+                autocomplete="name"
+                placeholder="Ej. Carlos Mendoza"
+                class="w-full h-11 bg-black/60 border border-white/10 rounded-xl px-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                oninput="validateForm()"
+              />
+            </div>
+
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <label for="client-phone" class="block text-[11px] font-medium text-zinc-400" id="lbl-phone">Teléfono (WhatsApp) *</label>
+                <span class="text-[10px] text-zinc-500">Con prefijo (+34...)</span>
+              </div>
+              <input
+                type="tel"
+                id="client-phone"
+                autocomplete="tel"
+                placeholder="+34 612 345 678"
+                class="w-full h-11 bg-black/60 border border-white/10 rounded-xl px-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all"
+                oninput="validateForm()"
+              />
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ==================== 4. UBICACIÓN & FOOTER ==================== -->
+      <footer class="pt-6 border-t border-white/[0.08] space-y-4">
+        <div class="p-4 rounded-2xl bg-surface-card border border-surface-border space-y-3">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <span class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold" id="footer-location-title">Ubicación del Local</span>
+              <p class="text-sm font-semibold text-white mt-0.5" id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo, Sevilla</p>
+              <p class="text-xs text-zinc-400 mt-0.5" id="footer-hours">Lunes a Sábado · 10:00 - 20:00</p>
+            </div>
+            <a
+              href="https://maps.google.com/?q=Calle+Mayor+14+Sevilla"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-3 py-1.5 rounded-lg bg-white/[0.06] border border-white/10 text-xs font-semibold text-white hover:bg-white hover:text-black transition-all inline-flex items-center gap-1.5 shrink-0"
+              id="btn-maps"
+            >
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+              <span>Google Maps</span>
+            </a>
+          </div>
+
+          <div class="pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-zinc-400">
+            <div class="flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+              </svg>
+              <span id="txt-payment-notice">Pago en local (Efectivo / Bizum / Tarjeta)</span>
+            </div>
+            <span class="text-zinc-500 font-mono text-[10px]">Sin comisiones</span>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-[11px] text-zinc-500 py-3">
+          <p id="txt-footer-policy">Barbería El Barrio · Sevilla</p>
+          <button onclick="openPinModal()" class="flex items-center gap-1 text-zinc-500 hover:text-zinc-300 transition-colors py-1 px-2 rounded">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+            <span>Admin</span>
+          </button>
+        </div>
+      </footer>
+
+    </div>
   </div>
 
   <!-- ===================================================================================
-       BARRA FIJA INFERIOR DEL CLIENTE
+       BARRA FIJA INFERIOR DEL CLIENTE (STICKY BOTTOM BAR)
        =================================================================================== -->
-  <div id="sticky-bar" class="fixed bottom-0 inset-x-0 bg-[#0a0a0c]/95 backdrop-blur-md border-t border-zinc-800 p-3.5 z-40">
+  <div id="sticky-bar" class="fixed bottom-0 inset-x-0 bg-black/95 backdrop-blur-2xl border-t border-white/[0.08] p-3.5 sm:p-4 z-40 shadow-2xl">
     <div class="w-full max-w-md mx-auto flex items-center gap-3">
-      <div class="flex-1 min-w-0">
+      <div class="flex-1 min-w-0 pr-1">
         <div class="flex items-center gap-2">
-          <span class="text-xs font-semibold text-white truncate" id="sticky-service-label">Corte de pelo</span>
-          <span class="text-xs font-bold text-zinc-300 shrink-0" id="sticky-price-label">15 €</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-accent-gold truncate" id="sticky-service-label">Corte de pelo</span>
+          <span class="text-xs font-bold text-white shrink-0" id="sticky-price-label">15 €</span>
         </div>
         <p class="text-[11px] text-zinc-400 truncate mt-0.5" id="sticky-date-label">Elige día y hora</p>
       </div>
@@ -204,7 +374,7 @@
         type="button"
         onclick="handleBookingConfirmation()"
         disabled
-        class="h-11 px-4 bg-white hover:bg-zinc-200 text-black font-semibold rounded-lg text-xs transition-colors flex items-center justify-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
+        class="h-12 px-5 bg-white hover:bg-zinc-200 text-black font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-2xl disabled:opacity-30 disabled:cursor-not-allowed shrink-0"
       >
         <svg class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.5.07-1.14.1-3.32-.8-2.6-1.08-4.27-3.72-4.4-3.89-.13-.17-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .36.01.52.01.17 0 .4-.06.62.47.24.57.81 1.97.88 2.12.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.28.11 1.79.84 2.1 1 .31.15.52.23.6.36.07.14.07.8-.17 1.48z"/>
@@ -216,12 +386,11 @@
 
 
   <!-- ===================================================================================
-       MODAL DE ÉXITO TRAS EL ENVÍO (CON RESUMEN Y AÑADIR A GOOGLE/APPLE CALENDAR)
+       MODAL DE ÉXITO TRAS EL ENVÍO (CALENDARIOS GOOGLE & APPLE .ICS)
        =================================================================================== -->
   <div id="success-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
     <div class="bg-surface-card border border-surface-border rounded-2xl w-full max-w-sm p-6 space-y-4 shadow-2xl text-center">
       
-      <!-- Icono de éxito animado -->
       <div class="w-12 h-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 mx-auto flex items-center justify-center">
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -235,7 +404,6 @@
         </p>
       </div>
 
-      <!-- Tarjeta resumen de la cita -->
       <div class="p-3.5 rounded-xl bg-zinc-950/70 border border-zinc-800 text-left space-y-2 text-xs">
         <div class="flex justify-between items-center border-b border-zinc-800/80 pb-2">
           <span class="text-zinc-400" id="lbl-summary-service">Servicio:</span>
@@ -251,12 +419,10 @@
         </div>
       </div>
 
-      <!-- Botones para añadir a Google / Apple Calendar -->
       <div class="space-y-2 pt-1">
         <p class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400" id="lbl-add-calendar">Añadir a tu calendario:</p>
         
         <div class="grid grid-cols-2 gap-2">
-          <!-- Google Calendar -->
           <a
             id="btn-google-cal"
             href="#"
@@ -269,7 +435,6 @@
             <span>Google</span>
           </a>
 
-          <!-- Apple / Outlook .ics -->
           <button
             type="button"
             onclick="downloadIcsFile()"
@@ -283,7 +448,6 @@
         </div>
       </div>
 
-      <!-- Botón de cierre -->
       <div class="pt-2">
         <button
           type="button"
@@ -300,7 +464,7 @@
 
 
   <!-- ===================================================================================
-       MODAL DE IDIOMAS
+       MODAL DE IDIOMAS (CON ICONO A/文)
        =================================================================================== -->
   <div id="language-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-surface-card border border-surface-border rounded-2xl w-full max-w-xs p-5 space-y-4 shadow-2xl">
@@ -319,7 +483,9 @@
   </div>
 
 
-  <!-- MODAL DE PIN (ADMIN) -->
+  <!-- ===================================================================================
+       MODAL DE PIN (ADMIN)
+       =================================================================================== -->
   <div id="pin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-surface-card border border-surface-border rounded-2xl w-full max-w-xs p-5 space-y-4 shadow-2xl text-center">
       <div class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 mx-auto flex items-center justify-center text-zinc-400">
@@ -358,7 +524,9 @@
   </div>
 
 
-  <!-- VISTA DEL PANEL DE ADMINISTRACIÓN -->
+  <!-- ===================================================================================
+       VISTA DEL PANEL DE ADMINISTRACIÓN
+       =================================================================================== -->
   <div id="admin-view" class="w-full max-w-md mx-auto px-4 pt-5 sm:px-5 space-y-5 hidden">
 
     <header class="flex items-center justify-between pb-3 border-b border-zinc-800">
@@ -499,16 +667,16 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT: STORE, MENSAJES Y GENERACIÓN DE CALENDARIOS (.ICS & GOOGLE)
+       JAVASCRIPT: LÓGICA COMPLETA DE NEGOCIO Y RENDERIZADO
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
 
     const DEFAULT_SERVICES = [
-      { id: 1, name: "Corte de pelo", duration: "30 min", price: 15, durationMin: 30, active: true },
-      { id: 2, name: "Corte + Barba", duration: "45 min", price: 24, durationMin: 45, active: true },
-      { id: 3, name: "Arreglo de barba", duration: "20 min", price: 12, durationMin: 20, active: true },
-      { id: 4, name: "Corte infantil / Senior", duration: "25 min", price: 13, durationMin: 25, active: true }
+      { id: 1, name: "Corte de pelo", duration: "30 min", price: 15, durationMin: 30, desc: "Lavado, corte a tijera/máquina y peinado", active: true },
+      { id: 2, name: "Corte + Barba", duration: "45 min", price: 24, durationMin: 45, desc: "Corte y perfilado con toalla caliente", active: true },
+      { id: 3, name: "Arreglo de barba", duration: "20 min", price: 12, durationMin: 20, desc: "Perfilado a navaja y aceites esenciales", active: true },
+      { id: 4, name: "Corte infantil / Senior", duration: "25 min", price: 13, durationMin: 25, desc: "Menores de 12 años y jubilados", active: true }
     ];
 
     const STORE = {
@@ -563,24 +731,32 @@
       selectedTime: null,
       clientName: '',
       clientPhone: '',
-      lastBooking: null // Guarda la última reserva para los calendarios
+      lastBooking: null
     };
 
-    // DICCIONARIO CON PLANTILLAS EXACTAS
     const i18n = {
       es: {
         shopName: "Barbería El Barrio",
-        status: "Abierto hoy · 10:00 a 20:00",
-        address: "Calle Mayor, 14 · Casco Antiguo, Sevilla",
-        step1Title: "1. Servicio",
-        step2Title: "2. Día y hora",
+        heroStatus: "Abierto hoy · 10:00 a 20:00",
+        heroLocation: "Casco Antiguo, Sevilla",
+        heroTitle: 'Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal',
+        heroSubtitle: "Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el centro histórico de Sevilla.",
+        heroCta: "Reservar Cita",
+        galleryTitle: "El Espacio & La Experiencia",
+        photoTag1: "Sillones clásicos y atención individual",
+        moduleTitle: "Reserva de Servicios",
+        step1Title: "1. Selecciona el servicio",
+        subStep1: "Precios oficiales",
+        step2Title: "2. Fecha y hora",
         step3Title: "3. Tus datos",
-        lblName: "Nombre y apellido",
+        lblName: "Nombre y apellido *",
         namePlaceholder: "Ej. Carlos Mendoza",
-        lblPhone: "Teléfono (WhatsApp)",
+        lblPhone: "Teléfono (WhatsApp) *",
         phonePlaceholder: "Ej. +34 612 345 678",
         shiftMorning: "Mañana",
         shiftAfternoon: "Tarde",
+        footerLocationTitle: "Ubicación del Local",
+        footerHours: "Lunes a Sábado · 10:00 - 20:00",
         paymentNotice: "Pago en el local (Efectivo / Bizum / Tarjeta)",
         footerPolicy: "Barbería El Barrio · Sevilla",
         closedDay: "Cerrado este día",
@@ -602,18 +778,27 @@
       },
       en: {
         shopName: "El Barrio Barbershop",
-        status: "Open today · 10:00 AM to 8:00 PM",
-        address: "14 Mayor St · Old Town, Seville",
-        step1Title: "1. Service",
+        heroStatus: "Open today · 10:00 AM to 8:00 PM",
+        heroLocation: "Old Town, Seville",
+        heroTitle: 'Traditional Barbering <span class="italic font-normal text-accent-gold">&</span> Grooming',
+        heroSubtitle: "Classic scissor cut, hot towel shave ritual, and beard shaping in the historic center of Seville.",
+        heroCta: "Book Appointment",
+        galleryTitle: "The Shop & Atmosphere",
+        photoTag1: "Classic chairs & individual attention",
+        moduleTitle: "Service Booking",
+        step1Title: "1. Select Service",
+        subStep1: "Official rates",
         step2Title: "2. Date & Time",
         step3Title: "3. Your Details",
-        lblName: "Full name",
+        lblName: "Full name *",
         namePlaceholder: "e.g. John Miller",
-        lblPhone: "Phone (WhatsApp)",
+        lblPhone: "Phone (WhatsApp) *",
         phonePlaceholder: "e.g. +44 7123 456789",
         shiftMorning: "Morning",
         shiftAfternoon: "Afternoon",
-        paymentNotice: "Pay in person (Cash / Bizum / Card)",
+        footerLocationTitle: "Shop Location",
+        footerHours: "Monday to Saturday · 10:00 AM - 8:00 PM",
+        paymentNotice: "Pay on-site (Cash / Bizum / Card)",
         footerPolicy: "El Barrio Barbershop · Seville",
         closedDay: "Closed on this date",
         ctaButton: "Confirm booking",
@@ -634,24 +819,33 @@
       },
       fr: {
         shopName: "Barbería El Barrio",
-        status: "Ouvert aujourd'hui · 10:00 à 20:00",
-        address: "Calle Mayor, 14 · Centre Historique, Séville",
-        step1Title: "1. Prestation",
+        heroStatus: "Ouvert aujourd'hui · 10:00 à 20:00",
+        heroLocation: "Centre Historique, Séville",
+        heroTitle: 'Barbier Traditionnel <span class="italic font-normal text-accent-gold">&</span> Soins',
+        heroSubtitle: "Coupe classique aux ciseaux, rasage traditionnel à la serviette chaude et taille de barbe à Séville.",
+        heroCta: "Prendre Rendez-vous",
+        galleryTitle: "Le Salon & L'Atmosphère",
+        photoTag1: "Fauteuils classiques et service sur-mesure",
+        moduleTitle: "Réservation de Services",
+        step1Title: "1. Choisissez la prestation",
+        subStep1: "Tarifs officiels",
         step2Title: "2. Date et heure",
         step3Title: "3. Vos coordonnées",
-        lblName: "Nom et prénom",
+        lblName: "Nom et prénom *",
         namePlaceholder: "Ex. Jean Dupont",
-        lblPhone: "Téléphone (WhatsApp)",
+        lblPhone: "Téléphone (WhatsApp) *",
         phonePlaceholder: "Ex. +33 612 345 678",
         shiftMorning: "Matin",
         shiftAfternoon: "Après-midi",
+        footerLocationTitle: "Emplacement du Salon",
+        footerHours: "Lundi au Samedi · 10:00 - 20:00",
         paymentNotice: "Paiement sur place (Espèces / Carte)",
         footerPolicy: "Barbería El Barrio · Séville",
         closedDay: "Fermé cette date",
         ctaButton: "Confirmer la réservation",
         chooseDatePrompt: "Choisissez la date et l'heure",
         modalSuccessTitle: "Réservation envoyée !",
-        modalSuccessDesc: "Nous avons ouvert WhatsApp pour transmettre votre demande au barbier.",
+        modalSuccessDesc: "WhatsApp a été ouvert pour envoyer votre message directement au barbier.",
         lblSummaryService: "Prestation :",
         lblSummaryDate: "Date et heure :",
         lblSummaryLocation: "Lieu :",
@@ -666,24 +860,33 @@
       },
       de: {
         shopName: "Barbería El Barrio",
-        status: "Heute geöffnet · 10:00 bis 20:00 Uhr",
-        address: "Calle Mayor, 14 · Altstadt, Sevilla",
-        step1Title: "1. Dienstleistung",
+        heroStatus: "Heute geöffnet · 10:00 bis 20:00 Uhr",
+        heroLocation: "Altstadt, Sevilla",
+        heroTitle: 'Traditioneller Barbier <span class="italic font-normal text-accent-gold">&</span> Pflege',
+        heroSubtitle: "Klassischer Scherenschnitt, Heißtuch-Rasur und Bartpflege im historischen Zentrum von Sevilla.",
+        heroCta: "Termin Buchen",
+        galleryTitle: "Der Salon & Die Atmosphäre",
+        photoTag1: "Klassische Stühle und individuelle Betreuung",
+        moduleTitle: "Online-Terminbuchung",
+        step1Title: "1. Dienstleistung wählen",
+        subStep1: "Offizielle Preise",
         step2Title: "2. Datum & Uhrzeit",
         step3Title: "3. Ihre Daten",
-        lblName: "Vor- und Nachname",
+        lblName: "Vor- und Nachname *",
         namePlaceholder: "z.B. Max Mustermann",
-        lblPhone: "Telefon (WhatsApp)",
+        lblPhone: "Telefon (WhatsApp) *",
         phonePlaceholder: "z.B. +49 170 1234567",
         shiftMorning: "Vormittag",
         shiftAfternoon: "Nachmittag",
+        footerLocationTitle: "Standort des Salons",
+        footerHours: "Montag bis Samstag · 10:00 - 20:00 Uhr",
         paymentNotice: "Zahlung vor Ort (Bar / Karte)",
         footerPolicy: "Barbería El Barrio · Sevilla",
         closedDay: "An diesem Tag geschlossen",
         ctaButton: "Termin buchen",
         chooseDatePrompt: "Wählen Sie Datum und Uhrzeit",
         modalSuccessTitle: "Buchung gesendet!",
-        modalSuccessDesc: "WhatsApp wurde geöffnet, um Ihre Anfrage direkt an den Barbier zu senden.",
+        modalSuccessDesc: "WhatsApp wurde geöffnet, um Ihre Nachricht direkt an den Barbier zu senden.",
         lblSummaryService: "Dienstleistung:",
         lblSummaryDate: "Datum & Uhrzeit:",
         lblSummaryLocation: "Ort:",
@@ -699,23 +902,33 @@
       it: {
         shopName: "Barbería El Barrio",
         status: "Aperto oggi · 10:00 - 20:00",
-        address: "Calle Mayor, 14 · Centro Storico, Siviglia",
-        step1Title: "1. Servizio",
+        heroStatus: "Aperto oggi · 10:00 - 20:00",
+        heroLocation: "Centro Storico, Siviglia",
+        heroTitle: 'Barberia Tradizionale <span class="italic font-normal text-accent-gold">&</span> Cura Maschile',
+        heroSubtitle: "Taglio classico a forbice, rasatura con panno caldo e modellatura barba nel centro storico di Siviglia.",
+        heroCta: "Prenota Appuntamento",
+        galleryTitle: "Lo Spazio & L'Esperienza",
+        photoTag1: "Poltrone classiche e attenzione individuale",
+        moduleTitle: "Prenotazione Servizi",
+        step1Title: "1. Scegli il servizio",
+        subStep1: "Listino ufficiale",
         step2Title: "2. Data e ora",
         step3Title: "3. I tuoi dati",
-        lblName: "Nome e cognome",
+        lblName: "Nome e cognome *",
         namePlaceholder: "Es. Marco Rossi",
-        lblPhone: "Telefono (WhatsApp)",
+        lblPhone: "Telefono (WhatsApp) *",
         phonePlaceholder: "Es. +39 340 1234567",
         shiftMorning: "Mattina",
         shiftAfternoon: "Pomeriggio",
+        footerLocationTitle: "Posizione del Salone",
+        footerHours: "Lunedì a Sabato · 10:00 - 20:00",
         paymentNotice: "Pagamento in loco (Contanti / Carta)",
         footerPolicy: "Barbería El Barrio · Siviglia",
         closedDay: "Chiuso in questa data",
         ctaButton: "Conferma prenotazione",
         chooseDatePrompt: "Scegli giorno e ora",
         modalSuccessTitle: "Prenotazione inviata!",
-        modalSuccessDesc: "Abbiamo aperto WhatsApp per inviare la tua richiesta direttamente al barbiere.",
+        modalSuccessDesc: "Abbiamo aperto WhatsApp per inviare il tuo messaggio direttamente al barbiere.",
         lblSummaryService: "Servizio:",
         lblSummaryDate: "Data e ora:",
         lblSummaryLocation: "Luogo:",
@@ -801,10 +1014,20 @@
 
     function updateLanguageTexts() {
       const t = i18n[state.lang] || i18n.es;
-      document.getElementById('txt-shop-name').textContent = t.shopName;
-      document.getElementById('txt-status').textContent = t.status;
-      document.getElementById('txt-shop-address').textContent = t.address;
+      
+      // Hero & Branding
+      document.getElementById('hero-badge-status').textContent = t.heroStatus;
+      document.getElementById('hero-badge-location').textContent = t.heroLocation;
+      document.getElementById('hero-title').innerHTML = t.heroTitle;
+      document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
+      document.getElementById('hero-cta').querySelector('span').textContent = t.heroCta;
+      document.getElementById('gallery-title').textContent = t.galleryTitle;
+      document.getElementById('photo-tag-1').textContent = t.photoTag1;
+      
+      // Módulo Reserva
+      document.getElementById('module-title').textContent = t.moduleTitle;
       document.getElementById('title-step-1').textContent = t.step1Title;
+      document.getElementById('sub-step-1').textContent = t.subStep1;
       document.getElementById('title-step-2').textContent = t.step2Title;
       document.getElementById('title-step-3').textContent = t.step3Title;
       document.getElementById('lbl-name').textContent = t.lblName;
@@ -813,6 +1036,10 @@
       document.getElementById('client-phone').placeholder = t.phonePlaceholder;
       document.getElementById('txt-shift-morning').textContent = t.shiftMorning;
       document.getElementById('txt-shift-afternoon').textContent = t.shiftAfternoon;
+      
+      // Footer
+      document.getElementById('footer-location-title').textContent = t.footerLocationTitle;
+      document.getElementById('footer-hours').textContent = t.footerHours;
       document.getElementById('txt-payment-notice').textContent = t.paymentNotice;
       document.getElementById('txt-footer-policy').textContent = t.footerPolicy;
       document.getElementById('txt-cta-button').textContent = t.ctaButton;
@@ -837,12 +1064,12 @@
         const isSelected = state.selectedServiceId === service.id;
 
         const cardStyle = isSelected
-          ? 'bg-zinc-900 border-zinc-200 text-white'
-          : 'bg-surface-card border-surface-border text-zinc-300 hover:border-zinc-700';
+          ? 'bg-[#181818] border-accent-gold ring-1 ring-accent-gold/40 shadow-xl'
+          : 'bg-surface-card border-surface-border hover:border-white/20';
 
         const radioStyle = isSelected
-          ? 'w-4 h-4 rounded-full bg-white flex items-center justify-center'
-          : 'w-4 h-4 rounded-full border border-zinc-600';
+          ? 'w-4 h-4 rounded-full bg-accent-gold flex items-center justify-center'
+          : 'w-4 h-4 rounded-full border border-white/20';
 
         const radioInner = isSelected
           ? '<div class="w-1.5 h-1.5 rounded-full bg-black"></div>'
@@ -851,14 +1078,17 @@
         return `
           <div 
             onclick="selectService(${service.id})"
-            class="p-3.5 rounded-xl border transition-colors cursor-pointer flex items-center justify-between ${cardStyle}"
+            class="p-3.5 rounded-2xl border transition-all duration-150 cursor-pointer flex items-center justify-between ${cardStyle}"
           >
-            <div class="flex items-center gap-2">
-              <span class="font-medium text-sm text-white">${service.name}</span>
-              <span class="text-xs text-zinc-400">· ${service.duration}</span>
+            <div class="space-y-0.5 pr-2">
+              <div class="flex items-center gap-2">
+                <span class="font-semibold text-sm text-white">${service.name}</span>
+                <span class="text-[11px] text-zinc-400 font-normal">· ${service.duration}</span>
+              </div>
+              <p class="text-xs text-zinc-400">${service.desc || ''}</p>
             </div>
             <div class="flex items-center gap-3 shrink-0">
-              <span class="text-sm font-semibold text-white">${service.price} €</span>
+              <span class="text-sm font-bold text-white bg-white/[0.06] px-2.5 py-1 rounded-lg border border-white/[0.06]">${service.price} €</span>
               <div class="${radioStyle}">${radioInner}</div>
             </div>
           </div>
@@ -910,16 +1140,16 @@
         const month = t.monthsShort[d.getMonth()];
 
         const cardStyle = isSelected
-          ? 'bg-white text-black font-semibold shadow-sm'
-          : 'bg-surface-card border border-surface-border text-zinc-300 hover:border-zinc-700';
+          ? 'bg-white text-black font-semibold shadow-lg scale-[1.02]'
+          : 'bg-surface-card border border-surface-border text-zinc-300 hover:border-white/20';
 
-        const subTextStyle = isSelected ? 'text-zinc-800' : 'text-zinc-500';
+        const subTextStyle = isSelected ? 'text-zinc-800 font-medium' : 'text-zinc-500';
 
         return `
           <button
             type="button"
             onclick="selectDate('${dateKey}')"
-            class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-2.5 rounded-xl transition-colors ${cardStyle}"
+            class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-3 rounded-2xl transition-all duration-150 ${cardStyle}"
           >
             <span class="text-[10px] uppercase tracking-wider ${subTextStyle}">${dayOfWeek}</span>
             <span class="text-base font-bold my-0.5 leading-none">${dayNum}</span>
@@ -1006,18 +1236,18 @@
 
         if (!slot.isAvailable) {
           return `
-            <button type="button" disabled class="h-10 text-xs rounded-lg bg-zinc-950 border border-zinc-900 text-zinc-600 line-through cursor-not-allowed opacity-30 select-none">
+            <button type="button" disabled class="h-10 text-xs rounded-xl bg-white/[0.02] border border-white/[0.04] text-zinc-600 line-through cursor-not-allowed opacity-30 select-none">
               ${slot.time}
             </button>
           `;
         }
 
         const activeStyle = isSelected
-          ? 'bg-white text-black font-semibold'
-          : 'bg-surface-card border border-surface-border text-zinc-200 hover:border-zinc-700';
+          ? 'bg-white text-black font-semibold ring-2 ring-white shadow-md'
+          : 'bg-surface-card border border-surface-border text-zinc-200 hover:border-white/30';
 
         return `
-          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-xs font-medium rounded-lg transition-colors flex items-center justify-center ${activeStyle}">
+          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-xs font-medium rounded-xl transition-all duration-150 flex items-center justify-center ${activeStyle}">
             ${slot.time}
           </button>
         `;
@@ -1107,7 +1337,6 @@
       appts.push(newAppt);
       STORE.saveAppointments(appts);
 
-      // Guardar objeto de última reserva para calendarios
       state.lastBooking = {
         serviceName: service.name,
         price: service.price,
@@ -1122,7 +1351,7 @@
       const [y, m, d] = state.selectedDate.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
       const t = i18n[state.lang] || i18n.es;
-      const dateFormatted = `${t.daysShort[dateObj.getDay()]}, ${d} ${t.monthsShort[dateObj.getMonth()]} ${y}`;
+      const dateFormatted = `${t.daysShort[dateObj.getDay()]}, ${d} ${t.monthsShort[dateObj.getMonth()]}`;
 
       const phone = (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233');
       const msg = t.waMessage(service.name, dateFormatted, state.selectedTime, state.clientName, state.clientPhone);
@@ -1141,7 +1370,6 @@
       document.getElementById('success-summary-service').textContent = `${booking.serviceName} (${booking.price} €)`;
       document.getElementById('success-summary-datetime').textContent = `${dateFormatted} · ${booking.time}`;
 
-      // Configurar enlace directo a Google Calendar
       const googleLink = buildGoogleCalendarUrl(booking);
       document.getElementById('btn-google-cal').href = googleLink;
 
@@ -1152,7 +1380,6 @@
       document.getElementById('success-modal').classList.add('hidden');
     }
 
-    // Constructor de URL para Google Calendar
     function buildGoogleCalendarUrl(booking) {
       const [y, m, d] = booking.date.split('-').map(Number);
       const [h, min] = booking.time.split(':').map(Number);
@@ -1172,7 +1399,6 @@
       return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startIso}/${endIso}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}`;
     }
 
-    // Generador y descargador de archivo .ICS (Apple Calendar / Outlook)
     function downloadIcsFile() {
       if (!state.lastBooking) return;
       const b = state.lastBooking;
