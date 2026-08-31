@@ -1,35 +1,17 @@
 <!DOCTYPE html>
-<!--
-============================================================================================
-PROYECTO: WebApp de Reserva de Citas para Peluquería / Barbería (Mobile First - QR Ready)
-ARCHIVO: index.html
-ESTRUCTURA GENERAL:
-  1. <head>    : Metadatos, fuentes (Inter) y configuración de Tailwind CSS.
-  2. <header>  : Nombre de la barbería, dirección, estado "Abierto hoy" y selector ES/EN.
-  3. <main>    : Flujo en 3 pasos:
-                 - Paso 1: Selección de Servicio (Nombre, duración y precio).
-                 - Paso 2: Selección de Fecha (Carrusel de días) y Hora (Cuadrícula de slots).
-                 - Paso 3: Datos del cliente (Nombre y Teléfono) y aviso de pago.
-                 - Botón CTA: "Confirmar cita vía WhatsApp".
-  4. <footer>  : Información de horario y pie de página.
-  5. <script>  : Vinculación con 'barber-config.js', 'whatsapp-booking.js' y lógica reactiva.
-============================================================================================
--->
-<html lang="es" class="h-full bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
+<html lang="es" class="h-full bg-black text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
 <head>
   <meta charset="UTF-8" />
-  <!-- viewport-fit=cover y control de escala para experiencia nativa en móviles -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#0c0c0e" />
-  <title>Reserva de Cita — Barbería Tradicional</title>
+  <meta name="theme-color" content="#000000" />
+  <title>Barbería El Barrio — Reserva de Cita</title>
 
-  <!-- ==================== FUENTE TIPOGRÁFICA (INTER) ==================== -->
+  <!-- Tipografía: Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- ==================== TAILWIND CSS CDN ==================== -->
-  <!-- Puedes personalizar los colores del tema aquí abajo si deseas cambiar la estética -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -37,13 +19,14 @@ ESTRUCTURA GENERAL:
       theme: {
         extend: {
           fontFamily: {
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
           },
           colors: {
-            zinc: {
-              850: '#1e1e24',
-              900: '#141417',
-              950: '#0c0c0e', // Fondo ultra oscuro minimalista
+            brand: {
+              gold: '#D4AF37',
+              dark: '#0a0a0c',
+              card: '#121216',
+              border: 'rgba(255, 255, 255, 0.08)'
             }
           }
         }
@@ -51,17 +34,17 @@ ESTRUCTURA GENERAL:
     }
   </script>
 
-  <!-- ==================== ESTILOS ADICIONALES ==================== -->
   <style>
-    /* Evita el destello azul al tocar elementos en dispositivos táctiles */
     * {
       -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
     }
-    /* Optimiza la respuesta táctil en móviles */
+    body {
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
     input, button, select {
       touch-action: manipulation;
     }
-    /* Oculta la barra de desplazamiento horizontal en el carrusel de días */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -69,244 +52,256 @@ ESTRUCTURA GENERAL:
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
+    /* Suavizado de bordes e iluminación estilo Apple */
+    .apple-glass {
+      background: rgba(18, 18, 22, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .apple-glass-card {
+      background: rgba(22, 22, 28, 0.6);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+    .apple-glass-card:active {
+      transform: scale(0.985);
+    }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans bg-zinc-950 text-zinc-100 pb-8">
-  <div class="w-full max-w-md mx-auto px-4 pt-6 sm:px-6">
+<body class="min-h-full flex flex-col justify-between font-sans bg-black text-zinc-100 pb-32">
+  <div class="w-full max-w-md mx-auto px-4 pt-5 sm:px-5">
 
     <!-- ===================================================================================
-         1. CABECERA (HEADER): LOGO / NOMBRE, DIRECCIÓN Y SELECTOR DE IDIOMA
+         HEADER PREMIUM ESTILO APPLE
          =================================================================================== -->
-    <header class="flex items-start justify-between pb-6 border-b border-zinc-800/80">
-      <div>
-        <!-- Indicador de estado abierto -->
-        <div class="flex items-center gap-2">
-          <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
-          <p class="text-[11px] font-medium tracking-widest uppercase text-zinc-400" id="txt-status">Abierto hoy</p>
+    <header class="apple-glass rounded-2xl p-4 mb-5 shadow-2xl relative overflow-hidden">
+      <!-- Glow sutil de fondo -->
+      <div class="absolute -top-10 -right-10 w-28 h-28 bg-white/[0.03] rounded-full blur-2xl pointer-events-none"></div>
+
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <!-- Monograma / Icono minimalista de la barbería -->
+          <div class="w-11 h-11 rounded-xl bg-gradient-to-b from-zinc-800 to-zinc-900 border border-white/10 flex items-center justify-center shadow-inner">
+            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6 3v18M18 3v18M6 8h12M6 16h12" />
+            </svg>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <span class="relative flex h-2 w-2">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </span>
+              <span class="text-[10px] font-semibold tracking-wider uppercase text-emerald-400" id="txt-status">Citas disponibles</span>
+            </div>
+            <h1 class="text-base font-bold tracking-tight text-white mt-0.5" id="txt-shop-name">Barbería El Barrio</h1>
+          </div>
         </div>
 
-        <!-- Nombre del local (se actualiza automáticamente según el idioma o desde JS) -->
-        <h1 class="text-xl font-bold tracking-tight text-white mt-1" id="txt-shop-name">Barbería El Barrio</h1>
+        <!-- Selector de idioma tipo segmented control de iOS -->
+        <div class="flex items-center bg-black/60 border border-white/10 rounded-full p-1 text-[11px] font-semibold">
+          <button id="btn-lang-es" onclick="setLanguage('es')" class="px-2.5 py-0.5 rounded-full bg-white text-black font-semibold transition-all">
+            ES
+          </button>
+          <button id="btn-lang-en" onclick="setLanguage('en')" class="px-2.5 py-0.5 rounded-full text-zinc-400 hover:text-white transition-all">
+            EN
+          </button>
+        </div>
+      </div>
 
-        <!-- Dirección física -->
-        <div class="flex items-center gap-1.5 mt-1 text-xs text-zinc-400">
+      <!-- Dirección con link de Google Maps y aviso de ubicación turística -->
+      <div class="flex items-center justify-between mt-3 pt-3 border-t border-white/[0.06] text-xs text-zinc-400">
+        <div class="flex items-center gap-1.5 truncate">
           <svg class="w-3.5 h-3.5 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
             <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
           </svg>
-          <span id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo</span>
+          <span class="truncate" id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo</span>
         </div>
-      </div>
-
-      <!-- Selector de idioma bilingüe (ES / EN) -->
-      <div class="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg p-0.5 text-xs font-medium">
-        <button id="btn-lang-es" onclick="setLanguage('es')" class="px-2.5 py-1 rounded-[6px] bg-zinc-800 text-white transition-colors">
-          ES
-        </button>
-        <button id="btn-lang-en" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-[6px] text-zinc-400 hover:text-zinc-200 transition-colors">
-          EN
-        </button>
+        <span class="text-[10px] font-medium text-zinc-500 uppercase tracking-wider bg-white/[0.04] px-2 py-0.5 rounded-md border border-white/[0.04]">
+          Walk-in / QR
+        </span>
       </div>
     </header>
 
     <!-- ===================================================================================
-         2. CONTENIDO PRINCIPAL (MAIN): LOS 3 PASOS DE LA RESERVA
+         CONTENIDO PRINCIPAL
          =================================================================================== -->
-    <main class="mt-6 space-y-7">
+    <main class="space-y-6">
 
-      <!-- -------------------------------------------------------------------------------
-           PASO 1: SELECCIÓN DE SERVICIO
-           Las tarjetas de servicio se renderizan dinámicamente desde el objeto 'i18n' en JS.
-           ------------------------------------------------------------------------------- -->
+      <!-- PASO 1: SELECCIÓN DE SERVICIO -->
       <section>
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2">
-            <span class="flex items-center justify-center w-5 h-5 text-[11px] font-semibold bg-zinc-800 text-zinc-300 rounded">1</span>
-            <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-1">Selecciona tu servicio</h2>
-          </div>
-          <span class="text-[11px] text-zinc-500" id="sub-step-1">Requerido</span>
+        <div class="flex items-center justify-between mb-2.5 px-1">
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-1">1. Elige tu servicio</h2>
+          <span class="text-[11px] text-zinc-500 font-medium" id="sub-step-1">Tarifa oficial</span>
         </div>
 
-        <!-- Contenedor inyectado por JS: renderServices() -->
-        <div class="space-y-2.5" id="services-container"></div>
+        <div class="space-y-2" id="services-container">
+          <!-- Renderizado vía JS -->
+        </div>
       </section>
 
-      <!-- -------------------------------------------------------------------------------
-           PASO 2: SELECCIÓN DE FECHA Y HORA
-           - Carrusel horizontal con los próximos 7 días laborales disponibles.
-           - Cuadrícula con las horas libres (las ocupadas o pasadas se bloquean solas).
-           ------------------------------------------------------------------------------- -->
+      <!-- PASO 2: FECHA Y HORA -->
       <section>
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2">
-            <span class="flex items-center justify-center w-5 h-5 text-[11px] font-semibold bg-zinc-800 text-zinc-300 rounded">2</span>
-            <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-2">Fecha y hora</h2>
-          </div>
-          <!-- Resumen de fecha y hora seleccionadas -->
-          <span class="text-[11px] text-zinc-400 font-medium" id="selected-date-summary"></span>
+        <div class="flex items-center justify-between mb-2.5 px-1">
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-2">2. Día y hora</h2>
+          <span class="text-[11px] text-zinc-300 font-medium tracking-tight" id="selected-date-summary"></span>
         </div>
 
-        <!-- Carrusel horizontal de días (JS: generateCalendarDays()) -->
+        <!-- Selector horizontal de días tipo iOS -->
         <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1" id="days-container"></div>
 
-        <!-- Cuadrícula de 4 columnas de horas (JS: renderTimeSlotsForSelectedDate()) -->
-        <div class="mt-3.5">
-          <div class="grid grid-cols-4 gap-2" id="time-slots-container"></div>
+        <!-- Cuadrícula de horas organizadas por Mañana y Tarde -->
+        <div class="mt-3.5 space-y-3">
+          <div>
+            <p class="text-[10px] uppercase font-semibold tracking-wider text-zinc-500 mb-1.5 px-1" id="txt-shift-morning">Mañana</p>
+            <div class="grid grid-cols-4 gap-1.5" id="morning-slots-container"></div>
+          </div>
+          <div>
+            <p class="text-[10px] uppercase font-semibold tracking-wider text-zinc-500 mb-1.5 px-1" id="txt-shift-afternoon">Tarde</p>
+            <div class="grid grid-cols-4 gap-1.5" id="afternoon-slots-container"></div>
+          </div>
         </div>
       </section>
 
-      <!-- -------------------------------------------------------------------------------
-           PASO 3: DATOS DEL CLIENTE
-           Formulario mínimo de 2 campos (Nombre completo y Teléfono WhatsApp).
-           ------------------------------------------------------------------------------- -->
+      <!-- PASO 3: DATOS DEL CLIENTE (FILTRO ANTI-FALSAS RESERVAS) -->
       <section>
-        <div class="flex items-center justify-between mb-3">
-          <div class="flex items-center gap-2">
-            <span class="flex items-center justify-center w-5 h-5 text-[11px] font-semibold bg-zinc-800 text-zinc-300 rounded">3</span>
-            <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-3">Tus datos</h2>
-          </div>
-          <span class="text-[11px] text-zinc-500" id="sub-step-3">2 campos</span>
+        <div class="flex items-center justify-between mb-2.5 px-1">
+          <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-3">3. Tus datos de contacto</h2>
+          <span class="text-[11px] text-zinc-500 font-medium">WhatsApp directo</span>
         </div>
 
-        <div class="space-y-3">
-          <!-- Campo 1: Nombre y apellido -->
+        <div class="apple-glass rounded-2xl p-3.5 space-y-3">
           <div>
-            <label for="client-name" class="block text-xs font-medium text-zinc-300 mb-1.5" id="lbl-name">Nombre y apellido</label>
-            <div class="relative">
-              <input
-                type="text"
-                id="client-name"
-                autocomplete="name"
-                placeholder="Ej. Carlos Mendoza"
-                class="w-full h-12 bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-colors"
-                oninput="validateForm()"
-              />
-            </div>
+            <label for="client-name" class="block text-[11px] font-medium text-zinc-400 mb-1" id="lbl-name">Nombre completo</label>
+            <input
+              type="text"
+              id="client-name"
+              autocomplete="name"
+              placeholder="Ej. Carlos Mendoza"
+              class="w-full h-11 bg-black/50 border border-white/10 rounded-xl px-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-all"
+              oninput="validateForm()"
+            />
           </div>
 
-          <!-- Campo 2: Teléfono móvil (WhatsApp) -->
           <div>
-            <label for="client-phone" class="block text-xs font-medium text-zinc-300 mb-1.5" id="lbl-phone">Teléfono móvil (WhatsApp)</label>
-            <div class="relative">
-              <input
-                type="tel"
-                id="client-phone"
-                autocomplete="tel"
-                placeholder="Ej. +34 612 345 678"
-                class="w-full h-12 bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500 transition-colors"
-                oninput="validateForm()"
-              />
+            <div class="flex items-center justify-between mb-1">
+              <label for="client-phone" class="block text-[11px] font-medium text-zinc-400" id="lbl-phone">Teléfono móvil</label>
+              <span class="text-[10px] text-zinc-500">Con prefijo (+34...)</span>
             </div>
+            <input
+              type="tel"
+              id="client-phone"
+              autocomplete="tel"
+              placeholder="+34 612 345 678"
+              class="w-full h-11 bg-black/50 border border-white/10 rounded-xl px-3.5 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-white/30 focus:ring-1 focus:ring-white/30 transition-all"
+              oninput="validateForm()"
+            />
           </div>
         </div>
       </section>
 
-      <!-- -------------------------------------------------------------------------------
-           AVISO DE PAGO (SOBRIO Y MINIMALISTA)
-           ------------------------------------------------------------------------------- -->
-      <section class="pt-2">
-        <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 flex items-start gap-3">
-          <!-- Icono vectorial SVG de información -->
+      <!-- POLÍTICA DE SEGURIDAD Y ANTI-NO-SHOW -->
+      <section class="space-y-2">
+        <!-- Aviso de pago en local -->
+        <div class="p-3 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-start gap-2.5">
           <svg class="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
-          <p class="text-xs text-zinc-400 leading-relaxed" id="txt-payment-notice">
-            El pago se realiza en el local una vez finalizado el servicio (Efectivo / Bizum / Tarjeta).
+          <p class="text-[11px] text-zinc-400 leading-relaxed" id="txt-payment-notice">
+            Pago presencial en el local (Efectivo / Bizum / Tarjeta).
           </p>
         </div>
-      </section>
 
-      <!-- -------------------------------------------------------------------------------
-           BOTÓN PRINCIPAL DE ACCIÓN (CTA): CONFIRMAR VÍA WHATSAPP
-           Permanece deshabilitado ('disabled') hasta que todos los campos son válidos.
-           ------------------------------------------------------------------------------- -->
-      <section class="pt-1">
-        <button
-          id="btn-submit"
-          type="button"
-          onclick="handleBookingConfirmation()"
-          disabled
-          class="w-full h-13 py-3.5 px-4 bg-zinc-100 hover:bg-white text-zinc-950 font-semibold rounded-xl text-sm transition-all duration-150 flex items-center justify-center gap-2.5 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-zinc-100"
-        >
-          <!-- Icono vectorial limpio de WhatsApp -->
-          <svg class="w-4 h-4 text-zinc-950 shrink-0" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.5.07-1.14.1-3.32-.8-2.6-1.08-4.27-3.72-4.4-3.89-.13-.17-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .36.01.52.01.17 0 .4-.06.62.47.24.57.81 1.97.88 2.12.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.28.11 1.79.84 2.1 1 .31.15.52.23.6.36.07.14.07.8-.17 1.48z"/>
+        <!-- Escudo Anti-Falsas Reservas (Garantía para el barbero) -->
+        <div class="p-3 rounded-xl bg-emerald-500/[0.04] border border-emerald-500/20 flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
           </svg>
-          <span id="txt-cta-button">Confirmar cita vía WhatsApp</span>
-        </button>
-
-        <p class="text-center text-[11px] text-zinc-500 mt-2.5" id="txt-cta-helper">
-          Se abrirá WhatsApp con el mensaje estructurado de tu cita
-        </p>
+          <div class="text-[11px] text-zinc-300 leading-relaxed">
+            <span class="font-semibold text-emerald-400" id="txt-anti-fake-title">Confirmación 1 a 1:</span>
+            <span class="text-zinc-400" id="txt-anti-fake-desc">Al pulsar el botón se abrirá WhatsApp con tu reserva. Tu cita queda confirmada de inmediato cuando el peluquero te responda.</span>
+          </div>
+        </div>
       </section>
 
     </main>
 
-    <!-- ===================================================================================
-         3. PIE DE PÁGINA (FOOTER)
-         =================================================================================== -->
-    <footer class="mt-10 pt-4 border-t border-zinc-900 text-center">
-      <p class="text-[11px] text-zinc-600" id="txt-footer">
-        Barbería El Barrio · Horario: Lun - Sáb 10:00 - 20:00
-      </p>
+    <!-- FOOTER SUTIL -->
+    <footer class="mt-8 text-center text-[10px] text-zinc-600">
+      <p id="txt-footer">Barbería El Barrio · Cancelaciones con min. 2h de antelación</p>
     </footer>
 
   </div>
 
   <!-- ===================================================================================
-       4. VINCULACIÓN DE ARCHIVOS JS EXTERNOS
-       - barber-config.js    : Define el teléfono, turnos, festivos y horas bloqueadas.
-       - whatsapp-booking.js : Construye el mensaje URI y abre WhatsApp.
+       BARRA FLOTANTE FIJA INFERIOR (STICKY DOCK TIPO APPLE)
        =================================================================================== -->
+  <div class="fixed bottom-0 inset-x-0 bg-black/80 backdrop-blur-xl border-t border-white/[0.08] p-4 z-50">
+    <div class="w-full max-w-md mx-auto">
+      <button
+        id="btn-submit"
+        type="button"
+        onclick="handleBookingConfirmation()"
+        disabled
+        class="w-full h-13 py-3 px-4 bg-white hover:bg-zinc-200 text-black font-semibold rounded-xl text-sm transition-all duration-200 flex items-center justify-between shadow-xl disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white"
+      >
+        <div class="flex items-center gap-2">
+          <svg class="w-4 h-4 text-black shrink-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.5.07-1.14.1-3.32-.8-2.6-1.08-4.27-3.72-4.4-3.89-.13-.17-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .36.01.52.01.17 0 .4-.06.62.47.24.57.81 1.97.88 2.12.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.28.11 1.79.84 2.1 1 .31.15.52.23.6.36.07.14.07.8-.17 1.48z"/>
+          </svg>
+          <span id="txt-cta-button">Confirmar vía WhatsApp</span>
+        </div>
+        
+        <!-- Badge de precio en el botón -->
+        <span class="text-xs font-bold bg-black/10 px-2 py-1 rounded-md text-black" id="cta-price-badge">15 €</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scripts modulares -->
   <script src="./barber-config.js"></script>
   <script src="./whatsapp-booking.js"></script>
 
-  <!-- ===================================================================================
-       5. LÓGICA DE CONTROL E INTERACTIVIDAD DE LA PÁGINA
-       =================================================================================== -->
   <script>
-    // ---------------------------------------------------------------------------------
-    // ESTADO REACTIVO DE LA APLICACIÓN (Guarda qué ha seleccionado el cliente)
-    // ---------------------------------------------------------------------------------
     const state = {
-      lang: 'es',              // Idioma activo ('es' o 'en')
-      selectedServiceId: 1,    // Por defecto el primer servicio
-      selectedDate: null,      // Fecha seleccionada (formato: "AAAA-MM-DD")
-      selectedTime: null,      // Hora seleccionada (ej. "11:30")
-      clientName: '',          // Nombre introducido por el cliente
-      clientPhone: ''          // Teléfono introducido por el cliente
+      lang: 'es',
+      selectedServiceId: 1,
+      selectedDate: null,
+      selectedTime: null,
+      clientName: '',
+      clientPhone: ''
     };
 
-    // ---------------------------------------------------------------------------------
-    // DICCIONARIO DE TEXTOS, SERVICIOS Y PRECIOS (ESPAÑOL / INGLÉS)
-    // Edita aquí los nombres de los servicios, precios, duraciones o textos de la web.
-    // ---------------------------------------------------------------------------------
     const i18n = {
       es: {
         shopName: "Barbería El Barrio",
-        status: "Abierto hoy",
+        status: "Citas disponibles",
         address: "Calle Mayor, 14 · Casco Antiguo",
-        step1Title: "Selecciona tu servicio",
-        step1Sub: "Requerido",
-        step2Title: "Fecha y hora",
-        step3Title: "Tus datos",
-        step3Sub: "2 campos",
-        lblName: "Nombre y apellido",
+        step1Title: "1. Elige tu servicio",
+        subStep1: "Tarifa oficial",
+        step2Title: "2. Día y hora",
+        step3Title: "3. Tus datos de contacto",
+        lblName: "Nombre completo",
         namePlaceholder: "Ej. Carlos Mendoza",
-        lblPhone: "Teléfono móvil (WhatsApp)",
-        phonePlaceholder: "Ej. +34 612 345 678",
-        paymentNotice: "El pago se realiza en el local una vez finalizado el servicio (Efectivo / Bizum / Tarjeta).",
-        ctaButton: "Confirmar cita vía WhatsApp",
-        ctaHelper: "Se abrirá WhatsApp con el mensaje estructurado de tu cita",
-        footer: "Barbería El Barrio · Horario: Lun - Sáb 10:00 - 20:00",
-        closedDay: "Cerrado en esta fecha",
-        // LISTA DE SERVICIOS EN ESPAÑOL
+        lblPhone: "Teléfono móvil",
+        phonePlaceholder: "+34 612 345 678",
+        shiftMorning: "Mañana",
+        shiftAfternoon: "Tarde",
+        paymentNotice: "Pago presencial en el local (Efectivo / Bizum / Tarjeta).",
+        antiFakeTitle: "Confirmación 1 a 1:",
+        antiFakeDesc: "Al pulsar el botón se abrirá WhatsApp con tu reserva. Tu cita queda formalmente confirmada cuando el peluquero te responda.",
+        ctaButton: "Confirmar vía WhatsApp",
+        footer: "Barbería El Barrio · Cancelaciones con min. 2h de antelación",
+        closedDay: "Sin turnos disponibles este día",
         services: [
-          { id: 1, name: "Corte clásico", duration: "30 min", price: "15 €", desc: "Lavado, corte a tijera/máquina y peinado" },
-          { id: 2, name: "Corte + Barba completa", duration: "45 min", price: "24 €", desc: "Corte de pelo y perfilado de barba con toalla caliente" },
-          { id: 3, name: "Arreglo y perfilado de barba", duration: "20 min", price: "12 €", desc: "Diseño, degradado y tratamiento con aceites" },
-          { id: 4, name: "Corte infantil / Jubilado", duration: "25 min", price: "13 €", desc: "Tarifa reducida para menores de 12 años y seniors" }
+          { id: 1, name: "Corte clásico", duration: "30 min", price: "15 €", desc: "Lavado, corte a tijera/máquina y styling" },
+          { id: 2, name: "Corte + Barba completa", duration: "45 min", price: "24 €", desc: "Corte y diseño de barba con toalla caliente" },
+          { id: 3, name: "Arreglo y perfilado de barba", duration: "20 min", price: "12 €", desc: "Perfilado a navaja y tratamiento de aceites" },
+          { id: 4, name: "Corte infantil / Senior", duration: "25 min", price: "13 €", desc: "Menores de 12 años y jubilados" }
         ],
         daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
         monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -315,28 +310,29 @@ ESTRUCTURA GENERAL:
       },
       en: {
         shopName: "El Barrio Barbershop",
-        status: "Open today",
+        status: "Slots available",
         address: "14 Main St · Old Town",
-        step1Title: "Select your service",
-        step1Sub: "Required",
-        step2Title: "Date and time",
-        step3Title: "Your details",
-        step3Sub: "2 fields",
+        step1Title: "1. Select service",
+        subStep1: "Official rates",
+        step2Title: "2. Date & time",
+        step3Title: "3. Contact details",
         lblName: "Full name",
         namePlaceholder: "e.g. John Miller",
-        lblPhone: "Mobile phone (WhatsApp)",
-        phonePlaceholder: "e.g. +34 612 345 678",
-        paymentNotice: "Payment is made in the shop after your service (Cash / Bizum / Card).",
-        ctaButton: "Confirm appointment via WhatsApp",
-        ctaHelper: "WhatsApp will open with your pre-filled appointment details",
-        footer: "El Barrio Barbershop · Mon - Sat 10:00 AM - 8:00 PM",
-        closedDay: "Closed on this date",
-        // LISTA DE SERVICIOS EN INGLÉS
+        lblPhone: "Mobile phone",
+        phonePlaceholder: "+34 612 345 678",
+        shiftMorning: "Morning",
+        shiftAfternoon: "Afternoon",
+        paymentNotice: "Pay in person at the shop (Cash / Bizum / Card).",
+        antiFakeTitle: "Direct 1-on-1 confirmation:",
+        antiFakeDesc: "WhatsApp will open with your request. Your appointment is confirmed as soon as the barber replies.",
+        ctaButton: "Confirm via WhatsApp",
+        footer: "El Barrio Barbershop · Cancellations at least 2h in advance",
+        closedDay: "No slots available on this date",
         services: [
           { id: 1, name: "Classic Haircut", duration: "30 min", price: "15 €", desc: "Wash, scissor/clipper cut and styling" },
           { id: 2, name: "Haircut + Full Beard", duration: "45 min", price: "24 €", desc: "Haircut and precision beard trim with hot towel" },
-          { id: 3, name: "Beard Trim & Shape", duration: "20 min", price: "12 €", desc: "Line-up, fade and organic oil treatment" },
-          { id: 4, name: "Kids / Senior Haircut", duration: "25 min", price: "13 €", desc: "Special rate for children under 12 & seniors" }
+          { id: 3, name: "Beard Shape & Trim", duration: "20 min", price: "12 €", desc: "Razor edge line-up and organic oils" },
+          { id: 4, name: "Kids / Senior Cut", duration: "25 min", price: "13 €", desc: "Children under 12 & seniors" }
         ],
         daysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
         monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
@@ -345,9 +341,6 @@ ESTRUCTURA GENERAL:
       }
     };
 
-    // ---------------------------------------------------------------------------------
-    // INICIALIZACIÓN: Se dispara al cargar el DOM de la página
-    // ---------------------------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
       renderServices();
       generateCalendarDays();
@@ -355,60 +348,51 @@ ESTRUCTURA GENERAL:
       validateForm();
     });
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: CAMBIAR IDIOMA (ES / EN)
-    // ---------------------------------------------------------------------------------
     function setLanguage(lang) {
       if (state.lang === lang) return;
       state.lang = lang;
       window.currentLanguage = lang;
       document.documentElement.lang = lang;
 
-      // Actualizar estilo visual de los botones del selector
       const btnEs = document.getElementById('btn-lang-es');
       const btnEn = document.getElementById('btn-lang-en');
 
       if (lang === 'es') {
-        btnEs.className = "px-2.5 py-1 rounded-[6px] bg-zinc-800 text-white transition-colors";
-        btnEn.className = "px-2.5 py-1 rounded-[6px] text-zinc-400 hover:text-zinc-200 transition-colors";
+        btnEs.className = "px-2.5 py-0.5 rounded-full bg-white text-black font-semibold transition-all";
+        btnEn.className = "px-2.5 py-0.5 rounded-full text-zinc-400 hover:text-white transition-all";
       } else {
-        btnEn.className = "px-2.5 py-1 rounded-[6px] bg-zinc-800 text-white transition-colors";
-        btnEs.className = "px-2.5 py-1 rounded-[6px] text-zinc-400 hover:text-zinc-200 transition-colors";
+        btnEn.className = "px-2.5 py-0.5 rounded-full bg-white text-black font-semibold transition-all";
+        btnEs.className = "px-2.5 py-0.5 rounded-full text-zinc-400 hover:text-white transition-all";
       }
 
-      // Redibujar componentes con los textos traducidos
       updateLanguageTexts();
       renderServices();
       generateCalendarDays();
       validateForm();
     }
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: ACTUALIZAR TEXTOS ESTÁTICOS DEL DOM
-    // ---------------------------------------------------------------------------------
     function updateLanguageTexts() {
       const t = i18n[state.lang];
       document.getElementById('txt-shop-name').textContent = t.shopName;
       document.getElementById('txt-status').textContent = t.status;
       document.getElementById('txt-shop-address').textContent = t.address;
       document.getElementById('title-step-1').textContent = t.step1Title;
-      document.getElementById('sub-step-1').textContent = t.step1Sub;
+      document.getElementById('sub-step-1').textContent = t.subStep1;
       document.getElementById('title-step-2').textContent = t.step2Title;
       document.getElementById('title-step-3').textContent = t.step3Title;
-      document.getElementById('sub-step-3').textContent = t.step3Sub;
       document.getElementById('lbl-name').textContent = t.lblName;
       document.getElementById('client-name').placeholder = t.namePlaceholder;
       document.getElementById('lbl-phone').textContent = t.lblPhone;
       document.getElementById('client-phone').placeholder = t.phonePlaceholder;
+      document.getElementById('txt-shift-morning').textContent = t.shiftMorning;
+      document.getElementById('txt-shift-afternoon').textContent = t.shiftAfternoon;
       document.getElementById('txt-payment-notice').textContent = t.paymentNotice;
+      document.getElementById('txt-anti-fake-title').textContent = t.antiFakeTitle;
+      document.getElementById('txt-anti-fake-desc').textContent = t.antiFakeDesc;
       document.getElementById('txt-cta-button').textContent = t.ctaButton;
-      document.getElementById('txt-cta-helper').textContent = t.ctaHelper;
       document.getElementById('txt-footer').textContent = t.footer;
     }
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: RENDERIZAR TARJETAS DE SERVICIOS
-    // ---------------------------------------------------------------------------------
     function renderServices() {
       const container = document.getElementById('services-container');
       const services = i18n[state.lang].services;
@@ -416,35 +400,39 @@ ESTRUCTURA GENERAL:
       container.innerHTML = services.map(service => {
         const isSelected = state.selectedServiceId === service.id;
         
-        // Estilo condicional: borde blanco si está activo, gris oscuro si no
-        const activeClasses = isSelected
-          ? 'bg-zinc-900 border-zinc-200 text-white ring-1 ring-zinc-200'
-          : 'bg-zinc-900/60 border-zinc-800/80 text-zinc-300 hover:border-zinc-700';
+        const cardStyle = isSelected
+          ? 'bg-zinc-900 border-white/40 ring-1 ring-white/20 shadow-lg'
+          : 'apple-glass-card hover:border-white/20';
 
-        // Checkbox visual redondeado
-        const radioCheck = isSelected
-          ? '<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-zinc-950"></div></div>'
-          : '<div class="w-4 h-4 rounded-full border border-zinc-600"></div>';
+        const radioStyle = isSelected
+          ? 'w-4 h-4 rounded-full bg-white flex items-center justify-center'
+          : 'w-4 h-4 rounded-full border border-white/20';
+
+        const radioInner = isSelected
+          ? '<div class="w-1.5 h-1.5 rounded-full bg-black"></div>'
+          : '';
 
         return `
           <div 
             onclick="selectService(${service.id})"
-            class="p-3.5 rounded-xl border transition-all duration-150 cursor-pointer flex items-center justify-between ${activeClasses}"
+            class="p-3.5 rounded-2xl transition-all duration-150 cursor-pointer flex items-center justify-between ${cardStyle}"
           >
             <div class="space-y-0.5 pr-2">
               <div class="flex items-center gap-2">
-                <span class="font-medium text-sm text-white">${service.name}</span>
+                <span class="font-semibold text-sm text-white">${service.name}</span>
                 <span class="text-[11px] text-zinc-400 font-normal">· ${service.duration}</span>
               </div>
-              <p class="text-xs text-zinc-500">${service.desc}</p>
+              <p class="text-xs text-zinc-400">${service.desc}</p>
             </div>
             <div class="flex items-center gap-3 shrink-0">
-              <span class="text-sm font-semibold text-white">${service.price}</span>
-              ${radioCheck}
+              <span class="text-sm font-bold text-white bg-white/[0.06] px-2.5 py-1 rounded-lg border border-white/[0.06]">${service.price}</span>
+              <div class="${radioStyle}">${radioInner}</div>
             </div>
           </div>
         `;
       }).join('');
+
+      updateCtaPrice();
     }
 
     function selectService(id) {
@@ -453,9 +441,15 @@ ESTRUCTURA GENERAL:
       validateForm();
     }
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: GENERAR CALENDARIO HORIZONTAL DE DÍAS (Próximos 7 días hábiles)
-    // ---------------------------------------------------------------------------------
+    function updateCtaPrice() {
+      const t = i18n[state.lang];
+      const service = t.services.find(s => s.id === state.selectedServiceId);
+      const priceBadge = document.getElementById('cta-price-badge');
+      if (service && priceBadge) {
+        priceBadge.textContent = service.price;
+      }
+    }
+
     function generateCalendarDays() {
       const container = document.getElementById('days-container');
       const t = i18n[state.lang];
@@ -471,7 +465,6 @@ ESTRUCTURA GENERAL:
         offset++;
 
         const dKey = formatDateKey(d);
-        // Omitir domingos o festivos configurados en closedDates
         if (d.getDay() === 0 || (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' && BARBER_SCHEDULE_CONFIG.closedDates.includes(dKey))) {
           continue;
         }
@@ -480,7 +473,6 @@ ESTRUCTURA GENERAL:
         count++;
       }
 
-      // Si no hay fecha fijada, seleccionar el primer día de la lista
       if (!state.selectedDate && days.length > 0) {
         state.selectedDate = formatDateKey(days[0]);
       }
@@ -493,19 +485,19 @@ ESTRUCTURA GENERAL:
         const month = t.monthsShort[d.getMonth()];
 
         const cardStyle = isSelected
-          ? 'bg-white text-zinc-950 font-semibold shadow-sm'
-          : 'bg-zinc-900 border border-zinc-800 text-zinc-300 hover:border-zinc-700';
+          ? 'bg-white text-black font-semibold shadow-lg scale-[1.02]'
+          : 'apple-glass-card text-zinc-300 hover:border-white/20';
 
-        const subTextStyle = isSelected ? 'text-zinc-700' : 'text-zinc-500';
+        const subTextStyle = isSelected ? 'text-zinc-800 font-medium' : 'text-zinc-500';
 
         return `
           <button
             type="button"
             onclick="selectDate('${dateKey}')"
-            class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-2.5 rounded-xl transition-all duration-150 ${cardStyle}"
+            class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-3 rounded-2xl transition-all duration-150 ${cardStyle}"
           >
-            <span class="text-[11px] uppercase tracking-wider ${subTextStyle}">${dayOfWeek}</span>
-            <span class="text-base font-bold my-0.5 leading-tight">${dayNum}</span>
+            <span class="text-[10px] uppercase tracking-wider ${subTextStyle}">${dayOfWeek}</span>
+            <span class="text-base font-bold my-0.5 leading-none">${dayNum}</span>
             <span class="text-[10px] ${subTextStyle}">${month}</span>
           </button>
         `;
@@ -517,7 +509,7 @@ ESTRUCTURA GENERAL:
 
     function selectDate(dateKey) {
       state.selectedDate = dateKey;
-      state.selectedTime = null; // Reinicia la hora al cambiar de día para obligar a elegir
+      state.selectedTime = null;
       generateCalendarDays();
       validateForm();
     }
@@ -541,58 +533,66 @@ ESTRUCTURA GENERAL:
       summaryEl.textContent = `${dayName}, ${d} ${monthName} ${state.selectedTime ? '· ' + state.selectedTime : ''}`;
     }
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: RENDERIZAR BOTONES DE HORAS (SLOTS)
-    // ---------------------------------------------------------------------------------
     function renderTimeSlotsForSelectedDate() {
-      const container = document.getElementById('time-slots-container');
+      const morningEl = document.getElementById('morning-slots-container');
+      const afternoonEl = document.getElementById('afternoon-slots-container');
       if (!state.selectedDate) return;
 
-      // Obtener slots calculados desde barber-config.js
       const slots = (typeof getDayTimeSlots === 'function')
         ? getDayTimeSlots(state.selectedDate)
         : [];
 
       if (slots.length === 0) {
-        container.innerHTML = `
-          <div class="col-span-4 py-4 text-center text-xs text-zinc-500 border border-dashed border-zinc-800 rounded-xl">
-            ${i18n[state.lang].closedDay}
-          </div>`;
+        morningEl.innerHTML = `<div class="col-span-4 py-3 text-center text-xs text-zinc-500 bg-white/[0.02] border border-dashed border-white/10 rounded-xl">${i18n[state.lang].closedDay}</div>`;
+        afternoonEl.innerHTML = '';
         return;
       }
 
-      container.innerHTML = slots.map(slot => {
+      const morningSlots = slots.filter(s => {
+        const hour = parseInt(s.time.split(':')[0], 10);
+        return hour < 15;
+      });
+
+      const afternoonSlots = slots.filter(s => {
+        const hour = parseInt(s.time.split(':')[0], 10);
+        return hour >= 15;
+      });
+
+      const renderSlotButton = (slot) => {
         const isSelected = state.selectedTime === slot.time;
 
-        // Si la hora está bloqueada o ya ha pasado: botón inactivo y tachado
         if (!slot.isAvailable) {
           return `
             <button
               type="button"
               disabled
-              title="${slot.reason || 'No disponible'}"
-              class="h-10 text-xs font-normal rounded-lg bg-zinc-900/30 border border-zinc-900 text-zinc-600 line-through cursor-not-allowed opacity-40 select-none"
+              title="${slot.reason || 'Ocupado'}"
+              class="h-10 text-xs font-normal rounded-xl bg-white/[0.02] border border-white/[0.04] text-zinc-600 line-through cursor-not-allowed opacity-30 select-none"
             >
               ${slot.time}
             </button>
           `;
         }
 
-        // Si la hora está disponible
         const activeStyle = isSelected
-          ? 'bg-white text-zinc-950 font-semibold ring-1 ring-white shadow-sm'
-          : 'bg-zinc-900 border border-zinc-800 text-zinc-300 hover:border-zinc-700 hover:text-white';
+          ? 'bg-white text-black font-semibold ring-2 ring-white shadow-md'
+          : 'apple-glass-card text-zinc-200 hover:border-white/30';
 
         return `
           <button
             type="button"
             onclick="selectTime('${slot.time}')"
-            class="h-10 text-xs font-medium rounded-lg transition-all duration-150 flex items-center justify-center ${activeStyle}"
+            class="h-10 text-xs font-medium rounded-xl transition-all duration-150 flex items-center justify-center ${activeStyle}"
           >
             ${slot.time}
           </button>
         `;
-      }).join('');
+      };
+
+      morningEl.innerHTML = morningSlots.map(renderSlotButton).join('');
+      afternoonEl.innerHTML = afternoonSlots.length > 0
+        ? afternoonSlots.map(renderSlotButton).join('')
+        : `<p class="col-span-4 text-center text-[11px] text-zinc-600 py-1">Sin turnos de tarde</p>`;
     }
 
     function selectTime(time) {
@@ -602,29 +602,35 @@ ESTRUCTURA GENERAL:
       validateForm();
     }
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: VALIDACIÓN EN TIEMPO REAL DEL FORMULARIO
-    // Habilita o deshabilita el botón de confirmación según se completen los datos
-    // ---------------------------------------------------------------------------------
+    // =========================================================================
+    // FILTRO ANTI-FALSAS RESERVAS Y VALIDACIÓN ESTRICTA
+    // =========================================================================
     function validateForm() {
       state.clientName = document.getElementById('client-name').value.trim();
       state.clientPhone = document.getElementById('client-phone').value.trim();
+
+      // Reglas de validación:
+      // 1. Servicio seleccionado
+      // 2. Fecha seleccionada
+      // 3. Hora seleccionada
+      // 4. Nombre con al menos 3 caracteres reales
+      // 5. Teléfono con mínimo 8 dígitos (evita '1234')
+      const phoneDigits = state.clientPhone.replace(/\D/g, '');
+      const hasValidPhone = phoneDigits.length >= 8;
+      const hasValidName = state.clientName.length >= 3;
 
       const isValid = (
         state.selectedServiceId !== null &&
         state.selectedDate !== null &&
         state.selectedTime !== null &&
-        state.clientName.length >= 2 &&
-        state.clientPhone.length >= 6
+        hasValidName &&
+        hasValidPhone
       );
 
       const btn = document.getElementById('btn-submit');
       btn.disabled = !isValid;
     }
 
-    // ---------------------------------------------------------------------------------
-    // FUNCIÓN: DISPARAR CONFIRMACIÓN A WHATSAPP
-    // ---------------------------------------------------------------------------------
     function handleBookingConfirmation() {
       const t = i18n[state.lang];
       const service = t.services.find(s => s.id === state.selectedServiceId);
@@ -646,12 +652,10 @@ ESTRUCTURA GENERAL:
         clientPhone: state.clientPhone
       };
 
-      // Sincronizar número de teléfono con la configuración si existe
       if (typeof BOOKING_CONFIG !== 'undefined' && typeof BARBER_SCHEDULE_CONFIG !== 'undefined') {
         BOOKING_CONFIG.barberPhoneNumber = BARBER_SCHEDULE_CONFIG.whatsappPhone;
       }
 
-      // Llamar al módulo de confirmación de whatsapp-booking.js
       if (typeof window.handleBookingConfirmation === 'function' && window.handleBookingConfirmation !== handleBookingConfirmation) {
         window.handleBookingConfirmation(bookingPayload);
       } else {
