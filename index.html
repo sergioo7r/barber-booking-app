@@ -1,17 +1,35 @@
 <!DOCTYPE html>
+<!--
+============================================================================================
+PROYECTO: WebApp de Reserva de Citas para Peluquería / Barbería (Mobile First - QR Ready)
+ARCHIVO: index.html
+ESTRUCTURA GENERAL:
+  1. <head>    : Metadatos, fuentes (Inter) y configuración de Tailwind CSS.
+  2. <header>  : Nombre de la barbería, dirección, estado "Abierto hoy" y selector ES/EN.
+  3. <main>    : Flujo en 3 pasos:
+                 - Paso 1: Selección de Servicio (Nombre, duración y precio).
+                 - Paso 2: Selección de Fecha (Carrusel de días) y Hora (Cuadrícula de slots).
+                 - Paso 3: Datos del cliente (Nombre y Teléfono) y aviso de pago.
+                 - Botón CTA: "Confirmar cita vía WhatsApp".
+  4. <footer>  : Información de horario y pie de página.
+  5. <script>  : Vinculación con 'barber-config.js', 'whatsapp-booking.js' y lógica reactiva.
+============================================================================================
+-->
 <html lang="es" class="h-full bg-zinc-950 text-zinc-100 antialiased selection:bg-zinc-800 selection:text-white">
 <head>
   <meta charset="UTF-8" />
+  <!-- viewport-fit=cover y control de escala para experiencia nativa en móviles -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#0c0c0e" />
   <title>Reserva de Cita — Barbería Tradicional</title>
 
-  <!-- Tipografía: Inter -->
+  <!-- ==================== FUENTE TIPOGRÁFICA (INTER) ==================== -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN -->
+  <!-- ==================== TAILWIND CSS CDN ==================== -->
+  <!-- Puedes personalizar los colores del tema aquí abajo si deseas cambiar la estética -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -25,7 +43,7 @@
             zinc: {
               850: '#1e1e24',
               900: '#141417',
-              950: '#0c0c0e',
+              950: '#0c0c0e', // Fondo ultra oscuro minimalista
             }
           }
         }
@@ -33,13 +51,17 @@
     }
   </script>
 
+  <!-- ==================== ESTILOS ADICIONALES ==================== -->
   <style>
+    /* Evita el destello azul al tocar elementos en dispositivos táctiles */
     * {
       -webkit-tap-highlight-color: transparent;
     }
+    /* Optimiza la respuesta táctil en móviles */
     input, button, select {
       touch-action: manipulation;
     }
+    /* Oculta la barra de desplazamiento horizontal en el carrusel de días */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -53,14 +75,21 @@
 <body class="min-h-full flex flex-col justify-between font-sans bg-zinc-950 text-zinc-100 pb-8">
   <div class="w-full max-w-md mx-auto px-4 pt-6 sm:px-6">
 
-    <!-- ==================== HEADER ==================== -->
+    <!-- ===================================================================================
+         1. CABECERA (HEADER): LOGO / NOMBRE, DIRECCIÓN Y SELECTOR DE IDIOMA
+         =================================================================================== -->
     <header class="flex items-start justify-between pb-6 border-b border-zinc-800/80">
       <div>
+        <!-- Indicador de estado abierto -->
         <div class="flex items-center gap-2">
           <span class="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
           <p class="text-[11px] font-medium tracking-widest uppercase text-zinc-400" id="txt-status">Abierto hoy</p>
         </div>
+
+        <!-- Nombre del local (se actualiza automáticamente según el idioma o desde JS) -->
         <h1 class="text-xl font-bold tracking-tight text-white mt-1" id="txt-shop-name">Barbería El Barrio</h1>
+
+        <!-- Dirección física -->
         <div class="flex items-center gap-1.5 mt-1 text-xs text-zinc-400">
           <svg class="w-3.5 h-3.5 text-zinc-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -70,7 +99,7 @@
         </div>
       </div>
 
-      <!-- Selector de idioma ES / EN -->
+      <!-- Selector de idioma bilingüe (ES / EN) -->
       <div class="flex items-center bg-zinc-900 border border-zinc-800 rounded-lg p-0.5 text-xs font-medium">
         <button id="btn-lang-es" onclick="setLanguage('es')" class="px-2.5 py-1 rounded-[6px] bg-zinc-800 text-white transition-colors">
           ES
@@ -81,10 +110,15 @@
       </div>
     </header>
 
-    <!-- ==================== CONTENEDOR PRINCIPAL ==================== -->
+    <!-- ===================================================================================
+         2. CONTENIDO PRINCIPAL (MAIN): LOS 3 PASOS DE LA RESERVA
+         =================================================================================== -->
     <main class="mt-6 space-y-7">
 
-      <!-- PASO 1: SELECCIÓN DE SERVICIO -->
+      <!-- -------------------------------------------------------------------------------
+           PASO 1: SELECCIÓN DE SERVICIO
+           Las tarjetas de servicio se renderizan dinámicamente desde el objeto 'i18n' en JS.
+           ------------------------------------------------------------------------------- -->
       <section>
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
@@ -94,35 +128,38 @@
           <span class="text-[11px] text-zinc-500" id="sub-step-1">Requerido</span>
         </div>
 
-        <div class="space-y-2.5" id="services-container">
-          <!-- Renderizado dinámico vía JS -->
-        </div>
+        <!-- Contenedor inyectado por JS: renderServices() -->
+        <div class="space-y-2.5" id="services-container"></div>
       </section>
 
-      <!-- PASO 2: FECHA Y HORA -->
+      <!-- -------------------------------------------------------------------------------
+           PASO 2: SELECCIÓN DE FECHA Y HORA
+           - Carrusel horizontal con los próximos 7 días laborales disponibles.
+           - Cuadrícula con las horas libres (las ocupadas o pasadas se bloquean solas).
+           ------------------------------------------------------------------------------- -->
       <section>
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
             <span class="flex items-center justify-center w-5 h-5 text-[11px] font-semibold bg-zinc-800 text-zinc-300 rounded">2</span>
             <h2 class="text-xs font-semibold uppercase tracking-wider text-zinc-400" id="title-step-2">Fecha y hora</h2>
           </div>
+          <!-- Resumen de fecha y hora seleccionadas -->
           <span class="text-[11px] text-zinc-400 font-medium" id="selected-date-summary"></span>
         </div>
 
-        <!-- Selector horizontal de días -->
-        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1" id="days-container">
-          <!-- Días renderizados dinámicamente -->
-        </div>
+        <!-- Carrusel horizontal de días (JS: generateCalendarDays()) -->
+        <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1" id="days-container"></div>
 
-        <!-- Selector de horas -->
+        <!-- Cuadrícula de 4 columnas de horas (JS: renderTimeSlotsForSelectedDate()) -->
         <div class="mt-3.5">
-          <div class="grid grid-cols-4 gap-2" id="time-slots-container">
-            <!-- Horas renderizadas dinámicamente -->
-          </div>
+          <div class="grid grid-cols-4 gap-2" id="time-slots-container"></div>
         </div>
       </section>
 
-      <!-- PASO 3: DATOS DEL CLIENTE -->
+      <!-- -------------------------------------------------------------------------------
+           PASO 3: DATOS DEL CLIENTE
+           Formulario mínimo de 2 campos (Nombre completo y Teléfono WhatsApp).
+           ------------------------------------------------------------------------------- -->
       <section>
         <div class="flex items-center justify-between mb-3">
           <div class="flex items-center gap-2">
@@ -133,6 +170,7 @@
         </div>
 
         <div class="space-y-3">
+          <!-- Campo 1: Nombre y apellido -->
           <div>
             <label for="client-name" class="block text-xs font-medium text-zinc-300 mb-1.5" id="lbl-name">Nombre y apellido</label>
             <div class="relative">
@@ -147,6 +185,7 @@
             </div>
           </div>
 
+          <!-- Campo 2: Teléfono móvil (WhatsApp) -->
           <div>
             <label for="client-phone" class="block text-xs font-medium text-zinc-300 mb-1.5" id="lbl-phone">Teléfono móvil (WhatsApp)</label>
             <div class="relative">
@@ -163,9 +202,12 @@
         </div>
       </section>
 
-      <!-- RESUMEN Y AVISO DE PAGO -->
+      <!-- -------------------------------------------------------------------------------
+           AVISO DE PAGO (SOBRIO Y MINIMALISTA)
+           ------------------------------------------------------------------------------- -->
       <section class="pt-2">
         <div class="p-3.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 flex items-start gap-3">
+          <!-- Icono vectorial SVG de información -->
           <svg class="w-4 h-4 text-zinc-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
@@ -175,7 +217,10 @@
         </div>
       </section>
 
-      <!-- BOTÓN DE ACCIÓN PRINCIPAL (CTA) -->
+      <!-- -------------------------------------------------------------------------------
+           BOTÓN PRINCIPAL DE ACCIÓN (CTA): CONFIRMAR VÍA WHATSAPP
+           Permanece deshabilitado ('disabled') hasta que todos los campos son válidos.
+           ------------------------------------------------------------------------------- -->
       <section class="pt-1">
         <button
           id="btn-submit"
@@ -184,6 +229,7 @@
           disabled
           class="w-full h-13 py-3.5 px-4 bg-zinc-100 hover:bg-white text-zinc-950 font-semibold rounded-xl text-sm transition-all duration-150 flex items-center justify-center gap-2.5 shadow-sm disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-zinc-100"
         >
+          <!-- Icono vectorial limpio de WhatsApp -->
           <svg class="w-4 h-4 text-zinc-950 shrink-0" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.5.07-1.14.1-3.32-.8-2.6-1.08-4.27-3.72-4.4-3.89-.13-.17-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .36.01.52.01.17 0 .4-.06.62.47.24.57.81 1.97.88 2.12.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.28.11 1.79.84 2.1 1 .31.15.52.23.6.36.07.14.07.8-.17 1.48z"/>
           </svg>
@@ -197,7 +243,9 @@
 
     </main>
 
-    <!-- FOOTER SIMPLE -->
+    <!-- ===================================================================================
+         3. PIE DE PÁGINA (FOOTER)
+         =================================================================================== -->
     <footer class="mt-10 pt-4 border-t border-zinc-900 text-center">
       <p class="text-[11px] text-zinc-600" id="txt-footer">
         Barbería El Barrio · Horario: Lun - Sáb 10:00 - 20:00
@@ -206,21 +254,34 @@
 
   </div>
 
-  <!-- Scripts modulares -->
+  <!-- ===================================================================================
+       4. VINCULACIÓN DE ARCHIVOS JS EXTERNOS
+       - barber-config.js    : Define el teléfono, turnos, festivos y horas bloqueadas.
+       - whatsapp-booking.js : Construye el mensaje URI y abre WhatsApp.
+       =================================================================================== -->
   <script src="./barber-config.js"></script>
   <script src="./whatsapp-booking.js"></script>
-  
+
+  <!-- ===================================================================================
+       5. LÓGICA DE CONTROL E INTERACTIVIDAD DE LA PÁGINA
+       =================================================================================== -->
   <script>
-    // Estado interactivo
+    // ---------------------------------------------------------------------------------
+    // ESTADO REACTIVO DE LA APLICACIÓN (Guarda qué ha seleccionado el cliente)
+    // ---------------------------------------------------------------------------------
     const state = {
-      lang: 'es',
-      selectedServiceId: 1,
-      selectedDate: null,
-      selectedTime: null,
-      clientName: '',
-      clientPhone: ''
+      lang: 'es',              // Idioma activo ('es' o 'en')
+      selectedServiceId: 1,    // Por defecto el primer servicio
+      selectedDate: null,      // Fecha seleccionada (formato: "AAAA-MM-DD")
+      selectedTime: null,      // Hora seleccionada (ej. "11:30")
+      clientName: '',          // Nombre introducido por el cliente
+      clientPhone: ''          // Teléfono introducido por el cliente
     };
 
+    // ---------------------------------------------------------------------------------
+    // DICCIONARIO DE TEXTOS, SERVICIOS Y PRECIOS (ESPAÑOL / INGLÉS)
+    // Edita aquí los nombres de los servicios, precios, duraciones o textos de la web.
+    // ---------------------------------------------------------------------------------
     const i18n = {
       es: {
         shopName: "Barbería El Barrio",
@@ -240,6 +301,7 @@
         ctaHelper: "Se abrirá WhatsApp con el mensaje estructurado de tu cita",
         footer: "Barbería El Barrio · Horario: Lun - Sáb 10:00 - 20:00",
         closedDay: "Cerrado en esta fecha",
+        // LISTA DE SERVICIOS EN ESPAÑOL
         services: [
           { id: 1, name: "Corte clásico", duration: "30 min", price: "15 €", desc: "Lavado, corte a tijera/máquina y peinado" },
           { id: 2, name: "Corte + Barba completa", duration: "45 min", price: "24 €", desc: "Corte de pelo y perfilado de barba con toalla caliente" },
@@ -269,6 +331,7 @@
         ctaHelper: "WhatsApp will open with your pre-filled appointment details",
         footer: "El Barrio Barbershop · Mon - Sat 10:00 AM - 8:00 PM",
         closedDay: "Closed on this date",
+        // LISTA DE SERVICIOS EN INGLÉS
         services: [
           { id: 1, name: "Classic Haircut", duration: "30 min", price: "15 €", desc: "Wash, scissor/clipper cut and styling" },
           { id: 2, name: "Haircut + Full Beard", duration: "45 min", price: "24 €", desc: "Haircut and precision beard trim with hot towel" },
@@ -282,6 +345,9 @@
       }
     };
 
+    // ---------------------------------------------------------------------------------
+    // INICIALIZACIÓN: Se dispara al cargar el DOM de la página
+    // ---------------------------------------------------------------------------------
     document.addEventListener('DOMContentLoaded', () => {
       renderServices();
       generateCalendarDays();
@@ -289,12 +355,16 @@
       validateForm();
     });
 
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: CAMBIAR IDIOMA (ES / EN)
+    // ---------------------------------------------------------------------------------
     function setLanguage(lang) {
       if (state.lang === lang) return;
       state.lang = lang;
       window.currentLanguage = lang;
       document.documentElement.lang = lang;
 
+      // Actualizar estilo visual de los botones del selector
       const btnEs = document.getElementById('btn-lang-es');
       const btnEn = document.getElementById('btn-lang-en');
 
@@ -306,12 +376,16 @@
         btnEs.className = "px-2.5 py-1 rounded-[6px] text-zinc-400 hover:text-zinc-200 transition-colors";
       }
 
+      // Redibujar componentes con los textos traducidos
       updateLanguageTexts();
       renderServices();
       generateCalendarDays();
       validateForm();
     }
 
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: ACTUALIZAR TEXTOS ESTÁTICOS DEL DOM
+    // ---------------------------------------------------------------------------------
     function updateLanguageTexts() {
       const t = i18n[state.lang];
       document.getElementById('txt-shop-name').textContent = t.shopName;
@@ -332,16 +406,22 @@
       document.getElementById('txt-footer').textContent = t.footer;
     }
 
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: RENDERIZAR TARJETAS DE SERVICIOS
+    // ---------------------------------------------------------------------------------
     function renderServices() {
       const container = document.getElementById('services-container');
       const services = i18n[state.lang].services;
 
       container.innerHTML = services.map(service => {
         const isSelected = state.selectedServiceId === service.id;
+        
+        // Estilo condicional: borde blanco si está activo, gris oscuro si no
         const activeClasses = isSelected
           ? 'bg-zinc-900 border-zinc-200 text-white ring-1 ring-zinc-200'
           : 'bg-zinc-900/60 border-zinc-800/80 text-zinc-300 hover:border-zinc-700';
 
+        // Checkbox visual redondeado
         const radioCheck = isSelected
           ? '<div class="w-4 h-4 rounded-full bg-white flex items-center justify-center"><div class="w-1.5 h-1.5 rounded-full bg-zinc-950"></div></div>'
           : '<div class="w-4 h-4 rounded-full border border-zinc-600"></div>';
@@ -373,6 +453,9 @@
       validateForm();
     }
 
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: GENERAR CALENDARIO HORIZONTAL DE DÍAS (Próximos 7 días hábiles)
+    // ---------------------------------------------------------------------------------
     function generateCalendarDays() {
       const container = document.getElementById('days-container');
       const t = i18n[state.lang];
@@ -381,14 +464,14 @@
 
       let count = 0;
       let offset = 0;
-      
+
       while (count < 7) {
         const d = new Date();
         d.setDate(today.getDate() + offset);
         offset++;
 
         const dKey = formatDateKey(d);
-        // Omitir domingos o festivos cerrados por defecto
+        // Omitir domingos o festivos configurados en closedDates
         if (d.getDay() === 0 || (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' && BARBER_SCHEDULE_CONFIG.closedDates.includes(dKey))) {
           continue;
         }
@@ -397,6 +480,7 @@
         count++;
       }
 
+      // Si no hay fecha fijada, seleccionar el primer día de la lista
       if (!state.selectedDate && days.length > 0) {
         state.selectedDate = formatDateKey(days[0]);
       }
@@ -433,7 +517,7 @@
 
     function selectDate(dateKey) {
       state.selectedDate = dateKey;
-      state.selectedTime = null; // Reiniciar hora al cambiar día
+      state.selectedTime = null; // Reinicia la hora al cambiar de día para obligar a elegir
       generateCalendarDays();
       validateForm();
     }
@@ -452,25 +536,22 @@
       const t = i18n[state.lang];
       const dayName = t.daysShort[dateObj.getDay()];
       const monthName = t.monthsShort[dateObj.getMonth()];
-      
+
       const summaryEl = document.getElementById('selected-date-summary');
       summaryEl.textContent = `${dayName}, ${d} ${monthName} ${state.selectedTime ? '· ' + state.selectedTime : ''}`;
     }
 
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: RENDERIZAR BOTONES DE HORAS (SLOTS)
+    // ---------------------------------------------------------------------------------
     function renderTimeSlotsForSelectedDate() {
       const container = document.getElementById('time-slots-container');
       if (!state.selectedDate) return;
 
+      // Obtener slots calculados desde barber-config.js
       const slots = (typeof getDayTimeSlots === 'function')
         ? getDayTimeSlots(state.selectedDate)
-        : [
-            { time: "10:00", isAvailable: true }, { time: "10:30", isAvailable: true },
-            { time: "11:00", isAvailable: true }, { time: "11:30", isAvailable: true },
-            { time: "12:00", isAvailable: true }, { time: "12:30", isAvailable: true },
-            { time: "16:30", isAvailable: true }, { time: "17:00", isAvailable: true },
-            { time: "17:30", isAvailable: true }, { time: "18:00", isAvailable: true },
-            { time: "18:30", isAvailable: true }, { time: "19:00", isAvailable: true }
-          ];
+        : [];
 
       if (slots.length === 0) {
         container.innerHTML = `
@@ -483,6 +564,7 @@
       container.innerHTML = slots.map(slot => {
         const isSelected = state.selectedTime === slot.time;
 
+        // Si la hora está bloqueada o ya ha pasado: botón inactivo y tachado
         if (!slot.isAvailable) {
           return `
             <button
@@ -496,6 +578,7 @@
           `;
         }
 
+        // Si la hora está disponible
         const activeStyle = isSelected
           ? 'bg-white text-zinc-950 font-semibold ring-1 ring-white shadow-sm'
           : 'bg-zinc-900 border border-zinc-800 text-zinc-300 hover:border-zinc-700 hover:text-white';
@@ -519,6 +602,10 @@
       validateForm();
     }
 
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: VALIDACIÓN EN TIEMPO REAL DEL FORMULARIO
+    // Habilita o deshabilita el botón de confirmación según se completen los datos
+    // ---------------------------------------------------------------------------------
     function validateForm() {
       state.clientName = document.getElementById('client-name').value.trim();
       state.clientPhone = document.getElementById('client-phone').value.trim();
@@ -535,7 +622,9 @@
       btn.disabled = !isValid;
     }
 
-    // Ejecuta la confirmación usando la función modular de whatsapp-booking.js
+    // ---------------------------------------------------------------------------------
+    // FUNCIÓN: DISPARAR CONFIRMACIÓN A WHATSAPP
+    // ---------------------------------------------------------------------------------
     function handleBookingConfirmation() {
       const t = i18n[state.lang];
       const service = t.services.find(s => s.id === state.selectedServiceId);
@@ -557,19 +646,20 @@
         clientPhone: state.clientPhone
       };
 
+      // Sincronizar número de teléfono con la configuración si existe
       if (typeof BOOKING_CONFIG !== 'undefined' && typeof BARBER_SCHEDULE_CONFIG !== 'undefined') {
         BOOKING_CONFIG.barberPhoneNumber = BARBER_SCHEDULE_CONFIG.whatsappPhone;
       }
 
+      // Llamar al módulo de confirmación de whatsapp-booking.js
       if (typeof window.handleBookingConfirmation === 'function' && window.handleBookingConfirmation !== handleBookingConfirmation) {
         window.handleBookingConfirmation(bookingPayload);
       } else {
-        // Fallback directo
         const phone = (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233');
         const msg = state.lang === 'en'
           ? `Hello, I would like to book an appointment: ${bookingPayload.serviceName} on ${dateFormatted} at ${state.selectedTime}. Name: ${state.clientName}. Phone: ${state.clientPhone}.`
           : `Hola, quiero reservar una cita: ${bookingPayload.serviceName} el ${dateFormatted} a las ${state.selectedTime}. A nombre de: ${state.clientName}. Mi teléfono: ${state.clientPhone}.`;
-        
+
         window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
       }
     }

@@ -1,56 +1,58 @@
 /**
- * Módulo de Reserva y Redirección a WhatsApp para Barbería
- * 
- * Funcionalidad:
- * - Valida campos requeridos (Servicio, Fecha, Hora, Nombre y Teléfono).
- * - Sanitiza y normaliza datos de entrada.
- * - Construye el mensaje preformateado en Español (ES) o Inglés (EN).
- * - Codifica el payload en URI Component y redirecciona a la API de WhatsApp (wa.me).
+ * =========================================================================================
+ * ARCHIVO: whatsapp-booking.js
+ * PROPÓSITO: Validador de formulario, formateador de texto y generador de URL de WhatsApp.
+ * INSTRUCCIONES: Puedes personalizar las frases de los mensajes en BOOKING_CONFIG.templates.
+ * =========================================================================================
  */
 
-// ==========================================
-// 1. CONFIGURACIÓN
-// ==========================================
+// =========================================================================================
+// 1. PLANTILLAS DE MENSAJE PERSONALIZABLES
+// =========================================================================================
 const BOOKING_CONFIG = {
-  // Número de teléfono del negocio con prefijo internacional (sin espacios, guiones ni '+')
-  // Ejemplo: '34600112233' para España (+34)
+  // Número de teléfono (se sincroniza automáticamente con barber-config.js si está presente)
   barberPhoneNumber: '34600112233',
-  
-  // Plantillas de mensaje bilingüe
+
+  // Mensaje que recibirá el peluquero cuando el cliente pulse "Confirmar cita"
+  // Puedes cambiar el texto o el orden de los datos según tus preferencias.
   templates: {
+    // Versión en Español
     es: (service, date, time, name, phone) =>
       `Hola, quiero reservar una cita: ${service} el ${date} a las ${time}. A nombre de: ${name}. Mi teléfono: ${phone}.`,
-    
+
+    // Versión en Inglés (para turistas / clientes extranjeros)
     en: (service, date, time, name, phone) =>
       `Hello, I would like to book an appointment: ${service} on ${date} at ${time}. Name: ${name}. Phone: ${phone}.`
   }
 };
 
-// ==========================================
-// 2. FUNCIÓN PRINCIPAL DE RESERVA
-// ==========================================
+
+// =========================================================================================
+// 2. FUNCIÓN PRINCIPAL DE CONFIRMACIÓN
+// =========================================================================================
 /**
- * Procesa la confirmación de la cita, valida los datos y abre WhatsApp.
+ * Se ejecuta al hacer clic en el botón principal.
+ * Valida los datos y abre la app de WhatsApp con el mensaje ya escrito.
  * 
- * @param {Object} [bookingData] - Datos opcionales directos o lee del DOM si se omite.
- * @returns {boolean} - True si la validación fue exitosa y se abrió WhatsApp, False si falló.
+ * @param {Object} [bookingData] - Objeto con datos de la cita (opcional)
+ * @returns {boolean} - Devuelve true si la validación fue correcta y se abrió WhatsApp.
  */
 function handleBookingConfirmation(bookingData) {
-  // A. Obtener datos (de parámetro o desde los elementos del DOM)
+  // Paso 1: Obtener los datos (o extraerlos del DOM si no se pasaron como argumento)
   const data = bookingData || extractBookingDataFromDOM();
 
-  // B. Validar datos requeridos
+  // Paso 2: Validar que el cliente haya completado todos los pasos
   const validation = validateBookingData(data);
   if (!validation.isValid) {
-    alert(validation.errorMessage);
+    alert(validation.errorMessage); // Alerta amigable si falta algún dato
     return false;
   }
 
-  // C. Formatear el mensaje según el idioma seleccionado
+  // Paso 3: Detectar el idioma y armar el mensaje correspondiente
   const lang = (data.lang && data.lang.toLowerCase() === 'en') ? 'en' : 'es';
-  const messageBuilder = BOOKING_CONFIG.templates[lang];
-  
-  const rawMessage = messageBuilder(
+  const messageTemplate = BOOKING_CONFIG.templates[lang];
+
+  const rawMessage = messageTemplate(
     data.serviceName,
     data.dateFormatted,
     data.time,
@@ -58,77 +60,33 @@ function handleBookingConfirmation(bookingData) {
     data.clientPhone
   );
 
-  // D. Codificar mensaje en formato URI seguro
+  // Paso 4: Codificar el mensaje para que sea válido dentro de una URL de internet (URI Encode)
+  // Convierte espacios, tildes y saltos de línea a caracteres seguros (%20, %C3%A1, etc.)
   const encodedMessage = encodeURIComponent(rawMessage);
 
-  // E. Construir URL oficial de la API de WhatsApp
-  const cleanPhoneNumber = BOOKING_CONFIG.barberPhoneNumber.replace(/\D/g, '');
-  const whatsappUrl = `https://wa.me/${cleanPhoneNumber}?text=${encodedMessage}`;
+  // Paso 5: Construir la URL oficial de la API de WhatsApp
+  const cleanPhone = BOOKING_CONFIG.barberPhoneNumber.replace(/\D/g, '');
+  const whatsappUrl = `https://wa.me/${cleanPhone}?text=${encodedMessage}`;
 
-  // F. Abrir WhatsApp en una nueva pestaña o app nativa
+  // Paso 6: Abrir WhatsApp en una nueva pestaña (o en la App si está en móvil)
   window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-  
   return true;
 }
 
-// ==========================================
-// 3. EXTRACCIÓN DE DATOS DESDE EL DOM
-// ==========================================
+
+// =========================================================================================
+// 3. REGLAS DE VALIDACIÓN DE CAMPOS
+// =========================================================================================
 /**
- * Extrae los valores actuales de los selectores e inputs en el DOM.
- * @returns {Object}
- */
-function extractBookingDataFromDOM() {
-  // 1. Servicio seleccionado
-  const selectedServiceEl = document.querySelector('[data-service-selected="true"]') ||
-                            document.querySelector('.service-card.selected') ||
-                            document.querySelector('input[name="service"]:checked');
-  const serviceName = selectedServiceEl ? (selectedServiceEl.dataset.name || selectedServiceEl.value || selectedServiceEl.innerText.split('\n')[0]) : null;
-
-  // 2. Fecha seleccionada
-  const selectedDateEl = document.querySelector('[data-date-selected="true"]') ||
-                         document.querySelector('.date-chip.selected') ||
-                         document.getElementById('booking-date');
-  const dateFormatted = selectedDateEl ? (selectedDateEl.dataset.formatted || selectedDateEl.value || selectedDateEl.innerText.trim().replace(/\n+/g, ' ')) : null;
-
-  // 3. Hora seleccionada
-  const selectedTimeEl = document.querySelector('[data-time-selected="true"]') ||
-                         document.querySelector('.time-slot.selected') ||
-                         document.getElementById('booking-time');
-  const time = selectedTimeEl ? (selectedTimeEl.dataset.time || selectedTimeEl.value || selectedTimeEl.innerText.trim()) : null;
-
-  // 4. Campos del cliente
-  const nameInput = document.getElementById('client-name') || document.querySelector('input[name="client-name"]');
-  const phoneInput = document.getElementById('client-phone') || document.querySelector('input[name="client-phone"]');
-
-  const clientName = nameInput ? nameInput.value.trim() : '';
-  const clientPhone = phoneInput ? phoneInput.value.trim() : '';
-
-  // 5. Idioma activo (por defecto 'es')
-  const lang = (window.currentLanguage || document.documentElement.lang || 'es').toLowerCase();
-
-  return {
-    lang,
-    serviceName,
-    dateFormatted,
-    time,
-    clientName,
-    clientPhone
-  };
-}
-
-// ==========================================
-// 4. VALIDACIÓN DE CAMPOS
-// ==========================================
-/**
- * Valida que ningún campo obligatorio esté ausente o incompleto.
+ * Comprueba que el formulario cumpla todas las condiciones antes de enviar.
  * 
- * @param {Object} data - Objeto con los datos recolectados
+ * @param {Object} data - Datos recogidos del cliente
  * @returns {{ isValid: boolean, errorMessage: string|null }}
  */
 function validateBookingData(data) {
   const isEn = data.lang === 'en';
 
+  // 1. ¿Ha seleccionado un servicio?
   if (!data.serviceName) {
     return {
       isValid: false,
@@ -136,6 +94,7 @@ function validateBookingData(data) {
     };
   }
 
+  // 2. ¿Ha seleccionado una fecha?
   if (!data.dateFormatted) {
     return {
       isValid: false,
@@ -143,6 +102,7 @@ function validateBookingData(data) {
     };
   }
 
+  // 3. ¿Ha seleccionado una hora?
   if (!data.time) {
     return {
       isValid: false,
@@ -150,6 +110,7 @@ function validateBookingData(data) {
     };
   }
 
+  // 4. ¿Ha escrito su nombre (mínimo 2 letras)?
   if (!data.clientName || data.clientName.trim().length < 2) {
     return {
       isValid: false,
@@ -157,17 +118,33 @@ function validateBookingData(data) {
     };
   }
 
-  // Validación básica de teléfono (mínimo 6 dígitos)
-  const phoneDigits = data.clientPhone.replace(/\D/g, '');
-  if (!data.clientPhone || phoneDigits.length < 6) {
+  // 5. ¿Ha escrito un teléfono con al menos 6 dígitos numéricos?
+  const numericDigits = data.clientPhone ? data.clientPhone.replace(/\D/g, '') : '';
+  if (!data.clientPhone || numericDigits.length < 6) {
     return {
       isValid: false,
       errorMessage: isEn ? "Please enter a valid phone number." : "Por favor, introduce un número de teléfono válido."
     };
   }
 
+  // Todos los campos son correctos
+  return { isValid: true, errorMessage: null };
+}
+
+
+// =========================================================================================
+// 4. EXTRACTOR AUTOMÁTICO DE DATOS DEL DOM (FALLBACK)
+// =========================================================================================
+/**
+ * Extrae los valores seleccionados directamente de los elementos HTML de la página.
+ */
+function extractBookingDataFromDOM() {
   return {
-    isValid: true,
-    errorMessage: null
+    lang: document.documentElement.lang || 'es',
+    serviceName: document.querySelector('[data-service-selected="true"]')?.dataset.name || null,
+    dateFormatted: document.querySelector('[data-date-selected="true"]')?.dataset.formatted || null,
+    time: document.querySelector('[data-time-selected="true"]')?.dataset.time || null,
+    clientName: document.getElementById('client-name')?.value.trim() || '',
+    clientPhone: document.getElementById('client-phone')?.value.trim() || ''
   };
 }
