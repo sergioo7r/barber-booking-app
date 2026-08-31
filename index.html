@@ -73,7 +73,7 @@
         <p class="text-xs text-zinc-400 mt-0.5" id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo, Sevilla</p>
       </div>
 
-      <!-- BOTÓN SELECTOR DE IDIOMAS MULTIPAÍS (CON ICONO TRADUCCIÓN A/文) -->
+      <!-- BOTÓN SELECTOR DE IDIOMAS (CON ICONO TRADUCCIÓN A/文) -->
       <div class="relative">
         <button
           id="btn-language-selector"
@@ -81,7 +81,7 @@
           class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-xs font-semibold text-zinc-200 transition-all shadow-sm"
           title="Cambiar idioma / Change language"
         >
-          <!-- Vector Icon: A/文 Translate exacto al diseño solicitado -->
+          <!-- Vector Icon: A/文 Translate exacto -->
           <svg class="w-4 h-4 text-zinc-300" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
           </svg>
@@ -219,13 +219,12 @@
 
 
   <!-- ===================================================================================
-       MODAL DE SELECCIÓN DE IDIOMAS (TURISMO SEVILLA: ES, EN, FR, DE, IT)
+       MODAL DE SELECCIÓN DE IDIOMAS
        =================================================================================== -->
   <div id="language-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-surface-card border border-surface-border rounded-2xl w-full max-w-xs p-5 space-y-4 shadow-2xl">
       <div class="flex items-center justify-between border-b border-zinc-800 pb-2.5">
         <div class="flex items-center gap-2">
-          <!-- Icono Translate -->
           <svg class="w-4 h-4 text-zinc-400" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
           </svg>
@@ -234,16 +233,12 @@
         <button onclick="toggleLanguageModal()" class="text-zinc-500 hover:text-white text-sm">✕</button>
       </div>
 
-      <div class="space-y-1.5" id="language-options-list">
-        <!-- Generado dinámicamente -->
-      </div>
+      <div class="space-y-1.5" id="language-options-list"></div>
     </div>
   </div>
 
 
-  <!-- ===================================================================================
-       MODAL DE PIN DE ACCESO (ADMIN)
-       =================================================================================== -->
+  <!-- MODAL DE PIN (ADMIN) -->
   <div id="pin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-surface-card border border-surface-border rounded-2xl w-full max-w-xs p-5 space-y-4 shadow-2xl text-center">
       <div class="w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 mx-auto flex items-center justify-center text-zinc-400">
@@ -282,9 +277,7 @@
   </div>
 
 
-  <!-- ===================================================================================
-       VISTA DEL PANEL DE ADMINISTRACIÓN (SOLO PELUQUERO)
-       =================================================================================== -->
+  <!-- VISTA DEL PANEL DE ADMINISTRACIÓN -->
   <div id="admin-view" class="w-full max-w-md mx-auto px-4 pt-5 sm:px-5 space-y-5 hidden">
 
     <header class="flex items-center justify-between pb-3 border-b border-zinc-800">
@@ -425,7 +418,7 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT: LOCALIZACIÓN 5 IDIOMAS & LÓGICA DE NEGOCIO
+       JAVASCRIPT: DETECCIÓN AUTOMÁTICA DE IDIOMA Y MOTOR
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
@@ -474,13 +467,12 @@
       }
     };
 
-    // IDIOMAS PRINCIPALES DE TURISTAS EN SEVILLA
     const SUPPORTED_LANGUAGES = [
-      { code: 'es', label: 'Español', flag: '🇪🇸' },
-      { code: 'en', label: 'English', flag: '🇬🇧' },
-      { code: 'fr', label: 'Français', flag: '🇫🇷' },
-      { code: 'de', label: 'Deutsch', flag: '🇩🇪' },
-      { code: 'it', label: 'Italiano', flag: '🇮🇹' }
+      { code: 'es', label: 'Español', flag: '🇪🇸', defaultPrefix: '+34 6' },
+      { code: 'en', label: 'English', flag: '🇬🇧', defaultPrefix: '+44 7' },
+      { code: 'fr', label: 'Français', flag: '🇫🇷', defaultPrefix: '+33 6' },
+      { code: 'de', label: 'Deutsch', flag: '🇩🇪', defaultPrefix: '+49 1' },
+      { code: 'it', label: 'Italiano', flag: '🇮🇹', defaultPrefix: '+39 3' }
     ];
 
     const state = {
@@ -492,7 +484,6 @@
       clientPhone: ''
     };
 
-    // DICCIONARIO COMPLETO DE TRADUCCIONES
     const i18n = {
       es: {
         shopName: "Barbería El Barrio",
@@ -529,7 +520,7 @@
         lblName: "Full name",
         namePlaceholder: "e.g. John Miller",
         lblPhone: "Phone (WhatsApp)",
-        phonePlaceholder: "e.g. +34 612 345 678",
+        phonePlaceholder: "e.g. +44 7123 456789",
         shiftMorning: "Morning",
         shiftAfternoon: "Afternoon",
         paymentNotice: "Pay in person (Cash / Bizum / Card)",
@@ -621,7 +612,34 @@
       }
     };
 
+    // =========================================================================
+    // DETECCIÓN AUTOMÁTICA DE IDIOMA POR NAVEGADOR
+    // =========================================================================
+    function detectUserLanguage() {
+      // 1. Si el usuario ya eligió un idioma antes, respetarlo
+      const savedLang = localStorage.getItem('barber_user_lang');
+      if (savedLang && SUPPORTED_LANGUAGES.some(l => l.code === savedLang)) {
+        return savedLang;
+      }
+
+      // 2. Detectar idioma nativo del smartphone del turista (navigator.language)
+      const browserLang = (navigator.language || navigator.userLanguage || 'es').toLowerCase();
+      
+      if (browserLang.startsWith('fr')) return 'fr';
+      if (browserLang.startsWith('de')) return 'de';
+      if (browserLang.startsWith('it')) return 'it';
+      if (browserLang.startsWith('en')) return 'en';
+      if (browserLang.startsWith('es')) return 'es';
+
+      // Fallback por defecto para otros países europeos: English
+      return 'en';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
+      // Aplicar idioma detectado automáticamente
+      state.lang = detectUserLanguage();
+      document.getElementById('active-lang-badge').textContent = state.lang.toUpperCase();
+
       const services = STORE.getServices().filter(s => s.active);
       if (services.length > 0) state.selectedServiceId = services[0].id;
 
@@ -637,9 +655,6 @@
       return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     }
 
-    // =========================================================================
-    // MODAL DE IDIOMAS
-    // =========================================================================
     function toggleLanguageModal() {
       const modal = document.getElementById('language-modal');
       modal.classList.toggle('hidden');
@@ -666,6 +681,7 @@
 
     function selectLanguage(langCode) {
       state.lang = langCode;
+      localStorage.setItem('barber_user_lang', langCode); // Guardar preferencia
       document.getElementById('active-lang-badge').textContent = langCode.toUpperCase();
       toggleLanguageModal();
       renderLanguageModalOptions();
@@ -955,7 +971,6 @@
         return;
       }
 
-      // Guardar cita
       const appts = STORE.getAppointments();
       const newAppt = {
         id: Date.now(),
@@ -969,7 +984,6 @@
       appts.push(newAppt);
       STORE.saveAppointments(appts);
 
-      // WhatsApp bilingüe estructurado
       const [y, m, d] = state.selectedDate.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
       const t = i18n[state.lang] || i18n.es;
