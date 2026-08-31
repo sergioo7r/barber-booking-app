@@ -9,7 +9,7 @@
   <!-- Favicon SVG minimalista -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Crect width='32' height='32' rx='6' fill='%2309090b'/%3E%3Cpath d='M9 8a3 3 0 1 0 2.2 5l4.8 5 6-7a1 1 0 0 1 1.5 1.3l-5.3 6.2 5.3 6.2a1 1 0 1 1-1.5 1.3l-6-7-4.8 5A3 3 0 1 0 9 24a3 3 0 0 0 2.8-2l4.2-4.4-4.2-4.4A3 3 0 0 0 9 8zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0 12a1 1 0 1 1 0 2 1 1 0 0 1 0-2z' fill='%23ffffff'/%3E%3C/svg%3E" />
 
-  <!-- Tipografía: Inter / Geist / Swiss Modern Grotesk -->
+  <!-- Tipografía: Inter / Swiss Modern Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -106,11 +106,11 @@
 <body class="min-h-full flex flex-col justify-between font-sans antialiased" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
-       VISTA PÚBLICA (MINIMALISMO PURO / SWISS DESIGN)
+       VISTA PÚBLICA (MINIMALISMO PURO CON FOTOGRAFÍA EDITORIAL)
        =================================================================================== -->
   <div id="public-view" class="w-full">
 
-    <!-- CABECERA PURA & DIRECTA -->
+    <!-- CABECERA -->
     <nav class="sticky top-0 z-40 w-full glass-header border-b" style="border-color: var(--border-subtle);">
       <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
         
@@ -121,7 +121,7 @@
           <span class="text-xs font-normal" style="color: var(--text-faint);">/ Triana</span>
         </a>
 
-        <!-- Toggle de Tema + Selector de Idioma Minimalista -->
+        <!-- Controles: Tema + Idioma -->
         <div class="flex items-center gap-2">
           
           <button
@@ -134,7 +134,7 @@
             <span id="icon-theme" class="text-[11px]">☼</span>
           </button>
 
-          <!-- Idiomas -->
+          <!-- Dropdown Idiomas -->
           <div class="relative" id="lang-dropdown-container">
             <button
               type="button"
@@ -147,7 +147,6 @@
               <span class="text-[9px]" style="color: var(--text-faint);">▾</span>
             </button>
 
-            <!-- Menú Dropdown -->
             <div
               id="lang-dropdown-menu"
               class="hidden absolute right-0 mt-1 w-32 py-1 rounded border shadow-xl z-50 overflow-hidden text-xs"
@@ -180,10 +179,10 @@
       </div>
     </nav>
 
-    <!-- CONTENEDOR PRINCIPAL -->
+    <!-- CONTENEDOR CENTRAL -->
     <main class="max-w-md mx-auto px-4 pt-6 sm:px-5">
 
-      <!-- ==================== 1. HERO DIRECTO ==================== -->
+      <!-- ==================== 1. HERO ==================== -->
       <section class="w-full pb-6 border-b" style="border-color: var(--border-subtle);">
         <div class="flex items-center justify-between text-[11px] pb-3" style="color: var(--text-muted);">
           <span id="hero-badge-location">Calle Castilla, Triana · Sevilla</span>
@@ -221,7 +220,45 @@
         </div>
       </section>
 
-      <!-- ==================== 2. MÓDULO DE RESERVA DIRECTO ==================== -->
+      <!-- ==================== 2. GALERÍA VISUAL LIMPIA ==================== -->
+      <section class="w-full py-6 border-b" style="border-color: var(--border-subtle);">
+        <div class="flex items-center justify-between mb-3 text-[11px]" style="color: var(--text-faint);">
+          <span class="font-semibold uppercase tracking-wider" id="lbl-gallery-title">El Espacio</span>
+          <span id="lbl-gallery-sub">Triana</span>
+        </div>
+
+        <div class="grid grid-cols-3 gap-2 w-full">
+          <div class="col-span-2 aspect-[4/3] rounded overflow-hidden relative border" style="border-color: var(--border-subtle); background-color: var(--bg-card);">
+            <img
+              src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80"
+              alt="Sillón de barbería"
+              class="w-full h-full object-cover grayscale-[25%] hover:grayscale-0 transition-all duration-300"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="col-span-1 flex flex-col gap-2">
+            <div class="flex-1 rounded overflow-hidden relative border aspect-[4/3]" style="border-color: var(--border-subtle); background-color: var(--bg-card);">
+              <img
+                src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=350&q=80"
+                alt="Navaja y toalla"
+                class="w-full h-full object-cover grayscale-[25%] hover:grayscale-0 transition-all duration-300"
+                loading="lazy"
+              />
+            </div>
+            <div class="flex-1 rounded overflow-hidden relative border aspect-[4/3]" style="border-color: var(--border-subtle); background-color: var(--bg-card);">
+              <img
+                src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=350&q=80"
+                alt="Herramientas"
+                class="w-full h-full object-cover grayscale-[25%] hover:grayscale-0 transition-all duration-300"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 3. MÓDULO DE RESERVAS ==================== -->
       <section id="booking-module" class="w-full pt-6 scroll-mt-16 space-y-7">
 
         <!-- 1. SERVICIOS -->
@@ -301,7 +338,7 @@
 
       </section>
 
-      <!-- ==================== 3. FOOTER MINIMAL ==================== -->
+      <!-- ==================== 4. FOOTER ==================== -->
       <footer class="pt-8 mt-8 border-t space-y-3" style="border-color: var(--border-subtle);">
         <div class="flex items-center justify-between text-xs" style="color: var(--text-muted);">
           <div>
@@ -323,7 +360,7 @@
   </div>
 
   <!-- ===================================================================================
-       BARRA FIJA INFERIOR (STICKY BAR PURA)
+       BARRA FIJA INFERIOR (STICKY BAR)
        =================================================================================== -->
   <div id="sticky-bar" class="fixed bottom-0 inset-x-0 glass-header border-t p-3 z-40" style="border-color: var(--border-subtle);">
     <div class="w-full max-w-md mx-auto flex items-center gap-3">
@@ -350,7 +387,7 @@
 
 
   <!-- ===================================================================================
-       MODAL DE CONFIRMACIÓN (CALENDARIOS)
+       MODAL DE CONFIRMACIÓN
        =================================================================================== -->
   <div id="success-modal" class="fixed inset-0 bg-black/75 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="border rounded-lg w-full max-w-sm p-5 space-y-3.5 shadow-2xl text-center" style="background-color: var(--bg-card); border-color: var(--border-subtle);">
@@ -588,7 +625,7 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT: MINIMALISMO & MOTOR DE RESERVAS
+       JAVASCRIPT: LOGICA I18N, GALERÍA Y RESERVAS
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
@@ -642,6 +679,7 @@
         heroTitle: "Barbería El Barrio",
         heroSubtitle: "Corte clásico, cuidado de barba y afeitado tradicional en Triana.",
         heroCta: "Reservar cita",
+        galleryTitle: "El Espacio",
         step1Title: "Servicio",
         subStep1: "Tarifa",
         step2Title: "Fecha y hora",
@@ -679,6 +717,7 @@
         heroTitle: "El Barrio Barbershop",
         heroSubtitle: "Classic haircut, beard grooming, and hot towel shave in Triana.",
         heroCta: "Book appointment",
+        galleryTitle: "The Space",
         step1Title: "Service",
         subStep1: "Rate",
         step2Title: "Date & Time",
@@ -716,6 +755,7 @@
         heroTitle: "Barbería El Barrio",
         heroSubtitle: "Coupe classique, soin de barbe et rasage traditionnel à Triana.",
         heroCta: "Prendre RDV",
+        galleryTitle: "Le Salon",
         step1Title: "Prestation",
         subStep1: "Tarif",
         step2Title: "Date & Heure",
@@ -753,6 +793,7 @@
         heroTitle: "Barbería El Barrio",
         heroSubtitle: "Taglio classico, cura della barba e rasatura tradizionale a Triana.",
         heroCta: "Prenota",
+        galleryTitle: "Lo Spazio",
         step1Title: "Servizio",
         subStep1: "Listino",
         step2Title: "Data e ora",
@@ -790,6 +831,7 @@
         heroTitle: "Barbería El Barrio",
         heroSubtitle: "Klassischer Haarschnitt, Bartpflege und traditionelle Rasur in Triana.",
         heroCta: "Termin buchen",
+        galleryTitle: "Der Salon",
         step1Title: "Dienstleistung",
         subStep1: "Preis",
         step2Title: "Datum & Uhrzeit",
@@ -966,6 +1008,7 @@
       document.getElementById('hero-title').textContent = t.heroTitle;
       document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
       document.getElementById('hero-cta').textContent = t.heroCta;
+      document.getElementById('lbl-gallery-title').textContent = t.galleryTitle;
       
       document.getElementById('title-step-1').textContent = t.step1Title;
       document.getElementById('sub-step-1').textContent = t.subStep1;
