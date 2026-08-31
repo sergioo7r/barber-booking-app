@@ -112,7 +112,6 @@
 
       <!-- ==================== 1. HERO SECTION ==================== -->
       <section class="space-y-4 pt-1">
-        <!-- Badges de estado -->
         <div class="flex items-center gap-2 flex-wrap">
           <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] font-medium text-zinc-300">
             <span class="relative flex h-2 w-2">
@@ -129,7 +128,6 @@
           </div>
         </div>
 
-        <!-- Título y subtítulo -->
         <div>
           <h1 class="font-serif text-3xl sm:text-[34px] font-semibold text-white tracking-tight leading-[1.18]" id="hero-title">
             Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal
@@ -139,7 +137,6 @@
           </p>
         </div>
 
-        <!-- Botón Reservar -->
         <div class="pt-1 flex items-center gap-3">
           <a
             href="#booking-module"
@@ -169,7 +166,7 @@
       <section class="space-y-3">
         <div class="flex items-center justify-between px-1">
           <h2 class="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold" id="gallery-title">El Espacio & La Experiencia</h2>
-          <span class="text-[10px] text-accent-gold font-medium tracking-wide">Tradición & Estilo</span>
+          <span class="text-[10px] text-accent-gold font-medium tracking-wide" id="gallery-tag">Tradición & Estilo</span>
         </div>
 
         <div class="grid grid-cols-3 gap-2.5 h-44 sm:h-48">
@@ -209,9 +206,8 @@
       <!-- ==================== 3. MÓDULO DE RESERVA ==================== -->
       <section id="booking-module" class="scroll-mt-20 pt-2 space-y-8">
 
-        <!-- Cabecera del módulo -->
         <div class="border-b border-white/[0.08] pb-3.5">
-          <span class="text-[10px] uppercase tracking-widest text-accent-gold font-semibold block mb-1">Agenda tu cita</span>
+          <span class="text-[10px] uppercase tracking-widest text-accent-gold font-semibold block mb-1" id="module-pretitle">Agenda tu cita</span>
           <h2 class="font-serif text-2xl font-bold text-white tracking-tight" id="module-title">Reserva de Servicios</h2>
         </div>
 
@@ -238,10 +234,8 @@
             <span class="text-[11px] text-accent-gold font-medium tracking-tight" id="selected-date-summary"></span>
           </div>
 
-          <!-- Carrusel de días -->
           <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1" id="days-container"></div>
 
-          <!-- Cuadrícula de horas -->
           <div class="mt-3.5 space-y-3.5">
             <div>
               <div class="flex items-center gap-1.5 mb-1.5 px-1 text-zinc-500">
@@ -272,7 +266,7 @@
               <span class="w-5 h-5 rounded-full bg-white/[0.08] border border-white/10 text-[10px] font-bold text-white flex items-center justify-center">3</span>
               <h3 class="text-xs font-semibold uppercase tracking-wider text-zinc-300" id="title-step-3">Tus datos</h3>
             </div>
-            <span class="text-[11px] text-zinc-500 font-medium">WhatsApp directo</span>
+            <span class="text-[11px] text-zinc-500 font-medium" id="lbl-direct-whatsapp">WhatsApp directo</span>
           </div>
 
           <div class="p-4 rounded-2xl bg-surface-card border border-surface-border space-y-3.5 shadow-xl">
@@ -291,7 +285,7 @@
             <div>
               <div class="flex items-center justify-between mb-1">
                 <label for="client-phone" class="block text-[11px] font-medium text-zinc-400" id="lbl-phone">Teléfono (WhatsApp) *</label>
-                <span class="text-[10px] text-zinc-500">Con prefijo (+34...)</span>
+                <span class="text-[10px] text-zinc-500" id="lbl-prefix-hint">Con prefijo (+34...)</span>
               </div>
               <input
                 type="tel"
@@ -337,7 +331,7 @@
               </svg>
               <span id="txt-payment-notice">Pago en local (Efectivo / Bizum / Tarjeta)</span>
             </div>
-            <span class="text-zinc-500 font-mono text-[10px]">Sin comisiones</span>
+            <span class="text-zinc-500 font-mono text-[10px]" id="txt-no-fees">Sin comisiones</span>
           </div>
         </div>
 
@@ -667,10 +661,42 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT: LÓGICA COMPLETA DE NEGOCIO Y RENDERIZADO
+       JAVASCRIPT: LÓGICA MULTILINGÜE INTEGRAL Y MOTOR DE RESERVAS
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
+
+    // Traducciones completas de los servicios para todos los idiomas
+    const SERVICES_TRANSLATIONS = {
+      1: {
+        es: { name: "Corte de pelo", desc: "Lavado, corte a tijera/máquina y peinado", duration: "30 min" },
+        en: { name: "Haircut", desc: "Wash, scissor/clipper cut and styling", duration: "30 min" },
+        fr: { name: "Coupe de cheveux", desc: "Shampoing, coupe aux ciseaux et coiffage", duration: "30 min" },
+        de: { name: "Klassischer Haarschnitt", desc: "Haarwäsche, Schnitt mit Schere & Styling", duration: "30 Min." },
+        it: { name: "Taglio di capelli", desc: "Lavaggio, taglio a forbice e piega", duration: "30 min" }
+      },
+      2: {
+        es: { name: "Corte + Barba", desc: "Corte completo y perfilado con toalla caliente", duration: "45 min" },
+        en: { name: "Haircut + Beard", desc: "Full haircut and hot towel beard shaping", duration: "45 min" },
+        fr: { name: "Coupe + Barbe", desc: "Coupe complète et soin de barbe à la serviette chaude", duration: "45 min" },
+        de: { name: "Haarschnitt + Bart", desc: "Kompletter Schnitt & Heißtuch-Bartpflege", duration: "45 Min." },
+        it: { name: "Taglio + Barba", desc: "Taglio completo e cura barba con panno caldo", duration: "45 min" }
+      },
+      3: {
+        es: { name: "Arreglo de barba", desc: "Perfilado a navaja, toalla caliente y bálsamo", duration: "20 min" },
+        en: { name: "Beard Trim & Shape", desc: "Razor shaping, hot towel and conditioning balm", duration: "20 min" },
+        fr: { name: "Taille de barbe", desc: "Traçage au rasoir, serviette chaude et baume", duration: "20 min" },
+        de: { name: "Bartpflege & Konturen", desc: "Messerrasur, Heißtuch und pflegendes Bartöl", duration: "20 Min." },
+        it: { name: "Rifinitura barba", desc: "Modellatura a rasoio, panno caldo e balsamo", duration: "20 min" }
+      },
+      4: {
+        es: { name: "Corte infantil / Senior", desc: "Menores de 12 años y jubilados", duration: "25 min" },
+        en: { name: "Kids & Senior Haircut", desc: "Under 12 years old and seniors", duration: "25 min" },
+        fr: { name: "Coupe Enfant / Senior", desc: "Moins de 12 ans et seniors", duration: "25 min" },
+        de: { name: "Kinder- / Seniorenhaarschnitt", desc: "Kinder unter 12 Jahren und Senioren", duration: "25 Min." },
+        it: { name: "Taglio Bambino / Senior", desc: "Bambini sotto i 12 anni e pensionati", duration: "25 min" }
+      }
+    };
 
     const DEFAULT_SERVICES = [
       { id: 1, name: "Corte de pelo", duration: "30 min", price: 15, durationMin: 30, desc: "Lavado, corte a tijera/máquina y peinado", active: true },
@@ -717,11 +743,11 @@
     };
 
     const SUPPORTED_LANGUAGES = [
-      { code: 'es', label: 'Español', flag: '🇪🇸', defaultPrefix: '+34 6' },
-      { code: 'en', label: 'English', flag: '🇬🇧', defaultPrefix: '+44 7' },
-      { code: 'fr', label: 'Français', flag: '🇫🇷', defaultPrefix: '+33 6' },
-      { code: 'de', label: 'Deutsch', flag: '🇩🇪', defaultPrefix: '+49 1' },
-      { code: 'it', label: 'Italiano', flag: '🇮🇹', defaultPrefix: '+39 3' }
+      { code: 'es', label: 'Español', flag: '🇪🇸', defaultPrefix: '+34 ' },
+      { code: 'en', label: 'English', flag: '🇬🇧', defaultPrefix: '+44 ' },
+      { code: 'fr', label: 'Français', flag: '🇫🇷', defaultPrefix: '+33 ' },
+      { code: 'de', label: 'Deutsch', flag: '🇩🇪', defaultPrefix: '+49 ' },
+      { code: 'it', label: 'Italiano', flag: '🇮🇹', defaultPrefix: '+39 ' }
     ];
 
     const state = {
@@ -743,21 +769,26 @@
         heroSubtitle: "Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el centro histórico de Sevilla.",
         heroCta: "Reservar Cita",
         galleryTitle: "El Espacio & La Experiencia",
+        galleryTag: "Tradición & Estilo",
         photoTag1: "Sillones clásicos y atención individual",
+        modulePretitle: "Agenda tu cita",
         moduleTitle: "Reserva de Servicios",
         step1Title: "1. Selecciona el servicio",
         subStep1: "Precios oficiales",
         step2Title: "2. Fecha y hora",
         step3Title: "3. Tus datos",
+        lblDirectWhatsapp: "WhatsApp directo",
         lblName: "Nombre y apellido *",
         namePlaceholder: "Ej. Carlos Mendoza",
         lblPhone: "Teléfono (WhatsApp) *",
-        phonePlaceholder: "Ej. +34 612 345 678",
+        phonePlaceholder: "+34 612 345 678",
+        prefixHint: "Con prefijo (+34...)",
         shiftMorning: "Mañana",
         shiftAfternoon: "Tarde",
         footerLocationTitle: "Ubicación del Local",
         footerHours: "Lunes a Sábado · 10:00 - 20:00",
-        paymentNotice: "Pago en el local (Efectivo / Bizum / Tarjeta)",
+        paymentNotice: "Pago en local (Efectivo / Bizum / Tarjeta)",
+        noFees: "Sin comisiones",
         footerPolicy: "Barbería El Barrio · Sevilla",
         closedDay: "Cerrado este día",
         ctaButton: "Confirmar reserva",
@@ -784,21 +815,26 @@
         heroSubtitle: "Classic scissor cut, hot towel shave ritual, and beard shaping in the historic center of Seville.",
         heroCta: "Book Appointment",
         galleryTitle: "The Shop & Atmosphere",
+        galleryTag: "Tradition & Style",
         photoTag1: "Classic chairs & individual attention",
+        modulePretitle: "Book your appointment",
         moduleTitle: "Service Booking",
         step1Title: "1. Select Service",
         subStep1: "Official rates",
         step2Title: "2. Date & Time",
         step3Title: "3. Your Details",
+        lblDirectWhatsapp: "Direct WhatsApp",
         lblName: "Full name *",
         namePlaceholder: "e.g. John Miller",
         lblPhone: "Phone (WhatsApp) *",
-        phonePlaceholder: "e.g. +44 7123 456789",
+        phonePlaceholder: "+44 7123 456789",
+        prefixHint: "With country code (+44...)",
         shiftMorning: "Morning",
         shiftAfternoon: "Afternoon",
         footerLocationTitle: "Shop Location",
         footerHours: "Monday to Saturday · 10:00 AM - 8:00 PM",
         paymentNotice: "Pay on-site (Cash / Bizum / Card)",
+        noFees: "No extra fees",
         footerPolicy: "El Barrio Barbershop · Seville",
         closedDay: "Closed on this date",
         ctaButton: "Confirm booking",
@@ -825,21 +861,26 @@
         heroSubtitle: "Coupe classique aux ciseaux, rasage traditionnel à la serviette chaude et taille de barbe à Séville.",
         heroCta: "Prendre Rendez-vous",
         galleryTitle: "Le Salon & L'Atmosphère",
+        galleryTag: "Tradition & Style",
         photoTag1: "Fauteuils classiques et service sur-mesure",
+        modulePretitle: "Prenez rendez-vous",
         moduleTitle: "Réservation de Services",
         step1Title: "1. Choisissez la prestation",
         subStep1: "Tarifs officiels",
         step2Title: "2. Date et heure",
         step3Title: "3. Vos coordonnées",
+        lblDirectWhatsapp: "WhatsApp direct",
         lblName: "Nom et prénom *",
         namePlaceholder: "Ex. Jean Dupont",
         lblPhone: "Téléphone (WhatsApp) *",
-        phonePlaceholder: "Ex. +33 612 345 678",
+        phonePlaceholder: "+33 612 345 678",
+        prefixHint: "Avec indicatif (+33...)",
         shiftMorning: "Matin",
         shiftAfternoon: "Après-midi",
         footerLocationTitle: "Emplacement du Salon",
         footerHours: "Lundi au Samedi · 10:00 - 20:00",
         paymentNotice: "Paiement sur place (Espèces / Carte)",
+        noFees: "Sans frais supplémentaires",
         footerPolicy: "Barbería El Barrio · Séville",
         closedDay: "Fermé cette date",
         ctaButton: "Confirmer la réservation",
@@ -866,21 +907,26 @@
         heroSubtitle: "Klassischer Scherenschnitt, Heißtuch-Rasur und Bartpflege im historischen Zentrum von Sevilla.",
         heroCta: "Termin Buchen",
         galleryTitle: "Der Salon & Die Atmosphäre",
+        galleryTag: "Tradition & Stil",
         photoTag1: "Klassische Stühle und individuelle Betreuung",
-        moduleTitle: "Online-Terminbuchung",
-        step1Title: "1. Dienstleistung wählen",
+        modulePretitle: "Termin vereinbaren",
+        moduleTitle: "Dienstleistung buchen",
+        step1Title: "1. Dienstleistung",
         subStep1: "Offizielle Preise",
         step2Title: "2. Datum & Uhrzeit",
         step3Title: "3. Ihre Daten",
+        lblDirectWhatsapp: "Direkt per WhatsApp",
         lblName: "Vor- und Nachname *",
         namePlaceholder: "z.B. Max Mustermann",
         lblPhone: "Telefon (WhatsApp) *",
-        phonePlaceholder: "z.B. +49 170 1234567",
+        phonePlaceholder: "+49 170 1234567",
+        prefixHint: "Mit Ländervorwahl (+49...)",
         shiftMorning: "Vormittag",
         shiftAfternoon: "Nachmittag",
         footerLocationTitle: "Standort des Salons",
         footerHours: "Montag bis Samstag · 10:00 - 20:00 Uhr",
         paymentNotice: "Zahlung vor Ort (Bar / Karte)",
+        noFees: "Keine Zusatzgebühren",
         footerPolicy: "Barbería El Barrio · Sevilla",
         closedDay: "An diesem Tag geschlossen",
         ctaButton: "Termin buchen",
@@ -901,28 +947,32 @@
       },
       it: {
         shopName: "Barbería El Barrio",
-        status: "Aperto oggi · 10:00 - 20:00",
         heroStatus: "Aperto oggi · 10:00 - 20:00",
         heroLocation: "Centro Storico, Siviglia",
         heroTitle: 'Barberia Tradizionale <span class="italic font-normal text-accent-gold">&</span> Cura Maschile',
         heroSubtitle: "Taglio classico a forbice, rasatura con panno caldo e modellatura barba nel centro storico di Siviglia.",
         heroCta: "Prenota Appuntamento",
         galleryTitle: "Lo Spazio & L'Esperienza",
+        galleryTag: "Tradizione & Stile",
         photoTag1: "Poltrone classiche e attenzione individuale",
+        modulePretitle: "Prenota il tuo appuntamento",
         moduleTitle: "Prenotazione Servizi",
         step1Title: "1. Scegli il servizio",
         subStep1: "Listino ufficiale",
         step2Title: "2. Data e ora",
         step3Title: "3. I tuoi dati",
+        lblDirectWhatsapp: "WhatsApp diretto",
         lblName: "Nome e cognome *",
         namePlaceholder: "Es. Marco Rossi",
         lblPhone: "Telefono (WhatsApp) *",
-        phonePlaceholder: "Es. +39 340 1234567",
+        phonePlaceholder: "+39 340 1234567",
+        prefixHint: "Con prefisso (+39...)",
         shiftMorning: "Mattina",
         shiftAfternoon: "Pomeriggio",
         footerLocationTitle: "Posizione del Salone",
         footerHours: "Lunedì a Sabato · 10:00 - 20:00",
         paymentNotice: "Pagamento in loco (Contanti / Carta)",
+        noFees: "Nessuna commissione",
         footerPolicy: "Barbería El Barrio · Siviglia",
         closedDay: "Chiuso in questa data",
         ctaButton: "Conferma prenotazione",
@@ -955,6 +1005,21 @@
       if (browserLang.startsWith('en')) return 'en';
       if (browserLang.startsWith('es')) return 'es';
       return 'en';
+    }
+
+    // Devuelve los textos de un servicio adaptados al idioma activo
+    function getLocalizedService(service) {
+      const lang = state.lang || 'es';
+      if (SERVICES_TRANSLATIONS[service.id] && SERVICES_TRANSLATIONS[service.id][lang]) {
+        const trans = SERVICES_TRANSLATIONS[service.id][lang];
+        return {
+          ...service,
+          name: trans.name,
+          desc: trans.desc,
+          duration: trans.duration
+        };
+      }
+      return service;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -1022,18 +1087,22 @@
       document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
       document.getElementById('hero-cta').querySelector('span').textContent = t.heroCta;
       document.getElementById('gallery-title').textContent = t.galleryTitle;
+      document.getElementById('gallery-tag').textContent = t.galleryTag;
       document.getElementById('photo-tag-1').textContent = t.photoTag1;
       
       // Módulo Reserva
+      document.getElementById('module-pretitle').textContent = t.modulePretitle;
       document.getElementById('module-title').textContent = t.moduleTitle;
       document.getElementById('title-step-1').textContent = t.step1Title;
       document.getElementById('sub-step-1').textContent = t.subStep1;
       document.getElementById('title-step-2').textContent = t.step2Title;
       document.getElementById('title-step-3').textContent = t.step3Title;
+      document.getElementById('lbl-direct-whatsapp').textContent = t.lblDirectWhatsapp;
       document.getElementById('lbl-name').textContent = t.lblName;
       document.getElementById('client-name').placeholder = t.namePlaceholder;
       document.getElementById('lbl-phone').textContent = t.lblPhone;
       document.getElementById('client-phone').placeholder = t.phonePlaceholder;
+      document.getElementById('lbl-prefix-hint').textContent = t.prefixHint;
       document.getElementById('txt-shift-morning').textContent = t.shiftMorning;
       document.getElementById('txt-shift-afternoon').textContent = t.shiftAfternoon;
       
@@ -1041,6 +1110,7 @@
       document.getElementById('footer-location-title').textContent = t.footerLocationTitle;
       document.getElementById('footer-hours').textContent = t.footerHours;
       document.getElementById('txt-payment-notice').textContent = t.paymentNotice;
+      document.getElementById('txt-no-fees').textContent = t.noFees;
       document.getElementById('txt-footer-policy').textContent = t.footerPolicy;
       document.getElementById('txt-cta-button').textContent = t.ctaButton;
 
@@ -1058,9 +1128,10 @@
 
     function renderServices() {
       const container = document.getElementById('services-container');
-      const services = STORE.getServices().filter(s => s.active);
+      const rawServices = STORE.getServices().filter(s => s.active);
 
-      container.innerHTML = services.map(service => {
+      container.innerHTML = rawServices.map(rawService => {
+        const service = getLocalizedService(rawService);
         const isSelected = state.selectedServiceId === service.id;
 
         const cardStyle = isSelected
@@ -1266,14 +1337,15 @@
 
     function updateStickyBar() {
       const services = STORE.getServices();
-      const service = services.find(s => s.id === state.selectedServiceId);
+      const rawService = services.find(s => s.id === state.selectedServiceId);
       const t = i18n[state.lang] || i18n.es;
 
       const serviceLabel = document.getElementById('sticky-service-label');
       const priceLabel = document.getElementById('sticky-price-label');
       const dateLabel = document.getElementById('sticky-date-label');
 
-      if (service && serviceLabel && priceLabel) {
+      if (rawService && serviceLabel && priceLabel) {
+        const service = getLocalizedService(rawService);
         serviceLabel.textContent = service.name;
         priceLabel.textContent = `${service.price} €`;
       }
@@ -1317,13 +1389,15 @@
     // =========================================================================
     function handleBookingConfirmation() {
       const services = STORE.getServices();
-      const service = services.find(s => s.id === state.selectedServiceId);
+      const rawService = services.find(s => s.id === state.selectedServiceId);
 
-      if (!service || !state.selectedDate || !state.selectedTime || !state.clientName || !state.clientPhone) {
+      if (!rawService || !state.selectedDate || !state.selectedTime || !state.clientName || !state.clientPhone) {
         return;
       }
 
-      // 1. Registrar cita en el almacén local del peluquero
+      const service = getLocalizedService(rawService);
+
+      // 1. Registrar cita en el almacén local
       const appts = STORE.getAppointments();
       const newAppt = {
         id: Date.now(),
@@ -1340,14 +1414,14 @@
       state.lastBooking = {
         serviceName: service.name,
         price: service.price,
-        durationMin: service.durationMin || 30,
+        durationMin: rawService.durationMin || 30,
         date: state.selectedDate,
         time: state.selectedTime,
         clientName: state.clientName,
         clientPhone: state.clientPhone
       };
 
-      // 2. Generar mensaje con formato exacto
+      // 2. Generar mensaje en el idioma correspondiente
       const [y, m, d] = state.selectedDate.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
       const t = i18n[state.lang] || i18n.es;
@@ -1356,13 +1430,13 @@
       const phone = (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233');
       const msg = t.waMessage(service.name, dateFormatted, state.selectedTime, state.clientName, state.clientPhone);
 
-      // 3. Abrir WhatsApp hacia el número del peluquero
+      // 3. Abrir WhatsApp
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
 
-      // 4. Mostrar pantalla / modal de éxito con opción de Google / Apple Calendar
+      // 4. Mostrar modal de confirmación con calendarios
       showSuccessModal(state.lastBooking, dateFormatted);
 
-      // 5. Actualizar la vista para reflejar la hora ocupada
+      // 5. Actualizar interfaz
       renderTimeSlotsForSelectedDate();
     }
 
