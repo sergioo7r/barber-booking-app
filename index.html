@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0c0c0c" />
   <title>Barbería El Barrio — Barbería Tradicional & Cuidado Masculino</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display / Inter -->
+  <!-- Google Fonts: Plus Jakarta Sans & Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
@@ -27,7 +27,7 @@
               DEFAULT: '#121212',
               card: '#161616',
               border: 'rgba(255, 255, 255, 0.08)',
-              hover: '#1b1b1b'
+              hover: '#1c1c1c'
             },
             accent: {
               gold: '#c5a880',
@@ -46,7 +46,8 @@
       box-sizing: border-box;
     }
     body {
-      padding-bottom: env(safe-area-inset-bottom, 24px);
+      /* Padding inferior amplio para que la barra flotante NUNCA tape el contenido */
+      padding-bottom: calc(110px + env(safe-area-inset-bottom, 24px));
     }
     input, button, select, textarea {
       touch-action: manipulation;
@@ -58,31 +59,24 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* Estética editorial de vidrio oscuro */
+    /* Estética editorial de cristal oscuro */
     .editorial-glass {
-      background: rgba(20, 20, 20, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.07);
-    }
-    .floating-label-input:focus ~ label,
-    .floating-label-input:not(:placeholder-shown) ~ label {
-      transform: translateY(-22px) scale(0.85);
-      color: #c5a880;
+      background: rgba(12, 12, 12, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans bg-[#0c0c0c] text-zinc-100 pb-36">
+<body class="min-h-full flex flex-col justify-between font-sans bg-[#0c0c0c] text-zinc-100">
 
   <!-- ===================================================================================
-       BARRA DE NAVEGACIÓN SUPERIOR (STICKY HEADER)
+       BARRA DE NAVEGACIÓN SUPERIOR FIJA
        =================================================================================== -->
-  <nav class="sticky top-0 z-40 w-full editorial-glass border-b border-white/[0.06]">
+  <nav class="sticky top-0 z-40 w-full editorial-glass border-b border-white/[0.08]">
     <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
       <a href="#" class="flex items-center gap-2.5 group">
         <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-white/10 flex items-center justify-center text-accent-gold group-hover:border-accent-gold/40 transition-colors">
-          <!-- Micro-icono: Tijeras (Lucide Scissors) -->
           <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/>
           </svg>
@@ -93,8 +87,8 @@
         </div>
       </a>
 
-      <!-- Selector de idioma ES / EN en píldora -->
-      <div class="flex items-center bg-black/70 border border-white/10 rounded-full p-0.5 text-[11px] font-semibold">
+      <!-- Selector de idioma ES / EN -->
+      <div class="flex items-center bg-black/80 border border-white/10 rounded-full p-0.5 text-[11px] font-semibold">
         <button id="btn-lang-es" onclick="setLanguage('es')" class="px-2.5 py-0.5 rounded-full bg-white text-black font-semibold transition-all">
           ES
         </button>
@@ -105,14 +99,15 @@
     </div>
   </nav>
 
-  <div class="w-full max-w-md mx-auto px-4 pt-6 sm:px-5 space-y-9">
+  <!-- CONTENEDOR PRINCIPAL CON ESPACIADO PROPORCIONAL -->
+  <div class="w-full max-w-md mx-auto px-4 pt-6 sm:px-5 space-y-10">
 
     <!-- ===================================================================================
-         1. HERO SECTION (EDITORIAL & ALTO VALOR PERCIBIDO)
+         1. HERO SECTION
          =================================================================================== -->
-    <section class="space-y-4 pt-2">
-      <!-- Badges de estado en vivo -->
-      <div class="flex items-center gap-2">
+    <section class="space-y-4">
+      <!-- Badges de estado -->
+      <div class="flex items-center gap-2 flex-wrap">
         <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] font-medium text-zinc-300">
           <span class="relative flex h-2 w-2">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -121,7 +116,6 @@
           <span id="hero-badge-status">Abierto hoy hasta las 20:30</span>
         </div>
         <div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-[11px] font-medium text-zinc-400">
-          <!-- Icono: Pin Mapa -->
           <svg class="w-3 h-3 text-zinc-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 7.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="9" r="2.5"/>
           </svg>
@@ -129,9 +123,9 @@
         </div>
       </div>
 
-      <!-- Título de marca editorial -->
+      <!-- Título y subtítulo -->
       <div>
-        <h1 class="font-serif text-3xl sm:text-[34px] font-semibold text-white tracking-tight leading-[1.15]" id="hero-title">
+        <h1 class="font-serif text-3xl sm:text-[34px] font-semibold text-white tracking-tight leading-[1.18]" id="hero-title">
           Barbería Tradicional <span class="italic font-normal text-accent-gold">&</span> Cuidado Personal
         </h1>
         <p class="text-xs sm:text-sm text-zinc-400 mt-2.5 leading-relaxed font-normal" id="hero-subtitle">
@@ -139,7 +133,7 @@
         </p>
       </div>
 
-      <!-- CTA Principal Hero -->
+      <!-- Botón Reservar -->
       <div class="pt-1 flex items-center gap-3">
         <a
           href="#booking-module"
@@ -166,16 +160,16 @@
     </section>
 
     <!-- ===================================================================================
-         2. GALERÍA MINIMALISTA / ESPACIO (BENTO GRID)
+         2. GALERÍA BENTO GRID (CON ALTURA Y SEPARACIÓN CONTROLADAS)
          =================================================================================== -->
-    <section class="space-y-2.5">
+    <section class="space-y-3">
       <div class="flex items-center justify-between px-1">
         <h2 class="text-[11px] uppercase tracking-widest text-zinc-500 font-semibold" id="gallery-title">El Espacio & La Experiencia</h2>
         <span class="text-[10px] text-accent-gold font-medium tracking-wide">Tradición & Estilo</span>
       </div>
 
-      <div class="grid grid-cols-3 gap-2 h-44 sm:h-52">
-        <!-- Foto Principal Bento (2 columnas) -->
+      <div class="grid grid-cols-3 gap-2.5 h-44 sm:h-48">
+        <!-- Foto 1 -->
         <div class="col-span-2 relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-zinc-900">
           <img
             src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=700&q=80"
@@ -188,8 +182,8 @@
           </div>
         </div>
 
-        <!-- 2 Fotos verticales en columna derecha -->
-        <div class="grid grid-rows-2 gap-2">
+        <!-- Fotos 2 y 3 -->
+        <div class="grid grid-rows-2 gap-2.5">
           <div class="relative rounded-2xl overflow-hidden group border border-white/[0.08] bg-zinc-900">
             <img
               src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=400&q=80"
@@ -211,16 +205,17 @@
     </section>
 
     <!-- ===================================================================================
-         3. MÓDULO DE RESERVA INTERACTIVO (NÚCLEO)
+         3. MÓDULO DE RESERVA (scroll-mt-20 evita que el navbar tape el título al hacer clic)
          =================================================================================== -->
-    <section id="booking-module" class="pt-3 space-y-7">
+    <section id="booking-module" class="scroll-mt-20 pt-4 space-y-8">
 
-      <div class="border-b border-white/[0.08] pb-3">
+      <!-- Cabecera del módulo -->
+      <div class="border-b border-white/[0.08] pb-3.5">
         <span class="text-[10px] uppercase tracking-widest text-accent-gold font-semibold block mb-1">Agenda tu cita</span>
-        <h2 class="font-serif text-xl sm:text-2xl font-bold text-white tracking-tight" id="module-title">Reserva de Servicios</h2>
+        <h2 class="font-serif text-2xl font-bold text-white tracking-tight" id="module-title">Reserva de Servicios</h2>
       </div>
 
-      <!-- PASO 1: SERVICIOS CON RESALTADO PERIMETRAL -->
+      <!-- PASO 1: SELECCIÓN DE SERVICIO -->
       <div class="space-y-3">
         <div class="flex items-center justify-between px-1">
           <div class="flex items-center gap-2">
@@ -245,14 +240,13 @@
           <span class="text-[11px] text-accent-gold font-medium tracking-tight" id="selected-date-summary"></span>
         </div>
 
-        <!-- Carrusel de días -->
+        <!-- Carrusel horizontal de días -->
         <div class="flex gap-2 overflow-x-auto no-scrollbar py-1 -mx-1 px-1" id="days-container"></div>
 
-        <!-- Horarios divididos por Mañana / Tarde -->
-        <div class="mt-3 space-y-3">
+        <!-- Cuadrícula de horas -->
+        <div class="mt-3.5 space-y-3.5">
           <div>
             <div class="flex items-center gap-1.5 mb-1.5 px-1 text-zinc-500">
-              <!-- Icono Reloj Mañana -->
               <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
               </svg>
@@ -260,6 +254,7 @@
             </div>
             <div class="grid grid-cols-4 gap-1.5" id="morning-slots-container"></div>
           </div>
+
           <div>
             <div class="flex items-center gap-1.5 mb-1.5 px-1 text-zinc-500">
               <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -272,7 +267,7 @@
         </div>
       </div>
 
-      <!-- PASO 3: DATOS DEL CLIENTE Y NOTAS ESPECIALES -->
+      <!-- PASO 3: DATOS DEL CLIENTE -->
       <div class="space-y-3">
         <div class="flex items-center justify-between px-1">
           <div class="flex items-center gap-2">
@@ -283,7 +278,6 @@
         </div>
 
         <div class="p-4 rounded-2xl bg-surface-card border border-surface-border space-y-3.5 shadow-xl">
-          <!-- Campo 1: Nombre completo -->
           <div>
             <label for="client-name" class="block text-[11px] font-medium text-zinc-400 mb-1" id="lbl-name">Nombre y apellidos *</label>
             <input
@@ -296,7 +290,6 @@
             />
           </div>
 
-          <!-- Campo 2: Teléfono móvil -->
           <div>
             <div class="flex items-center justify-between mb-1">
               <label for="client-phone" class="block text-[11px] font-medium text-zinc-400" id="lbl-phone">Teléfono WhatsApp *</label>
@@ -312,13 +305,12 @@
             />
           </div>
 
-          <!-- Campo 3: Notas especiales (Opcional) -->
           <div>
             <label for="client-notes" class="block text-[11px] font-medium text-zinc-400 mb-1" id="lbl-notes">Notas especiales (Opcional)</label>
             <textarea
               id="client-notes"
               rows="2"
-              placeholder="Ej. Piel sensible, recorte de barba degradado..."
+              placeholder="Ej. Piel sensible, corte degradado..."
               class="w-full p-3 bg-black/60 border border-white/10 rounded-xl text-xs text-white placeholder-zinc-600 focus:outline-none focus:border-accent-gold/50 focus:ring-1 focus:ring-accent-gold/50 transition-all resize-none"
             ></textarea>
           </div>
@@ -330,10 +322,9 @@
     <!-- ===================================================================================
          4. UBICACIÓN, POLÍTICA DE PAGO Y FOOTER
          =================================================================================== -->
-    <footer class="pt-4 border-t border-white/[0.08] space-y-4">
-      <!-- Tarjeta de Ubicación y Maps -->
+    <footer class="pt-6 border-t border-white/[0.08] space-y-4">
       <div class="p-4 rounded-2xl bg-surface-card border border-surface-border space-y-3">
-        <div class="flex items-start justify-between">
+        <div class="flex items-start justify-between gap-2">
           <div>
             <span class="text-[10px] uppercase tracking-widest text-zinc-500 font-semibold" id="footer-location-title">Ubicación del Local</span>
             <p class="text-sm font-semibold text-white mt-0.5" id="txt-shop-address">Calle Mayor, 14 · Casco Antiguo</p>
@@ -346,7 +337,6 @@
             class="px-3 py-1.5 rounded-lg bg-white/[0.06] border border-white/10 text-xs font-semibold text-white hover:bg-white hover:text-black transition-all inline-flex items-center gap-1.5 shrink-0"
             id="btn-maps"
           >
-            <!-- Icono Map Pin -->
             <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"/>
             </svg>
@@ -354,9 +344,8 @@
           </a>
         </div>
 
-        <div class="pt-2 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-zinc-400">
+        <div class="pt-2.5 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-zinc-400">
           <div class="flex items-center gap-1.5">
-            <!-- Icono Check -->
             <svg class="w-3.5 h-3.5 text-accent-gold" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
             </svg>
@@ -366,8 +355,7 @@
         </div>
       </div>
 
-      <!-- Copyright y política de cancelación -->
-      <div class="text-center text-[11px] text-zinc-500 py-2">
+      <div class="text-center text-[11px] text-zinc-500 py-3">
         <p id="txt-footer-policy">Barbería El Barrio · Cancelaciones con min. 2h de antelación</p>
       </div>
     </footer>
@@ -375,20 +363,18 @@
   </div>
 
   <!-- ===================================================================================
-       BARRA FIJA INFERIOR (STICKY BOTTOM BAR) — RESUMEN EN TIEMPO REAL Y CTA
+       BARRA FIJA INFERIOR (STICKY BOTTOM BAR)
        =================================================================================== -->
-  <div class="fixed bottom-0 inset-x-0 bg-black/90 backdrop-blur-2xl border-t border-white/[0.08] p-3.5 sm:p-4 z-50">
+  <div class="fixed bottom-0 inset-x-0 bg-black/95 backdrop-blur-2xl border-t border-white/[0.08] p-3.5 sm:p-4 z-50 shadow-2xl">
     <div class="w-full max-w-md mx-auto flex items-center gap-3">
-      <!-- Resumen en vivo de la reserva -->
       <div class="flex-1 min-w-0 pr-1">
         <div class="flex items-center gap-2">
-          <span class="text-[10px] uppercase font-bold tracking-widest text-accent-gold" id="sticky-service-label">Corte clásico</span>
-          <span class="text-xs font-bold text-white" id="sticky-price-label">15 €</span>
+          <span class="text-[10px] uppercase font-bold tracking-widest text-accent-gold truncate" id="sticky-service-label">Corte clásico</span>
+          <span class="text-xs font-bold text-white shrink-0" id="sticky-price-label">15 €</span>
         </div>
         <p class="text-[11px] text-zinc-400 truncate mt-0.5" id="sticky-date-label">Elige día y hora</p>
       </div>
 
-      <!-- Botón Principal de Confirmación -->
       <button
         id="btn-submit"
         type="button"
@@ -396,7 +382,6 @@
         disabled
         class="h-12 px-5 bg-white hover:bg-zinc-200 text-black font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-200 flex items-center justify-center gap-2 shadow-2xl disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-white shrink-0"
       >
-        <!-- Icono WhatsApp -->
         <svg class="w-4 h-4 text-black" viewBox="0 0 24 24" fill="currentColor">
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2zm5.8 14.16c-.24.68-1.4 1.25-1.92 1.33-.5.07-1.14.1-3.32-.8-2.6-1.08-4.27-3.72-4.4-3.89-.13-.17-1.06-1.41-1.06-2.69 0-1.28.67-1.91.91-2.17.24-.26.53-.33.7-.33.18 0 .36.01.52.01.17 0 .4-.06.62.47.24.57.81 1.97.88 2.12.07.15.12.33.02.53-.1.2-.15.33-.3.51-.15.17-.32.39-.46.52-.15.15-.31.31-.13.62.18.31.8 1.32 1.72 2.14 1.18 1.05 2.18 1.38 2.49 1.53.31.15.49.13.67-.08.18-.21.78-.91.99-1.22.21-.31.42-.26.7-.15.28.11 1.79.84 2.1 1 .31.15.52.23.6.36.07.14.07.8-.17 1.48z"/>
         </svg>
@@ -573,7 +558,6 @@
       container.innerHTML = services.map(service => {
         const isSelected = state.selectedServiceId === service.id;
 
-        // Resaltado perimetral refinado
         const cardStyle = isSelected
           ? 'bg-[#181818] border-accent-gold ring-1 ring-accent-gold/40 shadow-xl'
           : 'bg-surface-card border-surface-border hover:border-white/20';
