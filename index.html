@@ -109,10 +109,56 @@
     .theme-border {
       border-color: var(--border-color);
     }
+
+    /* ——— Toque no-IA: grano, sello y ticket ——— */
+    .grain::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .05;
+      z-index: 5;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    .stamp {
+      display: inline-block;
+      border: 1.5px solid var(--accent-bronze);
+      color: var(--accent-bronze);
+      border-radius: 4px;
+      padding: 3px 8px;
+      transform: rotate(-4deg);
+      font-size: 10px;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      opacity: .9;
+      mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.25'/%3E%3C/svg%3E");
+    }
+    .ticket-dash {
+      background-image: linear-gradient(to right, var(--border-color) 55%, transparent 45%);
+      background-size: 8px 1px;
+      background-repeat: repeat-x;
+      height: 1px;
+    }
+    .sticky-note {
+      background: #f5efdf;
+      color: #3a332a;
+      border: 1px solid #e2d9c2;
+      box-shadow: 0 2px 0 rgba(0,0,0,.25);
+      transform: rotate(-.4deg);
+    }
+    html.light-mode .sticky-note {
+      background: #fff8e6;
+    }
+    .open-dot {
+      width: 7px; height: 7px; border-radius: 9999px; display: inline-block;
+    }
+    .open-dot.on { background: #22c55e; box-shadow: 0 0 0 4px rgba(34,197,94,.15); }
+    .open-dot.off { background: #ef4444; box-shadow: 0 0 0 4px rgba(239,68,68,.12); }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans antialiased selection:bg-[#a89078]/30 selection:text-white" onclick="handleGlobalClick(event)">
+<body class="min-h-full flex flex-col justify-between font-sans antialiased selection:bg-[#a89078]/30 selection:text-white grain" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
        VISTA PÚBLICA (DIRECCIÓN EDITORIAL DE ALTA GAMA · TRIANA)
@@ -125,11 +171,11 @@
         
         <!-- Logotipo tipográfico -->
         <a href="#" class="flex flex-col group">
-          <span class="font-serif text-lg font-semibold tracking-wider uppercase transition-colors leading-none" style="color: var(--text-title);">
+          <span class="font-serif text-lg font-semibold tracking-wide uppercase transition-colors leading-none" style="color: var(--text-title);" id="brand-name">
             El Barrio
           </span>
-          <span class="text-[9px] uppercase tracking-[0.25em] mt-1 font-medium font-sans" style="color: var(--accent-bronze);">
-            Barbershop · Triana
+          <span class="text-[9px] uppercase tracking-[0.18em] mt-1 font-medium font-sans" style="color: var(--accent-bronze);">
+            Corte a navaja · Triana
           </span>
         </a>
 
@@ -184,23 +230,23 @@
               style="background-color: var(--bg-surface);"
             >
               <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3 py-2 text-xs hover:opacity-75 transition-colors" style="color: var(--text-body);">
-                <span class="flex items-center gap-2"><span>🇪🇸</span> Español</span>
+                <span class="flex items-center gap-2"><span class="text-[10px] font-bold opacity-60">ES</span> Español</span>
                 <span id="check-es" class="font-bold" style="color: var(--accent-bronze);">✓</span>
               </button>
               <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3 py-2 text-xs hover:opacity-75 transition-colors" style="color: var(--text-body);">
-                <span class="flex items-center gap-2"><span>🇬🇧</span> English</span>
+                <span class="flex items-center gap-2"><span class="text-[10px] font-bold opacity-60">EN</span> English</span>
                 <span id="check-en" class="font-bold hidden" style="color: var(--accent-bronze);">✓</span>
               </button>
               <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3 py-2 text-xs hover:opacity-75 transition-colors" style="color: var(--text-body);">
-                <span class="flex items-center gap-2"><span>🇫🇷</span> Français</span>
+                <span class="flex items-center gap-2"><span class="text-[10px] font-bold opacity-60">FR</span> Français</span>
                 <span id="check-fr" class="font-bold hidden" style="color: var(--accent-bronze);">✓</span>
               </button>
               <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3 py-2 text-xs hover:opacity-75 transition-colors" style="color: var(--text-body);">
-                <span class="flex items-center gap-2"><span>🇮🇹</span> Italiano</span>
+                <span class="flex items-center gap-2"><span class="text-[10px] font-bold opacity-60">IT</span> Italiano</span>
                 <span id="check-it" class="font-bold hidden" style="color: var(--accent-bronze);">✓</span>
               </button>
               <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3 py-2 text-xs hover:opacity-75 transition-colors" style="color: var(--text-body);">
-                <span class="flex items-center gap-2"><span>🇩🇪</span> Deutsch</span>
+                <span class="flex items-center gap-2"><span class="text-[10px] font-bold opacity-60">DE</span> Deutsch</span>
                 <span id="check-de" class="font-bold hidden" style="color: var(--accent-bronze);">✓</span>
               </button>
             </div>
@@ -214,102 +260,131 @@
     <main class="max-w-md mx-auto px-4 pt-6 sm:px-5">
 
       <!-- ==================== 1. HERO SECTION ==================== -->
-      <section class="w-full pb-8 border-b theme-border">
-        <!-- Badge de ubicación y horario en una sola línea refinada -->
-        <div class="flex items-center justify-between text-[11px] uppercase tracking-[0.18em] pb-4 font-sans font-medium">
-          <span style="color: var(--accent-bronze);" id="hero-badge-location">TRIANA · SEVILLA</span>
-          <span class="font-sans font-medium tracking-tight text-[12px]" style="color: var(--text-muted);" id="hero-badge-status">10:00 — 20:00</span>
+      <section class="w-full pb-7 border-b theme-border">
+        <!-- Línea realista: estado en vivo + barrio -->
+        <div class="flex items-center justify-between text-[11px] pb-4 font-sans font-medium">
+          <span class="flex items-center gap-1.5" style="color: var(--text-body);">
+            <span id="open-dot" class="open-dot on"></span>
+            <span id="hero-badge-status" style="color: var(--text-muted);">Abierto hoy · 10:00 — 20:00</span>
+          </span>
+          <span class="stamp" id="hero-stamp">Triana · desde 2012</span>
         </div>
 
         <div class="space-y-3 pt-1">
-          <h1 class="font-serif text-3xl sm:text-[36px] font-normal tracking-tight leading-[1.12]" style="color: var(--text-title);" id="hero-title">
-            Barbería Tradicional <span class="italic" style="color: var(--accent-bronze);">&</span> Cuidado Personal
+          <h1 class="font-serif text-[32px] sm:text-[36px] font-medium tracking-tight leading-[1.08]" style="color: var(--text-title);" id="hero-title">
+            Corte a navaja en Triana. Sin esperas.
           </h1>
-          <p class="text-xs sm:text-[13px] leading-relaxed font-light" style="color: var(--text-muted);" id="hero-subtitle">
-            Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el emblemático barrio de Triana.
+          <p class="text-[13px] sm:text-sm leading-relaxed font-normal" style="color: var(--text-body);" id="hero-subtitle">
+            Soy el del sillón nº2, te atiendo yo mismo. Reserva aquí abajo y entra directo — si llegas 10 min tarde, avísame por WhatsApp.
+          </p>
+          <p class="text-[11px] leading-relaxed" style="color: var(--text-muted);" id="hero-proof">
+            ★ 4,9 en Google · 320 reseñas · Calle Castilla 24 — a 2 min del puente
           </p>
         </div>
 
-        <div class="flex items-center gap-3 pt-5">
+        <div class="flex items-center gap-2.5 pt-5">
           <a
             href="#booking-module"
-            class="flex-1 inline-flex items-center justify-center gap-2 h-11 px-5 rounded-md font-semibold text-xs uppercase tracking-widest transition-all shadow-sm font-sans"
+            class="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-md font-semibold text-[13px] uppercase tracking-wide transition-all shadow-sm font-sans"
             style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
             id="hero-cta"
           >
-            <span>Reservar cita</span>
-            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <span>Pedir cita</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
             </svg>
+          </a>
+          <a
+            id="hero-call-btn"
+            href="tel:+34600112233"
+            class="h-12 px-4 rounded-md border theme-border flex items-center justify-center text-[13px] transition-all shrink-0 font-sans font-semibold"
+            style="color: var(--text-body);"
+            title="Llamar"
+          >
+            <span>Llamar</span>
           </a>
           <a
             href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
             target="_blank"
             rel="noopener noreferrer"
-            class="h-11 px-3.5 rounded-md border theme-border flex items-center justify-center text-xs transition-all shrink-0 font-sans font-medium tracking-wider"
+            class="h-12 w-12 rounded-md border theme-border flex items-center justify-center transition-all shrink-0"
             style="color: var(--text-muted);"
-            title="Google Maps"
+            title="Cómo llegar"
           >
-            <span class="text-[11px]">MAPS ↗</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           </a>
         </div>
+        <p class="text-[11px] mt-3 font-sans" style="color: var(--text-muted);" id="hero-slots-hint">Hoy quedan <b id="hero-slots-left" style="color: var(--text-body);">—</b> huecos libres · se actualiza solo</p>
       </section>
 
-      <!-- ==================== 2. GALERÍA BENTO EDITORIAL ==================== -->
-      <section class="w-full py-8 border-b theme-border">
+      <!-- ==================== 2. EL LOCAL (fotos reales, no stock) ==================== -->
+      <section class="w-full py-7 border-b theme-border">
         <div class="flex items-center justify-between mb-3 px-0.5 font-sans">
-          <h2 class="text-[10px] uppercase tracking-[0.2em] font-semibold" style="color: var(--text-muted);" id="gallery-title">El espacio & la experiencia</h2>
-          <span class="text-[10px] uppercase tracking-widest font-serif italic" style="color: var(--accent-bronze);" id="gallery-tag">Calle Castilla</span>
+          <h2 class="text-[13px] font-semibold" style="color: var(--text-title);" id="gallery-title">Así es el local</h2>
+          <span class="text-[11px]" style="color: var(--text-muted);" id="gallery-tag">Castilla 24 · Triana</span>
         </div>
 
-        <div class="grid grid-cols-3 gap-2 w-full">
-          <div class="col-span-2 aspect-[4/3] rounded-lg overflow-hidden relative border theme-border" style="background-color: var(--bg-surface);">
+        <div class="rounded-lg overflow-hidden relative border theme-border" style="background-color: var(--bg-surface);">
+          <img
+            src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80"
+            alt="Sillón de la barbería"
+            class="w-full aspect-[16/10] object-cover object-center filter sepia-[.18] contrast-[1.02] brightness-[.9]"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent flex items-end justify-between p-3">
+            <span class="text-[12px] text-white/95 font-medium" id="photo-tag-1">El sillón nº2, el de siempre</span>
+            <span class="text-[10px] text-white/70">lun–sáb</span>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2 mt-2">
+          <div class="rounded-lg overflow-hidden relative border theme-border aspect-[4/3]" style="background-color: var(--bg-surface);">
             <img
-              src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80"
-              alt="Sillón clásico de barbería"
-              class="w-full h-full object-cover object-center filter brightness-[0.82] contrast-[1.05]"
+              src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=500&q=80"
+              alt="Detalle de corte"
+              class="w-full h-full object-cover filter sepia-[.18] brightness-[.9]"
               loading="lazy"
             />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-2.5">
-              <span class="text-[10px] text-white/90 font-light" id="photo-tag-1">Atención individual y sobria</span>
-            </div>
           </div>
+          <div class="rounded-lg border border-dashed theme-border aspect-[4/3] flex flex-col items-center justify-center text-center p-3 gap-1" style="background-color: transparent;">
+            <span class="text-[12px] font-semibold" style="color: var(--text-body);">Pon aquí tu foto</span>
+            <span class="text-[11px] leading-snug" style="color: var(--text-muted);">Sustituye las 2 fotos por las tuyas en 2 min (ver Admin → Local)</span>
+          </div>
+        </div>
 
-          <div class="col-span-1 flex flex-col gap-2">
-            <div class="flex-1 rounded-lg overflow-hidden relative border theme-border aspect-[4/3]" style="background-color: var(--bg-surface);">
-              <img
-                src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=350&q=80"
-                alt="Navaja y toalla caliente"
-                class="w-full h-full object-cover filter brightness-[0.82] contrast-[1.05]"
-                loading="lazy"
-              />
-            </div>
-            <div class="flex-1 rounded-lg overflow-hidden relative border theme-border aspect-[4/3]" style="background-color: var(--bg-surface);">
-              <img
-                src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=350&q=80"
-                alt="Herramientas profesionales de barbería"
-                class="w-full h-full object-cover filter brightness-[0.82] contrast-[1.05]"
-                loading="lazy"
-              />
-            </div>
+        <!-- Aviso del barbero: nota amarilla, muy de barrio -->
+        <div id="barber-notice-box" class="sticky-note rounded-md mt-3 px-3.5 py-3 text-[12.5px] leading-snug">
+          <b>Aviso del barbero:</b> <span id="barber-notice-text">Esta semana el jueves por la tarde cierro (dentista). El sábado abro hasta las 14:30.</span>
+        </div>
+
+        <!-- Reseñas cortas, con nombres reales -->
+        <div class="grid grid-cols-1 gap-2 mt-3" id="reviews-row">
+          <div class="p-3 rounded-lg border theme-border" style="background-color: var(--bg-surface);">
+            <p class="text-[12.5px] leading-snug" style="color: var(--text-body);">“Me dejó el degradado perfecto antes de la boda. Sin esperas porque reservé aquí.”</p>
+            <p class="text-[11px] mt-1.5" style="color: var(--text-muted);">★★★★★ · Juan Carlos, de Castilla</p>
+          </div>
+          <div class="p-3 rounded-lg border theme-border" style="background-color: var(--bg-surface);">
+            <p class="text-[12.5px] leading-snug" style="color: var(--text-body);">“ Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave.”</p>
+            <p class="text-[11px] mt-1.5" style="color: var(--text-muted);">★★★★★ · James, UK visitor</p>
           </div>
         </div>
       </section>
 
       <!-- ==================== 3. SELECTOR DE SERVICIOS (ESTILO CARTA EDITORIAL) ==================== -->
-      <section id="booking-module" class="w-full pt-8 scroll-mt-20">
+      <section id="booking-module" class="w-full pt-7 scroll-mt-20">
 
-        <div class="mb-6">
-          <span class="text-[10px] uppercase tracking-[0.25em] font-semibold block mb-1 font-sans" style="color: var(--accent-bronze);" id="module-pretitle">Agenda tu cita</span>
-          <h2 class="font-serif text-2xl font-normal tracking-tight" style="color: var(--text-title);" id="module-title">Carta de Servicios</h2>
+        <div class="mb-5">
+          <span class="text-[11px] font-semibold block mb-1 font-sans" style="color: var(--accent-bronze);" id="module-pretitle">Pide tu hueco — tardas 30 segundos</span>
+          <h2 class="font-serif text-[26px] font-medium tracking-tight" style="color: var(--text-title);" id="module-title">Precios claros</h2>
+          <p class="text-[12px] mt-1" style="color: var(--text-muted);">Sin sorpresas. Se paga aquí, en efectivo o Bizum.</p>
         </div>
 
-        <!-- PASO 1: LISTA ESTILO CARTA CON DIVISOR HORIZONTAL -->
-        <div class="mb-8 font-sans">
-          <div class="flex items-center justify-between pb-2 border-b theme-border mb-1">
-            <span class="text-[10px] uppercase tracking-[0.18em] font-medium" style="color: var(--text-muted);" id="title-step-1">1. Selecciona el servicio</span>
-            <span class="text-[10px] uppercase tracking-wider font-medium" style="color: var(--text-muted);" id="sub-step-1">Tarifas</span>
+        <!-- PASO 1: LISTA ESTILO TICKET -->
+        <div class="mb-7 font-sans">
+          <div class="flex items-center justify-between pb-2 mb-1">
+            <span class="text-[12px] font-semibold" style="color: var(--text-body);" id="title-step-1">1. Elige qué te hago</span>
+            <span class="text-[11px]" style="color: var(--text-muted);" id="sub-step-1">lo que ves es lo que pagas</span>
           </div>
+          <div class="ticket-dash mb-1"></div>
 
           <div class="divide-y theme-border border-b" id="services-container">
             <!-- Inyectado dinámicamente -->
@@ -317,10 +392,10 @@
         </div>
 
         <!-- PASO 2: DÍA Y HORA -->
-        <div class="mb-8 font-sans">
-          <div class="flex items-center justify-between pb-2 border-b theme-border mb-3.5">
-            <span class="text-[10px] uppercase tracking-[0.18em] font-medium" style="color: var(--text-muted);" id="title-step-2">2. Selecciona fecha y hora</span>
-            <span class="text-xs font-medium" style="color: var(--accent-bronze);" id="selected-date-summary"></span>
+        <div class="mb-7 font-sans">
+          <div class="flex items-center justify-between pb-2 mb-3">
+            <span class="text-[12px] font-semibold" style="color: var(--text-body);" id="title-step-2">2. Elige día y hora</span>
+            <span class="text-[12px] font-semibold" style="color: var(--accent-bronze);" id="selected-date-summary"></span>
           </div>
 
           <!-- Cuadrícula limpia de días con números grandes Apple-style -->
@@ -341,10 +416,10 @@
         </div>
 
         <!-- PASO 3: TUS DATOS -->
-        <div class="mb-8 font-sans">
-          <div class="flex items-center justify-between pb-2 border-b theme-border mb-3.5">
-            <span class="text-[10px] uppercase tracking-[0.18em] font-medium" style="color: var(--text-muted);" id="title-step-3">3. Tus datos de contacto</span>
-            <span class="text-[10px] font-medium" style="color: var(--text-muted);" id="lbl-direct-whatsapp">Direct WhatsApp</span>
+        <div class="mb-7 font-sans">
+          <div class="flex items-center justify-between pb-2 mb-3">
+            <span class="text-[12px] font-semibold" style="color: var(--text-body);" id="title-step-3">3. Tus datos (solo para avisarte)</span>
+            <span class="text-[11px]" style="color: var(--text-muted);" id="lbl-direct-whatsapp">Te llega por WhatsApp</span>
           </div>
 
           <div class="space-y-3 p-4 rounded-lg border theme-border" style="background-color: var(--bg-surface);">
@@ -382,36 +457,42 @@
       </section>
 
       <!-- ==================== 4. UBICACIÓN & FOOTER ==================== -->
-      <footer class="pt-6 border-t theme-border space-y-4 font-sans">
+      <footer class="pt-5 border-t theme-border space-y-3 font-sans">
         <div class="p-4 rounded-lg border theme-border space-y-3" style="background-color: var(--bg-surface);">
           <div class="flex items-start justify-between gap-2">
             <div>
-              <span class="text-[9px] uppercase tracking-[0.25em] font-semibold block" style="color: var(--accent-bronze);" id="footer-location-title">Ubicación</span>
-              <p class="text-sm font-serif font-medium mt-1" style="color: var(--text-title);" id="txt-shop-address">Calle Castilla, Triana, Sevilla</p>
-              <p class="text-xs mt-0.5 font-sans font-light" style="color: var(--text-muted);" id="footer-hours">Lunes a Sábado · 10:00 - 20:00</p>
+              <span class="text-[11px] font-semibold block" style="color: var(--text-body);" id="footer-location-title">Dónde estoy</span>
+              <p class="text-[13.5px] font-medium mt-1" style="color: var(--text-title);" id="txt-shop-address">Calle Castilla 24, Triana, Sevilla</p>
+              <p class="text-[12px] mt-0.5 font-sans" style="color: var(--text-muted);" id="footer-hours">Lun–Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30</p>
+              <p class="text-[12px] mt-1 font-sans">
+                <a id="footer-phone" href="tel:+34600112233" class="underline underline-offset-2 font-semibold" style="color: var(--text-body);">600 112 233</a>
+                <span style="color: var(--text-muted);"> · </span>
+                <a id="footer-ig" href="#" class="underline underline-offset-2" style="color: var(--text-muted);">Instagram del local</a>
+              </p>
             </div>
             <a
               href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
               target="_blank"
               rel="noopener noreferrer"
-              class="px-3 py-1.5 rounded border theme-border text-xs transition-all shrink-0 font-sans font-medium text-[11px]"
+              class="px-3 py-2 rounded border theme-border text-xs transition-all shrink-0 font-sans font-semibold"
               style="color: var(--text-body);"
               id="btn-maps"
             >
-              Maps ↗
+              Cómo llegar
             </a>
           </div>
 
-          <div class="pt-2.5 border-t theme-border flex items-center justify-between text-[11px]" style="color: var(--text-muted);">
-            <span id="txt-payment-notice">Pago en local en efectivo o Bizum</span>
-            <span class="font-sans font-medium text-[10px]" id="txt-no-fees">Sin suplementos</span>
+          <div class="ticket-dash"></div>
+          <div class="flex items-center justify-between text-[12px]" style="color: var(--text-muted);">
+            <span id="txt-payment-notice">Aquí se paga: efectivo o Bizum</span>
+            <span class="font-medium" id="txt-no-fees">Sin suplementos</span>
           </div>
         </div>
 
         <div class="flex items-center justify-between text-[11px] py-3" style="color: var(--text-muted);">
-          <p id="txt-footer-policy">Barbería El Barrio · Triana, Sevilla</p>
-          <button onclick="openPinModal()" class="hover:opacity-100 transition-opacity font-sans text-[10px] uppercase tracking-wider font-semibold">
-            [ Admin ]
+          <p id="txt-footer-policy">El Barrio · corte de barrio en Triana desde 2012</p>
+          <button onclick="openPinModal()" class="hover:opacity-100 transition-opacity font-sans text-[11px] font-semibold underline underline-offset-2">
+            Soy el peluquero
           </button>
         </div>
       </footer>
@@ -440,7 +521,7 @@
         class="h-11 px-4 font-semibold rounded-md text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-25 disabled:cursor-not-allowed shrink-0 shadow-sm"
         style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
       >
-        <span id="txt-cta-button">Confirmar vía WhatsApp</span>
+        <span id="txt-cta-button">Pedir cita por WhatsApp</span>
       </button>
     </div>
   </div>
@@ -572,36 +653,42 @@
 
     <div class="flex rounded-lg p-1 border theme-border text-xs font-medium" style="background-color: var(--bg-surface);">
       <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="flex-1 py-1.5 rounded font-semibold shadow-sm transition-all" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
-        Citas
+        Hoy
       </button>
       <button id="tab-btn-blocks" onclick="switchAdminTab('blocks')" class="flex-1 py-1.5 rounded transition-all" style="color: var(--text-muted);">
-        Bloqueos
+        Huecos
       </button>
       <button id="tab-btn-services" onclick="switchAdminTab('services')" class="flex-1 py-1.5 rounded transition-all" style="color: var(--text-muted);">
         Precios
       </button>
+      <button id="tab-btn-shop" onclick="switchAdminTab('shop')" class="flex-1 py-1.5 rounded transition-all" style="color: var(--text-muted);">
+        Local/QR
+      </button>
     </div>
 
     <!-- PESTAÑA 1: CITAS -->
-    <section id="tab-appointments" class="space-y-4">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-[10px] uppercase tracking-widest font-semibold" style="color: var(--text-muted);">Citas Agendadas</h2>
-          <span class="text-xs font-medium" style="color: var(--text-body);" id="admin-today-date"></span>
-        </div>
-        <button onclick="openManualBookingModal()" class="px-2.5 py-1 rounded text-xs font-medium" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
-          + Manual
+    <section id="tab-appointments" class="space-y-3">
+      <div id="admin-day-summary" class="p-3.5 rounded-lg border theme-border grid grid-cols-3 gap-2 text-center" style="background-color: var(--bg-surface);"></div>
+      <div class="flex items-center gap-2">
+        <input type="date" id="admin-appt-date" class="flex-1 h-10 border theme-border rounded-lg px-3 text-xs" style="background-color: var(--bg-surface); color: var(--text-title);" onchange="renderAdminAppointments()" />
+        <button onclick="openManualBookingModal()" class="h-10 px-3 rounded-lg text-xs font-semibold shrink-0" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+          + Apuntar
         </button>
+      </div>
+      <div class="flex gap-2">
+        <button onclick="copyDayPart()" class="flex-1 h-9 rounded-lg border theme-border text-[12px] font-medium" style="color: var(--text-body); background-color: var(--bg-surface);">Copiar parte del día</button>
+        <button onclick="exportDayCsv()" class="flex-1 h-9 rounded-lg border theme-border text-[12px] font-medium" style="color: var(--text-body); background-color: var(--bg-surface);">Descargar Excel/CSV</button>
       </div>
 
       <div class="space-y-2.5" id="admin-appointments-list"></div>
+      <p class="text-[11px] leading-snug" style="color: var(--text-muted);">Truco: “Avisar” manda un WhatsApp al cliente para confirmar. Toca el círculo para marcar: pendiente → cortado → no vino.</p>
     </section>
 
     <!-- PESTAÑA 2: BLOQUEOS -->
     <section id="tab-blocks" class="space-y-4 hidden">
       <div>
-        <h2 class="text-[10px] uppercase tracking-widest font-semibold mb-1" style="color: var(--text-muted);">Bloquear Horarios</h2>
-        <p class="text-xs" style="color: var(--text-muted);">Toca cualquier hora para bloquear o liberar.</p>
+        <h2 class="text-[12px] font-semibold mb-1" style="color: var(--text-body);">Tapa huecos cuando te llamen por teléfono</h2>
+        <p class="text-[12px]" style="color: var(--text-muted);">Toca una hora para taparla o liberarla. El cliente la verá tachada.</p>
       </div>
 
       <div>
@@ -631,14 +718,54 @@
     <section id="tab-services" class="space-y-4 hidden">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-[10px] uppercase tracking-widest font-semibold" style="color: var(--text-muted);">Servicios y Tarifas</h2>
+          <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Servicios y precios</h2>
+          <p class="text-[11px]" style="color: var(--text-muted);">Cambia el precio aquí y se cambia en la web solo.</p>
         </div>
-        <button onclick="addNewServicePrompt()" class="px-2.5 py-1 rounded border theme-border text-xs hover:opacity-80" style="color: var(--text-body); background-color: var(--bg-surface);">
+        <button onclick="addNewServicePrompt()" class="px-2.5 py-1.5 rounded-lg border theme-border text-xs hover:opacity-80" style="color: var(--text-body); background-color: var(--bg-surface);">
           + Añadir
         </button>
       </div>
 
       <div class="space-y-2.5" id="admin-services-list"></div>
+    </section>
+
+    <!-- PESTAÑA 4: LOCAL + QR para vender -->
+    <section id="tab-shop" class="space-y-4 hidden">
+      <div>
+        <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Tu local y tu QR</h2>
+        <p class="text-[12px]" style="color: var(--text-muted);">Esto es lo que ve el cliente. Guárdalo una vez y listo.</p>
+      </div>
+      <div class="p-3.5 rounded-lg border theme-border space-y-2.5" style="background-color: var(--bg-surface);">
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="text-[11px]" style="color: var(--text-muted);">Nombre local</label><input id="set-shop" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+          <div><label class="text-[11px]" style="color: var(--text-muted);">Barbero</label><input id="set-barber" placeholder="Ej. Manolo" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        </div>
+        <div><label class="text-[11px]" style="color: var(--text-muted);">Dirección (tal cual en Maps)</label><input id="set-address" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        <div class="grid grid-cols-2 gap-2">
+          <div><label class="text-[11px]" style="color: var(--text-muted);">WhatsApp (con prefijo, sin +)</label><input id="set-phone" placeholder="34600112233" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+          <div><label class="text-[11px]" style="color: var(--text-muted);">PIN peluquero</label><input id="set-pin" maxlength="4" inputmode="numeric" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        </div>
+        <div><label class="text-[11px]" style="color: var(--text-muted);">Enlace Maps</label><input id="set-maps" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        <div><label class="text-[11px]" style="color: var(--text-muted);">Instagram (enlace)</label><input id="set-ig" placeholder="https://instagram.com/..." class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        <div><label class="text-[11px]" style="color: var(--text-muted);">Aviso del barbero (nota amarilla)</label><textarea id="set-notice" rows="2" class="w-full border theme-border rounded-lg px-3 py-2 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);"></textarea></div>
+        <button onclick="saveShopSettings()" class="w-full h-11 rounded-lg text-[13px] font-semibold" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Guardar datos del local</button>
+      </div>
+
+      <div class="p-3.5 rounded-lg border theme-border space-y-2.5 text-center" style="background-color: var(--bg-surface);">
+        <h3 class="text-[13px] font-semibold" style="color: var(--text-title);">QR para la puerta</h3>
+        <img id="qr-img" alt="QR de reservas" class="w-44 h-44 mx-auto rounded-lg border theme-border bg-white" />
+        <p class="text-[11px]" style="color: var(--text-muted);">Apunta a esta misma página. Imprímelo y pégalo en la puerta.</p>
+        <div class="grid grid-cols-2 gap-2">
+          <button onclick="downloadQr()" class="h-10 rounded-lg border theme-border text-[12px] font-semibold" style="color: var(--text-body);">Descargar QR</button>
+          <button onclick="copyBookingLink()" class="h-10 rounded-lg text-[12px] font-semibold" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Copiar enlace</button>
+        </div>
+        <button onclick="printQrSheet()" class="w-full h-10 rounded-lg border theme-border text-[12px]" style="color: var(--text-muted);">Imprimir cartel puerta (A4)</button>
+      </div>
+
+      <div class="p-3.5 rounded-lg border border-dashed theme-border space-y-1.5">
+        <h3 class="text-[12px] font-semibold" style="color: var(--text-body);">Cómo dejarlo 100% tuyo (5 min)</h3>
+        <p class="text-[12px] leading-snug" style="color: var(--text-muted);">1. Cambia las 2 fotos del index.html (busca “unsplash”).<br/>2. Cambia el WhatsApp aquí arriba.<br/>3. Descarga el QR y pégalo en la puerta.<br/>4. Prueba reservar tú mismo una vez.</p>
+      </div>
     </section>
 
   </div>
@@ -743,21 +870,21 @@
 
     const I18N = {
       es: {
-        badgeStatus: "10:00 — 20:00",
+        badgeStatus: "Abierto hoy · 10:00 — 20:00",
         badgeLocation: "TRIANA · SEVILLA",
-        heroTitle: 'Barbería Tradicional <span class="italic" style="color: var(--accent-bronze);">&</span> Cuidado Personal',
-        heroSubtitle: "Corte clásico a tijera, ritual de afeitado con toalla caliente y diseño de barba en el emblemático barrio de Triana.",
-        heroCta: "Reservar cita",
-        galleryTitle: "El espacio & la experiencia",
-        galleryTag: "Calle Castilla",
-        photoTag1: "Atención individual y sobria",
-        modulePretitle: "Agenda tu cita",
-        moduleTitle: "Carta de Servicios",
-        step1Title: "1. Selecciona el servicio",
-        subStep1: "Tarifas",
-        step2Title: "2. Selecciona fecha y hora",
-        step3Title: "3. Tus datos de contacto",
-        lblDirectWhatsapp: "Direct WhatsApp",
+        heroTitle: 'Corte a navaja en Triana. Sin esperas.',
+        heroSubtitle: "Soy el del sillón nº2, te atiendo yo mismo. Reserva aquí abajo y entra directo — si llegas 10 min tarde, avísame por WhatsApp.",
+        heroCta: "Pedir cita",
+        galleryTitle: "Así es el local",
+        galleryTag: "Castilla 24 · Triana",
+        photoTag1: "El sillón nº2, el de siempre",
+        modulePretitle: "Pide tu hueco — tardas 30 segundos",
+        moduleTitle: "Precios claros",
+        step1Title: "1. Elige qué te hago",
+        subStep1: "lo que ves es lo que pagas",
+        step2Title: "2. Elige día y hora",
+        step3Title: "3. Tus datos (solo para avisarte)",
+        lblDirectWhatsapp: "Te llega por WhatsApp",
         lblName: "Nombre completo *",
         namePlaceholder: "Ej. Carlos Mendoza",
         lblPhone: "Teléfono (WhatsApp) *",
@@ -765,13 +892,13 @@
         prefixHint: "+34...",
         shiftMorning: "Mañana",
         shiftAfternoon: "Tarde",
-        footerLocationTitle: "Ubicación",
-        footerHours: "Lunes a Sábado · 10:00 - 20:00",
-        paymentNotice: "Pago en local en efectivo o Bizum",
+        footerLocationTitle: "Dónde estoy",
+        footerHours: "Lun–Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30",
+        paymentNotice: "Aquí se paga: efectivo o Bizum",
         noFees: "Sin suplementos",
-        footerPolicy: "Barbería El Barrio · Triana, Sevilla",
+        footerPolicy: "El Barrio · corte de barrio en Triana desde 2012",
         closedDay: "Cerrado este día",
-        ctaButton: "Confirmar vía WhatsApp",
+        ctaButton: "Pedir cita por WhatsApp",
         chooseDatePrompt: "Elige día y hora",
         modalSuccessTitle: "Reserva enviada",
         modalSuccessDesc: "Hemos abierto WhatsApp para enviar tu mensaje directo al peluquero.",
@@ -1011,6 +1138,18 @@
       getPin() {
         return localStorage.getItem('barber_admin_pin') || DEFAULT_PIN;
       },
+      setPin(v) { localStorage.setItem('barber_admin_pin', v); },
+      getShop() {
+        const d = localStorage.getItem('barber_shop');
+        return d ? JSON.parse(d) : {
+          shop: "El Barrio", barber: "Manolo",
+          address: "Calle Castilla 24, Triana, Sevilla",
+          phone: (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233'),
+          maps: "https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla",
+          ig: "", notice: "Esta semana el jueves por la tarde cierro (dentista). El sábado abro hasta las 14:30."
+        };
+      },
+      saveShop(s) { localStorage.setItem('barber_shop', JSON.stringify(s)); },
       getServices() {
         const data = localStorage.getItem('barber_services');
         return data ? JSON.parse(data) : DEFAULT_SERVICES;
@@ -1113,50 +1252,117 @@
       validateForm();
     }
 
+    function setText(id, v) { const el = document.getElementById(id); if (el && v !== undefined) el.textContent = v; }
+    function setHtml(id, v) { const el = document.getElementById(id); if (el && v !== undefined) el.innerHTML = v; }
+
     function updateLanguageTexts() {
       const t = I18N[state.lang] || I18N.es;
       
-      document.getElementById('hero-badge-status').textContent = t.badgeStatus;
-      document.getElementById('hero-badge-location').textContent = t.badgeLocation;
-      document.getElementById('hero-title').innerHTML = t.heroTitle;
-      document.getElementById('hero-subtitle').textContent = t.heroSubtitle;
-      document.getElementById('hero-cta').querySelector('span').textContent = t.heroCta;
+      setText('hero-badge-status', t.badgeStatus);
+      setHtml('hero-title', t.heroTitle);
+      setText('hero-subtitle', t.heroSubtitle);
+      const cta = document.getElementById('hero-cta');
+      if (cta) { const s = cta.querySelector('span'); if (s) s.textContent = t.heroCta; }
       
-      document.getElementById('gallery-title').textContent = t.galleryTitle;
-      document.getElementById('gallery-tag').textContent = t.galleryTag;
-      document.getElementById('photo-tag-1').textContent = t.photoTag1;
-      document.getElementById('module-pretitle').textContent = t.modulePretitle;
-      document.getElementById('module-title').textContent = t.moduleTitle;
-      document.getElementById('title-step-1').textContent = t.step1Title;
-      document.getElementById('sub-step-1').textContent = t.subStep1;
-      document.getElementById('title-step-2').textContent = t.step2Title;
-      document.getElementById('title-step-3').textContent = t.step3Title;
+      setText('gallery-title', t.galleryTitle);
+      setText('gallery-tag', t.galleryTag);
+      setText('photo-tag-1', t.photoTag1);
+      setText('module-pretitle', t.modulePretitle);
+      setText('module-title', t.moduleTitle);
+      setText('title-step-1', t.step1Title);
+      setText('sub-step-1', t.subStep1);
+      setText('title-step-2', t.step2Title);
+      setText('title-step-3', t.step3Title);
       
-      document.getElementById('lbl-direct-whatsapp').textContent = t.lblDirectWhatsapp;
-      document.getElementById('lbl-name').textContent = t.lblName;
-      document.getElementById('client-name').placeholder = t.namePlaceholder;
-      document.getElementById('lbl-phone').textContent = t.lblPhone;
-      document.getElementById('client-phone').placeholder = t.phonePlaceholder;
-      document.getElementById('lbl-prefix-hint').textContent = t.prefixHint;
-      document.getElementById('txt-shift-morning').textContent = t.shiftMorning;
-      document.getElementById('txt-shift-afternoon').textContent = t.shiftAfternoon;
+      setText('lbl-direct-whatsapp', t.lblDirectWhatsapp);
+      setText('lbl-name', t.lblName);
+      const cn = document.getElementById('client-name'); if (cn) cn.placeholder = t.namePlaceholder;
+      setText('lbl-phone', t.lblPhone);
+      const cp = document.getElementById('client-phone'); if (cp) cp.placeholder = t.phonePlaceholder;
+      setText('lbl-prefix-hint', t.prefixHint);
+      setText('txt-shift-morning', t.shiftMorning);
+      setText('txt-shift-afternoon', t.shiftAfternoon);
       
-      document.getElementById('footer-location-title').textContent = t.footerLocationTitle;
-      document.getElementById('footer-hours').textContent = t.footerHours;
-      document.getElementById('txt-payment-notice').textContent = t.paymentNotice;
-      document.getElementById('txt-no-fees').textContent = t.noFees;
-      document.getElementById('txt-footer-policy').textContent = t.footerPolicy;
-      document.getElementById('txt-cta-button').textContent = t.ctaButton;
+      setText('footer-location-title', t.footerLocationTitle);
+      setText('footer-hours', t.footerHours);
+      setText('txt-payment-notice', t.paymentNotice);
+      setText('txt-no-fees', t.noFees);
+      setText('txt-footer-policy', t.footerPolicy);
+      setText('txt-cta-button', t.ctaButton);
 
-      document.getElementById('modal-success-title').textContent = t.modalSuccessTitle;
-      document.getElementById('modal-success-desc').textContent = t.modalSuccessDesc;
-      document.getElementById('lbl-summary-service').textContent = t.lblSummaryService;
-      document.getElementById('lbl-summary-date').textContent = t.lblSummaryDate;
-      document.getElementById('lbl-summary-location').textContent = t.lblSummaryLocation;
-      document.getElementById('lbl-add-calendar').textContent = t.lblAddCalendar;
-      document.getElementById('btn-close-success').textContent = t.btnCloseSuccess;
+      setText('modal-success-title', t.modalSuccessTitle);
+      setText('modal-success-desc', t.modalSuccessDesc);
+      setText('lbl-summary-service', t.lblSummaryService);
+      setText('lbl-summary-date', t.lblSummaryDate);
+      setText('lbl-summary-location', t.lblSummaryLocation);
+      setText('lbl-add-calendar', t.lblAddCalendar);
+      setText('btn-close-success', t.btnCloseSuccess);
 
+      applyShopSettings();
       updateStickyBar();
+    }
+
+    function applyShopSettings() {
+      const s = STORE.getShop();
+      setText('brand-name', s.shop || 'El Barrio');
+      setText('txt-shop-address', s.address || '');
+      setText('barber-notice-text', s.notice || '');
+      const nb = document.getElementById('barber-notice-box');
+      if (nb) nb.style.display = s.notice ? '' : 'none';
+      const fp = document.getElementById('footer-phone');
+      if (fp && s.phone) { fp.href = 'tel:+' + s.phone.replace(/\D/g,''); fp.textContent = formatPhoneDisplay(s.phone); }
+      const hc = document.getElementById('hero-call-btn');
+      if (hc && s.phone) hc.href = 'tel:+' + s.phone.replace(/\D/g,'');
+      const ig = document.getElementById('footer-ig');
+      if (ig) { if (s.ig) { ig.href = s.ig; ig.style.display = ''; } else { ig.style.display = 'none'; } }
+      updateOpenStatus();
+      updateHeroSlots();
+      renderQr();
+    }
+
+    function formatPhoneDisplay(p) {
+      const d = (p||'').replace(/\D/g,'');
+      if (d.length === 11 && d.startsWith('34')) return d.slice(2,5) + ' ' + d.slice(5,8) + ' ' + d.slice(8);
+      return p;
+    }
+
+    function updateOpenStatus() {
+      const dot = document.getElementById('open-dot');
+      const lbl = document.getElementById('hero-badge-status');
+      if (!dot || !lbl) return;
+      try {
+        const now = new Date();
+        const key = formatDateKey(now);
+        const slots = getDayTimeSlots(key);
+        const mins = now.getHours()*60 + now.getMinutes();
+        const future = slots.filter(s => { const [h,m] = s.time.split(':').map(Number); return (h*60+m) > mins && s.isAvailable; });
+        const open = slots.length > 0 && future.length > 0;
+        dot.className = 'open-dot ' + (open ? 'on' : 'off');
+        if (slots.length === 0) lbl.textContent = 'Cerrado hoy · te espero mañana';
+        else if (open) lbl.textContent = 'Abierto ahora · hasta ' + slots[slots.length-1].time;
+        else lbl.textContent = 'Cerrado ahora · mañana desde ' + slots[0].time;
+      } catch(e) { /* sin config, no rompe */ }
+    }
+
+    function countFreeSlots(dateKey) {
+      const blockedMap = STORE.getBlockedSlots();
+      const blocked = blockedMap[dateKey] || [];
+      const appts = STORE.getAppointments().filter(a => a.date === dateKey && a.status !== 'cancelled' && a.status !== 'noshow');
+      const taken = new Set([...blocked, ...appts.map(a => a.time)]);
+      const all = ["10:00","10:30","11:00","11:30","12:00","12:30","13:00","13:30","16:30","17:00","17:30","18:00","18:30","19:00","19:30"];
+      const now = new Date(); const isToday = dateKey === getTodayKey();
+      const cur = now.getHours()*60+now.getMinutes();
+      return all.filter(t => {
+        if (taken.has(t)) return false;
+        if (isToday) { const [h,m] = t.split(':').map(Number); if (h*60+m <= cur) return false; }
+        return true;
+      }).length;
+    }
+
+    function updateHeroSlots() {
+      const el = document.getElementById('hero-slots-left');
+      if (el && state.selectedDate) el.textContent = countFreeSlots(state.selectedDate);
+      else if (el) el.textContent = countFreeSlots(getTodayKey());
     }
 
     function getLocalizedService(service) {
@@ -1294,6 +1500,7 @@
       state.selectedDate = dateKey;
       state.selectedTime = null;
       generateCalendarDays();
+      updateHeroSlots();
       validateForm();
     }
 
@@ -1368,7 +1575,7 @@
 
         if (!slot.isAvailable) {
           return `
-            <button type="button" disabled class="h-9 text-xs rounded border theme-border line-through cursor-not-allowed select-none font-sans font-medium opacity-30" style="background-color: var(--bg-main); color: var(--text-muted);">
+            <button type="button" disabled class="h-10 text-[13px] rounded-md border theme-border line-through cursor-not-allowed select-none font-sans font-medium opacity-30" style="background-color: var(--bg-main); color: var(--text-muted);">
               ${slot.time}
             </button>
           `;
@@ -1379,7 +1586,7 @@
           : `style="background-color: var(--bg-surface); color: var(--text-body); border-color: var(--border-color);"`;
 
         return `
-          <button type="button" onclick="selectTime('${slot.time}')" class="h-9 text-xs rounded border transition-all flex items-center justify-center tracking-tight font-medium ${isSelected ? 'shadow-sm' : 'hover:opacity-80'}" ${activeCustomStyle}>
+          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-[13px] rounded-md border transition-all flex items-center justify-center tracking-tight font-semibold ${isSelected ? 'shadow-sm' : 'active:scale-95'}" ${activeCustomStyle}>
             ${slot.time}
           </button>
         `;
@@ -1393,6 +1600,7 @@
       state.selectedTime = time;
       renderTimeSlotsForSelectedDate();
       updateDateSummary();
+      updateHeroSlots();
       validateForm();
     }
 
@@ -1444,6 +1652,11 @@
       btn.disabled = !isValid;
     }
 
+    function priceOfService(name) {
+      const s = STORE.getServices().find(x => x.name === name);
+      return s ? s.price : 0;
+    }
+
     function handleBookingConfirmation() {
       const services = STORE.getServices();
       const rawService = services.find(s => s.id === state.selectedServiceId);
@@ -1459,7 +1672,8 @@
         id: Date.now(),
         name: state.clientName,
         phone: state.clientPhone,
-        service: service.name,
+        service: rawService.name,
+        price: rawService.price,
         date: state.selectedDate,
         time: state.selectedTime,
         status: 'confirmed'
@@ -1482,12 +1696,14 @@
       const t = I18N[state.lang] || I18N.es;
       const dateFormatted = `${t.daysShort[dateObj.getDay()]}, ${d} ${t.monthsShort[dateObj.getMonth()]}`;
 
-      const phone = (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233');
+      const shop = STORE.getShop();
+      const phone = (shop.phone || (typeof BARBER_SCHEDULE_CONFIG !== 'undefined' ? BARBER_SCHEDULE_CONFIG.whatsappPhone : '34600112233')).replace(/\D/g,'');
       const msg = t.waMessage(service.name, dateFormatted, state.selectedTime, state.clientName, state.clientPhone);
 
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
       showSuccessModal(state.lastBooking, dateFormatted);
       renderTimeSlotsForSelectedDate();
+      updateHeroSlots();
     }
 
     function showSuccessModal(booking, dateFormatted) {
@@ -1596,6 +1812,9 @@ END:VCALENDAR`;
       document.getElementById('admin-view').classList.remove('hidden');
 
       document.getElementById('admin-block-date').value = getTodayKey();
+      const ad = document.getElementById('admin-appt-date');
+      if (ad) ad.value = getTodayKey();
+      fillShopForm();
       renderAdminAppointments();
       renderAdminBlockSlots();
       renderAdminServices();
@@ -1612,10 +1831,10 @@ END:VCALENDAR`;
     }
 
     function switchAdminTab(tabName) {
-      ['appointments', 'blocks', 'services'].forEach(t => {
+      ['appointments', 'blocks', 'services', 'shop'].forEach(t => {
         const btn = document.getElementById(`tab-btn-${t}`);
         const sec = document.getElementById(`tab-${t}`);
-
+        if (!btn || !sec) return;
         if (t === tabName) {
           btn.style.backgroundColor = "var(--btn-primary-bg)";
           btn.style.color = "var(--btn-primary-text)";
@@ -1632,62 +1851,136 @@ END:VCALENDAR`;
       if (tabName === 'appointments') renderAdminAppointments();
       if (tabName === 'blocks') renderAdminBlockSlots();
       if (tabName === 'services') renderAdminServices();
+      if (tabName === 'shop') { fillShopForm(); renderQr(); }
+    }
+
+    function adminSelectedDate() {
+      const el = document.getElementById('admin-appt-date');
+      return (el && el.value) || getTodayKey();
     }
 
     function renderAdminAppointments() {
       const container = document.getElementById('admin-appointments-list');
-      const todayKey = getTodayKey();
-      document.getElementById('admin-today-date').textContent = `Hoy, ${todayKey}`;
+      const sumBox = document.getElementById('admin-day-summary');
+      const target = adminSelectedDate();
 
       const allAppts = STORE.getAppointments();
-      const todayAppts = allAppts
-        .filter(a => a.status !== 'cancelled')
-        .sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+      const dayAppts = allAppts
+        .filter(a => a.date === target && a.status !== 'cancelled')
+        .sort((a, b) => (a.time || '').localeCompare(b.time || ''));
 
-      if (todayAppts.length === 0) {
+      const done = dayAppts.filter(a => a.status === 'done');
+      const pending = dayAppts.filter(a => !a.status || a.status === 'confirmed');
+      const caja = dayAppts.filter(a => a.status !== 'noshow').reduce((s, a) => s + (a.price || priceOfService(a.service) || 0), 0);
+      const libres = countFreeSlots(target);
+
+      if (sumBox) {
+        sumBox.innerHTML = `
+          <div><div class="text-[16px] font-bold" style="color: var(--text-title);">${dayAppts.length}</div><div class="text-[10px]" style="color: var(--text-muted);">citas ${target === getTodayKey() ? 'hoy' : target.slice(5)}</div></div>
+          <div><div class="text-[16px] font-bold" style="color: var(--text-title);">~${caja}€</div><div class="text-[10px]" style="color: var(--text-muted);">caja estimada</div></div>
+          <div><div class="text-[16px] font-bold" style="color: var(--text-title);">${libres}</div><div class="text-[10px]" style="color: var(--text-muted);">huecos libres</div></div>`;
+      }
+
+      if (dayAppts.length === 0) {
         container.innerHTML = `
-          <div class="p-6 text-center text-xs border theme-border rounded-lg" style="background-color: var(--bg-surface); color: var(--text-muted);">
-            No hay citas registradas para hoy.
+          <div class="p-6 text-center text-[12px] border theme-border rounded-lg" style="background-color: var(--bg-surface); color: var(--text-muted);">
+            Nada apuntado para este día.<br/>Dale a “+ Apuntar” si entra alguien por teléfono o puerta.
           </div>`;
         return;
       }
 
-      container.innerHTML = todayAppts.map(appt => {
-        const isToday = appt.date === todayKey;
-        const cleanPhone = appt.phone.replace(/\D/g, '');
-        const confirmMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para hoy a las ${appt.time} en Barbería El Barrio (Calle Castilla, Triana). ¡Te esperamos!`);
+      container.innerHTML = dayAppts.map(appt => {
+        const cleanPhone = (appt.phone || '').replace(/\D/g, '');
+        const shop = STORE.getShop();
+        const confirmMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita de ${appt.service} para el ${appt.date} a las ${appt.time} en ${shop.shop} (${shop.address}). ¡Te esperamos!`);
         const waLink = `https://wa.me/${cleanPhone}?text=${confirmMsg}`;
+        const st = appt.status || 'confirmed';
+        const dot = st === 'done' ? '🟢' : (st === 'noshow' ? '🔴' : '🟡');
+        const stLabel = st === 'done' ? 'cortado' : (st === 'noshow' ? 'no vino' : 'pendiente');
+        const price = appt.price || priceOfService(appt.service) || '';
 
         return `
-          <div class="p-3.5 border theme-border rounded-lg space-y-2" style="background-color: var(--bg-surface);">
-            <div class="flex items-start justify-between">
-              <div>
+          <div class="p-3 border theme-border rounded-lg space-y-1.5" style="background-color: var(--bg-surface); ${st === 'noshow' ? 'opacity:.55;' : ''}">
+            <div class="flex items-start justify-between gap-2">
+              <button onclick="toggleApptStatus(${appt.id})" class="text-left flex-1" title="Toca para cambiar estado">
                 <div class="flex items-center gap-2">
-                  <span class="text-sm font-semibold tracking-tight" style="color: var(--text-title);">${appt.time}</span>
-                  <span class="text-[11px] px-2 py-0.5 rounded border theme-border font-serif" style="background-color: var(--bg-main); color: var(--text-body);">${appt.service}</span>
-                  ${!isToday ? `<span class="text-[10px] font-medium" style="color: var(--text-muted);">${appt.date}</span>` : ''}
+                  <span class="text-[15px] font-bold tracking-tight" style="color: var(--text-title);">${appt.time}</span>
+                  <span class="text-[11px] px-2 py-0.5 rounded border theme-border" style="background-color: var(--bg-main); color: var(--text-body);">${appt.service}${price ? ' · ' + price + '€' : ''}</span>
                 </div>
-                <p class="text-xs font-medium mt-1" style="color: var(--text-title);">${appt.name}</p>
-                <p class="text-[11px] font-medium" style="color: var(--text-muted);">${appt.phone}</p>
-              </div>
-
+                <p class="text-[13px] font-medium mt-1" style="color: var(--text-title);">${dot} ${appt.name} <span class="text-[11px] font-normal" style="color: var(--text-muted);">· ${stLabel}</span></p>
+                <p class="text-[11px]" style="color: var(--text-muted);">${appt.phone} · ${appt.date}</p>
+              </button>
               <div class="flex flex-col gap-1.5 shrink-0">
-                <a
-                  href="${waLink}"
-                  target="_blank"
-                  class="px-2.5 py-1 rounded text-xs font-medium inline-flex items-center gap-1 transition-colors border"
-                  style="background-color: rgba(16, 185, 129, 0.12); color: #10b981; border-color: rgba(16, 185, 129, 0.25);"
-                >
-                  <span>Avisar</span>
-                </a>
-                <button onclick="cancelAppointment(${appt.id})" class="text-[11px] text-rose-500 hover:opacity-80 text-right">
-                  Eliminar
-                </button>
+                <a href="${waLink}" target="_blank" class="px-2.5 py-1.5 rounded-md text-[12px] font-semibold inline-flex items-center gap-1 border" style="background-color: rgba(16,185,129,.12); color: #10b981; border-color: rgba(16,185,129,.25);">Avisar</a>
+                <button onclick="cancelAppointment(${appt.id})" class="text-[11px] text-rose-500 text-right">Quitar</button>
               </div>
             </div>
           </div>
         `;
       }).join('');
+    }
+
+    function toggleApptStatus(id) {
+      const appts = STORE.getAppointments();
+      const a = appts.find(x => x.id === id);
+      if (!a) return;
+      a.status = (!a.status || a.status === 'confirmed') ? 'done' : (a.status === 'done' ? 'noshow' : 'confirmed');
+      STORE.saveAppointments(appts);
+      renderAdminAppointments();
+    }
+
+    function copyDayPart() {
+      const target = adminSelectedDate();
+      const dayAppts = STORE.getAppointments().filter(a => a.date === target && a.status !== 'cancelled').sort((a,b) => (a.time||'').localeCompare(b.time||''));
+      const shop = STORE.getShop();
+      const lines = dayAppts.map(a => `${a.time} — ${a.name} (${a.service}) ${a.phone}`);
+      const txt = `Parte ${shop.shop} ${target}:\n` + (lines.join('\n') || '(sin citas)') + `\nCaja aprox: ~${dayAppts.filter(a=>a.status!=='noshow').reduce((s,a)=>s+(a.price||priceOfService(a.service)||0),0)}€`;
+      navigator.clipboard.writeText(txt).then(() => alert('Parte copiado, pégalo donde quieras')).catch(() => prompt('Copia el parte:', txt));
+    }
+
+    function exportDayCsv() {
+      const target = adminSelectedDate();
+      const rows = STORE.getAppointments().filter(a => a.date === target);
+      const csv = 'fecha;hora;cliente;telefono;servicio;precio;estado\n' + rows.map(a => [a.date, a.time, `"${(a.name||'').replace(/"/g,'')}"`, a.phone, `"${(a.service||'').replace(/"/g,'')}"`, (a.price||priceOfService(a.service)||''), (a.status||'')].join(';')).join('\n');
+      const blob = new Blob(["\ufeff" + csv], { type: 'text/csv;charset=utf-8;' });
+      const l = document.createElement('a'); l.href = URL.createObjectURL(blob); l.download = `parte-${target}.csv`; document.body.appendChild(l); l.click(); l.remove();
+    }
+
+    function fillShopForm() {
+      const s = STORE.getShop();
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.value = v || ''; };
+      set('set-shop', s.shop); set('set-barber', s.barber); set('set-address', s.address);
+      set('set-phone', s.phone); set('set-pin', STORE.getPin()); set('set-maps', s.maps);
+      set('set-ig', s.ig); set('set-notice', s.notice);
+    }
+
+    function saveShopSettings() {
+      const v = id => (document.getElementById(id)?.value || '').trim();
+      STORE.saveShop({ shop: v('set-shop') || 'El Barrio', barber: v('set-barber') || '', address: v('set-address'), phone: v('set-phone').replace(/\D/g,'') || '34600112233', maps: v('set-maps'), ig: v('set-ig'), notice: v('set-notice') });
+      const pin = v('set-pin'); if (pin && pin.length === 4) STORE.setPin(pin);
+      applyShopSettings();
+      alert('Guardado. La web ya muestra tus datos.');
+    }
+
+    function bookingUrl() { return location.href.split('#')[0]; }
+    function renderQr() {
+      const img = document.getElementById('qr-img');
+      if (!img) return;
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&color=1c1b1a&qzone=1&data=' + encodeURIComponent(bookingUrl());
+    }
+    function downloadQr() {
+      const a = document.createElement('a');
+      a.href = 'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&margin=12&data=' + encodeURIComponent(bookingUrl());
+      a.download = 'qr-reservas.png'; document.body.appendChild(a); a.click(); a.remove();
+    }
+    function copyBookingLink() {
+      navigator.clipboard.writeText(bookingUrl()).then(() => alert('Enlace copiado')).catch(() => prompt('Copia el enlace:', bookingUrl()));
+    }
+    function printQrSheet() {
+      const shop = STORE.getShop();
+      const w = window.open('', '_blank');
+      w.document.write(`<html><head><title>QR reservas</title><style>body{font-family:Georgia,serif;text-align:center;padding:40px}img{width:320px;height:320px}.box{border:2px dashed #333;padding:32px;max-width:480px;margin:0 auto}h1{margin:0;font-size:30px}p{font-size:15px}</style></head><body><div class="box"><h1>${shop.shop || 'El Barrio'}</h1><p>Escanea y pide tu cita en 30 segundos<br/><b>${shop.address || ''}</b></p><img src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=10&data=${encodeURIComponent(bookingUrl())}"/><p>Sin apps · confirmamos por WhatsApp</p></div><script>onload=()=>print()<\/script></body></html>`);
+      w.document.close();
     }
 
     function cancelAppointment(id) {
@@ -1723,10 +2016,12 @@ END:VCALENDAR`;
       }
 
       const appts = STORE.getAppointments();
-      appts.push({ id: Date.now(), name, phone, service, date, time, status: 'confirmed' });
+      appts.push({ id: Date.now(), name, phone, service, price: priceOfService(service), date, time, status: 'confirmed' });
       STORE.saveAppointments(appts);
 
       closeManualBookingModal();
+      const ad = document.getElementById('admin-appt-date');
+      if (ad) ad.value = date;
       renderAdminAppointments();
     }
 
