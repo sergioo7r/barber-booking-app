@@ -139,46 +139,27 @@
       transition: transform 0.08s ease;
     }
 
-    /* Animación del cilindro de barbería (Barber Pole clásico rojo, blanco y azul) */
-    @keyframes barberPoleScroll {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 34px; }
-    }
-    .barber-pole-pattern {
-      background: repeating-linear-gradient(
-        -45deg,
-        #dc2626 0px,
-        #dc2626 5px,
-        #ffffff 5px,
-        #ffffff 10px,
-        #2563eb 10px,
-        #2563eb 15px,
-        #ffffff 15px,
-        #ffffff 20px
-      );
-      background-size: 34px 34px;
-      animation: barberPoleScroll 2s linear infinite;
-    }
-
-    /* Difuminados de fondo de barbería */
+    /* Difuminados de luz ambiental de taller */
     .ambient-glow-amber {
-      background: radial-gradient(circle, rgba(197, 160, 114, 0.16) 0%, rgba(197, 160, 114, 0) 70%);
-    }
-    .ambient-glow-blue {
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, rgba(37, 99, 235, 0) 70%);
-    }
-    .ambient-glow-red {
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.11) 0%, rgba(220, 38, 38, 0) 70%);
+      background: radial-gradient(circle, rgba(197, 160, 114, 0.12) 0%, rgba(197, 160, 114, 0) 70%);
     }
 
     html.light-mode .ambient-glow-amber {
-      background: radial-gradient(circle, rgba(197, 160, 114, 0.10) 0%, rgba(197, 160, 114, 0) 70%);
+      background: radial-gradient(circle, rgba(197, 160, 114, 0.08) 0%, rgba(197, 160, 114, 0) 70%);
     }
-    html.light-mode .ambient-glow-blue {
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0) 70%);
+
+    /* Fondo inmersivo de taller de barbería desenfocado */
+    .barbershop-backdrop {
+      background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1920&q=80');
+      background-size: cover;
+      background-position: center 30%;
+      filter: blur(36px) saturate(1.1);
+      transform: scale(1.12);
+      opacity: 0.13;
     }
-    html.light-mode .ambient-glow-red {
-      background: radial-gradient(circle, rgba(220, 38, 38, 0.07) 0%, rgba(220, 38, 38, 0) 70%);
+    html.light-mode .barbershop-backdrop {
+      opacity: 0.05;
+      filter: blur(36px) saturate(0.9);
     }
   </style>
 </head>
@@ -186,17 +167,17 @@
 <body class="min-h-full flex flex-col justify-between antialiased selection:bg-[#c5a072]/30 selection:text-white relative overflow-x-hidden" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
-       DIFUMINADO AMBIENTAL DE FONDO CON COLORES DE PELUQUERÍA (ROJO, AZUL & ÁMBAR)
+       FONDO INMERSIVO DE BARBERÍA (ATMÓSFERA ATELIER DIFUMINADA CON LUZ CÁLIDA)
        =================================================================================== -->
-  <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-    <!-- Resplandor Ámbar Dorado (Arriba Izquierda) -->
-    <div class="absolute -top-24 -left-24 w-96 h-96 sm:w-[520px] sm:h-[520px] rounded-full ambient-glow-amber blur-3xl opacity-90"></div>
+  <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden select-none">
+    <!-- Capa de imagen real de barbería con bokeh difuminado -->
+    <div class="absolute inset-0 barbershop-backdrop transition-opacity duration-700"></div>
+
+    <!-- Viñeta degradada oscura para legibilidad perfecta -->
+    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0e0d0c]/60 to-[#0e0d0c]"></div>
     
-    <!-- Resplandor Azul Barbero (Arriba Derecha) -->
-    <div class="absolute -top-20 -right-20 w-80 h-80 sm:w-[480px] sm:h-[480px] rounded-full ambient-glow-blue blur-3xl opacity-80"></div>
-    
-    <!-- Resplandor Rojo Tradicional (Centro / Fondo) -->
-    <div class="absolute top-[45%] left-[50%] -translate-x-1/2 w-96 h-96 sm:w-[600px] sm:h-[600px] rounded-full ambient-glow-red blur-3xl opacity-70"></div>
+    <!-- Resplandor sutil cálido superior -->
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full ambient-glow-amber blur-3xl opacity-70"></div>
   </div>
 
   <!-- ===================================================================================
@@ -204,17 +185,21 @@
        =================================================================================== -->
   <div id="public-view" class="w-full flex-1">
 
-    <!-- CABECERA PRINCIPAL -->
+    <!-- CABECERA PRINCIPAL (LIMPIA, SIN BARRAS MÓVILES NI AI SLOP) -->
     <header class="sticky top-0 z-40 w-full editorial-blur border-b transition-colors" style="border-color: var(--border);">
-      <!-- Línea sutil superior de poste de barbero tradicional -->
-      <div class="w-full h-[2px] barber-pole-pattern opacity-75"></div>
-
       <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
         
-        <!-- Logotipo de la barbería con poste artesano animado -->
+        <!-- Logotipo de la barbería con emblema artesano en oro -->
         <a href="#" class="flex items-center gap-3 group">
-          <!-- Cilindro de barbero animado -->
-          <div class="w-3.5 h-7 rounded-full overflow-hidden border border-white/20 barber-pole-pattern shrink-0 shadow-md ring-1 ring-amber-500/20" title="Barbería Tradicional"></div>
+          <div class="w-9 h-9 rounded-xl border flex items-center justify-center shrink-0 shadow-sm transition-transform group-hover:scale-105" style="background-color: var(--card); border-color: var(--border-accent);">
+            <svg class="w-5 h-5" viewBox="0 0 64 64" fill="none">
+              <path d="M21 44 L40 18" stroke="#c5a072" stroke-width="3" stroke-linecap="round"/>
+              <path d="M43 44 L24 18" stroke="#c5a072" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="20" cy="44" r="5" stroke="#c5a072" stroke-width="2.4"/>
+              <circle cx="44" cy="44" r="5" stroke="#c5a072" stroke-width="2.4"/>
+              <circle cx="32" cy="27.5" r="2.2" fill="#c5a072"/>
+            </svg>
+          </div>
           
           <div class="flex flex-col">
             <span class="font-serif text-2xl font-bold tracking-tight" style="color: var(--text);" id="brand-name">
