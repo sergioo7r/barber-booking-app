@@ -10,6 +10,26 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="apple-touch-icon" href="favicon.svg" />
 
+  <!-- Detección instantánea de tema (Predeterminado Claro con auto-ajuste al sistema) -->
+  <script>
+    (function() {
+      try {
+        const saved = localStorage.getItem('barber_theme');
+        let theme = 'light';
+        if (saved === 'dark' || saved === 'light') {
+          theme = saved;
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          theme = 'dark';
+        }
+        if (theme === 'light') {
+          document.documentElement.classList.add('light-mode');
+        } else {
+          document.documentElement.classList.remove('light-mode');
+        }
+      } catch(e) {}
+    })();
+  </script>
+
   <!-- Tipografías: Playfair Display (editorial) & Plus Jakarta Sans (funcional) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -861,12 +881,19 @@
 
     const DEFAULT_PIN = "1234";
 
-    // MODO CLARO / OSCURO
+    // MODO CLARO / OSCURO (Predeterminado Claro con auto-ajuste al sistema operativo)
     function getStoredTheme() {
-      return localStorage.getItem('barber_theme') || 'dark';
+      const saved = localStorage.getItem('barber_theme');
+      if (saved === 'light' || saved === 'dark') return saved;
+      
+      // Auto-detección del sistema (por defecto 'light' si no se detecta oscuro)
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+      }
+      return 'light';
     }
 
-    function applyTheme(theme) {
+    function applyTheme(theme, isUserAction = false) {
       const htmlEl = document.documentElement;
       const themeIcon = document.getElementById('theme-icon');
       const metaTheme = document.getElementById('meta-theme-color');
@@ -880,16 +907,32 @@
         if (themeIcon) themeIcon.innerHTML = `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
         if (metaTheme) metaTheme.setAttribute('content', '#0c0e12');
       }
-      localStorage.setItem('barber_theme', theme);
+
+      if (isUserAction) {
+        localStorage.setItem('barber_theme', theme);
+        localStorage.setItem('barber_theme_manual', 'true');
+      }
     }
 
     function toggleTheme() {
-      const current = getStoredTheme();
+      const current = document.documentElement.classList.contains('light-mode') ? 'light' : 'dark';
       const next = current === 'light' ? 'dark' : 'light';
-      applyTheme(next);
+      applyTheme(next, true);
       renderServices();
       generateCalendarDays();
       if (STORE.isOwnerSession()) renderAdminVisualCalendar();
+    }
+
+    // Escucha en tiempo real de cambios de tema en el sistema operativo
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+        if (!localStorage.getItem('barber_theme_manual')) {
+          applyTheme(e.matches ? 'dark' : 'light', false);
+          renderServices();
+          generateCalendarDays();
+          if (STORE.isOwnerSession()) renderAdminVisualCalendar();
+        }
+      });
     }
 
     // MULTI-IDIOMA (ES, RO, EN, FR, IT, DE)
