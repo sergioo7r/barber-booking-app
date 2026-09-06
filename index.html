@@ -62,6 +62,7 @@
       --btn-bg: #ffffff;
       --btn-text: #0c0e12;
       --btn-hover: #f1f5f9;
+      --modal-bg: rgba(12, 14, 18, 0.85);
     }
 
     html.light-mode {
@@ -69,20 +70,21 @@
       --surface: #ffffff;
       --card: #ffffff;
       --card-hover: #f1f5f9;
-      --card-selected: #e2e8f0;
+      --card-selected: #f1f5f9;
       --border: #e2e8f0;
       --border-accent: #0f172a;
       --text: #0f172a;
       --text-body: #334155;
       --text-muted: #64748b;
       --accent: #0f172a;
-      --accent-warm: #d97706;
-      --accent-glow: rgba(15, 23, 42, 0.06);
-      --glass-nav: rgba(248, 250, 252, 0.95);
+      --accent-warm: #b45309;
+      --accent-glow: rgba(15, 23, 42, 0.04);
+      --glass-nav: rgba(248, 250, 252, 0.92);
       --input-bg: #ffffff;
       --btn-bg: #0f172a;
       --btn-text: #ffffff;
       --btn-hover: #1e293b;
+      --modal-bg: rgba(15, 23, 42, 0.5);
     }
 
     * {
@@ -132,12 +134,12 @@
       color: var(--btn-text);
       font-weight: 800;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
     }
     .btn-gold:hover:not(:disabled),
     .btn-editorial:hover:not(:disabled) {
       background-color: var(--btn-hover);
-      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.14);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
       transform: translateY(-1px);
     }
     .btn-gold:active:not(:disabled),
@@ -150,13 +152,28 @@
       transition: transform 0.08s ease;
     }
 
+    /* Viñeta degradada que se adapta perfectamente al tema claro y oscuro */
+    .vignette-overlay {
+      background: linear-gradient(to bottom, transparent, rgba(12, 14, 18, 0.5) 50%, #0c0e12 100%);
+    }
+    html.light-mode .vignette-overlay {
+      background: linear-gradient(to bottom, rgba(248, 250, 252, 0.15), rgba(248, 250, 252, 0.65) 50%, #f8fafc 100%);
+    }
+
+    /* Modal Backdrop */
+    .modal-overlay {
+      background-color: var(--modal-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
     /* Difuminados de luz ambiental de taller */
     .ambient-glow-amber {
       background: radial-gradient(circle, rgba(197, 160, 114, 0.12) 0%, rgba(197, 160, 114, 0) 70%);
     }
 
     html.light-mode .ambient-glow-amber {
-      background: radial-gradient(circle, rgba(197, 160, 114, 0.08) 0%, rgba(197, 160, 114, 0) 70%);
+      background: radial-gradient(circle, rgba(197, 160, 114, 0.06) 0%, rgba(197, 160, 114, 0) 70%);
     }
 
     /* Fondo inmersivo de taller de barbería desenfocado */
@@ -169,8 +186,8 @@
       opacity: 0.13;
     }
     html.light-mode .barbershop-backdrop {
-      opacity: 0.05;
-      filter: blur(36px) saturate(0.9);
+      opacity: 0.04;
+      filter: blur(36px) saturate(0.85);
     }
   </style>
 </head>
@@ -184,8 +201,8 @@
     <!-- Capa de imagen real de barbería con bokeh difuminado -->
     <div class="absolute inset-0 barbershop-backdrop transition-opacity duration-700"></div>
 
-    <!-- Viñeta degradada oscura para legibilidad perfecta -->
-    <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0e0d0c]/60 to-[#0e0d0c]"></div>
+    <!-- Viñeta degradada adaptable para legibilidad perfecta -->
+    <div class="absolute inset-0 vignette-overlay transition-colors duration-500"></div>
     
     <!-- Resplandor sutil cálido superior -->
     <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[700px] h-[500px] rounded-full ambient-glow-amber blur-3xl opacity-70"></div>
@@ -249,7 +266,7 @@
               class="hidden absolute right-0 mt-2 w-40 py-1 rounded-xl border shadow-2xl z-50 overflow-hidden font-sans"
               style="background-color: var(--card); border-color: var(--border);"
             >
-              <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+              <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-black/5 transition-colors" style="color: var(--text);">
                 <span class="flex items-center gap-2">
                   <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect y="125" width="750" height="250" fill="#ffc400"/></svg>
                   Español
@@ -257,7 +274,7 @@
                 <span id="check-es" class="font-bold text-emerald-400">✓</span>
               </button>
 
-              <button onclick="changeLanguage('ro')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+              <button onclick="changeLanguage('ro')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-black/5 transition-colors" style="color: var(--text);">
                 <span class="flex items-center gap-2">
                   <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002B7F"/><rect x="1" width="1" height="2" fill="#FCD116"/><rect x="2" width="1" height="2" fill="#CE1126"/></svg>
                   Română
@@ -265,7 +282,7 @@
                 <span id="check-ro" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
 
-              <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+              <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-black/5 transition-colors" style="color: var(--text);">
                 <span class="flex items-center gap-2">
                   <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 60 30"><clipPath id="uk1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clip-path="url(#uk1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="3"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
                   English
@@ -273,7 +290,7 @@
                 <span id="check-en" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
 
-              <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+              <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-black/5 transition-colors" style="color: var(--text);">
                 <span class="flex items-center gap-2">
                   <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002654"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ce1126"/></svg>
                   Français
@@ -281,7 +298,7 @@
                 <span id="check-fr" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
 
-              <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+              <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-black/5 transition-colors" style="color: var(--text);">
                 <span class="flex items-center gap-2">
                   <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>
                   Italiano
@@ -289,7 +306,7 @@
                 <span id="check-it" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
 
-              <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+              <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-black/5 transition-colors" style="color: var(--text);">
                 <span class="flex items-center gap-2">
                   <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 5 3"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#dd0000"/><rect y="2" width="5" height="1" fill="#ffce00"/></svg>
                   Deutsch
@@ -342,7 +359,7 @@
         <div class="space-y-3">
           <div class="flex items-center justify-between">
             <h2 class="text-base sm:text-lg font-bold flex items-center gap-2 font-serif" style="color: var(--text);" id="txt-step1-title">
-              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: #0e0d0c;">1</span>
+              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: var(--bg);">1</span>
               Elige tu servicio
             </h2>
             <span class="text-xs font-medium" style="color: var(--text-muted);" id="txt-step1-sub">Precios claros sin sorpresas</span>
@@ -357,7 +374,7 @@
         <div class="space-y-3 pt-2">
           <div class="flex items-center justify-between flex-wrap gap-2">
             <h2 class="text-base sm:text-lg font-bold flex items-center gap-2 font-serif" style="color: var(--text);" id="txt-step2-title">
-              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: #0e0d0c;">2</span>
+              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: var(--bg);">2</span>
               Elige día y hora
             </h2>
             <span class="text-xs font-bold num-formal" style="color: var(--accent);" id="selected-date-summary"></span>
@@ -384,7 +401,7 @@
         <div class="space-y-3 pt-2 border-t" style="border-color: var(--border);">
           <div class="flex items-center justify-between">
             <h2 class="text-base sm:text-lg font-bold flex items-center gap-2 font-serif" style="color: var(--text);" id="txt-step3-title">
-              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: #0e0d0c;">3</span>
+              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: var(--bg);">3</span>
               Tus datos
             </h2>
             <span class="text-xs text-emerald-400 font-medium" id="txt-step3-sub">✓ Para confirmar tu cita</span>
@@ -475,7 +492,7 @@
       <section class="space-y-3">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-1.5 text-amber-400">
-            <span class="text-sm font-extrabold text-white">5,0</span>
+            <span class="text-sm font-extrabold" style="color: var(--text);">5,0</span>
             <span>★★★★★</span>
             <span class="text-xs font-semibold" style="color: var(--text-muted);">(62 reseñas en Google)</span>
           </div>
@@ -486,13 +503,13 @@
             <p class="text-xs sm:text-[13px] leading-relaxed italic" style="color: var(--text-body);" id="txt-review-1">
               “El mejor corte y degradado de Triana. Trato de 10, puntuales y ambiente inmejorable.”
             </p>
-            <p class="text-xs font-bold text-amber-400">— Cliente Google (Triana)</p>
+            <p class="text-xs font-bold" style="color: var(--accent-warm);">— Cliente Google (Triana)</p>
           </div>
           <div class="p-4 rounded-2xl border space-y-1.5" style="background-color: var(--surface); border-color: var(--border);">
             <p class="text-xs sm:text-[13px] leading-relaxed italic" style="color: var(--text-body);" id="txt-review-2">
               “Reserva facilísima por WhatsApp en 30 segundos y corte impecable en Calle Castilla.”
             </p>
-            <p class="text-xs font-bold text-amber-400">— Cliente verificado (5.0 ★)</p>
+            <p class="text-xs font-bold" style="color: var(--accent-warm);">— Cliente verificado (5.0 ★)</p>
           </div>
         </div>
       </section>
@@ -508,7 +525,7 @@
               Lunes a Viernes 10:00–14:00 y 17:00–22:00 · Sábados 10:00–17:00
             </p>
             <p class="pt-0.5">
-              Teléfono / WhatsApp: <a id="footer-phone-link" href="tel:+34664616475" class="underline font-bold text-amber-400 num-formal">664 61 64 75</a>
+              Teléfono / WhatsApp: <a id="footer-phone-link" href="tel:+34664616475" class="underline font-bold text-amber-500 num-formal">664 61 64 75</a>
             </p>
           </div>
           <a
@@ -525,7 +542,7 @@
 
         <div class="border-t pt-3 flex items-center justify-between" style="border-color: var(--border); color: var(--text-muted);">
           <span id="txt-footer-brand">LC BARBER TRIANA · Citas Online</span>
-          <button onclick="openPinModal()" class="underline font-bold hover:text-white transition-colors" style="color: var(--text-muted);">
+          <button onclick="openPinModal()" class="underline font-bold hover:opacity-100 transition-opacity" style="color: var(--text-muted);">
             Acceso Barbero 🔒
           </button>
         </div>
@@ -672,7 +689,7 @@
        =================================================================================== -->
   
   <!-- MODAL DE ÉXITO TRAS PEDIR CITA -->
-  <div id="success-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div id="success-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
     <div class="border rounded-3xl w-full max-w-md p-6 sm:p-7 space-y-4 text-center shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
       <div class="w-12 h-12 rounded-full border mx-auto flex items-center justify-center text-xl font-bold text-emerald-400" style="background-color: var(--card); border-color: var(--border);">
         ✓
@@ -684,7 +701,7 @@
       
       <div class="p-4 rounded-2xl border text-left space-y-2 text-xs font-medium" style="background-color: var(--card); border-color: var(--border);">
         <p><span style="color: var(--text-muted);">Servicio:</span> <b style="color: var(--text);" id="success-summary-service">Corte (12 €)</b></p>
-        <p><span style="color: var(--text-muted);">Fecha y hora:</span> <b class="text-amber-400 num-formal" id="success-summary-datetime">Hoy, 11:30</b></p>
+        <p><span style="color: var(--text-muted);">Fecha y hora:</span> <b class="text-amber-500 num-formal" id="success-summary-datetime">Hoy, 11:30</b></p>
         <p><span style="color: var(--text-muted);">Lugar:</span> <span style="color: var(--text);" id="success-summary-address">C. Castilla, 58B, 41010 Sevilla (Triana)</span></p>
       </div>
 
@@ -704,7 +721,7 @@
   </div>
 
   <!-- MODAL PIN BARBERO -->
-  <div id="pin-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div id="pin-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
     <div class="border rounded-3xl w-full max-w-xs p-6 space-y-4 text-center shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
       <h3 class="font-serif text-lg font-bold" style="color: var(--text);">Acceso Barbero</h3>
       <p class="text-xs" style="color: var(--text-muted);">Introduce tu PIN de 4 dígitos</p>
@@ -728,7 +745,7 @@
   </div>
 
   <!-- MODAL EXPRESS: ASIGNAR CITA RÁPIDA -->
-  <div id="express-booking-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div id="express-booking-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
     <div class="border rounded-3xl w-full max-w-sm p-6 space-y-3.5 shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
       <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border);">
         <h3 class="font-serif text-base font-bold" style="color: var(--text);" id="express-modal-title">10:00 · Hoy</h3>
@@ -758,7 +775,7 @@
   </div>
 
   <!-- MODAL LISTA DE ESPERA -->
-  <div id="waitlist-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+  <div id="waitlist-modal" class="fixed inset-0 modal-overlay z-50 hidden flex items-center justify-center p-4">
     <div class="border rounded-3xl w-full max-w-sm p-6 space-y-3 shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
       <div class="flex items-center justify-between border-b pb-2" style="border-color: var(--border);">
         <h3 class="font-serif text-base font-bold" style="color: var(--text);">Apuntar a Espera</h3>
@@ -811,11 +828,11 @@
       if (theme === 'light') {
         htmlEl.classList.add('light-mode');
         if (themeIcon) themeIcon.textContent = '🌙';
-        if (metaTheme) metaTheme.setAttribute('content', '#f9f7f2');
+        if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
       } else {
         htmlEl.classList.remove('light-mode');
         if (themeIcon) themeIcon.textContent = '☀️';
-        if (metaTheme) metaTheme.setAttribute('content', '#0e0d0c');
+        if (metaTheme) metaTheme.setAttribute('content', '#0c0e12');
       }
       localStorage.setItem('barber_theme', theme);
     }
@@ -1895,7 +1912,7 @@ END:VCALENDAR`;
       if (chips) {
         const services = STORE.getServices().filter(s => s.active);
         chips.innerHTML = services.map((s, idx) => `
-          <button type="button" onclick="selectExpressService('${s.name}', this)" class="px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip ${idx === 0 ? 'btn-gold' : 'border-stone-700'}">
+          <button type="button" onclick="selectExpressService('${s.name}', this)" class="px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip ${idx === 0 ? 'btn-gold' : ''}" style="${idx === 0 ? '' : 'border-color: var(--border); color: var(--text); background-color: var(--card);'}">
             <span>${s.name}</span>
           </button>
         `).join('');
@@ -1908,8 +1925,12 @@ END:VCALENDAR`;
 
     function selectExpressService(name, btn) {
       state.expressSelectedService = name;
-      document.querySelectorAll('.express-service-chip').forEach(b => b.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip border-stone-700");
+      document.querySelectorAll('.express-service-chip').forEach(b => {
+        b.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip";
+        b.style = "border-color: var(--border); color: var(--text); background-color: var(--card);";
+      });
       btn.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip btn-gold";
+      btn.style = "";
     }
 
     function closeExpressBookingModal() {
