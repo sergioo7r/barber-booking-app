@@ -652,7 +652,10 @@
     </header>
 
     <div class="flex rounded-lg p-1 border theme-border text-xs font-medium" style="background-color: var(--bg-surface);">
-      <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="flex-1 py-1.5 rounded font-semibold shadow-sm transition-all" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="flex-1 py-1.5 rounded font-semibold shadow-sm transition-all" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        🟢 Agenda
+      </button>
+      <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="flex-1 py-1.5 rounded transition-all" style="color: var(--text-muted);">
         Hoy
       </button>
       <button id="tab-btn-blocks" onclick="switchAdminTab('blocks')" class="flex-1 py-1.5 rounded transition-all" style="color: var(--text-muted);">
@@ -666,8 +669,57 @@
       </button>
     </div>
 
-    <!-- PESTAÑA 1: CITAS -->
-    <section id="tab-appointments" class="space-y-3">
+    <!-- PESTAÑA 1: AGENDA VISUAL EN VIVO (VERDE / ROJO) -->
+    <section id="tab-visual" class="space-y-4">
+      
+      <!-- Navegador de Días en 1 Toque -->
+      <div class="p-3.5 rounded-xl border theme-border space-y-2.5" style="background-color: var(--bg-surface);">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5">
+            <button onclick="adminShiftDay(-1)" class="w-7 h-7 rounded border theme-border flex items-center justify-center text-xs hover:opacity-80" style="color: var(--text-body);">‹</button>
+            <span class="text-[13px] font-bold font-sans tracking-tight capitalize" style="color: var(--text-title);" id="admin-visual-date-label">Hoy</span>
+            <button onclick="adminShiftDay(1)" class="w-7 h-7 rounded border theme-border flex items-center justify-center text-xs hover:opacity-80" style="color: var(--text-body);">›</button>
+          </div>
+          
+          <input
+            type="date"
+            id="admin-visual-date-picker"
+            class="text-[11px] font-sans border theme-border rounded px-2 py-1 focus:outline-none"
+            style="background-color: var(--bg-main); color: var(--text-title);"
+            onchange="onAdminVisualDateChange(this.value)"
+          />
+        </div>
+
+        <!-- Chips de Acceso Rápido a Días -->
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1" id="admin-quick-day-chips"></div>
+
+        <!-- Resumen de Ocupación del Día -->
+        <div class="flex items-center justify-between text-[11px] pt-2 border-t theme-border">
+          <div class="flex items-center gap-2.5">
+            <span class="inline-flex items-center gap-1 text-emerald-400 font-medium">
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span id="admin-stat-free">0 Libres</span>
+            </span>
+            <span class="inline-flex items-center gap-1 text-rose-400 font-medium">
+              <span class="w-2 h-2 rounded-full bg-rose-500"></span> <span id="admin-stat-busy">0 Ocupadas</span>
+            </span>
+          </div>
+          <span class="text-[11px] font-medium" style="color: var(--accent-bronze);" id="admin-stat-money">~0 € caja</span>
+        </div>
+      </div>
+
+      <!-- Cuadrícula de Franjas Horarias (Verde = Libre, Rojo = Ocupado) -->
+      <div class="space-y-2">
+        <div class="flex items-center justify-between text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-muted);">
+          <span>Horario en vivo</span>
+          <span class="normal-case">Toca cualquier franja para gestionar</span>
+        </div>
+        <div class="space-y-1.5" id="admin-visual-slots-container"></div>
+      </div>
+
+    </section>
+
+    <!-- PESTAÑA 2: CITAS -->
+    <section id="tab-appointments" class="space-y-3 hidden">
       <div id="admin-day-summary" class="p-3.5 rounded-lg border theme-border grid grid-cols-3 gap-2 text-center" style="background-color: var(--bg-surface);"></div>
       <div class="flex items-center gap-2">
         <input type="date" id="admin-appt-date" class="flex-1 h-10 border theme-border rounded-lg px-3 text-xs" style="background-color: var(--bg-surface); color: var(--text-title);" onchange="renderAdminAppointments()" />
@@ -684,7 +736,7 @@
       <p class="text-[11px] leading-snug" style="color: var(--text-muted);">Truco: “Avisar” manda un WhatsApp al cliente para confirmar. Toca el círculo para marcar: pendiente → cortado → no vino.</p>
     </section>
 
-    <!-- PESTAÑA 2: BLOQUEOS -->
+    <!-- PESTAÑA 3: BLOQUEOS -->
     <section id="tab-blocks" class="space-y-4 hidden">
       <div>
         <h2 class="text-[12px] font-semibold mb-1" style="color: var(--text-body);">Tapa huecos cuando te llamen por teléfono</h2>
@@ -714,22 +766,24 @@
       <div class="grid grid-cols-4 gap-1.5" id="admin-slots-grid"></div>
     </section>
 
-    <!-- PESTAÑA 3: PRECIOS -->
+    <!-- PESTAÑA 4: PRECIOS -->
     <section id="tab-services" class="space-y-4 hidden">
-      <div class="flex items-center justify-between">
-        <div>
-          <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Servicios y precios</h2>
-          <p class="text-[11px]" style="color: var(--text-muted);">Cambia el precio aquí y se cambia en la web solo.</p>
+      <div>
+        <div class="flex items-center justify-between">
+          <div>
+            <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Servicios y precios</h2>
+            <p class="text-[11px]" style="color: var(--text-muted);">Cambia el precio aquí y se cambia en la web solo.</p>
+          </div>
+          <button onclick="addNewServicePrompt()" class="px-2.5 py-1.5 rounded-lg border theme-border text-xs hover:opacity-80" style="color: var(--text-body); background-color: var(--bg-surface);">
+            + Añadir
+          </button>
         </div>
-        <button onclick="addNewServicePrompt()" class="px-2.5 py-1.5 rounded-lg border theme-border text-xs hover:opacity-80" style="color: var(--text-body); background-color: var(--bg-surface);">
-          + Añadir
-        </button>
       </div>
 
       <div class="space-y-2.5" id="admin-services-list"></div>
     </section>
 
-    <!-- PESTAÑA 4: LOCAL + QR para vender -->
+    <!-- PESTAÑA 5: LOCAL + QR para vender -->
     <section id="tab-shop" class="space-y-4 hidden">
       <div>
         <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Tu local y tu QR</h2>
@@ -770,6 +824,76 @@
 
   </div>
 
+  <!-- ===================================================================================
+       MODAL EXPRESS: METER CITA RÁPIDA AL TELÉFONO / WHATSAPP
+       =================================================================================== -->
+  <div id="express-booking-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 font-sans">
+    <div class="border theme-border rounded-2xl w-full max-w-sm p-5 space-y-4 shadow-2xl" style="background-color: var(--bg-surface);">
+      
+      <div class="flex items-start justify-between border-b theme-border pb-3">
+        <div>
+          <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Meter Cita al Teléfono</span>
+          <h3 class="font-serif text-lg font-semibold mt-0.5" style="color: var(--text-title);" id="express-modal-title">
+            11:30 · Hoy
+          </h3>
+        </div>
+        <button onclick="closeExpressBookingModal()" class="w-7 h-7 rounded-full border theme-border flex items-center justify-center text-xs hover:opacity-75" style="color: var(--text-muted);">✕</button>
+      </div>
+
+      <div class="space-y-3">
+        <div>
+          <label class="block text-xs font-semibold mb-1" style="color: var(--text-title);">Nombre del cliente *</label>
+          <input
+            type="text"
+            id="express-client-name"
+            placeholder="Ej. Juan Gómez"
+            autocomplete="off"
+            class="w-full h-11 border theme-border rounded-lg px-3 text-sm font-medium focus:outline-none"
+            style="background-color: var(--bg-input); color: var(--text-title);"
+            onkeydown="if(event.key==='Enter') saveExpressBooking()"
+          />
+        </div>
+
+        <div>
+          <label class="block text-[11px] font-medium mb-1.5" style="color: var(--text-muted);">Servicio a realizar:</label>
+          <div class="grid grid-cols-2 gap-1.5" id="express-service-chips"></div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium mb-1" style="color: var(--text-muted);">Teléfono (opcional para WhatsApp):</label>
+          <input
+            type="tel"
+            id="express-client-phone"
+            placeholder="+34 600..."
+            class="w-full h-9 border theme-border rounded-lg px-3 text-xs focus:outline-none"
+            style="background-color: var(--bg-input); color: var(--text-title);"
+            onkeydown="if(event.key==='Enter') saveExpressBooking()"
+          />
+        </div>
+      </div>
+
+      <div class="pt-2 flex gap-2">
+        <button
+          type="button"
+          onclick="blockCurrentExpressSlot()"
+          class="px-3 h-11 rounded-lg border theme-border text-xs font-medium hover:opacity-75"
+          style="color: var(--text-muted);"
+          title="Marcar como descanso o imprevisto sin cliente"
+        >
+          Solo Bloquear
+        </button>
+        <button
+          type="button"
+          onclick="saveExpressBooking()"
+          class="flex-1 h-11 rounded-lg text-xs font-bold uppercase tracking-wider shadow-lg transition-opacity hover:opacity-90"
+          style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
+        >
+          Guardar Cita ↵
+        </button>
+      </div>
+
+    </div>
+  </div>
 
   <!-- MODAL: CITA MANUAL -->
   <div id="manual-booking-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 font-sans">
@@ -1190,7 +1314,10 @@
       selectedTime: null,
       clientName: '',
       clientPhone: '',
-      lastBooking: null
+      lastBooking: null,
+      adminVisualDate: getTodayKey(),
+      expressSelectedService: "Corte clásico",
+      expressCurrentSlotTime: "11:00"
     };
 
     function autoDetectLanguage() {
@@ -1811,13 +1938,19 @@ END:VCALENDAR`;
       document.getElementById('sticky-bar').classList.add('hidden');
       document.getElementById('admin-view').classList.remove('hidden');
 
+      state.adminVisualDate = getTodayKey();
+      const picker = document.getElementById('admin-visual-date-picker');
+      if (picker) picker.value = state.adminVisualDate;
+
       document.getElementById('admin-block-date').value = getTodayKey();
       const ad = document.getElementById('admin-appt-date');
       if (ad) ad.value = getTodayKey();
       fillShopForm();
+      renderAdminVisualCalendar();
       renderAdminAppointments();
       renderAdminBlockSlots();
       renderAdminServices();
+      switchAdminTab('visual');
     }
 
     function exitAdminView() {
@@ -1831,7 +1964,7 @@ END:VCALENDAR`;
     }
 
     function switchAdminTab(tabName) {
-      ['appointments', 'blocks', 'services', 'shop'].forEach(t => {
+      ['visual', 'appointments', 'blocks', 'services', 'shop'].forEach(t => {
         const btn = document.getElementById(`tab-btn-${t}`);
         const sec = document.getElementById(`tab-${t}`);
         if (!btn || !sec) return;
@@ -1848,10 +1981,356 @@ END:VCALENDAR`;
         }
       });
 
+      if (tabName === 'visual') renderAdminVisualCalendar();
       if (tabName === 'appointments') renderAdminAppointments();
       if (tabName === 'blocks') renderAdminBlockSlots();
       if (tabName === 'services') renderAdminServices();
       if (tabName === 'shop') { fillShopForm(); renderQr(); }
+    }
+
+    // NAVEGACIÓN RÁPIDA DE DÍAS EN LA AGENDA VISUAL
+    function adminShiftDay(daysOffset) {
+      const target = state.adminVisualDate || getTodayKey();
+      const [y, m, d] = target.split('-').map(Number);
+      const current = new Date(y, m - 1, d);
+      current.setDate(current.getDate() + daysOffset);
+      state.adminVisualDate = formatDateKey(current);
+      const picker = document.getElementById('admin-visual-date-picker');
+      if (picker) picker.value = state.adminVisualDate;
+      renderAdminVisualCalendar();
+    }
+
+    function onAdminVisualDateChange(newDate) {
+      if (!newDate) return;
+      state.adminVisualDate = newDate;
+      renderAdminVisualCalendar();
+    }
+
+    function setAdminVisualDay(dateKey) {
+      state.adminVisualDate = dateKey;
+      const picker = document.getElementById('admin-visual-date-picker');
+      if (picker) picker.value = dateKey;
+      renderAdminVisualCalendar();
+    }
+
+    // RENDERIZADO DE LA AGENDA VISUAL EN VIVO (VERDE / ROJO)
+    function renderAdminVisualCalendar() {
+      const container = document.getElementById('admin-visual-slots-container');
+      const chipsContainer = document.getElementById('admin-quick-day-chips');
+      const dateLabel = document.getElementById('admin-visual-date-label');
+      if (!container) return;
+      
+      const targetDate = state.adminVisualDate || getTodayKey();
+      const [y, m, d] = targetDate.split('-').map(Number);
+      const dateObj = new Date(y, m - 1, d);
+      
+      const daysNames = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+      const monthsNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+      
+      const isToday = targetDate === getTodayKey();
+      if (dateLabel) {
+        dateLabel.textContent = `${isToday ? 'Hoy, ' : ''}${daysNames[dateObj.getDay()]} ${d} ${monthsNames[dateObj.getMonth()]}`;
+      }
+
+      // Chips de selección rápida de días
+      if (chipsContainer) {
+        const today = new Date();
+        const quickDays = [];
+        for (let i = 0; i < 6; i++) {
+          const qd = new Date();
+          qd.setDate(today.getDate() + i);
+          const qKey = formatDateKey(qd);
+          const qLabel = i === 0 ? 'Hoy' : (i === 1 ? 'Mañana' : `${qd.getDate()} ${monthsNames[qd.getMonth()]}`);
+          quickDays.push({ key: qKey, label: qLabel, isSelected: qKey === targetDate });
+        }
+
+        chipsContainer.innerHTML = quickDays.map(qd => {
+          const style = qd.isSelected
+            ? 'bg-white text-black font-bold shadow-sm'
+            : 'border theme-border text-stone-400 hover:text-white';
+          return `
+            <button
+              type="button"
+              onclick="setAdminVisualDay('${qd.key}')"
+              class="px-2.5 py-1 rounded-md text-[11px] whitespace-nowrap transition-all ${style}"
+            >
+              ${qd.label}
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Franjas Horarias
+      const allSlots = [
+        "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
+        "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30"
+      ];
+
+      const closedDates = STORE.getClosedDates();
+      const isClosedDay = closedDates.includes(targetDate);
+      const blockedMap = STORE.getBlockedSlots();
+      const blockedForDate = blockedMap[targetDate] || [];
+      const appointments = STORE.getAppointments().filter(a => a.date === targetDate && a.status !== 'cancelled');
+
+      let freeCount = 0;
+      let busyCount = 0;
+      let totalCaja = 0;
+
+      if (isClosedDay) {
+        container.innerHTML = `
+          <div class="p-6 text-center border theme-border rounded-xl space-y-2" style="background-color: var(--bg-surface);">
+            <p class="text-sm font-bold text-rose-400">Día Completo Cerrado / Festivo</p>
+            <p class="text-xs" style="color: var(--text-muted);">No hay turnos disponibles para este día.</p>
+            <button onclick="toggleAdminClosedDayVisual('${targetDate}')" class="px-3 py-1.5 rounded text-xs font-semibold bg-white text-black mt-2">
+              Abrir este día
+            </button>
+          </div>
+        `;
+        const sf = document.getElementById('admin-stat-free'); if (sf) sf.textContent = `0 Libres`;
+        const sb = document.getElementById('admin-stat-busy'); if (sb) sb.textContent = `Cerrado`;
+        const sm = document.getElementById('admin-stat-money'); if (sm) sm.textContent = `0 € caja`;
+        return;
+      }
+
+      container.innerHTML = allSlots.map(time => {
+        const appt = appointments.find(a => a.time === time);
+        const isBlocked = blockedForDate.includes(time);
+
+        if (appt) {
+          busyCount++;
+          const price = appt.price || priceOfService(appt.service) || 15;
+          if (appt.status !== 'noshow') totalCaja += price;
+
+          const cleanPhone = (appt.phone || '').replace(/\D/g, '');
+          const shop = STORE.getShop();
+          const waMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para el ${d} de ${monthsNames[dateObj.getMonth()]} a las ${appt.time} en ${shop.shop || 'Barbería El Barrio'} (${shop.address || 'Triana'}).`);
+          const waLink = `https://wa.me/${cleanPhone}?text=${waMsg}`;
+          const st = appt.status || 'confirmed';
+          const stLabel = st === 'done' ? 'Cortado 🟢' : (st === 'noshow' ? 'No vino 🔴' : 'Pendiente 🟡');
+
+          return `
+            <div class="p-3 rounded-xl border border-rose-500/40 bg-rose-950/30 transition-all flex items-center justify-between gap-2 shadow-sm ${st === 'noshow' ? 'opacity-50' : ''}">
+              <div class="flex items-center gap-2.5 min-w-0 flex-1">
+                <div class="flex items-center gap-1.5 shrink-0">
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                  <span class="font-mono text-sm font-bold text-white tracking-tight">${time}</span>
+                </div>
+                <div class="min-w-0">
+                  <p class="text-xs font-bold text-white truncate">${appt.name} <span class="text-[10px] font-normal text-rose-300/80">(${price}€)</span></p>
+                  <p class="text-[11px] text-rose-200/80 truncate">${appt.service} ${appt.phone ? '· ' + appt.phone : ''}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-1 shrink-0">
+                <button
+                  onclick="toggleVisualApptStatus(${appt.id})"
+                  class="px-2 py-1 rounded text-[10px] font-medium border theme-border bg-stone-900/60 text-stone-300 hover:text-white"
+                  title="Cambiar estado: pendiente / cortado / no vino"
+                >
+                  ${stLabel}
+                </button>
+                ${cleanPhone ? `
+                  <a
+                    href="${waLink}"
+                    target="_blank"
+                    class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 rounded text-xs font-medium inline-flex items-center gap-1"
+                    title="Avisar por WhatsApp"
+                  >
+                    <span>WA</span>
+                  </a>
+                ` : ''}
+                <button
+                  onclick="freeAdminSlot(${appt.id}, '${targetDate}', '${time}')"
+                  class="px-2 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded text-xs font-medium"
+                  title="Liberar y cancelar cita"
+                >
+                  Liberar
+                </button>
+              </div>
+            </div>
+          `;
+        } else if (isBlocked) {
+          busyCount++;
+          return `
+            <div class="p-2.5 rounded-xl border border-stone-700/60 bg-stone-900/40 transition-all flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-stone-500"></span>
+                <span class="font-mono text-sm font-bold text-stone-400">${time}</span>
+                <span class="text-xs text-stone-400 font-medium">Descanso / Bloqueado</span>
+              </div>
+              <button
+                onclick="toggleSlotBlockVisual('${targetDate}', '${time}')"
+                class="px-2.5 py-1 rounded text-xs font-medium border theme-border text-stone-300 hover:text-white"
+              >
+                Desbloquear
+              </button>
+            </div>
+          `;
+        } else {
+          freeCount++;
+          return `
+            <div
+              onclick="openExpressBookingModal('${time}')"
+              class="p-3 rounded-xl border border-emerald-500/35 bg-emerald-950/20 hover:bg-emerald-900/30 transition-all cursor-pointer flex items-center justify-between gap-3 group"
+            >
+              <div class="flex items-center gap-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span class="font-mono text-sm font-bold text-emerald-300 tracking-tight">${time}</span>
+                </div>
+                <span class="text-xs font-medium text-emerald-200/90">LIBRE — Toca para meter cita</span>
+              </div>
+
+              <div class="shrink-0">
+                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-black transition-colors">
+                  + Meter Cita
+                </span>
+              </div>
+            </div>
+          `;
+        }
+      }).join('');
+
+      const sf = document.getElementById('admin-stat-free'); if (sf) sf.textContent = `${freeCount} Libres`;
+      const sb = document.getElementById('admin-stat-busy'); if (sb) sb.textContent = `${busyCount} Ocupadas`;
+      const sm = document.getElementById('admin-stat-money'); if (sm) sm.textContent = `~${totalCaja} € caja`;
+    }
+
+    function toggleVisualApptStatus(id) {
+      toggleApptStatus(id);
+      renderAdminVisualCalendar();
+    }
+
+    // MODAL EXPRESS: METER CITA EN VERDE
+    function openExpressBookingModal(time) {
+      state.expressCurrentSlotTime = time;
+      const targetDate = state.adminVisualDate || getTodayKey();
+      const [y, m, d] = targetDate.split('-').map(Number);
+      const dateObj = new Date(y, m - 1, d);
+      const monthsNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+
+      const titleEl = document.getElementById('express-modal-title');
+      if (titleEl) titleEl.textContent = `${time} · ${d} ${monthsNames[dateObj.getMonth()]}`;
+      
+      const nameInp = document.getElementById('express-client-name');
+      if (nameInp) nameInp.value = '';
+      
+      const phoneInp = document.getElementById('express-client-phone');
+      if (phoneInp) phoneInp.value = '';
+      
+      state.expressSelectedService = "Corte clásico";
+
+      // Renderizar chips de servicios
+      const chipsContainer = document.getElementById('express-service-chips');
+      if (chipsContainer) {
+        const services = STORE.getServices().filter(s => s.active);
+        chipsContainer.innerHTML = services.map((s, idx) => {
+          const isSelected = idx === 0;
+          return `
+            <button
+              type="button"
+              onclick="selectExpressService('${s.name}', this)"
+              class="px-2.5 py-2 rounded-lg text-xs font-medium border text-left transition-all express-service-chip ${isSelected ? 'bg-white text-black font-bold border-white' : 'border-stone-800 text-stone-300 hover:border-stone-600'}"
+            >
+              <span class="block truncate">${s.name}</span>
+              <span class="text-[10px] opacity-75 font-mono">${s.price} €</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      const modal = document.getElementById('express-booking-modal');
+      if (modal) modal.classList.remove('hidden');
+      setTimeout(() => { if (nameInp) nameInp.focus(); }, 100);
+    }
+
+    function selectExpressService(serviceName, btnEl) {
+      state.expressSelectedService = serviceName;
+      document.querySelectorAll('.express-service-chip').forEach(b => {
+        b.className = "px-2.5 py-2 rounded-lg text-xs font-medium border text-left transition-all express-service-chip border-stone-800 text-stone-300 hover:border-stone-600";
+      });
+      btnEl.className = "px-2.5 py-2 rounded-lg text-xs font-medium border text-left transition-all express-service-chip bg-white text-black font-bold border-white";
+    }
+
+    function closeExpressBookingModal() {
+      const modal = document.getElementById('express-booking-modal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function saveExpressBooking() {
+      const name = (document.getElementById('express-client-name')?.value || '').trim();
+      const phone = (document.getElementById('express-client-phone')?.value || '').trim();
+      const targetDate = state.adminVisualDate || getTodayKey();
+      const time = state.expressCurrentSlotTime;
+      const service = state.expressSelectedService || "Corte clásico";
+
+      if (!name) {
+        alert("Por favor, introduce el nombre del cliente.");
+        document.getElementById('express-client-name')?.focus();
+        return;
+      }
+
+      const appts = STORE.getAppointments();
+      const newAppt = {
+        id: Date.now(),
+        name,
+        phone: phone || "En local / llamada",
+        service,
+        price: priceOfService(service),
+        date: targetDate,
+        time,
+        status: 'confirmed'
+      };
+      appts.push(newAppt);
+      STORE.saveAppointments(appts);
+
+      closeExpressBookingModal();
+      renderAdminVisualCalendar();
+      renderAdminAppointments();
+      renderTimeSlotsForSelectedDate();
+    }
+
+    function blockCurrentExpressSlot() {
+      const targetDate = state.adminVisualDate || getTodayKey();
+      const time = state.expressCurrentSlotTime;
+      toggleSlotBlockVisual(targetDate, time);
+      closeExpressBookingModal();
+    }
+
+    function freeAdminSlot(apptId, dateStr, timeStr) {
+      if (!confirm(`¿Liberar turno de las ${timeStr} y cancelar la cita?`)) return;
+      const appts = STORE.getAppointments().filter(a => a.id !== apptId);
+      STORE.saveAppointments(appts);
+
+      renderAdminVisualCalendar();
+      renderAdminAppointments();
+      renderTimeSlotsForSelectedDate();
+    }
+
+    function toggleSlotBlockVisual(dateStr, timeStr) {
+      const blockedMap = STORE.getBlockedSlots();
+      const list = blockedMap[dateStr] || [];
+
+      if (list.includes(timeStr)) {
+        blockedMap[dateStr] = list.filter(t => t !== timeStr);
+      } else {
+        list.push(timeStr);
+        blockedMap[dateStr] = list;
+      }
+
+      STORE.saveBlockedSlots(blockedMap);
+      renderAdminVisualCalendar();
+      renderAdminBlockSlots();
+      renderTimeSlotsForSelectedDate();
+    }
+
+    function toggleAdminClosedDayVisual(dateStr) {
+      let closedDates = STORE.getClosedDates();
+      closedDates = closedDates.filter(d => d !== dateStr);
+      STORE.saveClosedDates(closedDates);
+      renderAdminVisualCalendar();
+      renderAdminBlockSlots();
+      renderTimeSlotsForSelectedDate();
     }
 
     function adminSelectedDate() {
