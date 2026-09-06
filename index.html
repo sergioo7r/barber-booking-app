@@ -4,9 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <meta name="theme-color" content="#121212" id="meta-theme-color" />
-  <title>Barbería El Barrio — Triana, Sevilla</title>
+  <title>Barbería El Barrio — Triana, Sevilla · Pedir Cita</title>
 
-  <!-- Google Font: Plus Jakarta Sans (Única fuente limpia y legible para todo) -->
+  <!-- Google Font: Plus Jakarta Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -29,23 +29,23 @@
   <style>
     :root {
       --bg: #121212;
-      --card: #1e1e1e;
-      --card-selected: #2a251e;
+      --card: #1c1c1c;
+      --card-selected: #2d261e;
       --card-border: #333333;
       --border-selected: #e5a93c;
       --text: #ffffff;
-      --text-muted: #a0a0a0;
+      --text-muted: #9e9e9e;
       --accent: #e5a93c;
       --accent-hover: #f5b94c;
       --btn-text: #121212;
-      --input-bg: #1a1a1a;
+      --input-bg: #161616;
       --success: #22c55e;
     }
 
     html.light-mode {
-      --bg: #f5f5f7;
+      --bg: #f4f4f6;
       --card: #ffffff;
-      --card-selected: #fff8eb;
+      --card-selected: #fff9ee;
       --card-border: #dcdce0;
       --border-selected: #c48218;
       --text: #111111;
@@ -76,7 +76,6 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Botón principal grande y fácil de pulsar */
     .btn-main {
       background-color: var(--accent);
       color: var(--btn-text);
@@ -92,13 +91,13 @@
 <body class="min-h-full flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black">
 
   <!-- ===================================================================================
-       BARRA DE MODO DUEÑO (Solo visible si el barbero está autenticado)
+       BARRA DE MODO DUEÑO (Solo visible si el barbero entra a su panel)
        =================================================================================== -->
   <div id="owner-top-bar" class="hidden sticky top-0 z-50 w-full bg-amber-600 text-stone-950 font-bold px-4 py-2.5 text-xs shadow-md">
     <div class="max-w-3xl mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
-        <span class="text-sm font-extrabold uppercase">MODO BARBERO ACTIVO</span>
+        <span class="text-sm font-extrabold uppercase">PANEL DEL BARBERO</span>
       </div>
       <div class="flex items-center gap-2">
         <button onclick="toggleOwnerClientView()" id="btn-toggle-owner-view" class="px-3 py-1 bg-black text-white rounded-lg text-xs font-bold">
@@ -113,45 +112,43 @@
 
 
   <!-- ===================================================================================
-       VISTA PÚBLICA (CLIENTES Y TURISTAS - ULTRA SENCILLA & CLARA)
+       VISTA PÚBLICA (NADA MÁS ENTRAR: COGER CITA DIRECTAMENTE)
        =================================================================================== -->
   <div id="public-view" class="w-full flex-1">
 
     <!-- CABECERA LIMPIA -->
     <header class="border-b sticky top-0 z-30 backdrop-blur-md" style="background-color: var(--bg); border-color: var(--card-border);">
-      <div class="max-w-3xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="max-w-3xl mx-auto px-4 py-3.5 flex items-center justify-between">
         
-        <div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight" style="color: var(--text);" id="brand-name">
+        <a href="#" class="flex flex-col">
+          <span class="text-2xl font-extrabold tracking-tight" style="color: var(--text);" id="brand-name">
             Barbería El Barrio
-          </h1>
-          <p class="text-sm font-semibold mt-0.5" style="color: var(--accent);">
+          </span>
+          <span class="text-xs font-semibold" style="color: var(--accent);">
             Triana, Sevilla · Calle Castilla 24
-          </p>
-        </div>
+          </span>
+        </a>
 
-        <!-- Opciones: Tema e Idioma -->
+        <!-- Opciones: Idioma y Tema -->
         <div class="flex items-center gap-2">
-          <!-- Selector de Idioma Simple -->
           <select
             id="lang-select"
             onchange="changeLanguage(this.value)"
-            class="h-10 px-3 rounded-xl border text-xs font-bold focus:outline-none cursor-pointer"
+            class="h-9 px-2.5 rounded-xl border text-xs font-bold focus:outline-none cursor-pointer"
             style="background-color: var(--card); border-color: var(--card-border); color: var(--text);"
           >
-            <option value="es">🇪🇸 Español</option>
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 Français</option>
-            <option value="it">🇮🇹 Italiano</option>
-            <option value="de">🇩🇪 Deutsch</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="en">🇬🇧 EN</option>
+            <option value="fr">🇫🇷 FR</option>
+            <option value="it">🇮🇹 IT</option>
+            <option value="de">🇩🇪 DE</option>
           </select>
 
-          <!-- Botón Modo Claro / Oscuro -->
           <button
             onclick="toggleTheme()"
-            class="w-10 h-10 rounded-xl border flex items-center justify-center font-bold text-base"
+            class="w-9 h-9 rounded-xl border flex items-center justify-center font-bold text-sm"
             style="background-color: var(--card); border-color: var(--card-border); color: var(--text);"
-            title="Cambiar tema claro/oscuro"
+            title="Cambiar tema"
           >
             <span id="theme-icon">☀️</span>
           </button>
@@ -160,105 +157,85 @@
       </div>
     </header>
 
-    <!-- CUERPO PRINCIPAL (PASO A PASO DIRECTO Y SIN DISTRACCIONES) -->
-    <main class="max-w-3xl mx-auto px-4 py-6 sm:py-8 space-y-8">
+    <main class="max-w-3xl mx-auto px-4 py-5 space-y-6">
 
-      <!-- AVISO CLARO: ABIERTO HOY & SIN ESPERAS -->
-      <div class="p-4 sm:p-5 rounded-2xl border flex items-center justify-between gap-3" style="background-color: var(--card); border-color: var(--card-border);">
-        <div class="flex items-center gap-3">
-          <span class="w-3.5 h-3.5 rounded-full bg-emerald-500 shrink-0"></span>
-          <div>
-            <p class="text-base font-bold" style="color: var(--text);" id="txt-status-open">Abierto hoy · Sin esperas</p>
-            <p class="text-xs sm:text-sm font-medium" style="color: var(--text-muted);" id="txt-status-sub">Elige tu hora abajo y entra directo a cortarte el pelo.</p>
-          </div>
-        </div>
-        <a
-          href="tel:+34600112233"
-          id="btn-call-shop"
-          class="px-4 py-2.5 rounded-xl border text-xs font-bold shrink-0 text-center hover:opacity-80"
-          style="border-color: var(--card-border); color: var(--text); background-color: var(--bg);"
-        >
-          📞 <span id="txt-btn-call">Llamar</span>
-        </a>
-      </div>
+      <!-- =========================================================================
+           1. LO PRIMERO NADA MÁS ENTRAR: MÓDULO PARA COGER CITA
+           ========================================================================= -->
 
-      <!-- ==================== PASO 1: ELEGIR SERVICIO ==================== -->
-      <section class="space-y-3">
-        <div class="flex items-center gap-2">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-sm font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">1</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold" style="color: var(--text);" id="txt-step1-title">
-            ¿Qué te vas a hacer?
+      <!-- PASO 1: ELEGIR CORTE / SERVICIO -->
+      <section class="space-y-2.5">
+        <div class="flex items-center justify-between">
+          <h2 class="text-lg sm:text-xl font-extrabold flex items-center gap-2" style="color: var(--text);" id="txt-step1-title">
+            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">1</span>
+            Elige tu corte
           </h2>
+          <span class="text-xs font-medium" style="color: var(--text-muted);" id="txt-step1-sub">Corte a navaja o tijera</span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3" id="services-container">
-          <!-- Tarjetas grandes de servicios inyectadas por JS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="services-container">
+          <!-- Inyectado dinámicamente -->
         </div>
       </section>
 
-      <!-- ==================== PASO 2: ELEGIR DÍA Y HORA ==================== -->
-      <section class="space-y-4">
+      <!-- PASO 2: ELEGIR DÍA Y HORA -->
+      <section class="space-y-3 pt-2">
         <div class="flex items-center justify-between flex-wrap gap-2">
-          <div class="flex items-center gap-2">
-            <span class="w-7 h-7 rounded-full flex items-center justify-center text-sm font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">2</span>
-            <h2 class="text-xl sm:text-2xl font-extrabold" style="color: var(--text);" id="txt-step2-title">
-              ¿Qué día y hora prefieres?
-            </h2>
-          </div>
-          <span class="text-sm font-bold num-formal" style="color: var(--accent);" id="selected-date-summary"></span>
+          <h2 class="text-lg sm:text-xl font-extrabold flex items-center gap-2" style="color: var(--text);" id="txt-step2-title">
+            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">2</span>
+            Elige día y hora
+          </h2>
+          <span class="text-xs font-bold num-formal" style="color: var(--accent);" id="selected-date-summary"></span>
         </div>
 
-        <!-- Botones de Días (Grandes y fáciles de pulsar) -->
+        <!-- Botones de Días -->
         <div>
-          <p class="text-xs font-bold uppercase tracking-wider mb-2" style="color: var(--text-muted);" id="txt-lbl-days">Selecciona el día:</p>
-          <div class="flex gap-2.5 overflow-x-auto no-scrollbar py-1" id="days-container"></div>
+          <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="days-container"></div>
         </div>
 
-        <!-- Botones de Horas (Mañana y Tarde) -->
-        <div class="space-y-4 pt-2">
+        <!-- Horas Mañana y Tarde -->
+        <div class="space-y-3 pt-1">
           <div>
-            <p class="text-xs font-bold uppercase tracking-wider mb-2" style="color: var(--text-muted);" id="txt-lbl-morning">Por la mañana (10:00 a 14:00):</p>
-            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2.5" id="morning-slots-container"></div>
+            <p class="text-xs font-bold uppercase tracking-wider mb-1.5" style="color: var(--text-muted);" id="txt-lbl-morning">Mañanas (10:00 — 14:00):</p>
+            <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="morning-slots-container"></div>
           </div>
 
           <div>
-            <p class="text-xs font-bold uppercase tracking-wider mb-2" style="color: var(--text-muted);" id="txt-lbl-afternoon">Por la tarde (16:30 a 20:00):</p>
-            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2.5" id="afternoon-slots-container"></div>
+            <p class="text-xs font-bold uppercase tracking-wider mb-1.5" style="color: var(--text-muted);" id="txt-lbl-afternoon">Tardes (16:30 — 20:00):</p>
+            <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="afternoon-slots-container"></div>
           </div>
         </div>
       </section>
 
-      <!-- ==================== PASO 3: TUS DATOS ==================== -->
-      <section class="space-y-3 border-t pt-6" style="border-color: var(--card-border);">
+      <!-- PASO 3: NOMBRE Y TELÉFONO -->
+      <section class="space-y-2.5 pt-2">
         <div class="flex items-center gap-2">
-          <span class="w-7 h-7 rounded-full flex items-center justify-center text-sm font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">3</span>
-          <h2 class="text-xl sm:text-2xl font-extrabold" style="color: var(--text);" id="txt-step3-title">
-            Tu nombre y teléfono
+          <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">3</span>
+          <h2 class="text-lg sm:text-xl font-extrabold" style="color: var(--text);" id="txt-step3-title">
+            Tu nombre y WhatsApp
           </h2>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
           <div>
-            <label for="client-name" class="block text-sm font-bold mb-1.5" style="color: var(--text);" id="lbl-name">Tu nombre:</label>
             <input
               type="text"
               id="client-name"
-              placeholder="Ej. Juan Pérez"
+              placeholder="Tu nombre completo *"
               autocomplete="name"
-              class="w-full h-14 border rounded-2xl px-4 text-base font-bold focus:outline-none"
+              class="w-full h-12 border rounded-xl px-3.5 text-sm font-bold focus:outline-none"
               style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);"
               oninput="validateForm()"
             />
           </div>
 
           <div>
-            <label for="client-phone" class="block text-sm font-bold mb-1.5" style="color: var(--text);" id="lbl-phone">Teléfono (WhatsApp):</label>
             <input
               type="tel"
               id="client-phone"
-              placeholder="Ej. 612 345 678"
+              placeholder="Teléfono móvil (WhatsApp) *"
               autocomplete="tel"
-              class="w-full h-14 border rounded-2xl px-4 text-base font-bold focus:outline-none num-formal"
+              class="w-full h-12 border rounded-xl px-3.5 text-sm font-bold focus:outline-none num-formal"
               style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);"
               oninput="validateForm()"
             />
@@ -266,18 +243,17 @@
         </div>
       </section>
 
-      <!-- ==================== RESUMEN Y BOTÓN FINAL ==================== -->
-      <div class="p-6 rounded-3xl border space-y-4 shadow-xl" style="background-color: var(--card); border-color: var(--border-selected);">
-        
+      <!-- RESUMEN Y BOTÓN DESTACADO DE PEDIR CITA -->
+      <div class="p-4 sm:p-5 rounded-2xl border space-y-3.5 shadow-lg" style="background-color: var(--card); border-color: var(--border-selected);">
         <div class="flex items-center justify-between flex-wrap gap-2">
           <div>
             <p class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="txt-summary-title">Resumen de tu cita:</p>
-            <p class="text-lg sm:text-xl font-extrabold mt-0.5" style="color: var(--text);" id="summary-service-text">Corte de pelo (12 €)</p>
-            <p class="text-sm font-bold num-formal mt-0.5" style="color: var(--accent);" id="summary-datetime-text">Selecciona día y hora</p>
+            <p class="text-base sm:text-lg font-extrabold mt-0.5" style="color: var(--text);" id="summary-service-text">Corte de pelo (12 €)</p>
+            <p class="text-xs font-bold num-formal mt-0.5" style="color: var(--accent);" id="summary-datetime-text">Selecciona día y hora arriba</p>
           </div>
           <div class="text-right">
-            <span class="text-xs font-bold uppercase tracking-wider block" style="color: var(--text-muted);" id="txt-lbl-pay">Total a pagar:</span>
-            <span class="text-3xl font-extrabold num-formal" style="color: var(--text);" id="summary-price-text">12 €</span>
+            <span class="text-xs font-bold uppercase tracking-wider block" style="color: var(--text-muted);" id="txt-lbl-pay">Total en el local:</span>
+            <span class="text-2xl font-extrabold num-formal" style="color: var(--text);" id="summary-price-text">12 €</span>
           </div>
         </div>
 
@@ -286,7 +262,7 @@
           type="button"
           onclick="handleBookingConfirmation()"
           disabled
-          class="w-full h-16 rounded-2xl text-base sm:text-lg uppercase tracking-wide font-extrabold flex items-center justify-center gap-3 btn-main disabled:opacity-30 disabled:cursor-not-allowed shadow-md"
+          class="w-full h-14 rounded-xl text-base uppercase tracking-wide font-extrabold flex items-center justify-center gap-2 btn-main disabled:opacity-30 disabled:cursor-not-allowed shadow-md"
         >
           <span>📱</span>
           <span id="txt-cta-button">PEDIR CITA POR WHATSAPP</span>
@@ -297,24 +273,78 @@
         </p>
       </div>
 
-      <!-- UBICACIÓN & CONTACTO -->
-      <footer class="border-t pt-6 pb-12 text-center space-y-3 font-medium text-xs sm:text-sm" style="border-color: var(--card-border); color: var(--text-muted);">
-        <p class="font-bold text-base" style="color: var(--text);" id="txt-footer-address">
-          📍 Calle Castilla 24, Triana, Sevilla
-        </p>
-        <p id="txt-footer-hours">
-          Horario: Lun a Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30
-        </p>
-        <div class="pt-2 flex items-center justify-center gap-4">
-          <a href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla" target="_blank" class="underline font-bold" style="color: var(--text);" id="lnk-maps">
-            Ver en Google Maps
-          </a>
-          <span>·</span>
-          <button onclick="openPinModal()" class="underline font-bold hover:opacity-80" style="color: var(--text);">
-            Acceso Barbero 🔒
-          </button>
+
+      <!-- =========================================================================
+           2. MÁS ABAJO: FOTOS DEL LOCAL, RESEÑAS Y UBICACIÓN
+           ========================================================================= -->
+      <div class="border-t pt-8 space-y-6" style="border-color: var(--card-border);">
+        
+        <!-- FOTOS DEL TALLER -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-extrabold" style="color: var(--text);" id="txt-gallery-title">
+              Así es la barbería
+            </h3>
+            <span class="text-xs font-bold" style="color: var(--accent);">Calle Castilla 24 · Triana</span>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+            <div class="rounded-xl overflow-hidden aspect-[4/3] border" style="border-color: var(--card-border);">
+              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="Sillón clásico de barbería" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="rounded-xl overflow-hidden aspect-[4/3] border" style="border-color: var(--card-border);">
+              <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=500&q=80" alt="Afeitado con toalla caliente" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div class="rounded-xl overflow-hidden aspect-[4/3] border col-span-2 sm:col-span-1" style="border-color: var(--card-border);">
+              <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=500&q=80" alt="Herramientas tradicionales" class="w-full h-full object-cover" loading="lazy" />
+            </div>
+          </div>
         </div>
-      </footer>
+
+        <!-- RESEÑAS DE CLIENTES -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5 text-amber-400">
+              <span class="text-sm font-extrabold text-white">4,9</span>
+              <span>★★★★★</span>
+              <span class="text-xs font-semibold" style="color: var(--text-muted);">(320+ reseñas en Google)</span>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div class="p-3.5 rounded-xl border space-y-1" style="background-color: var(--card); border-color: var(--card-border);">
+              <p class="text-xs leading-relaxed" style="color: var(--text);" id="txt-review-1">“El mejor corte y afeitado tradicional de Sevilla. Llegas a tu hora y entras directo al sillón sin perder la tarde.”</p>
+              <p class="text-[11px] font-bold text-amber-400">— Juan Carlos M. (Triana)</p>
+            </div>
+            <div class="p-3.5 rounded-xl border space-y-1" style="background-color: var(--card); border-color: var(--card-border);">
+              <p class="text-xs leading-relaxed" style="color: var(--text);" id="txt-review-2">“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”</p>
+              <p class="text-[11px] font-bold text-amber-400">— James M. (UK)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- UBICACIÓN, HORARIO Y ACCESO BARBERO -->
+        <footer class="p-4 rounded-2xl border space-y-3 text-xs" style="background-color: var(--card); border-color: var(--card-border);">
+          <div class="flex items-start justify-between gap-3 flex-wrap">
+            <div>
+              <p class="font-extrabold text-sm" style="color: var(--text);" id="txt-footer-address">📍 Calle Castilla 24, Triana, Sevilla</p>
+              <p class="mt-0.5" style="color: var(--text-muted);" id="txt-footer-hours">Lun a Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30</p>
+              <p class="mt-1 font-bold">Teléfono: <a href="tel:+34600112233" class="underline text-amber-400">600 112 233</a></p>
+            </div>
+            <a href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla" target="_blank" class="px-3 py-2 rounded-xl border font-bold hover:opacity-80" style="border-color: var(--card-border); color: var(--text); background-color: var(--bg);">
+              Cómo llegar (Google Maps)
+            </a>
+          </div>
+
+          <div class="border-t pt-3 flex items-center justify-between" style="border-color: var(--card-border); color: var(--text-muted);">
+            <span>Barbería El Barrio · Triana</span>
+            <button onclick="openPinModal()" class="underline font-bold hover:text-white" style="color: var(--text-muted);">
+              Acceso Barbero 🔒
+            </button>
+          </div>
+        </footer>
+
+      </div>
 
     </main>
   </div>
@@ -566,7 +596,7 @@
       if (theme === 'light') {
         htmlEl.classList.add('light-mode');
         if (themeIcon) themeIcon.textContent = '🌙';
-        if (metaTheme) metaTheme.setAttribute('content', '#f5f5f7');
+        if (metaTheme) metaTheme.setAttribute('content', '#f4f4f6');
       } else {
         htmlEl.classList.remove('light-mode');
         if (themeIcon) themeIcon.textContent = '☀️';
@@ -587,27 +617,24 @@
     // TRADUCCIONES LIMPIAS (ES, EN, FR, IT, DE)
     const I18N = {
       es: {
-        statusOpen: "Abierto hoy · Sin esperas",
-        statusSub: "Elige tu hora abajo y entra directo a cortarte el pelo.",
-        btnCall: "Llamar",
-        step1Title: "¿Qué te vas a hacer?",
-        step2Title: "¿Qué día y hora prefieres?",
-        lblDays: "Selecciona el día:",
-        lblMorning: "Por la mañana (10:00 a 14:00):",
-        lblAfternoon: "Por la tarde (16:30 a 20:00):",
-        step3Title: "Tu nombre y teléfono",
-        lblName: "Tu nombre:",
-        namePlaceholder: "Ej. Juan Pérez",
-        lblPhone: "Teléfono (WhatsApp):",
-        phonePlaceholder: "Ej. 612 345 678",
+        step1Title: "1. Elige tu corte",
+        step1Sub: "Corte a navaja o tijera",
+        step2Title: "2. Elige día y hora",
+        lblMorning: "Mañanas (10:00 — 14:00):",
+        lblAfternoon: "Tardes (16:30 — 20:00):",
+        step3Title: "3. Tu nombre y WhatsApp",
+        namePlaceholder: "Tu nombre completo *",
+        phonePlaceholder: "Teléfono móvil (WhatsApp) *",
         summaryTitle: "Resumen de tu cita:",
-        lblPay: "Total a pagar:",
+        lblPay: "Total en el local:",
         ctaButton: "PEDIR CITA POR WHATSAPP",
         noPayNotice: "ℹ️ No tienes que pagar nada ahora. Pagas en la barbería en efectivo o Bizum.",
+        galleryTitle: "Así es la barbería",
+        review1: "“El mejor corte y afeitado tradicional de Sevilla. Llegas a tu hora y entras directo al sillón sin perder la tarde.”",
+        review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Sevilla",
-        footerHours: "Horario: Lun a Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30",
-        lnkMaps: "Ver en Google Maps",
-        chooseDatePrompt: "Selecciona día y hora",
+        footerHours: "Lun a Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30",
+        chooseDatePrompt: "Selecciona día y hora arriba",
         modalSuccessTitle: "Cita Solicitada",
         modalSuccessDesc: "Hemos abierto tu WhatsApp con los datos de tu reserva para que el peluquero te confirme enseguida.",
         closedDay: "Cerrado este día",
@@ -619,27 +646,24 @@
           `Hola, quiero reservar cita para ${s} el ${d} a las ${t}. Nombre: ${n}, Tel: ${ph}. (Barbería El Barrio, Triana)`
       },
       en: {
-        statusOpen: "Open today · No waiting",
-        statusSub: "Pick your time below and walk straight in.",
-        btnCall: "Call",
-        step1Title: "Select your service",
-        step2Title: "Choose day & time",
-        lblDays: "Select date:",
-        lblMorning: "Morning (10:00 AM to 2:00 PM):",
-        lblAfternoon: "Afternoon (4:30 PM to 8:00 PM):",
-        step3Title: "Your name and phone",
-        lblName: "Your full name:",
-        namePlaceholder: "e.g. John Miller",
-        lblPhone: "Phone (WhatsApp):",
-        phonePlaceholder: "e.g. +44 7123 456789",
+        step1Title: "1. Select your cut",
+        step1Sub: "Scissor or razor cut",
+        step2Title: "2. Choose day & time",
+        lblMorning: "Morning (10:00 AM — 2:00 PM):",
+        lblAfternoon: "Afternoon (4:30 PM — 8:00 PM):",
+        step3Title: "3. Your name & WhatsApp",
+        namePlaceholder: "Your full name *",
+        phonePlaceholder: "Mobile phone (WhatsApp) *",
         summaryTitle: "Booking summary:",
-        lblPay: "Total to pay:",
+        lblPay: "Total on site:",
         ctaButton: "BOOK APPOINTMENT VIA WHATSAPP",
         noPayNotice: "ℹ️ No deposit needed. You pay at the barbershop in cash or card.",
+        galleryTitle: "Inside the barbershop",
+        review1: "“Best traditional fade and hot towel shave in Seville. Right on time without waiting.”",
+        review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Seville",
-        footerHours: "Hours: Mon to Fri 10:00–14:00 & 16:30–20:00 · Sat 10:00–14:30",
-        lnkMaps: "View on Google Maps",
-        chooseDatePrompt: "Select date and time",
+        footerHours: "Mon to Fri 10:00–14:00 & 16:30–20:00 · Sat 10:00–14:30",
+        chooseDatePrompt: "Select date and time above",
         modalSuccessTitle: "Booking Requested",
         modalSuccessDesc: "WhatsApp opened with your appointment details so the barber can confirm right away.",
         closedDay: "Closed on this date",
@@ -651,26 +675,23 @@
           `Hello, I would like to book an appointment for ${s} on ${d} at ${t}. Name: ${n}, Phone: ${ph}. (Barbería El Barrio, Triana)`
       },
       fr: {
-        statusOpen: "Ouvert aujourd'hui · Sans attente",
-        statusSub: "Choisissez votre heure et entrez directement.",
-        btnCall: "Appeler",
-        step1Title: "Choisissez la prestation",
-        step2Title: "Date et heure",
-        lblDays: "Choisissez le jour :",
-        lblMorning: "Matin (10:00 à 14:00) :",
-        lblAfternoon: "Après-midi (16:30 à 20:00) :",
-        step3Title: "Vos coordonnées",
-        lblName: "Votre nom :",
-        namePlaceholder: "Ex. Jean Dupont",
-        lblPhone: "Téléphone (WhatsApp) :",
-        phonePlaceholder: "Ex. +33 612 345 678",
+        step1Title: "1. Choisissez la prestation",
+        step1Sub: "Coupe aux ciseaux ou rasoir",
+        step2Title: "2. Date et heure",
+        lblMorning: "Matin (10:00 — 14:00) :",
+        lblAfternoon: "Après-midi (16:30 — 20:00) :",
+        step3Title: "3. Vos coordonnées",
+        namePlaceholder: "Votre nom complet *",
+        phonePlaceholder: "Téléphone (WhatsApp) *",
         summaryTitle: "Récapitulatif :",
         lblPay: "Total sur place :",
         ctaButton: "RÉSERVER PAR WHATSAPP",
         noPayNotice: "ℹ️ Aucun paiement en ligne. Paiement sur place après la coupe.",
+        galleryTitle: "Le salon",
+        review1: "“Superbe coupe et rasage traditionnel à Séville. Ponctuel et chaleureux.”",
+        review2: "“Accueil parfait pour les touristes, confirmation WhatsApp rapide.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Séville",
         footerHours: "Horaires : Lun–Ven 10:00–20:00 · Sam 10:00–14:30",
-        lnkMaps: "Voir sur Google Maps",
         chooseDatePrompt: "Choisissez la date et l'heure",
         modalSuccessTitle: "Demande Envoyée",
         modalSuccessDesc: "WhatsApp s'est ouvert pour envoyer votre confirmation au barbier.",
@@ -683,26 +704,23 @@
           `Bonjour, je souhaite réserver pour ${s} le ${d} à ${t}. Nom: ${n}, Tél: ${ph}. (Barbería El Barrio, Triana)`
       },
       it: {
-        statusOpen: "Aperto oggi · Senza attese",
-        statusSub: "Scegli l'orario ed entra direttamente.",
-        btnCall: "Chiama",
-        step1Title: "Scegli il servizio",
-        step2Title: "Giorno e ora",
-        lblDays: "Scegli il giorno:",
-        lblMorning: "Mattina (10:00 - 14:00):",
-        lblAfternoon: "Pomeriggio (16:30 - 20:00):",
-        step3Title: "I tuoi dati",
-        lblName: "Il tuo nome:",
-        namePlaceholder: "Es. Marco Rossi",
-        lblPhone: "Telefono (WhatsApp):",
-        phonePlaceholder: "Es. +39 340 1234567",
+        step1Title: "1. Scegli il servizio",
+        step1Sub: "Taglio a forbice o rasoio",
+        step2Title: "2. Giorno e ora",
+        lblMorning: "Mattina (10:00 — 14:00):",
+        lblAfternoon: "Pomeriggio (16:30 — 20:00):",
+        step3Title: "3. I tuoi dati",
+        namePlaceholder: "Nome e cognome *",
+        phonePlaceholder: "Telefono (WhatsApp) *",
         summaryTitle: "Riepilogo:",
         lblPay: "Totale da pagare:",
         ctaButton: "PRENOTA SU WHATSAPP",
         noPayNotice: "ℹ️ Nessun pagamento anticipato. Paghi direttamente in negozio.",
+        galleryTitle: "La barberia",
+        review1: "“Miglior taglio e rasatura di Siviglia. Puntualità e grande professionalità.”",
+        review2: "“Ottimo servizio e rapida conferma su WhatsApp.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Siviglia",
         footerHours: "Orari: Lun–Ven 10:00–20:00 · Sab 10:00–14:30",
-        lnkMaps: "Apri su Google Maps",
         chooseDatePrompt: "Scegli giorno e ora",
         modalSuccessTitle: "Prenotazione Inviata",
         modalSuccessDesc: "WhatsApp si è aperto con i dettagli per confermare il tuo turno.",
@@ -715,26 +733,23 @@
           `Ciao, vorrei prenotare per ${s} il ${d} alle ore ${t}. Nome: ${n}, Tel: ${ph}. (Barbería El Barrio, Triana)`
       },
       de: {
-        statusOpen: "Heute geöffnet · Keine Wartezeit",
-        statusSub: "Uhrzeit wählen und direkt drankommen.",
-        btnCall: "Anrufen",
-        step1Title: "Dienstleistung wählen",
-        step2Title: "Datum & Uhrzeit",
-        lblDays: "Tag wählen:",
-        lblMorning: "Vormittag (10:00 - 14:00 Uhr):",
-        lblAfternoon: "Nachmittag (16:30 - 20:00 Uhr):",
-        step3Title: "Ihre Daten",
-        lblName: "Ihr Name:",
-        namePlaceholder: "z.B. Max Mustermann",
-        lblPhone: "Telefon (WhatsApp):",
-        phonePlaceholder: "z.B. +49 170 1234567",
+        step1Title: "1. Dienstleistung wählen",
+        step1Sub: "Schnitt mit Schere oder Rasierer",
+        step2Title: "2. Datum & Uhrzeit",
+        lblMorning: "Vormittag (10:00 — 14:00 Uhr):",
+        lblAfternoon: "Nachmittag (16:30 — 20:00 Uhr):",
+        step3Title: "3. Ihre Daten",
+        namePlaceholder: "Vollständiger Name *",
+        phonePlaceholder: "Mobilnummer (WhatsApp) *",
         summaryTitle: "Zusammenfassung:",
         lblPay: "Gesamtbetrag vor Ort:",
         ctaButton: "PER WHATSAPP BUCHEN",
         noPayNotice: "ℹ️ Keine Vorauszahlung nötig. Zahlung vor Ort im Salon.",
+        galleryTitle: "Der Salon",
+        review1: "“Erstklassiger Haarschnitt und Heißtuch-Rasur in Sevilla.”",
+        review2: "“Sehr freundlich, schnelle Buchung über WhatsApp.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Sevilla",
         footerHours: "Öffnungszeiten: Mo–Fr 10:00–20:00 Uhr · Sa 10:00–14:30 Uhr",
-        lnkMaps: "In Google Maps öffnen",
         chooseDatePrompt: "Datum und Uhrzeit wählen",
         modalSuccessTitle: "Buchung Gesendet",
         modalSuccessDesc: "WhatsApp wurde geöffnet, um Ihren Termin zu bestätigen.",
@@ -750,7 +765,7 @@
 
     const SERVICES_TRANSLATIONS = {
       1: {
-        es: { name: "Corte de pelo", desc: "Lavado, corte a tijera o máquina y peinado" },
+        es: { name: "Corte de pelo", desc: "Lavado artesano, tijera o máquina y peinado" },
         en: { name: "Haircut", desc: "Wash, scissor or clipper cut and styling" },
         fr: { name: "Coupe de cheveux", desc: "Shampoing, coupe et coiffage" },
         it: { name: "Taglio di capelli", desc: "Lavaggio, taglio e rifinitura" },
@@ -780,7 +795,7 @@
     };
 
     const DEFAULT_SERVICES = [
-      { id: 1, name: "Corte de pelo", duration: "30 min", price: 12, durationMin: 30, desc: "Lavado, corte a tijera o máquina y peinado", active: true },
+      { id: 1, name: "Corte de pelo", duration: "30 min", price: 12, durationMin: 30, desc: "Lavado artesano, tijera o máquina y peinado", active: true },
       { id: 2, name: "Corte + Arreglo de Barba", duration: "45 min", price: 20, durationMin: 45, desc: "Corte completo y afeitado de barba con toalla caliente", active: true },
       { id: 3, name: "Arreglo de Barba", duration: "20 min", price: 10, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y aceite", active: true },
       { id: 4, name: "Jubilados y Niños", duration: "25 min", price: 10, durationMin: 25, desc: "Menores de 12 años y mayores de 65", active: true }
@@ -890,26 +905,23 @@
     function updateLanguageTexts() {
       const t = I18N[state.lang] || I18N.es;
       
-      setText('txt-status-open', t.statusOpen);
-      setText('txt-status-sub', t.statusSub);
-      setText('txt-btn-call', t.btnCall);
       setText('txt-step1-title', t.step1Title);
+      setText('txt-step1-sub', t.step1Sub);
       setText('txt-step2-title', t.step2Title);
-      setText('txt-lbl-days', t.lblDays);
       setText('txt-lbl-morning', t.lblMorning);
       setText('txt-lbl-afternoon', t.lblAfternoon);
       setText('txt-step3-title', t.step3Title);
-      setText('lbl-name', t.lblName);
       const cn = document.getElementById('client-name'); if (cn) cn.placeholder = t.namePlaceholder;
-      setText('lbl-phone', t.lblPhone);
       const cp = document.getElementById('client-phone'); if (cp) cp.placeholder = t.phonePlaceholder;
       setText('txt-summary-title', t.summaryTitle);
       setText('txt-lbl-pay', t.lblPay);
       setText('txt-cta-button', t.ctaButton);
       setText('txt-no-pay-notice', t.noPayNotice);
+      setText('txt-gallery-title', t.galleryTitle);
+      setText('txt-review-1', t.review1);
+      setText('txt-review-2', t.review2);
       setText('txt-footer-address', t.footerAddress);
       setText('txt-footer-hours', t.footerHours);
-      setText('lnk-maps', t.lnkMaps);
       setText('modal-success-title', t.modalSuccessTitle);
       setText('modal-success-desc', t.modalSuccessDesc);
 
@@ -935,7 +947,7 @@
     }
 
     // =========================================================================
-    // RENDERIZADO DE SERVICIOS (BOTONES GRANDES Y CLAROS)
+    // RENDERIZADO DE SERVICIOS
     // =========================================================================
     function renderServices() {
       const container = document.getElementById('services-container');
@@ -951,29 +963,29 @@
           : 'background-color: var(--card); border-color: var(--card-border); border-width: 1px;';
 
         const checkMark = isSelected
-          ? `<span class="w-6 h-6 rounded-full flex items-center justify-center font-extrabold text-xs" style="background-color: var(--accent); color: var(--btn-text);">✓</span>`
-          : `<span class="w-6 h-6 rounded-full border flex items-center justify-center" style="border-color: var(--card-border);"></span>`;
+          ? `<span class="w-5 h-5 rounded-full flex items-center justify-center font-extrabold text-xs shrink-0" style="background-color: var(--accent); color: var(--btn-text);">✓</span>`
+          : `<span class="w-5 h-5 rounded-full border flex items-center justify-center shrink-0" style="border-color: var(--card-border);"></span>`;
 
         return `
           <button 
             type="button"
             onclick="selectService(${service.id})"
-            class="p-4 sm:p-5 rounded-2xl border text-left transition-all flex items-start justify-between gap-3 cursor-pointer w-full"
+            class="p-3.5 sm:p-4 rounded-2xl border text-left transition-all flex items-start justify-between gap-3 cursor-pointer w-full"
             style="${style}"
           >
-            <div class="space-y-1 flex-1">
-              <div class="flex items-center gap-2.5">
+            <div class="space-y-0.5 flex-1 min-w-0">
+              <div class="flex items-center gap-2">
                 ${checkMark}
-                <span class="text-lg font-extrabold" style="color: var(--text);">
+                <span class="text-base sm:text-lg font-extrabold truncate" style="color: var(--text);">
                   ${service.name}
                 </span>
               </div>
-              <p class="text-xs sm:text-sm pl-8 font-medium leading-snug" style="color: var(--text-muted);">${service.desc || ''}</p>
+              <p class="text-xs pl-7 font-medium leading-snug" style="color: var(--text-muted);">${service.desc || ''}</p>
             </div>
 
-            <div class="text-right shrink-0 pl-2">
-              <span class="text-2xl font-extrabold block num-formal" style="color: var(--text);">${service.price} €</span>
-              <span class="text-xs font-bold block mt-0.5 num-formal" style="color: var(--accent);">${service.duration}</span>
+            <div class="text-right shrink-0 pl-1">
+              <span class="text-xl sm:text-2xl font-extrabold block num-formal" style="color: var(--text);">${service.price} €</span>
+              <span class="text-[11px] font-bold block num-formal" style="color: var(--accent);">${service.duration}</span>
             </div>
           </button>
         `;
@@ -1035,12 +1047,12 @@
           <button
             type="button"
             onclick="selectDate('${dateKey}')"
-            class="flex-shrink-0 flex flex-col items-center justify-center w-20 sm:w-22 py-3 rounded-2xl border transition-all"
+            class="flex-shrink-0 flex flex-col items-center justify-center w-18 sm:w-20 py-2.5 rounded-xl border transition-all"
             style="${style}"
           >
-            <span class="text-xs uppercase font-extrabold">${dayOfWeek}</span>
-            <span class="text-2xl font-extrabold my-0.5 num-formal leading-none">${dayNum}</span>
-            <span class="text-xs font-bold">${month}</span>
+            <span class="text-[10px] uppercase font-extrabold">${dayOfWeek}</span>
+            <span class="text-xl font-extrabold my-0.5 num-formal leading-none">${dayNum}</span>
+            <span class="text-[10px] font-bold">${month}</span>
           </button>
         `;
       }).join('');
@@ -1090,7 +1102,7 @@
 
       const closedDates = STORE.getClosedDates();
       if (closedDates.includes(state.selectedDate)) {
-        morningEl.innerHTML = `<div class="col-span-3 sm:col-span-5 py-4 text-center text-sm font-bold border rounded-2xl" style="background-color: var(--card); border-color: var(--card-border); color: var(--text-muted);">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
+        morningEl.innerHTML = `<div class="col-span-4 sm:col-span-5 py-3 text-center text-xs font-bold border rounded-xl" style="background-color: var(--card); border-color: var(--card-border); color: var(--text-muted);">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
         afternoonEl.innerHTML = '';
         return;
       }
@@ -1129,7 +1141,7 @@
 
         if (!slot.isAvailable) {
           return `
-            <button type="button" disabled class="h-12 text-sm rounded-xl border line-through cursor-not-allowed font-bold opacity-30 num-formal" style="background-color: var(--bg); border-color: var(--card-border); color: var(--text-muted);">
+            <button type="button" disabled class="h-10 text-xs rounded-xl border line-through cursor-not-allowed font-bold opacity-30 num-formal" style="background-color: var(--bg); border-color: var(--card-border); color: var(--text-muted);">
               ${slot.time}
             </button>
           `;
@@ -1140,7 +1152,7 @@
           : `background-color: var(--card); color: var(--text); border-color: var(--card-border); font-weight: 700;`;
 
         return `
-          <button type="button" onclick="selectTime('${slot.time}')" class="h-12 text-sm rounded-xl border transition-all flex items-center justify-center num-formal hover:border-amber-400" style="${style}">
+          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-xs rounded-xl border transition-all flex items-center justify-center num-formal hover:border-amber-400" style="${style}">
             ${slot.time}
           </button>
         `;
@@ -1839,7 +1851,7 @@ END:VCALENDAR`;
       changeLanguage(detected);
 
       const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.has('admin') || urlParams.has('panel') || STORE.isOwnerSession()) {
+      if (urlParams.has('admin') || urlParams.has('panel')) {
         STORE.setOwnerSession(true);
         enterAdminView();
       }
