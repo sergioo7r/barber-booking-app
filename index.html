@@ -396,7 +396,7 @@
           <div class="flex items-center justify-between flex-wrap gap-2">
             <div>
               <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="txt-summary-title">Resumen de reserva:</span>
-              <p class="text-base sm:text-lg font-bold font-serif mt-0.5" style="color: var(--text);" id="summary-service-text">Corte clásico (12 €)</p>
+              <p class="text-base sm:text-lg font-bold font-serif mt-0.5" style="color: var(--text);" id="summary-service-text">Corte (12 €)</p>
               <p class="text-xs font-semibold num-formal mt-0.5" style="color: var(--accent);" id="summary-datetime-text">Selecciona día y hora</p>
             </div>
             <div class="text-right">
@@ -657,7 +657,7 @@
       </p>
       
       <div class="p-4 rounded-2xl border text-left space-y-2 text-xs font-medium" style="background-color: var(--card); border-color: var(--border);">
-        <p><span style="color: var(--text-muted);">Servicio:</span> <b style="color: var(--text);" id="success-summary-service">Corte clásico (12 €)</b></p>
+        <p><span style="color: var(--text-muted);">Servicio:</span> <b style="color: var(--text);" id="success-summary-service">Corte (12 €)</b></p>
         <p><span style="color: var(--text-muted);">Fecha y hora:</span> <b class="text-amber-400 num-formal" id="success-summary-datetime">Hoy, 11:30</b></p>
         <p><span style="color: var(--text-muted);">Lugar:</span> <span style="color: var(--text);" id="success-summary-address">Calle Principal 12 · Centro</span></p>
       </div>
@@ -968,40 +968,32 @@
 
     const SERVICES_TRANSLATIONS = {
       1: {
-        es: { name: "Corte clásico", desc: "Lavado artesano, corte a tijera o máquina y peinado" },
-        en: { name: "Classic Haircut", desc: "Artisan wash, scissor or clipper cut and styling" },
-        fr: { name: "Coupe classique", desc: "Shampoing, coupe aux ciseaux et coiffage" },
-        it: { name: "Taglio classico", desc: "Lavaggio artigianale, taglio e rifinitura" },
-        de: { name: "Klassischer Haarschnitt", desc: "Haarwäsche, Schnitt & Styling" }
+        es: { name: "Corte", desc: "Corte y peinado" },
+        en: { name: "Haircut", desc: "Cut and styling" },
+        fr: { name: "Coupe", desc: "Coupe et coiffage" },
+        it: { name: "Taglio", desc: "Taglio e rifinitura" },
+        de: { name: "Haarschnitt", desc: "Schnitt und Styling" }
       },
       2: {
-        es: { name: "Corte + Ritual Barba", desc: "Corte completo y afeitado de barba con toalla caliente" },
-        en: { name: "Haircut + Beard Ritual", desc: "Full haircut and hot-towel beard shave" },
-        fr: { name: "Coupe + Soin Barbe", desc: "Coupe complète et soin serviette chaude" },
-        it: { name: "Taglio + Rituale Barba", desc: "Taglio completo e rasatura panno caldo" },
-        de: { name: "Haarschnitt + Bartritual", desc: "Komplettschnitt mit Heißtuch-Rasur" }
+        es: { name: "Barba", desc: "Arreglo y perfilado de barba" },
+        en: { name: "Beard Trim", desc: "Beard shape and outline" },
+        fr: { name: "Barbe", desc: "Taille et traçage de barbe" },
+        it: { name: "Barba", desc: "Modellatura e cura barba" },
+        de: { name: "Bartpflege", desc: "Bartrasur und Kontur" }
       },
       3: {
-        es: { name: "Arreglo de Barba Tradicional", desc: "Perfilado a navaja, toalla caliente y aceite nutritivo" },
-        en: { name: "Traditional Beard Trim", desc: "Razor outline, hot towel and beard oil" },
-        fr: { name: "Taille de Barbe Traditionnelle", desc: "Traçage au rasoir et serviette chaude" },
-        it: { name: "Rifinitura Barba Tradizionale", desc: "Modellatura a rasoio e panno caldo" },
-        de: { name: "Traditionelle Bartpflege", desc: "Messerrasur mit Heißtuch & Öl" }
-      },
-      4: {
-        es: { name: "Corte Junior / Senior", desc: "Menores de 12 años y mayores de 65 años" },
-        en: { name: "Junior & Senior Cut", desc: "Kids under 12 and seniors 65+" },
-        fr: { name: "Coupe Enfant / Senior", desc: "Moins de 12 ans et plus de 65 ans" },
-        it: { name: "Taglio Junior / Senior", desc: "Under 12 e over 65" },
-        de: { name: "Kinder- / Seniorenhaarschnitt", desc: "Kinder unter 12 und Senioren" }
+        es: { name: "Corte y Barba", desc: "Corte completo y arreglo de barba" },
+        en: { name: "Haircut & Beard", desc: "Full haircut and beard trim" },
+        fr: { name: "Coupe & Barbe", desc: "Coupe complète et soin barbe" },
+        it: { name: "Taglio e Barba", desc: "Taglio completo e cura barba" },
+        de: { name: "Haarschnitt & Bart", desc: "Komplettservice Schnitt und Bart" }
       }
     };
 
     const DEFAULT_SERVICES = [
-      { id: 1, name: "Corte clásico", duration: "30 min", price: 12, durationMin: 30, desc: "Lavado artesano, corte a tijera o máquina y peinado", active: true },
-      { id: 2, name: "Corte + Ritual Barba", duration: "45 min", price: 15, durationMin: 45, desc: "Corte completo y arreglo tradicional de barba con toalla caliente", active: true },
-      { id: 3, name: "Arreglo de Barba Tradicional", duration: "20 min", price: 7, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y bálsamo", active: true },
-      { id: 4, name: "Corte Junior / Senior", duration: "25 min", price: 10, durationMin: 25, desc: "Menores de 12 años y mayores de 65 años", active: true }
+      { id: 1, name: "Corte", duration: "30 min", price: 12, durationMin: 30, desc: "Corte y peinado", active: true },
+      { id: 2, name: "Barba", duration: "20 min", price: 7, durationMin: 20, desc: "Arreglo y perfilado de barba", active: true },
+      { id: 3, name: "Corte y Barba", duration: "45 min", price: 15, durationMin: 45, desc: "Corte completo y arreglo de barba", active: true }
     ];
 
     const STORE = {
@@ -1026,15 +1018,17 @@
       getServices() {
         const data = localStorage.getItem('barber_services');
         if (data) {
-          const list = JSON.parse(data);
-          // Sincronizar automáticamente con las tarifas solicitadas
-          const s1 = list.find(s => s.id === 1);
-          if (s1 && (s1.price === 15 || s1.price === 14)) s1.price = 12;
-          const s2 = list.find(s => s.id === 2);
-          if (s2 && (s2.price === 20 || s2.price === 18)) s2.price = 15;
-          const s3 = list.find(s => s.id === 3);
-          if (s3 && (s3.price === 10 || s3.price === 8)) s3.price = 7;
-          return list;
+          try {
+            const list = JSON.parse(data);
+            // Sincronizar automáticamente si la lista tiene servicios anteriores
+            if (list.length !== 3 || !list.some(s => s.name === "Corte y Barba")) {
+              STORE.saveServices(DEFAULT_SERVICES);
+              return DEFAULT_SERVICES;
+            }
+            return list;
+          } catch(e) {
+            return DEFAULT_SERVICES;
+          }
         }
         return DEFAULT_SERVICES;
       },
