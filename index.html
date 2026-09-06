@@ -230,41 +230,71 @@
             <button
               type="button"
               onclick="toggleLanguageDropdown(event)"
-              class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all spring-btn"
+              class="flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all spring-btn"
               style="border-color: var(--border); background-color: var(--card); color: var(--text);"
               aria-label="Seleccionar idioma"
             >
+              <span id="active-lang-flag" class="flex items-center">
+                <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect y="125" width="750" height="250" fill="#ffc400"/></svg>
+              </span>
               <span id="active-lang-text" class="uppercase font-bold tracking-wider text-[11px]">ES</span>
               <svg class="w-3 h-3 transition-transform duration-200 opacity-60" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
               </svg>
             </button>
 
-            <!-- Menú Desplegable -->
+            <!-- Menú Desplegable (Con banderas vectoriales SVG auténticas, sin emojis) -->
             <div
               id="lang-dropdown-menu"
-              class="hidden absolute right-0 mt-2 w-36 py-1 rounded-xl border shadow-2xl z-50 overflow-hidden font-sans"
+              class="hidden absolute right-0 mt-2 w-40 py-1 rounded-xl border shadow-2xl z-50 overflow-hidden font-sans"
               style="background-color: var(--card); border-color: var(--border);"
             >
-              <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
-                <span>🇪🇸 Español</span>
-                <span id="check-es" class="font-bold text-amber-500">✓</span>
+              <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect y="125" width="750" height="250" fill="#ffc400"/></svg>
+                  Español
+                </span>
+                <span id="check-es" class="font-bold text-emerald-400">✓</span>
               </button>
-              <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
-                <span>🇬🇧 English</span>
-                <span id="check-en" class="font-bold text-amber-500 hidden">✓</span>
+
+              <button onclick="changeLanguage('ro')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002B7F"/><rect x="1" width="1" height="2" fill="#FCD116"/><rect x="2" width="1" height="2" fill="#CE1126"/></svg>
+                  Română
+                </span>
+                <span id="check-ro" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
-              <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
-                <span>🇫🇷 Français</span>
-                <span id="check-fr" class="font-bold text-amber-500 hidden">✓</span>
+
+              <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 60 30"><clipPath id="uk1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clip-path="url(#uk1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="3"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>
+                  English
+                </span>
+                <span id="check-en" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
-              <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
-                <span>🇮🇹 Italiano</span>
-                <span id="check-it" class="font-bold text-amber-500 hidden">✓</span>
+
+              <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002654"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ce1126"/></svg>
+                  Français
+                </span>
+                <span id="check-fr" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
-              <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
-                <span>🇩🇪 Deutsch</span>
-                <span id="check-de" class="font-bold text-amber-500 hidden">✓</span>
+
+              <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>
+                  Italiano
+                </span>
+                <span id="check-it" class="font-bold text-emerald-400 hidden">✓</span>
+              </button>
+
+              <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-white/5 transition-colors" style="color: var(--text);">
+                <span class="flex items-center gap-2">
+                  <svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 5 3"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#dd0000"/><rect y="2" width="5" height="1" fill="#ffce00"/></svg>
+                  Deutsch
+                </span>
+                <span id="check-de" class="font-bold text-emerald-400 hidden">✓</span>
               </button>
             </div>
           </div>
@@ -799,7 +829,16 @@
       if (STORE.isOwnerSession()) renderAdminVisualCalendar();
     }
 
-    // MULTI-IDIOMA (ES, EN, FR, IT, DE)
+    // MULTI-IDIOMA (ES, RO, EN, FR, IT, DE)
+    const FLAG_SVGS = {
+      es: `<svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 750 500"><rect width="750" height="500" fill="#c60b1e"/><rect y="125" width="750" height="250" fill="#ffc400"/></svg>`,
+      ro: `<svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002B7F"/><rect x="1" width="1" height="2" fill="#FCD116"/><rect x="2" width="1" height="2" fill="#CE1126"/></svg>`,
+      en: `<svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 60 30"><clipPath id="uk1"><path d="M0,0 v30 h60 v-30 z"/></clipPath><g clip-path="url(#uk1)"><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="3"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></g></svg>`,
+      fr: `<svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#002654"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ce1126"/></svg>`,
+      it: `<svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 3 2"><rect width="1" height="2" fill="#009246"/><rect x="1" width="1" height="2" fill="#ffffff"/><rect x="2" width="1" height="2" fill="#ce2b37"/></svg>`,
+      de: `<svg class="w-4 h-3 rounded-[2px] shadow-sm overflow-hidden shrink-0" viewBox="0 0 5 3"><rect width="5" height="1" fill="#000000"/><rect y="1" width="5" height="1" fill="#dd0000"/><rect y="2" width="5" height="1" fill="#ffce00"/></svg>`
+    };
+
     const I18N = {
       es: {
         heroTitle: "Corte y cuidado de barba en Triana.",
@@ -832,6 +871,38 @@
         tomorrow: "Mañana",
         waMessage: (s, d, t, n, ph) =>
           `Hola, quiero reservar cita para ${s} el ${d} a las ${t}. Nombre: ${n}, Tel: ${ph}. (${STORE.getShop().shop || APP_CONFIG.brandName})`
+      },
+      ro: {
+        heroTitle: "Tuns și îngrijire barbă în Triana.",
+        heroDesc: "Rezervă-ți locul în 30 de secunde și intră direct pe scaun fără așteptare. Plata la salon după tuns.",
+        step1Title: "1. Alege serviciul",
+        step1Sub: "Prețuri clare fără surprize",
+        step2Title: "2. Alege ziua și ora",
+        lblMorning: "Dimineața (10:00 — 14:00)",
+        lblAfternoon: "După-amiaza (17:00 — 22:00)",
+        step3Title: "3. Datele tale",
+        step3Sub: "✓ Confirmare directă",
+        namePlaceholder: "Nume și prenume *",
+        phonePlaceholder: "Telefon mobil (WhatsApp) *",
+        summaryTitle: "Rezumat rezervare:",
+        lblPay: "Total la salon:",
+        ctaButton: "Rezervă Cita pe WhatsApp",
+        noPayNotice: "Fără plată în avans. Se plătește la frizerie în numerar sau Bizum/Card după tuns.",
+        galleryTitle: "Salonul din Triana",
+        review1: "“Cel mai bun tuns și fade din Triana. Punctualitate și servicii de nota 10.”",
+        review2: "“Rezervare super simplă pe WhatsApp în 30 de secunde și servicii impecabile.”",
+        footerAddress: "📍 C. Castilla, 58B, 41010 Sevilla (Triana)",
+        footerHours: "Luni până Vineri 10:00–14:00 și 17:00–22:00 · Sâmbătă 10:00–17:00",
+        chooseDatePrompt: "Selectează ziua și ora",
+        modalSuccessTitle: "Programare Trimisă",
+        modalSuccessDesc: "S-a deschis WhatsApp cu datele rezervării pentru a le trimite direct frizerului.",
+        closedDay: "Închis în această zi",
+        daysShort: ["Dum", "Lun", "Mar", "Mie", "Joi", "Vin", "Sâm"],
+        monthsShort: ["Ian", "Feb", "Mar", "Apr", "Mai", "Iun", "Iul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        today: "Azi",
+        tomorrow: "Mâine",
+        waMessage: (s, d, t, n, ph) =>
+          `Bună ziua, doresc o programare pentru ${s} în data de ${d} la ora ${t}. Nume: ${n}, Tel: ${ph}. (${STORE.getShop().shop || APP_CONFIG.brandName})`
       },
       en: {
         heroTitle: "Classic haircut and traditional straight-razor shave.",
@@ -966,6 +1037,7 @@
     const SERVICES_TRANSLATIONS = {
       1: {
         es: { name: "Corte", desc: "Corte y peinado" },
+        ro: { name: "Tuns", desc: "Tuns și aranjat" },
         en: { name: "Haircut", desc: "Cut and styling" },
         fr: { name: "Coupe", desc: "Coupe et coiffage" },
         it: { name: "Taglio", desc: "Taglio e rifinitura" },
@@ -973,6 +1045,7 @@
       },
       2: {
         es: { name: "Barba", desc: "Arreglo y perfilado de barba" },
+        ro: { name: "Barbă", desc: "Tuns și conturat barbă" },
         en: { name: "Beard Trim", desc: "Beard shape and outline" },
         fr: { name: "Barbe", desc: "Taille et traçage de barbe" },
         it: { name: "Barba", desc: "Modellatura e cura barba" },
@@ -980,6 +1053,7 @@
       },
       3: {
         es: { name: "Corte y Barba", desc: "Corte completo y arreglo de barba" },
+        ro: { name: "Tuns + Barbă", desc: "Pachet complet tuns și barbă" },
         en: { name: "Haircut & Beard", desc: "Full haircut and beard trim" },
         fr: { name: "Coupe & Barbe", desc: "Coupe complète et soin barbe" },
         it: { name: "Taglio e Barba", desc: "Taglio completo e cura barba" },
@@ -1075,6 +1149,7 @@
       const langs = navigator.languages || [navigator.language || navigator.userLanguage || 'es'];
       for (const l of langs) {
         const code = l.toLowerCase();
+        if (code.startsWith('ro')) return 'ro';
         if (code.startsWith('en')) return 'en';
         if (code.startsWith('fr')) return 'fr';
         if (code.startsWith('it')) return 'it';
@@ -1118,7 +1193,12 @@
       const langText = document.getElementById('active-lang-text');
       if (langText) langText.textContent = langCode.toUpperCase();
 
-      ['es', 'en', 'fr', 'it', 'de'].forEach(code => {
+      const activeFlag = document.getElementById('active-lang-flag');
+      if (activeFlag && FLAG_SVGS[langCode]) {
+        activeFlag.innerHTML = FLAG_SVGS[langCode];
+      }
+
+      ['es', 'ro', 'en', 'fr', 'it', 'de'].forEach(code => {
         const check = document.getElementById(`check-${code}`);
         if (check) {
           if (code === langCode) check.classList.remove('hidden');
