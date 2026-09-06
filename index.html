@@ -152,12 +152,9 @@
       transition: transform 0.08s ease;
     }
 
-    /* Viñeta degradada que se adapta perfectamente al tema claro y oscuro */
+    /* Viñeta degradada para modo oscuro */
     .vignette-overlay {
       background: linear-gradient(to bottom, transparent, rgba(12, 14, 18, 0.5) 50%, #0c0e12 100%);
-    }
-    html.light-mode .vignette-overlay {
-      background: linear-gradient(to bottom, rgba(248, 250, 252, 0.15), rgba(248, 250, 252, 0.65) 50%, #f8fafc 100%);
     }
 
     /* Modal Backdrop */
@@ -172,11 +169,7 @@
       background: radial-gradient(circle, rgba(197, 160, 114, 0.12) 0%, rgba(197, 160, 114, 0) 70%);
     }
 
-    html.light-mode .ambient-glow-amber {
-      background: radial-gradient(circle, rgba(197, 160, 114, 0.06) 0%, rgba(197, 160, 114, 0) 70%);
-    }
-
-    /* Fondo inmersivo de taller de barbería desenfocado */
+    /* Fondo inmersivo de taller de barbería desenfocado (Solo modo oscuro) */
     .barbershop-backdrop {
       background-image: url('https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=1920&q=80');
       background-size: cover;
@@ -185,9 +178,16 @@
       transform: scale(1.12);
       opacity: 0.13;
     }
-    html.light-mode .barbershop-backdrop {
-      opacity: 0.04;
-      filter: blur(36px) saturate(0.85);
+
+    /* En tema claro: CERO sombras oscuras, fondos grises o viñetas que ensucien la interfaz */
+    html.light-mode body {
+      background-color: #f8fafc !important;
+      background-image: radial-gradient(at 50% 0%, rgba(197, 160, 114, 0.05) 0%, transparent 50%) !important;
+    }
+    html.light-mode .barbershop-backdrop,
+    html.light-mode .vignette-overlay,
+    html.light-mode .ambient-glow-amber {
+      display: none !important;
     }
   </style>
 </head>
