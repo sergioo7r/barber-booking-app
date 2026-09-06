@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#141312" id="meta-theme-color" />
-  <title>Barbería El Barrio — Triana, Sevilla</title>
+  <meta name="theme-color" content="#131211" id="meta-theme-color" />
+  <title>Barbería El Barrio — Triana, Sevilla · Barbería & Botica Artesana</title>
 
-  <!-- Favicon vectorial SVG (Tijeras de barbero artesanas) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%23141312'/%3E%3Cpath d='M9 8a3 3 0 1 0 2.2 5l4.8 5 6-7a1 1 0 0 1 1.5 1.3l-5.3 6.2 5.3 6.2a1 1 0 1 1-1.5 1.3l-6-7-4.8 5A3 3 0 1 0 9 24a3 3 0 0 0 2.8-2l4.2-4.4-4.2-4.4A3 3 0 0 0 9 8zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0 12a1 1 0 1 1 0 2 1 1 0 0 1 0-2z' fill='%23bfa382'/%3E%3C/svg%3E" />
+  <!-- Favicon vectorial SVG (Tijeras y navaja artesanas en bronce) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%23131211'/%3E%3Cpath d='M9 8a3 3 0 1 0 2.2 5l4.8 5 6-7a1 1 0 0 1 1.5 1.3l-5.3 6.2 5.3 6.2a1 1 0 1 1-1.5 1.3l-6-7-4.8 5A3 3 0 1 0 9 24a3 3 0 0 0 2.8-2l4.2-4.4-4.2-4.4A3 3 0 0 0 9 8zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0 12a1 1 0 1 1 0 2 1 1 0 0 1 0-2z' fill='%23c5a072'/%3E%3C/svg%3E" />
 
-  <!-- Tipografía: Cormorant Garamond (Editorial Serif de lujo) & Plus Jakarta Sans (Grotesk limpio) -->
+  <!-- Tipografía: Cormorant Garamond (Editorial de Alta Gama) & Plus Jakarta Sans (Limpio tipo Apple/SF) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -32,49 +32,55 @@
 
   <style>
     :root {
-      --bg-main: #141312;
-      --bg-surface: #1a1918;
-      --bg-card: #21201e;
-      --bg-input: #141312;
-      --border-color: #2e2c29;
+      --bg-main: #131211;
+      --bg-surface: #1a1917;
+      --bg-card: #22201d;
+      --bg-card-hover: #2a2723;
+      --bg-input: #151413;
+      --border-color: #2e2b26;
       --border-subtle: rgba(255, 255, 255, 0.08);
       --text-title: #ffffff;
-      --text-body: #ede8df;
-      --text-muted: #9c958a;
-      --accent-bronze: #bfa382;
+      --text-body: #ece6dc;
+      --text-muted: #9e968a;
+      --accent-bronze: #c5a072;
+      --accent-bronze-light: #e5c59e;
       --accent-emerald: #10b981;
-      --btn-primary-bg: #ede8df;
+      --btn-primary-bg: #ece6dc;
       --btn-primary-hover: #ffffff;
-      --btn-primary-text: #141312;
-      --glass-bg: rgba(20, 19, 18, 0.94);
-      --service-hover: #262422;
-      --slot-bg: #1a1918;
-      --slot-text: #ede8df;
-      --day-active-bg: #ede8df;
-      --day-active-text: #141312;
+      --btn-primary-text: #131211;
+      --glass-bg: rgba(19, 18, 17, 0.94);
+      --service-hover: #262420;
+      --slot-bg: #1a1917;
+      --slot-text: #ece6dc;
+      --day-active-bg: #ece6dc;
+      --day-active-text: #131211;
+      --gold-glow: 0 0 20px rgba(197, 160, 114, 0.2);
     }
 
     html.light-mode {
-      --bg-main: #f8f6f2;
+      --bg-main: #f7f5f0;
       --bg-surface: #ffffff;
-      --bg-card: #fbfaf8;
+      --bg-card: #fcfbf9;
+      --bg-card-hover: #f3efe6;
       --bg-input: #ffffff;
-      --border-color: #e4ded4;
+      --border-color: #e2dcce;
       --border-subtle: rgba(0, 0, 0, 0.08);
-      --text-title: #1a1816;
-      --text-body: #2e2a25;
-      --text-muted: #787166;
-      --accent-bronze: #9c7a52;
+      --text-title: #181614;
+      --text-body: #2c2823;
+      --text-muted: #797165;
+      --accent-bronze: #a17849;
+      --accent-bronze-light: #7c582f;
       --accent-emerald: #059669;
-      --btn-primary-bg: #1c1a18;
+      --btn-primary-bg: #181614;
       --btn-primary-hover: #000000;
-      --btn-primary-text: #f8f6f2;
-      --glass-bg: rgba(248, 246, 242, 0.94);
-      --service-hover: #ece7de;
+      --btn-primary-text: #f7f5f0;
+      --glass-bg: rgba(247, 245, 240, 0.94);
+      --service-hover: #ece6d8;
       --slot-bg: #ffffff;
-      --slot-text: #1a1816;
-      --day-active-bg: #1c1a18;
+      --slot-text: #181614;
+      --day-active-bg: #181614;
       --day-active-text: #ffffff;
+      --gold-glow: 0 0 20px rgba(161, 120, 73, 0.15);
     }
 
     * {
@@ -84,7 +90,7 @@
     }
     
     body {
-      padding-bottom: calc(140px + env(safe-area-inset-bottom, 24px));
+      padding-bottom: calc(145px + env(safe-area-inset-bottom, 24px));
       background-color: var(--bg-main);
       color: var(--text-body);
       transition: background-color 0.25s ease, color 0.25s ease;
@@ -118,22 +124,23 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      opacity: .04;
+      opacity: .035;
       z-index: 5;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    .stamp {
-      display: inline-block;
+    .stamp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       border: 1px solid var(--accent-bronze);
       color: var(--accent-bronze);
       border-radius: 4px;
-      padding: 3px 8px;
+      padding: 2px 7px;
       font-size: 10px;
-      letter-spacing: .14em;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      font-weight: 600;
-      opacity: .95;
+      font-weight: 700;
     }
 
     .ticket-dash {
@@ -144,13 +151,13 @@
     }
 
     .sticky-note {
-      background: #fbf7ee;
-      color: #383126;
-      border: 1px solid #e5dcce;
-      box-shadow: 0 4px 12px rgba(0,0,0,.08);
+      background: #faf6ec;
+      color: #383124;
+      border: 1px solid #e2d7c5;
+      box-shadow: 0 4px 14px rgba(0,0,0,.06);
     }
     html.light-mode .sticky-note {
-      background: #fffdf7;
+      background: #fdfbf7;
     }
 
     .open-dot {
@@ -161,7 +168,7 @@
 
     /* Micro-animaciones fluidas */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(8px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in-up {
@@ -170,12 +177,37 @@
     
     .spring-btn:active {
       transform: scale(0.97);
-      transition: transform 0.1s ease;
+      transition: transform 0.1s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-card-shine {
+      position: relative;
+      overflow: hidden;
+    }
+    .product-card-shine::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(
+        60deg,
+        transparent 40%,
+        rgba(255, 255, 255, 0.04) 50%,
+        transparent 60%
+      );
+      transform: rotate(25deg);
+      pointer-events: none;
+      transition: transform 0.6s ease;
+    }
+    .product-card-shine:hover::after {
+      transform: rotate(25deg) translate(20%, 20%);
     }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans antialiased selection:bg-[#bfa382]/30 selection:text-white grain" onclick="handleGlobalClick(event)">
+<body class="min-h-full flex flex-col justify-between font-sans antialiased selection:bg-[#c5a072]/30 selection:text-white grain" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
        BARRA DE MODO DUEÑO (Solo visible cuando el dueño está autenticado)
@@ -184,19 +216,19 @@
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="font-semibold tracking-wide text-stone-200">👔 MODO DUEÑO</span>
+        <span class="font-bold tracking-wider text-stone-200 uppercase text-[11px]">👔 MODO DUEÑO</span>
       </div>
       <div class="flex items-center gap-2">
         <button
           id="btn-toggle-owner-view"
           onclick="toggleOwnerClientView()"
-          class="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-600 text-[11px] font-medium spring-btn"
+          class="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-600 text-[11px] font-semibold spring-btn"
         >
           💈 Ver como Cliente
         </button>
         <button
           onclick="logoutOwnerSession()"
-          class="text-stone-400 hover:text-stone-200 text-[11px] px-1.5"
+          class="text-stone-400 hover:text-stone-200 text-xs px-2 py-0.5"
           title="Cerrar sesión de dueño"
         >
           ✕
@@ -220,20 +252,20 @@
           <span class="font-serif text-lg font-semibold tracking-wide uppercase transition-colors leading-none" style="color: var(--text-title);" id="brand-name">
             El Barrio
           </span>
-          <span class="text-[9px] uppercase tracking-[0.2em] mt-1 font-medium font-sans" style="color: var(--accent-bronze);">
-            Corte a navaja · Triana
+          <span class="text-[9px] uppercase tracking-[0.22em] mt-1 font-semibold font-sans" style="color: var(--accent-bronze);">
+            Corte a navaja & Botica · Triana
           </span>
         </a>
 
         <!-- Controles: Selector de Tema + Selector de Idioma -->
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2">
           
           <!-- Botón Toggle Modo Claro / Oscuro -->
           <button
             id="theme-toggle-btn"
             type="button"
             onclick="toggleTheme()"
-            class="w-8 h-8 rounded-md border theme-border hover:opacity-80 flex items-center justify-center transition-all spring-btn"
+            class="w-8 h-8 rounded-lg border theme-border hover:opacity-80 flex items-center justify-center transition-all spring-btn"
             style="color: var(--text-body); background-color: var(--bg-surface);"
             aria-label="Cambiar tema claro/oscuro"
             title="Modo Claro / Oscuro"
@@ -256,14 +288,14 @@
               id="lang-dropdown-btn"
               type="button"
               onclick="toggleLanguageDropdown(event)"
-              class="flex items-center gap-1.5 px-2.5 py-1 rounded-md border theme-border text-xs transition-all font-sans font-medium spring-btn"
+              class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border theme-border text-xs transition-all font-sans font-semibold spring-btn"
               style="color: var(--text-body); background-color: var(--bg-surface);"
               aria-label="Seleccionar idioma"
             >
               <svg class="w-3.5 h-3.5" style="color: var(--accent-bronze);" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"/>
               </svg>
-              <span id="active-lang-text" class="uppercase font-semibold tracking-wider text-[11px] font-sans">ES</span>
+              <span id="active-lang-text" class="uppercase font-bold tracking-wider text-[11px] font-sans">ES</span>
               <svg class="w-3 h-3 transition-transform duration-200" style="color: var(--text-muted);" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
               </svg>
@@ -303,48 +335,48 @@
     </nav>
 
     <!-- CONTENEDOR CENTRAL -->
-    <main class="max-w-md mx-auto px-4 pt-6 sm:px-5">
+    <main class="max-w-md mx-auto px-4 pt-5 sm:px-5">
 
       <!-- ==================== 1. HERO SECTION ==================== -->
       <section class="w-full pb-7 border-b theme-border animate-fade-in-up">
         <!-- Estado en vivo + sello artesano -->
-        <div class="flex items-center justify-between text-[11px] pb-4 font-sans font-medium">
+        <div class="flex items-center justify-between text-[11px] pb-3.5 font-sans font-medium">
           <span class="flex items-center gap-2" style="color: var(--text-body);">
             <span id="open-dot" class="open-dot on"></span>
             <span id="hero-badge-status" style="color: var(--text-muted);">Abierto hoy · 10:00 — 20:00</span>
           </span>
-          <span class="stamp" id="hero-stamp">Triana · desde 2012</span>
+          <span class="stamp-badge" id="hero-stamp">Triana · desde 2012</span>
         </div>
 
-        <div class="space-y-3 pt-1">
-          <h1 class="font-serif text-[32px] sm:text-[36px] font-normal tracking-tight leading-[1.08]" style="color: var(--text-title);" id="hero-title">
+        <div class="space-y-2.5 pt-1">
+          <h1 class="font-serif text-[34px] sm:text-[38px] font-normal tracking-tight leading-[1.06]" style="color: var(--text-title);" id="hero-title">
             Corte a navaja en Triana. Sin esperas.
           </h1>
           <p class="text-[13px] sm:text-sm leading-relaxed font-light" style="color: var(--text-body);" id="hero-subtitle">
-            Soy el del sillón nº2, te atiendo yo mismo. Reserva aquí abajo y entra directo — si llegas 10 min tarde, avísame por WhatsApp.
+            Soy el del sillón nº2, te atiendo yo mismo. Reserva abajo en 30 segundos y entra directo — si llegas 10 min tarde, avísame por WhatsApp.
           </p>
-          <p class="text-[11px] leading-relaxed" style="color: var(--text-muted);" id="hero-proof">
-            ★ 4,9 en Google · 320 reseñas · Calle Castilla 24 — a 2 min del puente
+          <p class="text-[11.5px] leading-relaxed flex items-center gap-1.5 font-medium" style="color: var(--text-muted);" id="hero-proof">
+            <span style="color: var(--accent-bronze);">★★★★★</span> 4,9 en Google · 320 reseñas · Calle Castilla 24
           </p>
         </div>
 
-        <div class="flex items-center gap-2.5 pt-5">
+        <div class="flex items-center gap-2 pt-5">
           <a
             href="#booking-module"
-            class="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-md font-semibold text-[13px] uppercase tracking-wider transition-all shadow-sm font-sans spring-btn"
+            class="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-lg font-bold text-xs uppercase tracking-wider transition-all shadow-md font-sans spring-btn"
             style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
             id="hero-cta"
           >
             <span>Pedir cita</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
             </svg>
           </a>
           <a
             id="hero-call-btn"
             href="tel:+34600112233"
-            class="h-12 px-4 rounded-md border theme-border flex items-center justify-center text-[13px] transition-all shrink-0 font-sans font-semibold spring-btn"
-            style="color: var(--text-body);"
+            class="h-12 px-4 rounded-lg border theme-border flex items-center justify-center text-xs transition-all shrink-0 font-sans font-semibold spring-btn"
+            style="color: var(--text-body); background-color: var(--bg-surface);"
             title="Llamar"
           >
             <span id="txt-hero-call">Llamar</span>
@@ -353,100 +385,143 @@
             href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
             target="_blank"
             rel="noopener noreferrer"
-            class="h-12 w-12 rounded-md border theme-border flex items-center justify-center transition-all shrink-0 spring-btn"
-            style="color: var(--text-muted);"
+            class="h-12 w-12 rounded-lg border theme-border flex items-center justify-center transition-all shrink-0 spring-btn"
+            style="color: var(--text-muted); background-color: var(--bg-surface);"
             title="Cómo llegar"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           </a>
         </div>
-        <p class="text-[11px] mt-3 font-sans" style="color: var(--text-muted);" id="hero-slots-hint">Hoy quedan <b id="hero-slots-left" style="color: var(--text-body);">—</b> huecos libres · se actualiza solo</p>
+        <p class="text-[11px] mt-3 font-sans flex items-center gap-1.5" style="color: var(--text-muted);" id="hero-slots-hint">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          Hoy quedan <b id="hero-slots-left" style="color: var(--text-body);">—</b> huecos libres · se actualiza en vivo
+        </p>
       </section>
 
       <!-- ==================== 2. EL ESPACIO (GALERÍA EDITORIAL) ==================== -->
       <section class="w-full py-7 border-b theme-border">
         <div class="flex items-center justify-between mb-3 px-0.5 font-sans">
-          <h2 class="text-[12px] uppercase tracking-wider font-semibold" style="color: var(--text-title);" id="gallery-title">Así es el local</h2>
-          <span class="text-[11px] italic font-serif" style="color: var(--accent-bronze);" id="gallery-tag">Castilla 24 · Triana</span>
+          <h2 class="text-xs uppercase tracking-wider font-bold" style="color: var(--text-title);" id="gallery-title">Así es el taller</h2>
+          <span class="text-xs italic font-serif" style="color: var(--accent-bronze);" id="gallery-tag">Castilla 24 · Triana</span>
         </div>
 
-        <div class="rounded-lg overflow-hidden relative border theme-border group" style="background-color: var(--bg-surface);">
+        <div class="rounded-xl overflow-hidden relative border theme-border group shadow-sm" style="background-color: var(--bg-surface);">
           <img
             src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80"
             alt="Sillón clásico de la barbería"
-            class="w-full aspect-[16/10] object-cover object-center filter contrast-[1.03] brightness-[.88] transition-transform duration-500 group-hover:scale-[1.02]"
+            class="w-full aspect-[16/10] object-cover object-center filter contrast-[1.03] brightness-[.88] transition-transform duration-700 group-hover:scale-[1.02]"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end justify-between p-3">
-            <span class="text-[12px] text-white/95 font-medium" id="photo-tag-1">El sillón nº2, el de siempre</span>
-            <span class="text-[10px] text-white/70">Lun–Sáb</span>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent flex items-end justify-between p-3.5">
+            <span class="text-xs text-white/95 font-medium" id="photo-tag-1">El sillón nº2, el de siempre</span>
+            <span class="text-[10px] uppercase font-bold tracking-wider text-white/70">Lun–Sáb</span>
           </div>
         </div>
 
         <div class="grid grid-cols-2 gap-2 mt-2">
-          <div class="rounded-lg overflow-hidden relative border theme-border aspect-[4/3] group" style="background-color: var(--bg-surface);">
+          <div class="rounded-xl overflow-hidden relative border theme-border aspect-[4/3] group" style="background-color: var(--bg-surface);">
             <img
               src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=500&q=80"
               alt="Ritual de toalla y navaja"
-              class="w-full h-full object-cover filter contrast-[1.03] brightness-[.88] transition-transform duration-500 group-hover:scale-[1.03]"
+              class="w-full h-full object-cover filter contrast-[1.03] brightness-[.88] transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
             />
           </div>
-          <div class="rounded-lg overflow-hidden relative border theme-border aspect-[4/3] group" style="background-color: var(--bg-surface);">
+          <div class="rounded-xl overflow-hidden relative border theme-border aspect-[4/3] group" style="background-color: var(--bg-surface);">
             <img
               src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=500&q=80"
               alt="Herramientas profesionales"
-              class="w-full h-full object-cover filter contrast-[1.03] brightness-[.88] transition-transform duration-500 group-hover:scale-[1.03]"
+              class="w-full h-full object-cover filter contrast-[1.03] brightness-[.88] transition-transform duration-700 group-hover:scale-[1.03]"
               loading="lazy"
             />
           </div>
         </div>
 
         <!-- Aviso del barbero -->
-        <div id="barber-notice-box" class="sticky-note rounded-lg mt-3.5 px-3.5 py-3 text-[12.5px] leading-snug">
+        <div id="barber-notice-box" class="sticky-note rounded-xl mt-3.5 px-3.5 py-3 text-[12.5px] leading-snug">
           <b>Aviso del barbero:</b> <span id="barber-notice-text">Si vienes en moto hay aparcamiento justo en la puerta de Calle Castilla.</span>
         </div>
 
         <!-- Reseñas cortas -->
         <div class="grid grid-cols-1 gap-2 mt-3" id="reviews-row">
-          <div class="p-3 rounded-lg border theme-border" style="background-color: var(--bg-surface);">
+          <div class="p-3.5 rounded-xl border theme-border" style="background-color: var(--bg-surface);">
             <p class="text-[12.5px] leading-snug" style="color: var(--text-body);" id="txt-review-1">“Me dejó el degradado perfecto antes de la boda. Sin esperas porque reservé aquí.”</p>
-            <p class="text-[11px] mt-1.5" style="color: var(--text-muted);">★★★★★ · Juan Carlos (Triana)</p>
+            <p class="text-[11px] mt-2 font-medium" style="color: var(--text-muted);">★★★★★ · Juan Carlos (Triana)</p>
           </div>
-          <div class="p-3 rounded-lg border theme-border" style="background-color: var(--bg-surface);">
+          <div class="p-3.5 rounded-xl border theme-border" style="background-color: var(--bg-surface);">
             <p class="text-[12.5px] leading-snug" style="color: var(--text-body);" id="txt-review-2">“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”</p>
-            <p class="text-[11px] mt-1.5" style="color: var(--text-muted);">★★★★★ · James M. (UK)</p>
+            <p class="text-[11px] mt-2 font-medium" style="color: var(--text-muted);">★★★★★ · James M. (UK)</p>
           </div>
         </div>
       </section>
 
-      <!-- ==================== 3. SELECTOR DE SERVICIOS (ESTILO CARTA EDITORIAL) ==================== -->
-      <section id="booking-module" class="w-full pt-7 scroll-mt-20">
 
-        <div class="mb-5">
-          <span class="text-[11px] font-semibold block mb-1 font-sans uppercase tracking-wider" style="color: var(--accent-bronze);" id="module-pretitle">Pide tu hueco — tardas 30 segundos</span>
-          <h2 class="font-serif text-[28px] font-normal tracking-tight" style="color: var(--text-title);" id="module-title">Precios claros</h2>
-          <p class="text-[12px] mt-0.5" style="color: var(--text-muted);" id="module-desc">Sin sorpresas. Se paga en el local, en efectivo o Bizum.</p>
+      <!-- =========================================================================
+           3. BOTICA & PRODUCTOS ARTESANALES (DESTACADOS DEL TALLER)
+           ========================================================================= -->
+      <section id="products-boutique" class="w-full py-8 border-b theme-border">
+        <div class="flex items-start justify-between mb-4 px-0.5">
+          <div>
+            <span class="stamp-badge mb-1.5" id="boutique-badge">Botica del Barbero</span>
+            <h2 class="font-serif text-[26px] font-normal tracking-tight leading-tight" style="color: var(--text-title);" id="boutique-title">
+              Productos Artesanales
+            </h2>
+            <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="boutique-subtitle">
+              Formulados en Sevilla con ingredientes naturales. Añádelos a tu cita o pidelos sueltos.
+            </p>
+          </div>
         </div>
 
-        <!-- PASO 1: LISTA ESTILO TICKET -->
-        <div class="mb-7 font-sans">
-          <div class="flex items-center justify-between pb-2 mb-1">
-            <span class="text-[12px] font-semibold" style="color: var(--text-body);" id="title-step-1">1. Elige qué te hago</span>
+        <!-- Cuadrícula editorial de productos -->
+        <div class="space-y-3" id="products-list-container">
+          <!-- Inyectado dinámicamente con estética de catálogo boutique -->
+        </div>
+      </section>
+
+
+      <!-- ==================== 4. SELECTOR DE RESERVAS (ESTILO CARTA EDITORIAL) ==================== -->
+      <section id="booking-module" class="w-full pt-8 scroll-mt-20">
+
+        <div class="mb-5">
+          <span class="text-[11px] font-bold block mb-1 font-sans uppercase tracking-wider" style="color: var(--accent-bronze);" id="module-pretitle">Pide tu hueco — tardas 30 segundos</span>
+          <h2 class="font-serif text-[28px] font-normal tracking-tight" style="color: var(--text-title);" id="module-title">Precios claros</h2>
+          <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="module-desc">Sin sorpresas. Se paga en el local, en efectivo o Bizum.</p>
+        </div>
+
+        <!-- PASO 1: SERVICIOS CON TARJETAS ARTESANALES -->
+        <div class="mb-6 font-sans">
+          <div class="flex items-center justify-between pb-2 mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-title);" id="title-step-1">1. Elige qué te hago</span>
             <span class="text-[11px]" style="color: var(--text-muted);" id="sub-step-1">lo que ves es lo que pagas</span>
           </div>
-          <div class="ticket-dash mb-1"></div>
 
-          <div class="divide-y theme-border border-b" id="services-container">
-            <!-- Inyectado dinámicamente -->
+          <div class="space-y-2" id="services-container">
+            <!-- Inyectado dinámicamente con tarjetas táctiles de alta gama -->
+          </div>
+        </div>
+
+        <!-- CROSS-SELLING: AÑADIR PRODUCTO A TU CITA -->
+        <div class="mb-7 p-4 rounded-xl border theme-border font-sans transition-all" style="background-color: var(--bg-surface);" id="booking-addons-box">
+          <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style="color: var(--accent-bronze);" id="addons-title">
+              <span>🧴</span> Añadir producto para recoger (opcional)
+            </span>
+            <span class="text-[10px] font-medium" style="color: var(--text-muted);" id="addons-badge">Se prepara para tu corte</span>
+          </div>
+          <p class="text-[11px] mb-3" style="color: var(--text-muted);" id="addons-desc">
+            Te lo dejamos listo en el mostrador cuando vengas a tu cita.
+          </p>
+
+          <div class="space-y-2" id="booking-addons-list">
+            <!-- Inyectado con checkboxes táctiles -->
           </div>
         </div>
 
         <!-- PASO 2: DÍA Y HORA -->
         <div class="mb-7 font-sans">
           <div class="flex items-center justify-between pb-2 mb-3">
-            <span class="text-[12px] font-semibold" style="color: var(--text-body);" id="title-step-2">2. Elige día y hora</span>
-            <span class="text-[12px] font-semibold" style="color: var(--accent-bronze);" id="selected-date-summary"></span>
+            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-title);" id="title-step-2">2. Elige día y hora</span>
+            <span class="text-xs font-bold" style="color: var(--accent-bronze);" id="selected-date-summary"></span>
           </div>
 
           <!-- Cuadrícula limpia de días con números grandes Apple-style -->
@@ -455,12 +530,12 @@
           <!-- Horarios Mañana / Tarde -->
           <div class="space-y-4">
             <div>
-              <span class="text-[10px] uppercase tracking-[0.2em] block mb-2 px-0.5 font-medium" style="color: var(--text-muted);" id="txt-shift-morning">Mañana</span>
+              <span class="text-[10px] uppercase tracking-[0.2em] block mb-2 px-0.5 font-bold" style="color: var(--text-muted);" id="txt-shift-morning">Mañana</span>
               <div class="grid grid-cols-4 gap-1.5" id="morning-slots-container"></div>
             </div>
 
             <div>
-              <span class="text-[10px] uppercase tracking-[0.2em] block mb-2 px-0.5 font-medium" style="color: var(--text-muted);" id="txt-shift-afternoon">Tarde</span>
+              <span class="text-[10px] uppercase tracking-[0.2em] block mb-2 px-0.5 font-bold" style="color: var(--text-muted);" id="txt-shift-afternoon">Tarde</span>
               <div class="grid grid-cols-4 gap-1.5" id="afternoon-slots-container"></div>
             </div>
           </div>
@@ -469,19 +544,19 @@
         <!-- PASO 3: TUS DATOS -->
         <div class="mb-7 font-sans">
           <div class="flex items-center justify-between pb-2 mb-3">
-            <span class="text-[12px] font-semibold" style="color: var(--text-body);" id="title-step-3">3. Tus datos (solo para avisarte)</span>
+            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-title);" id="title-step-3">3. Tus datos (solo para avisarte)</span>
             <span class="text-[11px]" style="color: var(--text-muted);" id="lbl-direct-whatsapp">Te llega por WhatsApp</span>
           </div>
 
-          <div class="space-y-3 p-4 rounded-lg border theme-border" style="background-color: var(--bg-surface);">
+          <div class="space-y-3 p-4 rounded-xl border theme-border" style="background-color: var(--bg-surface);">
             <div>
-              <label for="client-name" class="block text-[11px] font-medium mb-1" style="color: var(--text-muted);" id="lbl-name">Nombre completo *</label>
+              <label for="client-name" class="block text-xs font-semibold mb-1" style="color: var(--text-muted);" id="lbl-name">Nombre completo *</label>
               <input
                 type="text"
                 id="client-name"
                 autocomplete="name"
                 placeholder="Ej. Carlos Mendoza"
-                class="w-full h-11 border theme-border rounded-md px-3.5 text-sm focus:outline-none transition-colors font-sans"
+                class="w-full h-11 border theme-border rounded-lg px-3.5 text-sm focus:outline-none transition-colors font-sans"
                 style="background-color: var(--bg-input); color: var(--text-title);"
                 oninput="validateForm()"
               />
@@ -489,7 +564,7 @@
 
             <div>
               <div class="flex items-center justify-between mb-1">
-                <label for="client-phone" class="block text-[11px] font-medium" style="color: var(--text-muted);" id="lbl-phone">Teléfono (WhatsApp) *</label>
+                <label for="client-phone" class="block text-xs font-semibold" style="color: var(--text-muted);" id="lbl-phone">Teléfono (WhatsApp) *</label>
                 <span class="text-[10px] font-medium tracking-tight" style="color: var(--text-muted);" id="lbl-prefix-hint">+34...</span>
               </div>
               <input
@@ -497,7 +572,7 @@
                 id="client-phone"
                 autocomplete="tel"
                 placeholder="+34 612 345 678"
-                class="w-full h-11 border theme-border rounded-md px-3.5 text-sm focus:outline-none transition-colors font-sans"
+                class="w-full h-11 border theme-border rounded-lg px-3.5 text-sm focus:outline-none transition-colors font-sans"
                 style="background-color: var(--bg-input); color: var(--text-title);"
                 oninput="validateForm()"
               />
@@ -507,15 +582,15 @@
 
       </section>
 
-      <!-- ==================== 4. UBICACIÓN & FOOTER ==================== -->
+      <!-- ==================== 5. UBICACIÓN & FOOTER ==================== -->
       <footer class="pt-5 border-t theme-border space-y-3 font-sans">
-        <div class="p-4 rounded-lg border theme-border space-y-3" style="background-color: var(--bg-surface);">
+        <div class="p-4 rounded-xl border theme-border space-y-3" style="background-color: var(--bg-surface);">
           <div class="flex items-start justify-between gap-2">
             <div>
-              <span class="text-[11px] font-semibold block uppercase tracking-wider" style="color: var(--accent-bronze);" id="footer-location-title">Dónde estoy</span>
-              <p class="text-[13.5px] font-medium mt-1 font-serif" style="color: var(--text-title);" id="txt-shop-address">Calle Castilla 24, Triana, Sevilla</p>
-              <p class="text-[12px] mt-0.5 font-sans" style="color: var(--text-muted);" id="footer-hours">Lun–Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30</p>
-              <p class="text-[12px] mt-1 font-sans">
+              <span class="text-[10px] font-bold block uppercase tracking-wider" style="color: var(--accent-bronze);" id="footer-location-title">Dónde estoy</span>
+              <p class="text-sm font-medium mt-1 font-serif" style="color: var(--text-title);" id="txt-shop-address">Calle Castilla 24, Triana, Sevilla</p>
+              <p class="text-xs mt-0.5 font-sans" style="color: var(--text-muted);" id="footer-hours">Lun–Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30</p>
+              <p class="text-xs mt-1 font-sans">
                 <a id="footer-phone" href="tel:+34600112233" class="underline underline-offset-2 font-semibold" style="color: var(--text-body);">600 112 233</a>
                 <span style="color: var(--text-muted);"> · </span>
                 <a id="footer-ig" href="#" class="underline underline-offset-2" style="color: var(--text-muted);">Instagram</a>
@@ -525,8 +600,8 @@
               href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
               target="_blank"
               rel="noopener noreferrer"
-              class="px-3 py-2 rounded border theme-border text-xs transition-all shrink-0 font-sans font-semibold spring-btn"
-              style="color: var(--text-body);"
+              class="px-3 py-2 rounded-lg border theme-border text-xs transition-all shrink-0 font-sans font-bold spring-btn"
+              style="color: var(--text-body); background-color: var(--bg-main);"
               id="btn-maps"
             >
               Cómo llegar
@@ -534,14 +609,14 @@
           </div>
 
           <div class="ticket-dash"></div>
-          <div class="flex items-center justify-between text-[12px]" style="color: var(--text-muted);">
+          <div class="flex items-center justify-between text-xs" style="color: var(--text-muted);">
             <span id="txt-payment-notice">Aquí se paga: efectivo o Bizum</span>
             <span class="font-medium" id="txt-no-fees">Sin suplementos</span>
           </div>
         </div>
 
         <div class="flex items-center justify-between text-[11px] py-3" style="color: var(--text-muted);">
-          <p id="txt-footer-policy">El Barrio · corte de barrio en Triana desde 2012</p>
+          <p id="txt-footer-policy">El Barrio · Corte tradicional & Botica en Triana desde 2012</p>
           <button onclick="openPinModal()" class="hover:opacity-100 transition-opacity font-sans text-[11px] font-semibold underline underline-offset-2">
             Soy el peluquero
           </button>
@@ -559,7 +634,7 @@
       <div class="flex-1 min-w-0 pr-1">
         <div class="flex items-center gap-2">
           <span class="text-xs font-serif font-semibold tracking-wide truncate" style="color: var(--text-title);" id="sticky-service-label">Corte clásico</span>
-          <span class="text-sm font-semibold shrink-0 tracking-tight" style="color: var(--accent-bronze);" id="sticky-price-label">15 €</span>
+          <span class="text-sm font-bold shrink-0 tracking-tight" style="color: var(--accent-bronze);" id="sticky-price-label">15 €</span>
         </div>
         <p class="text-[11px] truncate mt-0.5" style="color: var(--text-muted);" id="sticky-date-label">Elige día y hora</p>
       </div>
@@ -569,7 +644,7 @@
         type="button"
         onclick="handleBookingConfirmation()"
         disabled
-        class="h-11 px-4 font-semibold rounded-md text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-25 disabled:cursor-not-allowed shrink-0 shadow-sm spring-btn"
+        class="h-11 px-4 font-bold rounded-lg text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-25 disabled:cursor-not-allowed shrink-0 shadow-sm spring-btn"
         style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
       >
         <span id="txt-cta-button">Pedir cita por WhatsApp</span>
@@ -582,27 +657,31 @@
        MODAL DE ÉXITO (GOOGLE & APPLE .ICS)
        =================================================================================== -->
   <div id="success-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 font-sans">
-    <div class="border theme-border rounded-xl w-full max-w-sm p-6 space-y-4 shadow-2xl text-center animate-fade-in-up" style="background-color: var(--bg-surface);">
+    <div class="border theme-border rounded-2xl w-full max-w-sm p-6 space-y-4 shadow-2xl text-center animate-fade-in-up" style="background-color: var(--bg-surface);">
       
-      <div class="w-10 h-10 rounded-full border theme-border mx-auto flex items-center justify-center font-serif text-lg" style="color: var(--accent-bronze); background-color: var(--bg-main);">
+      <div class="w-12 h-12 rounded-full border theme-border mx-auto flex items-center justify-center font-serif text-xl" style="color: var(--accent-bronze); background-color: var(--bg-main);">
         ✓
       </div>
 
       <div>
-        <h3 class="font-serif text-xl font-normal" style="color: var(--text-title);" id="modal-success-title">Reserva enviada</h3>
+        <h3 class="font-serif text-2xl font-normal" style="color: var(--text-title);" id="modal-success-title">Reserva enviada</h3>
         <p class="text-xs mt-1 leading-relaxed" style="color: var(--text-muted);" id="modal-success-desc">
           Hemos abierto WhatsApp para enviar tu mensaje directo al peluquero.
         </p>
       </div>
 
-      <div class="p-3.5 rounded-lg border theme-border text-left space-y-2 text-xs" style="background-color: var(--bg-main);">
+      <div class="p-3.5 rounded-xl border theme-border text-left space-y-2 text-xs" style="background-color: var(--bg-main);">
         <div class="flex justify-between items-center border-b theme-border pb-2">
           <span style="color: var(--text-muted);" id="lbl-summary-service">Servicio:</span>
-          <span class="font-semibold" style="color: var(--text-title);" id="success-summary-service">Corte clásico (15 €)</span>
+          <span class="font-bold" style="color: var(--text-title);" id="success-summary-service">Corte clásico (15 €)</span>
+        </div>
+        <div id="success-summary-addons-row" class="hidden flex justify-between items-center border-b theme-border pb-2">
+          <span style="color: var(--text-muted);">Productos:</span>
+          <span class="font-bold text-right truncate pl-2" style="color: var(--accent-bronze);" id="success-summary-addons"></span>
         </div>
         <div class="flex justify-between items-center border-b theme-border pb-2">
           <span style="color: var(--text-muted);" id="lbl-summary-date">Fecha y hora:</span>
-          <span class="font-semibold tracking-tight" style="color: var(--text-title);" id="success-summary-datetime">Hoy, 11:30</span>
+          <span class="font-bold tracking-tight" style="color: var(--text-title);" id="success-summary-datetime">Hoy, 11:30</span>
         </div>
         <div class="flex justify-between items-center text-[11px] pt-0.5">
           <span style="color: var(--text-muted);" id="lbl-summary-location">Lugar:</span>
@@ -611,14 +690,14 @@
       </div>
 
       <div class="space-y-2 pt-1">
-        <p class="text-[10px] uppercase tracking-[0.2em] font-semibold" style="color: var(--text-muted);" id="lbl-add-calendar">Añadir a tu calendario</p>
+        <p class="text-[10px] uppercase tracking-[0.2em] font-bold" style="color: var(--text-muted);" id="lbl-add-calendar">Añadir a tu calendario</p>
         
         <div class="grid grid-cols-2 gap-2">
           <a
             id="btn-google-cal"
             href="#"
             target="_blank"
-            class="h-9 rounded border theme-border text-xs flex items-center justify-center transition-colors font-medium text-[11px] spring-btn"
+            class="h-9 rounded-lg border theme-border text-xs flex items-center justify-center transition-colors font-semibold text-[11px] spring-btn"
             style="color: var(--text-body); background-color: var(--bg-surface);"
           >
             Google Calendar
@@ -627,7 +706,7 @@
           <button
             type="button"
             onclick="downloadIcsFile()"
-            class="h-9 rounded border theme-border text-xs flex items-center justify-center transition-colors font-medium text-[11px] spring-btn"
+            class="h-9 rounded-lg border theme-border text-xs flex items-center justify-center transition-colors font-semibold text-[11px] spring-btn"
             style="color: var(--text-body); background-color: var(--bg-surface);"
           >
             Apple / .ics
@@ -639,7 +718,7 @@
         <button
           type="button"
           onclick="closeSuccessModal()"
-          class="w-full h-10 rounded text-xs font-semibold uppercase tracking-wider transition-colors spring-btn"
+          class="w-full h-10 rounded-lg text-xs font-bold uppercase tracking-wider transition-colors spring-btn"
           style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
           id="btn-close-success"
         >
@@ -655,9 +734,9 @@
        MODAL DE PIN (ACCESO PELUQUERO)
        =================================================================================== -->
   <div id="pin-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 font-sans">
-    <div class="border theme-border rounded-xl w-full max-w-xs p-5 space-y-4 shadow-2xl text-center animate-fade-in-up" style="background-color: var(--bg-surface);">
+    <div class="border theme-border rounded-2xl w-full max-w-xs p-5 space-y-4 shadow-2xl text-center animate-fade-in-up" style="background-color: var(--bg-surface);">
       <div>
-        <h3 class="font-serif text-lg font-normal" style="color: var(--text-title);">Panel de Peluquero</h3>
+        <h3 class="font-serif text-xl font-normal" style="color: var(--text-title);">Panel del Peluquero</h3>
         <p class="text-xs mt-0.5" style="color: var(--text-muted);">Introduce tu PIN de 4 dígitos</p>
       </div>
 
@@ -673,13 +752,13 @@
         onkeyup="if(event.key==='Enter') checkAdminPin()"
       />
 
-      <p id="pin-error" class="text-xs text-rose-500 hidden font-medium">PIN incorrecto</p>
+      <p id="pin-error" class="text-xs text-rose-500 hidden font-semibold">PIN incorrecto</p>
 
       <div class="flex gap-2 pt-1">
-        <button onclick="closePinModal()" class="flex-1 h-9 rounded border theme-border text-xs spring-btn" style="color: var(--text-muted);">
+        <button onclick="closePinModal()" class="flex-1 h-9 rounded-lg border theme-border text-xs spring-btn" style="color: var(--text-muted);">
           Cancelar
         </button>
-        <button onclick="checkAdminPin()" class="flex-1 h-9 rounded text-xs font-semibold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="checkAdminPin()" class="flex-1 h-9 rounded-lg text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
           Entrar
         </button>
       </div>
@@ -697,33 +776,36 @@
       <div>
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="text-[9px] uppercase tracking-[0.25em] font-semibold" style="color: var(--accent-bronze);">Control del Local</span>
+          <span class="text-[9px] uppercase tracking-[0.25em] font-bold" style="color: var(--accent-bronze);">Control del Local</span>
         </div>
-        <h1 class="font-serif text-xl font-normal mt-0.5" style="color: var(--text-title);">Panel del Peluquero</h1>
+        <h1 class="font-serif text-2xl font-normal mt-0.5" style="color: var(--text-title);">Panel de Gestión</h1>
       </div>
-      <button onclick="exitAdminView()" class="px-3 py-1.5 rounded border theme-border text-xs hover:opacity-75 spring-btn" style="color: var(--text-body);">
+      <button onclick="exitAdminView()" class="px-3 py-1.5 rounded-lg border theme-border text-xs font-semibold hover:opacity-75 spring-btn" style="color: var(--text-body);">
         Ver Web Cliente
       </button>
     </header>
 
     <!-- Pestañas de Navegación del Panel -->
-    <div class="flex rounded-lg p-1 border theme-border text-xs font-medium overflow-x-auto no-scrollbar gap-1" style="background-color: var(--bg-surface);">
-      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="px-3 py-1.5 rounded font-semibold shadow-sm transition-all whitespace-nowrap shrink-0" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+    <div class="flex rounded-xl p-1 border theme-border text-xs font-medium overflow-x-auto no-scrollbar gap-1" style="background-color: var(--bg-surface);">
+      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="px-3 py-1.5 rounded-lg font-bold shadow-sm transition-all whitespace-nowrap shrink-0" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
         🟢 Agenda en Vivo
       </button>
-      <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="px-3 py-1.5 rounded transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
+      <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
         📊 Caja & Citas
       </button>
-      <button id="tab-btn-waitlist" onclick="switchAdminTab('waitlist')" class="px-3 py-1.5 rounded transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
+      <button id="tab-btn-waitlist" onclick="switchAdminTab('waitlist')" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
         📋 Espera
       </button>
-      <button id="tab-btn-blocks" onclick="switchAdminTab('blocks')" class="px-3 py-1.5 rounded transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
+      <button id="tab-btn-blocks" onclick="switchAdminTab('blocks')" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
         ⏱️ Bloqueos
       </button>
-      <button id="tab-btn-services" onclick="switchAdminTab('services')" class="px-3 py-1.5 rounded transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
+      <button id="tab-btn-products" onclick="switchAdminTab('products')" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
+        🧴 Botica/Stock
+      </button>
+      <button id="tab-btn-services" onclick="switchAdminTab('services')" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
         🏷️ Precios
       </button>
-      <button id="tab-btn-shop" onclick="switchAdminTab('shop')" class="px-3 py-1.5 rounded transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
+      <button id="tab-btn-shop" onclick="switchAdminTab('shop')" class="px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0" style="color: var(--text-muted);">
         🖨️ Local/QR
       </button>
     </div>
@@ -735,15 +817,15 @@
       <div class="p-3.5 rounded-xl border theme-border space-y-2.5" style="background-color: var(--bg-surface);">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-1.5">
-            <button onclick="adminShiftDay(-1)" class="w-7 h-7 rounded border theme-border flex items-center justify-center text-xs hover:opacity-80 spring-btn" style="color: var(--text-body);">‹</button>
-            <span class="text-[13px] font-bold font-sans tracking-tight capitalize" style="color: var(--text-title);" id="admin-visual-date-label">Hoy</span>
-            <button onclick="adminShiftDay(1)" class="w-7 h-7 rounded border theme-border flex items-center justify-center text-xs hover:opacity-80 spring-btn" style="color: var(--text-body);">›</button>
+            <button onclick="adminShiftDay(-1)" class="w-7 h-7 rounded-lg border theme-border flex items-center justify-center text-xs hover:opacity-80 spring-btn" style="color: var(--text-body);">‹</button>
+            <span class="text-sm font-bold font-sans tracking-tight capitalize" style="color: var(--text-title);" id="admin-visual-date-label">Hoy</span>
+            <button onclick="adminShiftDay(1)" class="w-7 h-7 rounded-lg border theme-border flex items-center justify-center text-xs hover:opacity-80 spring-btn" style="color: var(--text-body);">›</button>
           </div>
           
           <input
             type="date"
             id="admin-visual-date-picker"
-            class="text-[11px] font-sans border theme-border rounded px-2 py-1 focus:outline-none"
+            class="text-xs font-sans border theme-border rounded-lg px-2.5 py-1 focus:outline-none"
             style="background-color: var(--bg-main); color: var(--text-title);"
             onchange="onAdminVisualDateChange(this.value)"
           />
@@ -753,24 +835,24 @@
         <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1" id="admin-quick-day-chips"></div>
 
         <!-- Resumen de Ocupación del Día -->
-        <div class="flex items-center justify-between text-[11px] pt-2 border-t theme-border">
+        <div class="flex items-center justify-between text-xs pt-2 border-t theme-border">
           <div class="flex items-center gap-2.5">
-            <span class="inline-flex items-center gap-1 text-emerald-400 font-medium">
+            <span class="inline-flex items-center gap-1 text-emerald-400 font-semibold">
               <span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span id="admin-stat-free">0 Libres</span>
             </span>
-            <span class="inline-flex items-center gap-1 text-rose-400 font-medium">
+            <span class="inline-flex items-center gap-1 text-rose-400 font-semibold">
               <span class="w-2 h-2 rounded-full bg-rose-500"></span> <span id="admin-stat-busy">0 Ocupadas</span>
             </span>
           </div>
-          <span class="text-[11px] font-medium" style="color: var(--accent-bronze);" id="admin-stat-money">~0 € caja</span>
+          <span class="text-xs font-bold" style="color: var(--accent-bronze);" id="admin-stat-money">~0 € caja</span>
         </div>
       </div>
 
       <!-- Cuadrícula de Franjas Horarias (Verde = Libre, Rojo = Ocupado) -->
       <div class="space-y-2">
-        <div class="flex items-center justify-between text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-muted);">
+        <div class="flex items-center justify-between text-[10px] uppercase tracking-wider font-bold" style="color: var(--text-muted);">
           <span>Horario en vivo</span>
-          <span class="normal-case">Toca para meter cita por teléfono o gestionar</span>
+          <span class="normal-case font-medium">Toca para meter cita por teléfono o WhatsApp</span>
         </div>
         <div class="space-y-1.5" id="admin-visual-slots-container"></div>
       </div>
@@ -779,16 +861,16 @@
 
     <!-- PESTAÑA 2: CAJA & LISTA DE CITAS -->
     <section id="tab-appointments" class="space-y-3 hidden">
-      <div id="admin-day-summary" class="p-3.5 rounded-lg border theme-border grid grid-cols-3 gap-2 text-center" style="background-color: var(--bg-surface);"></div>
+      <div id="admin-day-summary" class="p-3.5 rounded-xl border theme-border grid grid-cols-3 gap-2 text-center" style="background-color: var(--bg-surface);"></div>
       <div class="flex items-center gap-2">
         <input type="date" id="admin-appt-date" class="flex-1 h-10 border theme-border rounded-lg px-3 text-xs" style="background-color: var(--bg-surface); color: var(--text-title);" onchange="renderAdminAppointments()" />
-        <button onclick="openManualBookingModal()" class="h-10 px-3 rounded-lg text-xs font-semibold shrink-0 spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="openManualBookingModal()" class="h-10 px-3 rounded-lg text-xs font-bold shrink-0 spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
           + Apuntar
         </button>
       </div>
       <div class="flex gap-2">
-        <button onclick="copyDayPart()" class="flex-1 h-9 rounded-lg border theme-border text-[12px] font-medium spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">Copiar parte del día</button>
-        <button onclick="exportDayCsv()" class="flex-1 h-9 rounded-lg border theme-border text-[12px] font-medium spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">Descargar CSV</button>
+        <button onclick="copyDayPart()" class="flex-1 h-9 rounded-lg border theme-border text-xs font-semibold spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">Copiar parte del día</button>
+        <button onclick="exportDayCsv()" class="flex-1 h-9 rounded-lg border theme-border text-xs font-semibold spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">Descargar CSV</button>
       </div>
 
       <div class="space-y-2.5" id="admin-appointments-list"></div>
@@ -799,10 +881,10 @@
     <section id="tab-waitlist" class="space-y-4 hidden">
       <div class="flex items-center justify-between">
         <div>
-          <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Lista de Espera</h2>
-          <p class="text-[11px]" style="color: var(--text-muted);">Apunta a clientes que quieren hueco por si alguien cancela.</p>
+          <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-body);">Lista de Espera</h2>
+          <p class="text-xs" style="color: var(--text-muted);">Apunta a clientes que quieren hueco por si alguien cancela.</p>
         </div>
-        <button onclick="openAddWaitlistModal()" class="px-2.5 py-1.5 rounded-lg text-xs font-semibold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="openAddWaitlistModal()" class="px-2.5 py-1.5 rounded-lg text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
           + Apuntar cliente
         </button>
       </div>
@@ -813,8 +895,8 @@
     <!-- PESTAÑA 4: BLOQUEOS DE HORARIO & DÍAS -->
     <section id="tab-blocks" class="space-y-4 hidden">
       <div>
-        <h2 class="text-[12px] font-semibold mb-1" style="color: var(--text-body);">Bloqueos de Descanso & Festivos</h2>
-        <p class="text-[12px]" style="color: var(--text-muted);">Toca cualquier hora para bloquearla o liberarla.</p>
+        <h2 class="text-xs font-bold uppercase tracking-wider mb-1" style="color: var(--text-body);">Bloqueos de Descanso & Festivos</h2>
+        <p class="text-xs" style="color: var(--text-muted);">Toca cualquier hora para bloquearla o liberarla.</p>
       </div>
 
       <div>
@@ -827,12 +909,12 @@
         />
       </div>
 
-      <div class="p-3 border theme-border rounded-lg flex items-center justify-between" style="background-color: var(--bg-surface);">
-        <span class="text-xs" style="color: var(--text-title);">Cerrar día completo</span>
+      <div class="p-3 border theme-border rounded-xl flex items-center justify-between" style="background-color: var(--bg-surface);">
+        <span class="text-xs font-medium" style="color: var(--text-title);">Cerrar día completo</span>
         <input
           type="checkbox"
           id="admin-toggle-closed-day"
-          class="w-4 h-4 accent-stone-500 cursor-pointer"
+          class="w-4 h-4 accent-amber-600 cursor-pointer"
           onchange="toggleAdminClosedDay()"
         />
       </div>
@@ -840,15 +922,30 @@
       <div class="grid grid-cols-4 gap-1.5" id="admin-slots-grid"></div>
     </section>
 
-    <!-- PESTAÑA 5: SERVICIOS Y PRECIOS -->
+    <!-- PESTAÑA 5: BOTICA / GESTIÓN DE PRODUCTOS -->
+    <section id="tab-products" class="space-y-4 hidden">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-body);">Botica y Productos</h2>
+          <p class="text-xs" style="color: var(--text-muted);">Edita precios de pomadas, aceites y packs artesanales.</p>
+        </div>
+        <button onclick="addNewProductPrompt()" class="px-2.5 py-1.5 rounded-lg border theme-border text-xs font-semibold hover:opacity-80 spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">
+          + Nuevo
+        </button>
+      </div>
+
+      <div class="space-y-2.5" id="admin-products-list"></div>
+    </section>
+
+    <!-- PESTAÑA 6: SERVICIOS Y PRECIOS -->
     <section id="tab-services" class="space-y-4 hidden">
       <div>
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Servicios y tarifas</h2>
-            <p class="text-[11px]" style="color: var(--text-muted);">Edita precios en vivo y se actualizarán en la carta.</p>
+            <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-body);">Servicios de Peluquería</h2>
+            <p class="text-xs" style="color: var(--text-muted);">Edita precios en vivo y se actualizarán en la carta.</p>
           </div>
-          <button onclick="addNewServicePrompt()" class="px-2.5 py-1.5 rounded-lg border theme-border text-xs hover:opacity-80 spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">
+          <button onclick="addNewServicePrompt()" class="px-2.5 py-1.5 rounded-lg border theme-border text-xs font-semibold hover:opacity-80 spring-btn" style="color: var(--text-body); background-color: var(--bg-surface);">
             + Añadir
           </button>
         </div>
@@ -857,37 +954,37 @@
       <div class="space-y-2.5" id="admin-services-list"></div>
     </section>
 
-    <!-- PESTAÑA 6: LOCAL & CARTEL QR -->
+    <!-- PESTAÑA 7: LOCAL & CARTEL QR -->
     <section id="tab-shop" class="space-y-4 hidden">
       <div>
-        <h2 class="text-[12px] font-semibold" style="color: var(--text-body);">Tu local y tu QR</h2>
-        <p class="text-[12px]" style="color: var(--text-muted);">Datos públicos que ven los clientes.</p>
+        <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-body);">Tu local y tu QR</h2>
+        <p class="text-xs" style="color: var(--text-muted);">Datos públicos que ven los clientes.</p>
       </div>
-      <div class="p-3.5 rounded-lg border theme-border space-y-2.5" style="background-color: var(--bg-surface);">
+      <div class="p-3.5 rounded-xl border theme-border space-y-2.5" style="background-color: var(--bg-surface);">
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-[11px]" style="color: var(--text-muted);">Nombre local</label><input id="set-shop" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
-          <div><label class="text-[11px]" style="color: var(--text-muted);">Barbero</label><input id="set-barber" placeholder="Ej. Manolo" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+          <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">Nombre local</label><input id="set-shop" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+          <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">Barbero</label><input id="set-barber" placeholder="Ej. Manolo" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
         </div>
-        <div><label class="text-[11px]" style="color: var(--text-muted);">Dirección</label><input id="set-address" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">Dirección</label><input id="set-address" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
         <div class="grid grid-cols-2 gap-2">
-          <div><label class="text-[11px]" style="color: var(--text-muted);">WhatsApp (sin +)</label><input id="set-phone" placeholder="34600112233" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
-          <div><label class="text-[11px]" style="color: var(--text-muted);">PIN peluquero</label><input id="set-pin" maxlength="4" inputmode="numeric" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+          <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">WhatsApp (sin +)</label><input id="set-phone" placeholder="34600112233" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+          <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">PIN peluquero</label><input id="set-pin" maxlength="4" inputmode="numeric" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
         </div>
-        <div><label class="text-[11px]" style="color: var(--text-muted);">Enlace Maps</label><input id="set-maps" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
-        <div><label class="text-[11px]" style="color: var(--text-muted);">Instagram</label><input id="set-ig" placeholder="https://instagram.com/..." class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
-        <div><label class="text-[11px]" style="color: var(--text-muted);">Aviso del barbero (nota amarilla)</label><textarea id="set-notice" rows="2" class="w-full border theme-border rounded-lg px-3 py-2 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);"></textarea></div>
-        <button onclick="saveShopSettings()" class="w-full h-11 rounded-lg text-[13px] font-semibold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Guardar datos del local</button>
+        <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">Enlace Maps</label><input id="set-maps" class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">Instagram</label><input id="set-ig" placeholder="https://instagram.com/..." class="w-full h-10 border theme-border rounded-lg px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
+        <div><label class="text-[11px] font-semibold" style="color: var(--text-muted);">Aviso del barbero (nota amarilla)</label><textarea id="set-notice" rows="2" class="w-full border theme-border rounded-lg px-3 py-2 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);"></textarea></div>
+        <button onclick="saveShopSettings()" class="w-full h-11 rounded-lg text-xs font-bold uppercase tracking-wider spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Guardar datos del local</button>
       </div>
 
-      <div class="p-3.5 rounded-lg border theme-border space-y-2.5 text-center" style="background-color: var(--bg-surface);">
-        <h3 class="text-[13px] font-semibold" style="color: var(--text-title);">Cartel QR para la puerta</h3>
-        <img id="qr-img" alt="QR de reservas" class="w-44 h-44 mx-auto rounded-lg border theme-border bg-white" />
-        <p class="text-[11px]" style="color: var(--text-muted);">Apunta a tu web. Imprímelo y pégalo en el escaparate.</p>
+      <div class="p-3.5 rounded-xl border theme-border space-y-2.5 text-center" style="background-color: var(--bg-surface);">
+        <h3 class="text-sm font-bold" style="color: var(--text-title);">Cartel QR para el escaparate</h3>
+        <img id="qr-img" alt="QR de reservas" class="w-44 h-44 mx-auto rounded-xl border theme-border bg-white" />
+        <p class="text-xs" style="color: var(--text-muted);">Apunta a tu web. Imprímelo y pégalo en la puerta de la barbería.</p>
         <div class="grid grid-cols-2 gap-2">
-          <button onclick="downloadQr()" class="h-10 rounded-lg border theme-border text-[12px] font-semibold spring-btn" style="color: var(--text-body);">Descargar QR</button>
-          <button onclick="copyBookingLink()" class="h-10 rounded-lg text-[12px] font-semibold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Copiar enlace</button>
+          <button onclick="downloadQr()" class="h-10 rounded-lg border theme-border text-xs font-semibold spring-btn" style="color: var(--text-body);">Descargar QR</button>
+          <button onclick="copyBookingLink()" class="h-10 rounded-lg text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Copiar enlace</button>
         </div>
-        <button onclick="printQrSheet()" class="w-full h-10 rounded-lg border theme-border text-[12px] spring-btn" style="color: var(--text-muted);">Imprimir cartel puerta (A4)</button>
+        <button onclick="printQrSheet()" class="w-full h-10 rounded-lg border theme-border text-xs font-medium spring-btn" style="color: var(--text-muted);">Imprimir cartel puerta (A4)</button>
       </div>
     </section>
 
@@ -912,7 +1009,7 @@
 
       <div class="space-y-3">
         <div>
-          <label class="block text-xs font-semibold mb-1" style="color: var(--text-title);">Nombre del cliente *</label>
+          <label class="block text-xs font-bold mb-1" style="color: var(--text-title);">Nombre del cliente *</label>
           <input
             type="text"
             id="express-client-name"
@@ -925,12 +1022,12 @@
         </div>
 
         <div>
-          <label class="block text-[11px] font-medium mb-1.5" style="color: var(--text-muted);">Servicio:</label>
+          <label class="block text-[11px] font-semibold mb-1.5" style="color: var(--text-muted);">Servicio:</label>
           <div class="grid grid-cols-2 gap-1.5" id="express-service-chips"></div>
         </div>
 
         <div>
-          <label class="block text-xs font-medium mb-1" style="color: var(--text-muted);">Teléfono (opcional):</label>
+          <label class="block text-xs font-semibold mb-1" style="color: var(--text-muted);">Teléfono (opcional):</label>
           <input
             type="tel"
             id="express-client-phone"
@@ -946,7 +1043,7 @@
         <button
           type="button"
           onclick="blockCurrentExpressSlot()"
-          class="px-3 h-11 rounded-lg border theme-border text-xs font-medium hover:opacity-75 spring-btn"
+          class="px-3 h-11 rounded-lg border theme-border text-xs font-semibold hover:opacity-75 spring-btn"
           style="color: var(--text-muted);"
           title="Marcar como descanso o comida sin cliente"
         >
@@ -968,32 +1065,32 @@
 
   <!-- MODAL: APUNTAR A LISTA DE ESPERA -->
   <div id="waitlist-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 font-sans">
-    <div class="border theme-border rounded-xl w-full max-w-sm p-5 space-y-3.5 shadow-2xl animate-fade-in-up" style="background-color: var(--bg-surface);">
+    <div class="border theme-border rounded-2xl w-full max-w-sm p-5 space-y-3.5 shadow-2xl animate-fade-in-up" style="background-color: var(--bg-surface);">
       <div class="flex items-center justify-between border-b theme-border pb-2">
-        <h3 class="font-serif text-base" style="color: var(--text-title);">Apuntar a Lista de Espera</h3>
+        <h3 class="font-serif text-lg" style="color: var(--text-title);">Apuntar a Lista de Espera</h3>
         <button onclick="closeWaitlistModal()" class="text-xs hover:opacity-75" style="color: var(--text-muted);">✕</button>
       </div>
 
       <div>
-        <label class="block text-xs mb-1" style="color: var(--text-muted);">Nombre del cliente</label>
-        <input type="text" id="waitlist-client-name" placeholder="Ej. Antonio" class="w-full h-9 border theme-border rounded px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+        <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Nombre del cliente</label>
+        <input type="text" id="waitlist-client-name" placeholder="Ej. Antonio" class="w-full h-9 border theme-border rounded-lg px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
       </div>
 
       <div>
-        <label class="block text-xs mb-1" style="color: var(--text-muted);">Teléfono (WhatsApp)</label>
-        <input type="tel" id="waitlist-client-phone" placeholder="600112233" class="w-full h-9 border theme-border rounded px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+        <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Teléfono (WhatsApp)</label>
+        <input type="tel" id="waitlist-client-phone" placeholder="600112233" class="w-full h-9 border theme-border rounded-lg px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
       </div>
 
       <div>
-        <label class="block text-xs mb-1" style="color: var(--text-muted);">Preferencia horaria</label>
-        <input type="text" id="waitlist-client-pref" placeholder="Ej. Hoy por la tarde a partir de las 18:00" class="w-full h-9 border theme-border rounded px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+        <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Preferencia horaria</label>
+        <input type="text" id="waitlist-client-pref" placeholder="Ej. Hoy por la tarde a partir de las 18:00" class="w-full h-9 border theme-border rounded-lg px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
       </div>
 
       <div class="pt-2 flex gap-2">
-        <button onclick="closeWaitlistModal()" class="flex-1 h-9 rounded border theme-border text-xs spring-btn" style="color: var(--text-muted);">
+        <button onclick="closeWaitlistModal()" class="flex-1 h-9 rounded-lg border theme-border text-xs spring-btn" style="color: var(--text-muted);">
           Cancelar
         </button>
-        <button onclick="saveWaitlistClient()" class="flex-1 h-9 rounded text-xs font-semibold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="saveWaitlistClient()" class="flex-1 h-9 rounded-lg text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);" >
           Guardar en Lista
         </button>
       </div>
@@ -1003,43 +1100,43 @@
 
   <!-- MODAL: CITA MANUAL -->
   <div id="manual-booking-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4 font-sans">
-    <div class="border theme-border rounded-xl w-full max-w-sm p-5 space-y-3.5 shadow-2xl animate-fade-in-up" style="background-color: var(--bg-surface);">
+    <div class="border theme-border rounded-2xl w-full max-w-sm p-5 space-y-3.5 shadow-2xl animate-fade-in-up" style="background-color: var(--bg-surface);">
       <div class="flex items-center justify-between border-b theme-border pb-2">
-        <h3 class="font-serif text-base" style="color: var(--text-title);">Añadir Cita Manual</h3>
+        <h3 class="font-serif text-lg" style="color: var(--text-title);">Añadir Cita Manual</h3>
         <button onclick="closeManualBookingModal()" class="text-xs hover:opacity-75" style="color: var(--text-muted);">✕</button>
       </div>
 
       <div>
-        <label class="block text-xs mb-1" style="color: var(--text-muted);">Nombre</label>
-        <input type="text" id="manual-client-name" class="w-full h-9 border theme-border rounded px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+        <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Nombre</label>
+        <input type="text" id="manual-client-name" class="w-full h-9 border theme-border rounded-lg px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
       </div>
 
       <div>
-        <label class="block text-xs mb-1" style="color: var(--text-muted);">Teléfono</label>
-        <input type="tel" id="manual-client-phone" class="w-full h-9 border theme-border rounded px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+        <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Teléfono</label>
+        <input type="tel" id="manual-client-phone" class="w-full h-9 border theme-border rounded-lg px-2.5 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
       </div>
 
       <div class="grid grid-cols-2 gap-2">
         <div>
-          <label class="block text-xs mb-1" style="color: var(--text-muted);">Fecha</label>
-          <input type="date" id="manual-client-date" class="w-full h-9 border theme-border rounded px-2 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+          <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Fecha</label>
+          <input type="date" id="manual-client-date" class="w-full h-9 border theme-border rounded-lg px-2 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
         </div>
         <div>
-          <label class="block text-xs mb-1" style="color: var(--text-muted);">Hora</label>
-          <input type="time" id="manual-client-time" value="11:00" class="w-full h-9 border theme-border rounded px-2 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
+          <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Hora</label>
+          <input type="time" id="manual-client-time" value="11:00" class="w-full h-9 border theme-border rounded-lg px-2 text-xs" style="background-color: var(--bg-input); color: var(--text-title);" />
         </div>
       </div>
 
       <div>
-        <label class="block text-xs mb-1" style="color: var(--text-muted);">Servicio</label>
-        <select id="manual-client-service" class="w-full h-9 border theme-border rounded px-2 text-xs" style="background-color: var(--bg-input); color: var(--text-title);"></select>
+        <label class="block text-xs mb-1 font-semibold" style="color: var(--text-muted);">Servicio</label>
+        <select id="manual-client-service" class="w-full h-9 border theme-border rounded-lg px-2 text-xs" style="background-color: var(--bg-input); color: var(--text-title);"></select>
       </div>
 
       <div class="pt-2 flex gap-2">
-        <button onclick="closeManualBookingModal()" class="flex-1 h-9 rounded border theme-border text-xs spring-btn" style="color: var(--text-muted);">
+        <button onclick="closeManualBookingModal()" class="flex-1 h-9 rounded-lg border theme-border text-xs spring-btn" style="color: var(--text-muted);">
           Cancelar
         </button>
-        <button onclick="saveManualBooking()" class="flex-1 h-9 rounded text-xs font-semibold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="saveManualBooking()" class="flex-1 h-9 rounded-lg text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
           Guardar
         </button>
       </div>
@@ -1048,7 +1145,7 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT: ARQUITECTURA ZERO-CLICK I18N, OWNER PERSISTENCE & MOTOR
+       JAVASCRIPT: ARQUITECTURA ZERO-CLICK I18N, OWNER PERSISTENCE & MOTOR DE PRODUCTOS
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
@@ -1070,12 +1167,12 @@
         html.classList.add('light-mode');
         if (iconSun) iconSun.classList.add('hidden');
         if (iconMoon) iconMoon.classList.remove('hidden');
-        if (metaThemeColor) metaThemeColor.setAttribute('content', '#f8f6f2');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', '#f7f5f0');
       } else {
         html.classList.remove('light-mode');
         if (iconSun) iconSun.classList.remove('hidden');
         if (iconMoon) iconMoon.classList.add('hidden');
-        if (metaThemeColor) metaThemeColor.setAttribute('content', '#141312');
+        if (metaThemeColor) metaThemeColor.setAttribute('content', '#131211');
       }
       localStorage.setItem('barber_theme', theme);
     }
@@ -1084,6 +1181,8 @@
       const isLight = document.documentElement.classList.contains('light-mode');
       applyTheme(isLight ? 'dark' : 'light');
       renderServices();
+      renderBoutiqueProducts();
+      renderBookingAddons();
       generateCalendarDays();
       renderTimeSlotsForSelectedDate();
       renderAdminVisualCalendar();
@@ -1104,15 +1203,24 @@
         badgeStatus: "Abierto hoy · 10:00 — 20:00",
         badgeLocation: "TRIANA · SEVILLA",
         heroTitle: 'Corte a navaja en Triana. Sin esperas.',
-        heroSubtitle: "Soy el del sillón nº2, te atiendo yo mismo. Reserva aquí abajo y entra directo — si llegas 10 min tarde, avísame por WhatsApp.",
-        heroProof: "★ 4,9 en Google · 320 reseñas · Calle Castilla 24 — a 2 min del puente",
+        heroSubtitle: "Soy el del sillón nº2, te atiendo yo mismo. Reserva abajo en 30 segundos y entra directo — si llegas 10 min tarde, avísame por WhatsApp.",
+        heroProof: "★ 4,9 en Google · 320 reseñas · Calle Castilla 24",
         heroCta: "Pedir cita",
         heroCall: "Llamar",
-        galleryTitle: "Así es el local",
+        galleryTitle: "Así es el taller",
         galleryTag: "Castilla 24 · Triana",
         photoTag1: "El sillón nº2, el de siempre",
         review1: "“Me dejó el degradado perfecto antes de la boda. Sin esperas porque reservé aquí.”",
         review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
+        boutiqueBadge: "Botica del Barbero",
+        boutiqueTitle: "Productos Artesanales de Triana",
+        boutiqueSubtitle: "Formulados en Sevilla con esencias naturales. Añádelos a tu cita o recógelos en el local.",
+        btnAddToBooking: "+ Añadir a mi cita",
+        btnAddedToBooking: "✓ En tu reserva",
+        btnDirectWaProduct: "💬 Pedir por WhatsApp",
+        addonsTitle: "Añadir producto a tu visita (opcional)",
+        addonsBadge: "Preparado para tu corte",
+        addonsDesc: "Te lo dejamos listo en el mostrador cuando vengas a tu cita.",
         modulePretitle: "Pide tu hueco — tardas 30 segundos",
         moduleTitle: "Precios claros",
         moduleDesc: "Sin sorpresas. Se paga en el local, en efectivo o Bizum.",
@@ -1132,7 +1240,7 @@
         footerHours: "Lun–Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30",
         paymentNotice: "Aquí se paga: efectivo o Bizum",
         noFees: "Sin suplementos",
-        footerPolicy: "El Barrio · corte de barrio en Triana desde 2012",
+        footerPolicy: "El Barrio · Corte tradicional & Botica en Triana desde 2012",
         closedDay: "Cerrado este día",
         ctaButton: "Pedir cita por WhatsApp",
         chooseDatePrompt: "Elige día y hora",
@@ -1147,15 +1255,15 @@
         monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
         today: "Hoy",
         tomorrow: "Mañana",
-        waMessage: (s, d, t, n, ph) =>
-          `[ES 🇪🇸] Nueva reserva: ${s} | ${d} a las ${t} | Cliente: ${n} | Teléfono: ${ph} | Pago en local (Triana, Sevilla)`
+        waMessage: (s, d, t, n, ph, products) =>
+          `[ES 🇪🇸] Reserva: ${s}${products ? ' + ' + products : ''} | ${d} a las ${t} | Cliente: ${n} | Tel: ${ph} | Pago en local (Triana, Sevilla)`
       },
       en: {
         badgeStatus: "Open today · 10:00 AM — 8:00 PM",
         badgeLocation: "TRIANA · SEVILLE",
         heroTitle: 'Classic razor haircut in Triana. No waiting.',
-        heroSubtitle: "Traditional barbershop chair #2, personally taking care of you. Book your spot below and walk straight in.",
-        heroProof: "★ 4.9 on Google · 320 reviews · Calle Castilla 24 — 2 min from Triana Bridge",
+        heroSubtitle: "Traditional barbershop chair #2, personally taking care of you. Book below in 30 seconds and walk straight in.",
+        heroProof: "★ 4.9 on Google · 320 reviews · Calle Castilla 24",
         heroCta: "Book appointment",
         heroCall: "Call",
         galleryTitle: "The barbershop",
@@ -1163,6 +1271,15 @@
         photoTag1: "Authentic barber chair #2",
         review1: "“Best fade and hot towel beard trim in Seville. Quick booking, perfect service.”",
         review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
+        boutiqueBadge: "Barber's Apothecary",
+        boutiqueTitle: "Handcrafted Grooming Products",
+        boutiqueSubtitle: "Formulated in Seville with natural botanical extracts. Add to your cut or order directly.",
+        btnAddToBooking: "+ Add to my cut",
+        btnAddedToBooking: "✓ Added to booking",
+        btnDirectWaProduct: "💬 Order via WhatsApp",
+        addonsTitle: "Add grooming product to your cut (optional)",
+        addonsBadge: "Ready at the chair",
+        addonsDesc: "We'll have it prepared for you at the counter when you arrive.",
         modulePretitle: "Reserve your slot in 30 seconds",
         moduleTitle: "Clear pricing",
         moduleDesc: "No surprises. Payment on-site in cash or card.",
@@ -1182,7 +1299,7 @@
         footerHours: "Mon–Fri 10:00 AM–8:00 PM · Sat 10:00 AM–2:30 PM",
         paymentNotice: "Payment on-site: Cash or Card",
         noFees: "No extra charges",
-        footerPolicy: "El Barrio · Traditional Triana Barbershop since 2012",
+        footerPolicy: "El Barrio · Traditional Triana Barbershop & Grooming since 2012",
         closedDay: "Closed on this date",
         ctaButton: "Confirm via WhatsApp",
         chooseDatePrompt: "Select date and time",
@@ -1197,15 +1314,15 @@
         monthsShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         today: "Today",
         tomorrow: "Tomorrow",
-        waMessage: (s, d, t, n, ph) =>
-          `[EN 🇬🇧] New booking: ${s} | ${d} at ${t} | Client: ${n} | Phone: ${ph} | Payment on-site (Triana, Seville)`
+        waMessage: (s, d, t, n, ph, products) =>
+          `[EN 🇬🇧] Booking: ${s}${products ? ' + ' + products : ''} | ${d} at ${t} | Client: ${n} | Phone: ${ph} | Payment on-site (Triana, Seville)`
       },
       fr: {
         badgeStatus: "Ouvert aujourd'hui · 10:00 — 20:00",
         badgeLocation: "TRIANA · SÉVILLE",
         heroTitle: 'Coupe au rasoir à Triana. Sans attente.',
-        heroSubtitle: "Fauteuil traditionnel nº2. Réservez votre créneau en 30 secondes et entrez directement.",
-        heroProof: "★ 4,9 sur Google · 320 avis · Calle Castilla 24 — à 2 min du pont",
+        heroSubtitle: "Fauteuil traditionnel nº2. Réservez en 30 secondes et entrez directement au salon.",
+        heroProof: "★ 4,9 sur Google · 320 avis · Calle Castilla 24",
         heroCta: "Prendre RDV",
         heroCall: "Appeler",
         galleryTitle: "Le salon",
@@ -1213,6 +1330,15 @@
         photoTag1: "Fauteuil nº2 traditionnel",
         review1: "“Excellente coupe et taille de barbe avec serviette chaude à Séville.”",
         review2: "“Accueil chaleureux pour touristes, confirmation WhatsApp instantanée.”",
+        boutiqueBadge: "Herboristerie du Barbier",
+        boutiqueTitle: "Soins & Produits Artisanaux",
+        boutiqueSubtitle: "Formulés à Séville avec des extraits naturels. Ajoutez à votre rendez-vous.",
+        btnAddToBooking: "+ Ajouter au RDV",
+        btnAddedToBooking: "✓ Ajouté au RDV",
+        btnDirectWaProduct: "💬 Commander via WhatsApp",
+        addonsTitle: "Ajouter un produit de soin (optionnel)",
+        addonsBadge: "Préparé sur place",
+        addonsDesc: "Prêt au comptoir lors de votre arrivée.",
         modulePretitle: "Réservez en 30 secondes",
         moduleTitle: "Tarifs clairs",
         moduleDesc: "Paiement sur place en espèces ou carte.",
@@ -1232,7 +1358,7 @@
         footerHours: "Lun–Ven 10:00–20:00 · Sam 10:00–14:30",
         paymentNotice: "Paiement sur place : Espèces / Carte",
         noFees: "Sans supplément",
-        footerPolicy: "El Barrio · Salon traditionnel à Triana depuis 2012",
+        footerPolicy: "El Barrio · Salon traditionnel & Soins à Triana depuis 2012",
         closedDay: "Fermé cette date",
         ctaButton: "Confirmer via WhatsApp",
         chooseDatePrompt: "Choisissez la date et l'heure",
@@ -1247,15 +1373,15 @@
         monthsShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Août", "Sep", "Oct", "Nov", "Déc"],
         today: "Aujourd'hui",
         tomorrow: "Demain",
-        waMessage: (s, d, t, n, ph) =>
-          `[FR 🇫🇷] Nouvelle réservation: ${s} | ${d} à ${t} | Client: ${n} | Téléphone: ${ph} | Paiement sur place (Triana, Séville)`
+        waMessage: (s, d, t, n, ph, products) =>
+          `[FR 🇫🇷] Réservation : ${s}${products ? ' + ' + products : ''} | ${d} à ${t} | Client : ${n} | Tél : ${ph} | Paiement sur place (Triana, Séville)`
       },
       it: {
         badgeStatus: "Aperto oggi · 10:00 — 20:00",
         badgeLocation: "TRIANA · SIVIGLIA",
         heroTitle: 'Taglio a rasoio a Triana. Senza attese.',
         heroSubtitle: "Poltrona tradizionale nº2. Prenota il tuo turno in 30 secondi ed entra direttamente.",
-        heroProof: "★ 4,9 su Google · 320 recensioni · Calle Castilla 24 — a 2 min dal ponte",
+        heroProof: "★ 4,9 su Google · 320 recensioni · Calle Castilla 24",
         heroCta: "Prenota ora",
         heroCall: "Chiama",
         galleryTitle: "La barberia",
@@ -1263,6 +1389,15 @@
         photoTag1: "Poltrona tradizionale nº2",
         review1: "“Taglio sfumato impeccabile e rasatura con panno caldo a Triana.”",
         review2: "“Gentilezza, professionalità e conferma rapida via WhatsApp.”",
+        boutiqueBadge: "Bottega del Barbiere",
+        boutiqueTitle: "Prodotti Artigianali di Triana",
+        boutiqueSubtitle: "Formulati a Siviglia con ingredienti botanici naturali.",
+        btnAddToBooking: "+ Aggiungi al taglio",
+        btnAddedToBooking: "✓ Aggiunto al turno",
+        btnDirectWaProduct: "💬 Ordina via WhatsApp",
+        addonsTitle: "Aggiungi un prodotto al tuo appuntamento (opzionale)",
+        addonsBadge: "Pronto al bancone",
+        addonsDesc: "Te lo prepariamo al banco per quando arrivi al salone.",
         modulePretitle: "Prenota in 30 secondi",
         moduleTitle: "Listino trasparente",
         moduleDesc: "Pagamento in loco in contanti o carta.",
@@ -1282,7 +1417,7 @@
         footerHours: "Lun–Ven 10:00–20:00 · Sab 10:00–14:30",
         paymentNotice: "Pagamento in loco: Contanti / Carta",
         noFees: "Nessun extra",
-        footerPolicy: "El Barrio · Tradizione a Triana dal 2012",
+        footerPolicy: "El Barrio · Tradizione e Cura a Triana dal 2012",
         closedDay: "Chiuso in questa data",
         ctaButton: "Conferma via WhatsApp",
         chooseDatePrompt: "Scegli giorno e ora",
@@ -1297,8 +1432,8 @@
         monthsShort: ["Gen", "Feb", "Mar", "Apr", "Mag", "Giu", "Lug", "Ago", "Set", "Ott", "Nov", "Dic"],
         today: "Oggi",
         tomorrow: "Domani",
-        waMessage: (s, d, t, n, ph) =>
-          `[IT 🇮🇹] Nuova prenotazione: ${s} | ${d} alle ore ${t} | Cliente: ${n} | Telefono: ${ph} | Pagamento in loco (Triana, Siviglia)`
+        waMessage: (s, d, t, n, ph, products) =>
+          `[IT 🇮🇹] Prenotazione: ${s}${products ? ' + ' + products : ''} | ${d} alle ore ${t} | Cliente: ${n} | Tel: ${ph} | Pagamento in loco (Triana, Siviglia)`
       },
       de: {
         badgeStatus: "Heute geöffnet · 10:00 — 20:00 Uhr",
@@ -1313,6 +1448,15 @@
         photoTag1: "Traditioneller Stuhl Nr. 2",
         review1: "“Erstklassiger Haarschnitt und Heißtuch-Rasur in Sevilla.”",
         review2: "“Sehr freundlich, schnelle Buchung über WhatsApp.”",
+        boutiqueBadge: "Barbier-Apotheke",
+        boutiqueTitle: "Handgefertigte Pflegeprodukte",
+        boutiqueSubtitle: "In Sevilla hergestellt mit natürlichen Essenzen. Direkt zum Haarschnitt dazu bestellen.",
+        btnAddToBooking: "+ Zum Schnitt hinzufügen",
+        btnAddedToBooking: "✓ Hinzugefügt",
+        btnDirectWaProduct: "💬 Per WhatsApp bestellen",
+        addonsTitle: "Pflegeprodukt zum Termin hinzufügen (optional)",
+        addonsBadge: "Liegt bereit",
+        addonsDesc: "Wir legen das Produkt am Tresen für Ihren Besuch bereit.",
         modulePretitle: "In 30 Sekunden buchen",
         moduleTitle: "Transparente Preise",
         moduleDesc: "Zahlung vor Ort in bar oder mit Karte.",
@@ -1332,7 +1476,7 @@
         footerHours: "Mo–Fr 10:00–20:00 Uhr · Sa 10:00–14:30 Uhr",
         paymentNotice: "Zahlung vor Ort (Bar / Karte)",
         noFees: "Keine Zusatzkosten",
-        footerPolicy: "El Barrio · Traditioneller Barbier in Triana seit 2012",
+        footerPolicy: "El Barrio · Traditioneller Barbier & Pflege in Triana seit 2012",
         closedDay: "Geschlossen",
         ctaButton: "Via WhatsApp bestätigen",
         chooseDatePrompt: "Datum und Uhrzeit wählen",
@@ -1347,47 +1491,123 @@
         monthsShort: ["Jan", "Feb", "Mär", "Apr", "Mai", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dez"],
         today: "Heute",
         tomorrow: "Morgen",
-        waMessage: (s, d, t, n, ph) =>
-          `[DE 🇩🇪] Neue Buchung: ${s} | ${d} um ${t} Uhr | Kunde: ${n} | Telefon: ${ph} | Zahlung vor Ort (Triana, Sevilla)`
+        waMessage: (s, d, t, n, ph, products) =>
+          `[DE 🇩🇪] Buchung: ${s}${products ? ' + ' + products : ''} | ${d} um ${t} Uhr | Kunde: ${n} | Tel: ${ph} | Zahlung vor Ort (Triana, Sevilla)`
       }
     };
 
+    // SERVICIOS DE CORTE Y TRATAMIENTOS
     const SERVICES_TRANSLATIONS = {
       1: {
-        es: { name: "Corte clásico", desc: "Lavado, corte a tijera o máquina y peinado", duration: "30 min" },
-        en: { name: "Classic Haircut", desc: "Wash, scissor or clipper cut & styling", duration: "30 min" },
-        fr: { name: "Coupe classique", desc: "Shampoing, coupe aux ciseaux et coiffage", duration: "30 min" },
-        it: { name: "Taglio classico", desc: "Lavaggio, taglio a forbice e piega", duration: "30 min" },
-        de: { name: "Klassischer Haarschnitt", desc: "Haarwäsche, Schnitt & Styling", duration: "30 Min." }
+        es: { name: "Corte clásico", desc: "Lavado artesano, corte a tijera o máquina y peinado con pomada", duration: "30 min", tag: "⭐ Más pedido" },
+        en: { name: "Classic Haircut", desc: "Artisan wash, scissor/clipper cut & botanical pomade styling", duration: "30 min", tag: "⭐ Most Popular" },
+        fr: { name: "Coupe classique", desc: "Shampoing aux plantes, coupe aux ciseaux et coiffage", duration: "30 min", tag: "⭐ Plus demandé" },
+        it: { name: "Taglio classico", desc: "Lavaggio artigianale, taglio a forbice e cera all'arancia", duration: "30 min", tag: "⭐ Più richiesto" },
+        de: { name: "Klassischer Haarschnitt", desc: "Haarwäsche, Schnitt & Pomade-Styling", duration: "30 Min.", tag: "⭐ Beliebt" }
       },
       2: {
-        es: { name: "Corte + Barba", desc: "Corte completo y ritual con toalla caliente", duration: "45 min" },
-        en: { name: "Haircut + Beard Ritual", desc: "Full haircut and hot towel beard shaping", duration: "45 min" },
-        fr: { name: "Coupe + Soin Barbe", desc: "Coupe complète et soin à la serviette chaude", duration: "45 min" },
-        it: { name: "Taglio + Cura Barba", desc: "Taglio completo e rituale con panno caldo", duration: "45 min" },
-        de: { name: "Haarschnitt + Bartritual", desc: "Komplettschnitt & Heißtuch-Bartpflege", duration: "45 Min." }
+        es: { name: "Corte + Ritual Barba", desc: "Corte completo y afeitado con toalla caliente, aceite de cedro y bálsamo", duration: "45 min", tag: "🔥 Experiencia Completa" },
+        en: { name: "Haircut + Beard Ritual", desc: "Full haircut with hot towel shave, cedarwood oil and soothing balm", duration: "45 min", tag: "🔥 Complete Ritual" },
+        fr: { name: "Coupe + Soin Barbe", desc: "Coupe complète et soin serviette chaude à l'huile de cèdre", duration: "45 min", tag: "🔥 Rituel Complet" },
+        it: { name: "Taglio + Rituale Barba", desc: "Taglio completo e rasatura panno caldo all'olio di cedro", duration: "45 min", tag: "🔥 Esperienza Totale" },
+        de: { name: "Haarschnitt + Bartritual", desc: "Komplettschnitt mit Heißtuch, Zedernöl & Balsam", duration: "45 Min.", tag: "🔥 Komplettes Ritual" }
       },
       3: {
-        es: { name: "Arreglo de barba", desc: "Perfilado a navaja, toalla caliente y bálsamo", duration: "20 min" },
-        en: { name: "Beard Grooming", desc: "Razor shaping, hot towel and conditioning balm", duration: "20 min" },
-        fr: { name: "Taille de barbe", desc: "Traçage au rasoir, serviette chaude et baume", duration: "20 min" },
-        it: { name: "Rifinitura barba", desc: "Modellatura a rasoio, panno caldo e balsamo", duration: "20 min" },
-        de: { name: "Bartpflege & Konturen", desc: "Messerrasur, Heißtuch und Bartbalsam", duration: "20 Min." }
+        es: { name: "Arreglo de Barba Tradicional", desc: "Perfilado a navaja, toalla caliente de eucalipto y aceite hidratante", duration: "20 min", tag: "✂️ Navaja Clásica" },
+        en: { name: "Traditional Beard Sculpt", desc: "Razor outline, eucalyptus hot towel and nourishing beard oil", duration: "20 min", tag: "✂️ Classic Razor" },
+        fr: { name: "Taille de Barbe Traditionnelle", desc: "Traçage au rasoir, serviette à l'eucalyptus et huile nourrissante", duration: "20 min", tag: "✂️ Rasoir Classique" },
+        it: { name: "Rifinitura Barba Tradizionale", desc: "Modellatura a rasoio, panno caldo all'eucalipto e olio nutriente", duration: "20 min", tag: "✂️ Rasoio Classico" },
+        de: { name: "Traditionelle Bartpflege", desc: "Messerrasur, Eukalyptus-Heißtuch und nährendes Bartöl", duration: "20 Min.", tag: "✂️ Rasiermesser" }
       },
       4: {
-        es: { name: "Corte infantil / Senior", desc: "Menores de 12 años y jubilados", duration: "25 min" },
-        en: { name: "Junior & Senior Cut", desc: "Under 12 years old and seniors", duration: "25 min" },
-        fr: { name: "Coupe Enfant / Senior", desc: "Moins de 12 ans et seniors", duration: "25 min" },
-        it: { name: "Taglio Junior / Senior", desc: "Bambini sotto i 12 anni e pensionati", duration: "25 min" },
-        de: { name: "Kinder- / Seniorenhaarschnitt", desc: "Kinder unter 12 Jahren & Senioren", duration: "25 Min." }
+        es: { name: "Corte Junior / Senior", desc: "Menores de 12 años y jubilados con el mismo trato artesano", duration: "25 min", tag: "🌱 Familiar" },
+        en: { name: "Junior & Senior Cut", desc: "Kids under 12 and seniors with authentic craftsman care", duration: "25 min", tag: "🌱 Family" },
+        fr: { name: "Coupe Enfant / Senior", desc: "Moins de 12 ans et seniors avec toute notre attention", duration: "25 min", tag: "🌱 Famille" },
+        it: { name: "Taglio Junior / Senior", desc: "Bambini sotto i 12 anni e pensionati", duration: "25 min", tag: "🌱 Famiglia" },
+        de: { name: "Kinder- / Seniorenhaarschnitt", desc: "Kinder unter 12 & Senioren", duration: "25 Min.", tag: "🌱 Familie" }
       }
     };
 
     const DEFAULT_SERVICES = [
-      { id: 1, name: "Corte clásico", duration: "30 min", price: 15, durationMin: 30, desc: "Lavado, corte a tijera o máquina y peinado", active: true },
-      { id: 2, name: "Corte + Barba", duration: "45 min", price: 24, durationMin: 45, desc: "Corte completo y ritual con toalla caliente", active: true },
-      { id: 3, name: "Arreglo de barba", duration: "20 min", price: 12, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y bálsamo", active: true },
-      { id: 4, name: "Corte infantil / Senior", duration: "25 min", price: 13, durationMin: 25, desc: "Menores de 12 años y jubilados", active: true }
+      { id: 1, name: "Corte clásico", duration: "30 min", price: 15, durationMin: 30, desc: "Lavado artesano, corte a tijera o máquina y peinado con pomada", active: true, tag: "⭐ Más pedido" },
+      { id: 2, name: "Corte + Ritual Barba", duration: "45 min", price: 24, durationMin: 45, desc: "Corte completo y afeitado con toalla caliente, aceite de cedro y bálsamo", active: true, tag: "🔥 Experiencia Completa" },
+      { id: 3, name: "Arreglo de Barba Tradicional", duration: "20 min", price: 12, durationMin: 20, desc: "Perfilado a navaja, toalla caliente de eucalipto y aceite hidratante", active: true, tag: "✂️ Navaja Clásica" },
+      { id: 4, name: "Corte Junior / Senior", duration: "25 min", price: 13, durationMin: 25, desc: "Menores de 12 años y jubilados con el mismo trato artesano", active: true, tag: "🌱 Familiar" }
+    ];
+
+    // CATÁLOGO DE PRODUCTOS ARTESANALES DE TRIANA
+    const PRODUCTS_TRANSLATIONS = {
+      1: {
+        es: { name: "Pomada Mate Arcilla de Sevilla", desc: "Fijación fuerte y flexible con arcilla volcánica natural. Acabado mate sin brillos y aroma a tabaco rubio y bergamota.", badge: "⭐ TOP VENTAS" },
+        en: { name: "Seville Matte Clay Pomade", desc: "Strong flexible hold with volcanic clay. Natural matte finish with subtle notes of sweet tobacco & bergamot.", badge: "⭐ BEST SELLER" },
+        fr: { name: "Pommade Mate Argile de Séville", desc: "Fixation forte et naturelle à l'argile. Fini mat élégant au parfum de tabac doux et bergamote.", badge: "⭐ TOP VENTES" },
+        it: { name: "Pomata Opaca Argilla di Siviglia", desc: "Tenuta forte e naturale con argilla vulcanica. Finitura opaca e aroma di tabacco e bergamotto.", badge: "⭐ PIÙ VENDUTO" },
+        de: { name: "Matte Ton-Pomade Sevilla", desc: "Starker flexibler Halt mit vulkanischem Ton. Mattes Finish mit Duft nach süßem Tabak & Bergamotte.", badge: "⭐ BESTSELLER" }
+      },
+      2: {
+        es: { name: "Aceite de Barba Azahar & Cedro", desc: "100% orgánico (jojoba, argán y ricino). Suaviza la barba, calma la piel y deja el característico aroma fresco a Triana.", badge: "🍊 AROMA SEVILLANO" },
+        en: { name: "Orange Blossom & Cedar Beard Oil", desc: "100% organic (jojoba, argan, castor). Softens coarse beard, prevents itching with fresh Seville blossom scent.", badge: "🍊 SEVILLE SCENT" },
+        fr: { name: "Huile de Barbe Fleur d'Oranger & Cèdre", desc: "100% bio (jojoba, argan). Adoucit le poil et apaise la peau avec une fragrance florale de Séville.", badge: "🍊 FLEUR D'ORANGER" },
+        it: { name: "Olio da Barba Zagara & Cedro", desc: "100% biologico con jojoba e argan. Ammorbidisce la barba e rinfresca con note agrumate di Siviglia.", badge: "🍊 AROMA SIVIGLIANO" },
+        de: { name: "Bartöl Orangenblüte & Zeder", desc: "100% bio mit Jojoba & Arganöl. Pflegt das Barthaar geschmeidig mit frischem Orangenblütenduft.", badge: "🍊 SEVILLA-DUFT" }
+      },
+      3: {
+        es: { name: "Tónico After-Shave Romero & Eucalipto", desc: "Loción calmante botánica sin alcohol irritante. Cierra poros, desinflama al instante y refresca tras el corte a navaja.", badge: "🌿 100% NATURAL" },
+        en: { name: "Rosemary & Eucalyptus After-Shave", desc: "Botanical soothing tonic with zero harsh alcohol. Closes pores and eliminates razor burn immediately.", badge: "🌿 100% NATURAL" },
+        fr: { name: "Lotion Après-Rasage Romarin & Eucalyptus", desc: "Tonique végétal sans alcool agressif. Apaise le feu du rasoir et tonifie la peau.", badge: "🌿 100% NATUREL" },
+        it: { name: "Dopobarba Rosmarino & Eucalipto", desc: "Lozione calmante botanica senza alcool. Elimina le irritazioni e rinfresca a fondo.", badge: "🌿 100% NATURALE" },
+        de: { name: "After-Shave Rosmarin & Eukalyptus", desc: "Pflanzliches Beruhigungstonikum ohne Alkohol. Schließt Poren und lindert Rasurbrand sofort.", badge: "🌿 100% NATÜRLICH" }
+      },
+      4: {
+        es: { name: "Pack Ritual Triana (Caja de Madera)", desc: "Incluye Pomada Mate + Aceite de Barba + Bálsamo en caja de pino grabada a fuego. El regalo perfecto (Ahorras 6€).", badge: "🎁 PACK REGALO" },
+        en: { name: "Triana Grooming Gift Set (Wooden Box)", desc: "Includes Matte Pomade + Beard Oil + Soothing Balm in fire-branded pine box (Save 6€).", badge: "🎁 GIFT SET" },
+        fr: { name: "Coffret Rituel Triana (Boîte en Bois)", desc: "Pommade Mate + Huile de Barbe + Baume dans son coffret en bois gravé (Économisez 6€).", badge: "🎁 COFFRET CADEAU" },
+        it: { name: "Cofanetto Rituale Triana (Scatola in Legno)", desc: "Pomata Opaca + Olio Barba + Balsamo in elegante scatola di pino incisa a fuoco (Risparmi 6€).", badge: "🎁 PACCO REGALO" },
+        de: { name: "Triana Geschenkbox (Holzkiste)", desc: "Enthält Pomade + Bartöl + Balsam in feingebrannter Kiefernholzkiste (6€ sparen).", badge: "🎁 GESCHENKSET" }
+      }
+    };
+
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 1,
+        name: "Pomada Mate Arcilla de Sevilla",
+        price: 14,
+        size: "100 ml",
+        desc: "Fijación fuerte y flexible con arcilla volcánica natural. Acabado mate sin brillos y aroma a tabaco rubio y bergamota.",
+        badge: "⭐ TOP VENTAS",
+        image: "https://images.unsplash.com/photo-1597854711516-1b4705007474?auto=format&fit=crop&w=600&q=80",
+        active: true
+      },
+      {
+        id: 2,
+        name: "Aceite de Barba Azahar & Cedro",
+        price: 16,
+        size: "30 ml",
+        desc: "100% orgánico (jojoba, argán y ricino). Suaviza la barba, calma la piel y deja el característico aroma fresco a Triana.",
+        badge: "🍊 AROMA SEVILLANO",
+        image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80",
+        active: true
+      },
+      {
+        id: 3,
+        name: "Tónico After-Shave Romero & Eucalipto",
+        price: 12,
+        size: "150 ml",
+        desc: "Loción calmante botánica sin alcohol irritante. Cierra poros, desinflama al instante y refresca tras el corte a navaja.",
+        badge: "🌿 100% NATURAL",
+        image: "https://images.unsplash.com/photo-1608248597358-0050e64f7743?auto=format&fit=crop&w=600&q=80",
+        active: true
+      },
+      {
+        id: 4,
+        name: "Pack Ritual Triana (Caja de Madera)",
+        price: 36,
+        size: "Pack 3 piezas",
+        desc: "Incluye Pomada Mate + Aceite de Barba + Bálsamo en caja de pino grabada a fuego. El regalo perfecto (Ahorras 6€).",
+        badge: "🎁 PACK REGALO",
+        image: "https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=600&q=80",
+        active: true
+      }
     ];
 
     const STORE = {
@@ -1426,6 +1646,13 @@
       saveServices(services) {
         localStorage.setItem('barber_services', JSON.stringify(services));
       },
+      getProducts() {
+        const data = localStorage.getItem('barber_products');
+        return data ? JSON.parse(data) : DEFAULT_PRODUCTS;
+      },
+      saveProducts(products) {
+        localStorage.setItem('barber_products', JSON.stringify(products));
+      },
       getBlockedSlots() {
         const data = localStorage.getItem('barber_blocked_slots');
         return data ? JSON.parse(data) : {};
@@ -1443,8 +1670,8 @@
       getAppointments() {
         const data = localStorage.getItem('barber_appointments');
         return data ? JSON.parse(data) : [
-          { id: 101, name: "Carlos Mendoza", phone: "+34 612 345 678", service: "Corte clásico", price: 15, date: getTodayKey(), time: "11:00", status: "confirmed" },
-          { id: 102, name: "Jean Dupont", phone: "+33 655 443 221", service: "Corte + Barba", price: 24, date: getTodayKey(), time: "12:30", status: "confirmed" }
+          { id: 101, name: "Carlos Mendoza", phone: "+34 612 345 678", service: "Corte clásico", price: 15, addons: [], date: getTodayKey(), time: "11:00", status: "confirmed" },
+          { id: 102, name: "Jean Dupont", phone: "+33 655 443 221", service: "Corte + Ritual Barba", price: 38, addons: ["Pomada Mate Arcilla"], date: getTodayKey(), time: "12:30", status: "confirmed" }
         ];
       },
       saveAppointments(appts) {
@@ -1464,6 +1691,7 @@
     const state = {
       lang: 'es',
       selectedServiceId: 1,
+      selectedProductIds: [], // Array de IDs de productos añadidos a la reserva
       selectedDate: null,
       selectedTime: null,
       clientName: '',
@@ -1537,6 +1765,8 @@
       toggleLanguageDropdown();
       updateLanguageTexts();
       renderServices();
+      renderBoutiqueProducts();
+      renderBookingAddons();
       generateCalendarDays();
       validateForm();
     }
@@ -1561,6 +1791,13 @@
       setText('photo-tag-1', t.photoTag1);
       setText('txt-review-1', t.review1);
       setText('txt-review-2', t.review2);
+
+      setText('boutique-badge', t.boutiqueBadge);
+      setText('boutique-title', t.boutiqueTitle);
+      setText('boutique-subtitle', t.boutiqueSubtitle);
+      setText('addons-title', `🧴 ${t.addonsTitle}`);
+      setText('addons-badge', t.addonsBadge);
+      setText('addons-desc', t.addonsDesc);
 
       setText('module-pretitle', t.modulePretitle);
       setText('module-title', t.moduleTitle);
@@ -1606,10 +1843,25 @@
           ...service,
           name: trans.name,
           desc: trans.desc,
-          duration: trans.duration
+          duration: trans.duration,
+          tag: trans.tag || service.tag
         };
       }
       return service;
+    }
+
+    function getLocalizedProduct(prod) {
+      const lang = state.lang || 'es';
+      if (PRODUCTS_TRANSLATIONS[prod.id] && PRODUCTS_TRANSLATIONS[prod.id][lang]) {
+        const trans = PRODUCTS_TRANSLATIONS[prod.id][lang];
+        return {
+          ...prod,
+          name: trans.name,
+          desc: trans.desc,
+          badge: trans.badge || prod.badge
+        };
+      }
+      return prod;
     }
 
     function priceOfService(name) {
@@ -1617,7 +1869,9 @@
       return s ? s.price : 15;
     }
 
-    // LISTA DE SERVICIOS ESTILO CARTA
+    // =========================================================================
+    // 3. RENDERIZADO EDITORIAL DE SERVICIOS (TARJETAS TÁCTILES DE ALTA GAMA)
+    // =========================================================================
     function renderServices() {
       const container = document.getElementById('services-container');
       if (!container) return;
@@ -1627,37 +1881,42 @@
         const service = getLocalizedService(rawService);
         const isSelected = state.selectedServiceId === service.id;
 
-        const rowStyle = isSelected
-          ? 'px-3 -mx-3 rounded-md'
-          : 'hover:opacity-85 px-3 -mx-3 rounded-md';
+        const borderStyle = isSelected
+          ? 'border-emerald-500/80 shadow-[0_0_15px_rgba(16,185,129,0.15)] ring-1 ring-emerald-500/30'
+          : 'theme-border hover:border-stone-500/50';
 
-        const rowBg = isSelected
+        const customBg = isSelected
           ? 'style="background-color: var(--service-hover);"'
-          : '';
+          : 'style="background-color: var(--bg-surface);"';
 
-        const dotIndicator = isSelected
-          ? `<span class="w-2 h-2 rounded-full inline-block mr-2.5 shrink-0 bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>`
-          : `<span class="w-2 h-2 rounded-full inline-block mr-2.5 shrink-0 opacity-0"></span>`;
+        const radioDot = isSelected
+          ? `<div class="w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center bg-emerald-500/20"><div class="w-2 h-2 rounded-full bg-emerald-400"></div></div>`
+          : `<div class="w-4 h-4 rounded-full border border-stone-600"></div>`;
 
         return `
           <div 
             onclick="selectService(${service.id})"
-            class="py-3.5 transition-all duration-150 cursor-pointer flex items-center justify-between gap-3 spring-btn ${rowStyle}"
-            ${rowBg}
+            class="p-4 rounded-xl border transition-all duration-200 cursor-pointer flex items-start justify-between gap-3 spring-btn ${borderStyle}"
+            ${customBg}
           >
-            <div class="space-y-0.5 min-w-0">
-              <div class="flex items-center">
-                ${dotIndicator}
-                <span class="font-serif text-base font-medium truncate ${isSelected ? 'font-semibold' : ''}" style="color: var(--text-title);">
+            <div class="space-y-1 min-w-0 flex-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                ${radioDot}
+                <span class="font-serif text-[17px] font-semibold tracking-wide" style="color: var(--text-title);">
                   ${service.name}
                 </span>
+                ${service.tag ? `
+                  <span class="text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider" style="background-color: rgba(197, 160, 114, 0.15); color: var(--accent-bronze); border: 1px solid rgba(197, 160, 114, 0.3);">
+                    ${service.tag}
+                  </span>
+                ` : ''}
               </div>
-              <p class="text-[12px] pl-4 font-light leading-snug font-sans" style="color: var(--text-muted);">${service.desc || ''}</p>
+              <p class="text-xs pl-6 font-light leading-snug font-sans" style="color: var(--text-muted);">${service.desc || ''}</p>
             </div>
 
-            <div class="text-right shrink-0 font-sans">
-              <span class="text-sm font-semibold tracking-tight block" style="color: var(--text-title);">${service.price} €</span>
-              <span class="text-[10px] font-medium block uppercase tracking-wide" style="color: var(--text-muted);">${service.duration}</span>
+            <div class="text-right shrink-0 font-sans pl-2">
+              <span class="text-[17px] font-bold tracking-tight block" style="color: var(--text-title);">${service.price} €</span>
+              <span class="text-[10px] font-semibold block uppercase tracking-wider mt-0.5" style="color: var(--text-muted);">${service.duration}</span>
             </div>
           </div>
         `;
@@ -1672,6 +1931,133 @@
       validateForm();
     }
 
+
+    // =========================================================================
+    // 4. BOTICA: CATÁLOGO DE PRODUCTOS DESTACADOS & CROSS-SELLING
+    // =========================================================================
+    function renderBoutiqueProducts() {
+      const container = document.getElementById('products-list-container');
+      if (!container) return;
+      const rawProducts = STORE.getProducts().filter(p => p.active);
+      const t = I18N[state.lang] || I18N.es;
+      const shopPhone = STORE.getShop().phone || '34600112233';
+
+      container.innerHTML = rawProducts.map(rawProd => {
+        const prod = getLocalizedProduct(rawProd);
+        const isAdded = state.selectedProductIds.includes(prod.id);
+
+        const waProductMsg = encodeURIComponent(`Hola ${STORE.getShop().shop || 'Barbería El Barrio'}, me interesa comprar el producto: "${prod.name}" (${prod.price}€). ¿Tenéis stock para recoger en Calle Castilla?`);
+        const waProductLink = `https://wa.me/${shopPhone}?text=${waProductMsg}`;
+
+        return `
+          <div class="p-4 rounded-xl border theme-border product-card-shine transition-all shadow-sm" style="background-color: var(--bg-surface);">
+            <div class="flex items-start gap-3.5">
+              <!-- Imagen del producto -->
+              <div class="w-20 h-20 rounded-lg overflow-hidden border theme-border shrink-0 relative bg-stone-900 group">
+                <img
+                  src="${prod.image || 'https://images.unsplash.com/photo-1597854711516-1b4705007474?auto=format&fit=crop&w=600&q=80'}"
+                  alt="${prod.name}"
+                  class="w-full h-full object-cover filter brightness-[.92] contrast-[1.05] transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+
+              <!-- Info producto -->
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between gap-1 mb-1">
+                  <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded" style="background-color: rgba(197, 160, 114, 0.15); color: var(--accent-bronze); border: 1px solid rgba(197, 160, 114, 0.3);">
+                    ${prod.badge || 'TRIANA BOTICA'}
+                  </span>
+                  <div class="text-right">
+                    <span class="text-base font-bold tracking-tight font-sans" style="color: var(--text-title);">${prod.price} €</span>
+                  </div>
+                </div>
+
+                <h3 class="font-serif text-[16px] font-semibold leading-tight mb-1" style="color: var(--text-title);">
+                  ${prod.name}
+                </h3>
+                <p class="text-xs font-light leading-snug line-clamp-2" style="color: var(--text-muted);">
+                  ${prod.desc}
+                </p>
+              </div>
+            </div>
+
+            <!-- Botones de Acción Rápida -->
+            <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t theme-border">
+              <button
+                type="button"
+                onclick="toggleProductBookingAddon(${prod.id})"
+                class="h-9 rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-1.5 spring-btn ${isAdded ? 'bg-emerald-500 text-black shadow-md' : 'border theme-border text-stone-200 hover:bg-stone-800'}"
+                style="${!isAdded ? 'background-color: var(--bg-main); color: var(--text-body);' : ''}"
+              >
+                <span>${isAdded ? t.btnAddedToBooking : t.btnAddToBooking}</span>
+              </button>
+
+              <a
+                href="${waProductLink}"
+                target="_blank"
+                class="h-9 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 border theme-border hover:opacity-85 transition-opacity spring-btn"
+                style="background-color: var(--bg-main); color: var(--text-muted);"
+              >
+                <span>${t.btnDirectWaProduct}</span>
+              </a>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // CHECKBOXES DE AÑADIR PRODUCTO DENTRO DEL PASO 1 DE CITAS
+    function renderBookingAddons() {
+      const container = document.getElementById('booking-addons-list');
+      if (!container) return;
+      const rawProducts = STORE.getProducts().filter(p => p.active);
+
+      container.innerHTML = rawProducts.map(rawProd => {
+        const prod = getLocalizedProduct(rawProd);
+        const isChecked = state.selectedProductIds.includes(prod.id);
+
+        return `
+          <label 
+            class="p-2.5 rounded-lg border theme-border flex items-center justify-between gap-3 cursor-pointer transition-colors hover:opacity-90 spring-btn ${isChecked ? 'border-emerald-500/60 bg-emerald-950/20' : ''}"
+            style="background-color: var(--bg-main);"
+          >
+            <div class="flex items-center gap-2.5 min-w-0">
+              <input
+                type="checkbox"
+                ${isChecked ? 'checked' : ''}
+                onchange="toggleProductBookingAddon(${prod.id})"
+                class="w-4 h-4 rounded accent-emerald-500 cursor-pointer shrink-0"
+              />
+              <div class="min-w-0">
+                <span class="text-xs font-semibold block truncate" style="color: var(--text-title);">${prod.name}</span>
+                <span class="text-[10px]" style="color: var(--text-muted);">${prod.size || '100 ml'} · ${prod.badge || 'Artesano'}</span>
+              </div>
+            </div>
+
+            <span class="text-xs font-bold shrink-0" style="color: var(--accent-bronze);">+${prod.price} €</span>
+          </label>
+        `;
+      }).join('');
+
+      updateStickyBar();
+    }
+
+    function toggleProductBookingAddon(prodId) {
+      if (state.selectedProductIds.includes(prodId)) {
+        state.selectedProductIds = state.selectedProductIds.filter(id => id !== prodId);
+      } else {
+        state.selectedProductIds.push(prodId);
+      }
+      renderBoutiqueProducts();
+      renderBookingAddons();
+      updateStickyBar();
+    }
+
+
+    // =========================================================================
+    // 5. CALENDARIO Y DISPONIBILIDAD HORARIA
+    // =========================================================================
     function generateCalendarDays() {
       const container = document.getElementById('days-container');
       if (!container) return;
@@ -1709,7 +2095,7 @@
         const month = t.monthsShort[d.getMonth()];
 
         const cardStyle = isSelected
-          ? 'font-semibold shadow-sm scale-[1.02]'
+          ? 'font-bold shadow-md scale-[1.02]'
           : 'hover:opacity-85';
 
         const customBg = isSelected
@@ -1722,12 +2108,12 @@
           <button
             type="button"
             onclick="selectDate('${dateKey}')"
-            class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-2.5 rounded border transition-all font-sans spring-btn ${cardStyle}"
+            class="flex-shrink-0 flex flex-col items-center justify-center w-16 py-2.5 rounded-xl border transition-all font-sans spring-btn ${cardStyle}"
             ${customBg}
           >
-            <span class="text-[9px] uppercase tracking-wider font-semibold" ${subTextColor}>${dayOfWeek}</span>
-            <span class="text-[17px] font-semibold my-0.5 leading-none tracking-tight">${dayNum}</span>
-            <span class="text-[9px] font-medium tracking-wide" ${subTextColor}>${month}</span>
+            <span class="text-[9px] uppercase tracking-wider font-bold" ${subTextColor}>${dayOfWeek}</span>
+            <span class="text-[18px] font-bold my-0.5 leading-none tracking-tight">${dayNum}</span>
+            <span class="text-[9px] font-semibold tracking-wide" ${subTextColor}>${month}</span>
           </button>
         `;
       }).join('');
@@ -1795,7 +2181,7 @@
 
       const closedDates = STORE.getClosedDates();
       if (closedDates.includes(state.selectedDate)) {
-        morningEl.innerHTML = `<div class="col-span-4 py-3 text-center text-xs border theme-border rounded font-sans" style="background-color: var(--bg-surface); color: var(--text-muted);">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
+        morningEl.innerHTML = `<div class="col-span-4 py-3 text-center text-xs border theme-border rounded-xl font-sans" style="background-color: var(--bg-surface); color: var(--text-muted);">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
         afternoonEl.innerHTML = '';
         return;
       }
@@ -1834,7 +2220,7 @@
 
         if (!slot.isAvailable) {
           return `
-            <button type="button" disabled class="h-9 text-xs rounded border theme-border line-through cursor-not-allowed select-none font-sans font-medium opacity-30" style="background-color: var(--bg-main); color: var(--text-muted);">
+            <button type="button" disabled class="h-9 text-xs rounded-lg border theme-border line-through cursor-not-allowed select-none font-sans font-medium opacity-25" style="background-color: var(--bg-main); color: var(--text-muted);">
               ${slot.time}
             </button>
           `;
@@ -1845,7 +2231,7 @@
           : `style="background-color: var(--bg-surface); color: var(--text-body); border-color: var(--border-color);"`;
 
         return `
-          <button type="button" onclick="selectTime('${slot.time}')" class="h-9 text-xs rounded border transition-all flex items-center justify-center tracking-tight font-medium spring-btn ${isSelected ? 'shadow-sm' : 'hover:opacity-80'}" ${activeCustomStyle}>
+          <button type="button" onclick="selectTime('${slot.time}')" class="h-9 text-xs rounded-lg border transition-all flex items-center justify-center tracking-tight font-semibold spring-btn ${isSelected ? 'shadow-md' : 'hover:opacity-80'}" ${activeCustomStyle}>
             ${slot.time}
           </button>
         `;
@@ -1862,6 +2248,24 @@
       validateForm();
     }
 
+    function calculateTotalBookingPrice() {
+      const services = STORE.getServices();
+      const rawService = services.find(s => s.id === state.selectedServiceId);
+      const servicePrice = rawService ? rawService.price : 15;
+
+      const products = STORE.getProducts();
+      const addonsPrice = state.selectedProductIds.reduce((sum, id) => {
+        const p = products.find(prod => prod.id === id);
+        return sum + (p ? p.price : 0);
+      }, 0);
+
+      return {
+        servicePrice,
+        addonsPrice,
+        total: servicePrice + addonsPrice
+      };
+    }
+
     function updateStickyBar() {
       const services = STORE.getServices();
       const rawService = services.find(s => s.id === state.selectedServiceId);
@@ -1871,10 +2275,13 @@
       const priceLabel = document.getElementById('sticky-price-label');
       const dateLabel = document.getElementById('sticky-date-label');
 
+      const prices = calculateTotalBookingPrice();
+
       if (rawService && serviceLabel && priceLabel) {
         const service = getLocalizedService(rawService);
-        serviceLabel.textContent = service.name;
-        priceLabel.textContent = `${service.price} €`;
+        const addonsCount = state.selectedProductIds.length;
+        serviceLabel.textContent = `${service.name}${addonsCount > 0 ? ` + ${addonsCount} prod.` : ''}`;
+        priceLabel.textContent = `${prices.total} €`;
       }
 
       if (dateLabel) {
@@ -1919,6 +2326,11 @@
       }
 
       const service = getLocalizedService(rawService);
+      const allProducts = STORE.getProducts();
+      const selectedProducts = state.selectedProductIds.map(id => allProducts.find(p => p.id === id)).filter(Boolean);
+      const productNames = selectedProducts.map(p => p.name).join(', ');
+
+      const prices = calculateTotalBookingPrice();
 
       const appts = STORE.getAppointments();
       const newAppt = {
@@ -1926,7 +2338,8 @@
         name: state.clientName,
         phone: state.clientPhone,
         service: service.name,
-        price: service.price,
+        price: prices.total,
+        addons: selectedProducts.map(p => p.name),
         date: state.selectedDate,
         time: state.selectedTime,
         status: 'confirmed'
@@ -1936,7 +2349,8 @@
 
       state.lastBooking = {
         serviceName: service.name,
-        price: service.price,
+        price: prices.total,
+        addons: selectedProducts.map(p => p.name),
         durationMin: rawService.durationMin || 30,
         date: state.selectedDate,
         time: state.selectedTime,
@@ -1950,18 +2364,29 @@
       const dateFormatted = `${t.daysShort[dateObj.getDay()]}, ${d} ${t.monthsShort[dateObj.getMonth()]}`;
 
       const phone = STORE.getShop().phone || '34600112233';
-      const msg = t.waMessage(service.name, dateFormatted, state.selectedTime, state.clientName, state.clientPhone);
+      const msg = t.waMessage(service.name, dateFormatted, state.selectedTime, state.clientName, state.clientPhone, productNames);
 
       window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
-      showSuccessModal(state.lastBooking, dateFormatted);
+      showSuccessModal(state.lastBooking, dateFormatted, productNames);
       renderTimeSlotsForSelectedDate();
       renderAdminVisualCalendar();
       updateFreeSlotsCounter();
     }
 
-    function showSuccessModal(booking, dateFormatted) {
-      setText('success-summary-service', `${booking.serviceName} (${booking.price} €)`);
+    function showSuccessModal(booking, dateFormatted, productNames) {
+      setText('success-summary-service', `${booking.serviceName} (${booking.price} € total)`);
       setText('success-summary-datetime', `${dateFormatted} · ${booking.time}`);
+
+      const addonsRow = document.getElementById('success-summary-addons-row');
+      const addonsText = document.getElementById('success-summary-addons');
+      if (addonsRow && addonsText) {
+        if (productNames) {
+          addonsText.textContent = productNames;
+          addonsRow.classList.remove('hidden');
+        } else {
+          addonsRow.classList.add('hidden');
+        }
+      }
 
       const googleLink = buildGoogleCalendarUrl(booking);
       const gBtn = document.getElementById('btn-google-cal');
@@ -2041,7 +2466,7 @@ END:VCALENDAR`;
 
 
     // =========================================================================
-    // 3. SUITE DEL DUEÑO & MODO PERSISTENTE EXCLUSIVO
+    // 6. SUITE DEL DUEÑO & MODO PERSISTENTE EXCLUSIVO
     // =========================================================================
     function openPinModal() {
       const modal = document.getElementById('pin-modal');
@@ -2093,6 +2518,7 @@ END:VCALENDAR`;
       renderAdminAppointments();
       renderAdminWaitlist();
       renderAdminBlockSlots();
+      renderAdminProducts();
       renderAdminServices();
       switchAdminTab('visual');
     }
@@ -2103,6 +2529,8 @@ END:VCALENDAR`;
       document.getElementById('sticky-bar').classList.remove('hidden');
 
       renderServices();
+      renderBoutiqueProducts();
+      renderBookingAddons();
       generateCalendarDays();
       renderTimeSlotsForSelectedDate();
     }
@@ -2118,6 +2546,8 @@ END:VCALENDAR`;
         document.getElementById('sticky-bar').classList.remove('hidden');
         if (toggleBtn) toggleBtn.textContent = "👔 Volver a Panel";
         renderServices();
+        renderBoutiqueProducts();
+        renderBookingAddons();
         generateCalendarDays();
         renderTimeSlotsForSelectedDate();
       } else {
@@ -2139,19 +2569,19 @@ END:VCALENDAR`;
     }
 
     function switchAdminTab(tabName) {
-      ['visual', 'appointments', 'waitlist', 'blocks', 'services', 'shop'].forEach(t => {
+      ['visual', 'appointments', 'waitlist', 'blocks', 'products', 'services', 'shop'].forEach(t => {
         const btn = document.getElementById(`tab-btn-${t}`);
         const sec = document.getElementById(`tab-${t}`);
         if (!btn || !sec) return;
         if (t === tabName) {
           btn.style.backgroundColor = "var(--btn-primary-bg)";
           btn.style.color = "var(--btn-primary-text)";
-          btn.className = "px-3 py-1.5 rounded font-semibold shadow-sm transition-all whitespace-nowrap shrink-0";
+          btn.className = "px-3 py-1.5 rounded-lg font-bold shadow-sm transition-all whitespace-nowrap shrink-0";
           sec.classList.remove('hidden');
         } else {
           btn.style.backgroundColor = "transparent";
           btn.style.color = "var(--text-muted)";
-          btn.className = "px-3 py-1.5 rounded transition-all whitespace-nowrap shrink-0";
+          btn.className = "px-3 py-1.5 rounded-lg transition-all whitespace-nowrap shrink-0";
           sec.classList.add('hidden');
         }
       });
@@ -2160,6 +2590,7 @@ END:VCALENDAR`;
       if (tabName === 'appointments') renderAdminAppointments();
       if (tabName === 'waitlist') renderAdminWaitlist();
       if (tabName === 'blocks') renderAdminBlockSlots();
+      if (tabName === 'products') renderAdminProducts();
       if (tabName === 'services') renderAdminServices();
       if (tabName === 'shop') { fillShopForm(); renderQr(); }
     }
@@ -2228,7 +2659,7 @@ END:VCALENDAR`;
             <button
               type="button"
               onclick="setAdminVisualDay('${qd.key}')"
-              class="px-2.5 py-1 rounded-md text-[11px] whitespace-nowrap transition-all spring-btn ${style}"
+              class="px-2.5 py-1 rounded-lg text-xs whitespace-nowrap transition-all spring-btn ${style}"
             >
               ${qd.label}
             </button>
@@ -2257,7 +2688,7 @@ END:VCALENDAR`;
           <div class="p-6 text-center border theme-border rounded-xl space-y-2" style="background-color: var(--bg-surface);">
             <p class="text-sm font-bold text-rose-400">Día Completo Cerrado / Festivo</p>
             <p class="text-xs" style="color: var(--text-muted);">No hay turnos disponibles para este día.</p>
-            <button onclick="toggleAdminClosedDayVisual('${targetDate}')" class="px-3 py-1.5 rounded text-xs font-semibold bg-white text-black mt-2 spring-btn">
+            <button onclick="toggleAdminClosedDayVisual('${targetDate}')" class="px-3 py-1.5 rounded-lg text-xs font-bold bg-white text-black mt-2 spring-btn">
               Abrir este día
             </button>
           </div>
@@ -2279,7 +2710,8 @@ END:VCALENDAR`;
 
           const cleanPhone = (appt.phone || '').replace(/\D/g, '');
           const shop = STORE.getShop();
-          const waMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para el ${d} de ${monthsNames[dateObj.getMonth()]} a las ${appt.time} en ${shop.shop || 'Barbería El Barrio'} (${shop.address || 'Triana'}). ¡Te esperamos!`);
+          const addonsText = (appt.addons && appt.addons.length > 0) ? ` + ${appt.addons.join(', ')}` : '';
+          const waMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para el ${d} de ${monthsNames[dateObj.getMonth()]} a las ${appt.time} en ${shop.shop || 'Barbería El Barrio'} (${shop.address || 'Triana'})${addonsText ? ' con ' + addonsText : ''}. ¡Te esperamos!`);
           const waLink = `https://wa.me/${cleanPhone}?text=${waMsg}`;
           const st = appt.status || 'confirmed';
           const stLabel = st === 'done' ? 'Cortado 🟢' : (st === 'noshow' ? 'No vino 🔴' : 'Pendiente 🟡');
@@ -2292,15 +2724,15 @@ END:VCALENDAR`;
                   <span class="font-mono text-sm font-bold text-white tracking-tight">${time}</span>
                 </div>
                 <div class="min-w-0">
-                  <p class="text-xs font-bold text-white truncate">${appt.name} <span class="text-[10px] font-normal text-rose-300/80">(${price}€)</span></p>
-                  <p class="text-[11px] text-rose-200/80 truncate">${appt.service} ${appt.phone ? '· ' + appt.phone : ''}</p>
+                  <p class="text-xs font-bold text-white truncate">${appt.name} <span class="text-[10px] font-semibold text-rose-300">(${price}€)</span></p>
+                  <p class="text-[11px] text-rose-200/80 truncate">${appt.service}${addonsText ? ' · 🧴 ' + appt.addons.join(', ') : ''}</p>
                 </div>
               </div>
 
               <div class="flex items-center gap-1 shrink-0">
                 <button
                   onclick="toggleVisualApptStatus(${appt.id})"
-                  class="px-2 py-1 rounded text-[10px] font-medium border theme-border bg-stone-900/60 text-stone-300 hover:text-white spring-btn"
+                  class="px-2 py-1 rounded-lg text-[10px] font-semibold border theme-border bg-stone-900/60 text-stone-300 hover:text-white spring-btn"
                   title="Cambiar estado: pendiente / cortado / no vino"
                 >
                   ${stLabel}
@@ -2309,7 +2741,7 @@ END:VCALENDAR`;
                   <a
                     href="${waLink}"
                     target="_blank"
-                    class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 rounded text-xs font-medium inline-flex items-center gap-1 spring-btn"
+                    class="px-2 py-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 border border-emerald-500/30 rounded-lg text-xs font-bold inline-flex items-center gap-1 spring-btn"
                     title="Avisar por WhatsApp"
                   >
                     <span>WA</span>
@@ -2317,7 +2749,7 @@ END:VCALENDAR`;
                 ` : ''}
                 <button
                   onclick="freeAdminSlot(${appt.id}, '${targetDate}', '${time}')"
-                  class="px-2 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded text-xs font-medium spring-btn"
+                  class="px-2 py-1 bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 border border-rose-500/30 rounded-lg text-xs font-bold spring-btn"
                   title="Liberar y cancelar cita"
                 >
                   Liberar
@@ -2332,11 +2764,11 @@ END:VCALENDAR`;
               <div class="flex items-center gap-2.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-stone-500"></span>
                 <span class="font-mono text-sm font-bold text-stone-400">${time}</span>
-                <span class="text-xs text-stone-400 font-medium">Descanso / Bloqueado</span>
+                <span class="text-xs text-stone-400 font-semibold">Descanso / Bloqueado</span>
               </div>
               <button
                 onclick="toggleSlotBlockVisual('${targetDate}', '${time}')"
-                class="px-2.5 py-1 rounded text-xs font-medium border theme-border text-stone-300 hover:text-white spring-btn"
+                class="px-2.5 py-1 rounded-lg text-xs font-semibold border theme-border text-stone-300 hover:text-white spring-btn"
               >
                 Desbloquear
               </button>
@@ -2354,11 +2786,11 @@ END:VCALENDAR`;
                   <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
                   <span class="font-mono text-sm font-bold text-emerald-300 tracking-tight">${time}</span>
                 </div>
-                <span class="text-xs font-medium text-emerald-200/90">LIBRE — Toca para meter cita</span>
+                <span class="text-xs font-semibold text-emerald-200/90">LIBRE — Toca para meter cita</span>
               </div>
 
               <div class="shrink-0">
-                <span class="px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-black transition-colors">
+                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 group-hover:bg-emerald-500 group-hover:text-black transition-colors">
                   + Asignar
                 </span>
               </div>
@@ -2452,6 +2884,7 @@ END:VCALENDAR`;
         phone: phone || "En local / llamada",
         service,
         price: priceOfService(service),
+        addons: [],
         date: targetDate,
         time,
         status: 'confirmed'
@@ -2520,7 +2953,7 @@ END:VCALENDAR`;
 
       if (list.length === 0) {
         container.innerHTML = `
-          <div class="p-6 text-center text-xs border theme-border rounded-lg" style="background-color: var(--bg-surface); color: var(--text-muted);">
+          <div class="p-6 text-center text-xs border theme-border rounded-xl" style="background-color: var(--bg-surface); color: var(--text-muted);">
             No hay clientes en espera.<br/>Cuando te llamen y no tengas hueco, dale a “+ Apuntar cliente”.
           </div>`;
         return;
@@ -2532,7 +2965,7 @@ END:VCALENDAR`;
         const waLink = `https://wa.me/${cleanPhone}?text=${waMsg}`;
 
         return `
-          <div class="p-3 border theme-border rounded-lg space-y-1.5" style="background-color: var(--bg-surface);">
+          <div class="p-3.5 border theme-border rounded-xl space-y-1.5" style="background-color: var(--bg-surface);">
             <div class="flex items-start justify-between gap-2">
               <div>
                 <p class="text-[13px] font-bold" style="color: var(--text-title);">${item.name}</p>
@@ -2541,7 +2974,7 @@ END:VCALENDAR`;
               </div>
               <div class="flex flex-col gap-1.5 shrink-0">
                 ${cleanPhone ? `
-                  <a href="${waLink}" target="_blank" class="px-2.5 py-1 rounded text-xs font-medium inline-flex items-center gap-1 border spring-btn" style="background-color: rgba(16,185,129,.12); color: #10b981; border-color: rgba(16,185,129,.25);">
+                  <a href="${waLink}" target="_blank" class="px-2.5 py-1 rounded-lg text-xs font-bold inline-flex items-center gap-1 border spring-btn" style="background-color: rgba(16,185,129,.12); color: #10b981; border-color: rgba(16,185,129,.25);">
                     Avisar hueco
                   </a>
                 ` : ''}
@@ -2610,20 +3043,19 @@ END:VCALENDAR`;
         .filter(a => a.date === target && a.status !== 'cancelled')
         .sort((a, b) => (a.time || '').localeCompare(b.time || ''));
 
-      const done = dayAppts.filter(a => a.status === 'done');
       const caja = dayAppts.filter(a => a.status !== 'noshow').reduce((s, a) => s + (a.price || priceOfService(a.service) || 0), 0);
       const libres = countFreeSlots(target);
 
       if (sumBox) {
         sumBox.innerHTML = `
-          <div><div class="text-[16px] font-bold" style="color: var(--text-title);">${dayAppts.length}</div><div class="text-[10px]" style="color: var(--text-muted);">citas ${target === getTodayKey() ? 'hoy' : target.slice(5)}</div></div>
-          <div><div class="text-[16px] font-bold" style="color: var(--text-title);">~${caja}€</div><div class="text-[10px]" style="color: var(--text-muted);">caja estimada</div></div>
-          <div><div class="text-[16px] font-bold" style="color: var(--text-title);">${libres}</div><div class="text-[10px]" style="color: var(--text-muted);">huecos libres</div></div>`;
+          <div><div class="text-[17px] font-bold" style="color: var(--text-title);">${dayAppts.length}</div><div class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-muted);">citas ${target === getTodayKey() ? 'hoy' : target.slice(5)}</div></div>
+          <div><div class="text-[17px] font-bold" style="color: var(--text-title);">~${caja}€</div><div class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-muted);">caja estimada</div></div>
+          <div><div class="text-[17px] font-bold" style="color: var(--text-title);">${libres}</div><div class="text-[10px] uppercase tracking-wider font-semibold" style="color: var(--text-muted);">huecos libres</div></div>`;
       }
 
       if (dayAppts.length === 0) {
         container.innerHTML = `
-          <div class="p-6 text-center text-[12px] border theme-border rounded-lg" style="background-color: var(--bg-surface); color: var(--text-muted);">
+          <div class="p-6 text-center text-xs border theme-border rounded-xl" style="background-color: var(--bg-surface); color: var(--text-muted);">
             Nada apuntado para este día.<br/>Dale a “+ Apuntar” si entra alguien por teléfono o puerta.
           </div>`;
         return;
@@ -2640,18 +3072,18 @@ END:VCALENDAR`;
         const price = appt.price || priceOfService(appt.service) || '';
 
         return `
-          <div class="p-3 border theme-border rounded-lg space-y-1.5" style="background-color: var(--bg-surface); ${st === 'noshow' ? 'opacity:.55;' : ''}">
+          <div class="p-3.5 border theme-border rounded-xl space-y-1.5" style="background-color: var(--bg-surface); ${st === 'noshow' ? 'opacity:.55;' : ''}">
             <div class="flex items-start justify-between gap-2">
               <button onclick="toggleApptStatus(${appt.id})" class="text-left flex-1" title="Toca para cambiar estado">
                 <div class="flex items-center gap-2">
                   <span class="text-[15px] font-bold tracking-tight" style="color: var(--text-title);">${appt.time}</span>
-                  <span class="text-[11px] px-2 py-0.5 rounded border theme-border" style="background-color: var(--bg-main); color: var(--text-body);">${appt.service}${price ? ' · ' + price + '€' : ''}</span>
+                  <span class="text-[11px] px-2 py-0.5 rounded-md border theme-border font-semibold" style="background-color: var(--bg-main); color: var(--text-body);">${appt.service}${price ? ' · ' + price + '€' : ''}</span>
                 </div>
-                <p class="text-[13px] font-medium mt-1" style="color: var(--text-title);">${dot} ${appt.name} <span class="text-[11px] font-normal" style="color: var(--text-muted);">· ${stLabel}</span></p>
-                <p class="text-[11px]" style="color: var(--text-muted);">${appt.phone} · ${appt.date}</p>
+                <p class="text-xs font-bold mt-1" style="color: var(--text-title);">${dot} ${appt.name} <span class="text-[11px] font-normal" style="color: var(--text-muted);">· ${stLabel}</span></p>
+                <p class="text-[11px]" style="color: var(--text-muted);">${appt.phone} · ${appt.date}${appt.addons && appt.addons.length > 0 ? ' · 🧴 ' + appt.addons.join(', ') : ''}</p>
               </button>
               <div class="flex flex-col gap-1.5 shrink-0">
-                <a href="${waLink}" target="_blank" class="px-2.5 py-1.5 rounded-md text-[12px] font-semibold inline-flex items-center gap-1 border spring-btn" style="background-color: rgba(16,185,129,.12); color: #10b981; border-color: rgba(16,185,129,.25);">Avisar</a>
+                <a href="${waLink}" target="_blank" class="px-2.5 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1 border spring-btn" style="background-color: rgba(16,185,129,.12); color: #10b981; border-color: rgba(16,185,129,.25);">Avisar</a>
                 <button onclick="cancelAppointment(${appt.id})" class="text-[11px] text-rose-500 text-right">Quitar</button>
               </div>
             </div>
@@ -2674,7 +3106,7 @@ END:VCALENDAR`;
       const target = adminSelectedDate();
       const dayAppts = STORE.getAppointments().filter(a => a.date === target && a.status !== 'cancelled').sort((a,b) => (a.time||'').localeCompare(b.time||''));
       const shop = STORE.getShop();
-      const lines = dayAppts.map(a => `${a.time} — ${a.name} (${a.service}) ${a.phone}`);
+      const lines = dayAppts.map(a => `${a.time} — ${a.name} (${a.service}${a.addons && a.addons.length > 0 ? ' + ' + a.addons.join(',') : ''}) ${a.phone}`);
       const txt = `Parte ${shop.shop} ${target}:\n` + (lines.join('\n') || '(sin citas)') + `\nCaja aprox: ~${dayAppts.filter(a=>a.status!=='noshow').reduce((s,a)=>s+(a.price||priceOfService(a.service)||0),0)}€`;
       navigator.clipboard.writeText(txt).then(() => alert('Parte copiado')).catch(() => prompt('Copia el parte:', txt));
     }
@@ -2720,7 +3152,7 @@ END:VCALENDAR`;
     function renderQr() {
       const img = document.getElementById('qr-img');
       if (!img) return;
-      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&color=141312&qzone=1&data=' + encodeURIComponent(bookingUrl());
+      img.src = 'https://api.qrserver.com/v1/create-qr-code/?size=300x300&margin=8&color=131211&qzone=1&data=' + encodeURIComponent(bookingUrl());
     }
     function downloadQr() {
       const a = document.createElement('a');
@@ -2733,7 +3165,7 @@ END:VCALENDAR`;
     function printQrSheet() {
       const shop = STORE.getShop();
       const w = window.open('', '_blank');
-      w.document.write(`<html><head><title>Cartel QR ${shop.shop || 'El Barrio'}</title><style>body{font-family:Georgia,serif;text-align:center;padding:50px;background:#fdfcfb}img{width:320px;height:320px}.box{border:2px solid #222;padding:40px;max-width:500px;margin:0 auto;border-radius:12px}h1{margin:0 0 8px;font-size:34px;letter-spacing:1px}p{font-size:16px;color:#444}</style></head><body><div class="box"><h1>${shop.shop || 'EL BARRIO'}</h1><p>Barbería Tradicional en Triana<br/><b>${shop.address || 'Calle Castilla 24'}</b></p><img src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=10&data=${encodeURIComponent(bookingUrl())}"/><p style="margin-top:20px;font-weight:600">Escanea con tu cámara y pide cita en 30 segundos</p></div><script>onload=()=>print()<\/script></body></html>`);
+      w.document.write(`<html><head><title>Cartel QR ${shop.shop || 'El Barrio'}</title><style>body{font-family:Georgia,serif;text-align:center;padding:50px;background:#fdfcfb}img{width:320px;height:320px}.box{border:2px solid #222;padding:40px;max-width:500px;margin:0 auto;border-radius:12px}h1{margin:0 0 8px;font-size:34px;letter-spacing:1px}p{font-size:16px;color:#444}</style></head><body><div class="box"><h1>${shop.shop || 'EL BARRIO'}</h1><p>Barbería Tradicional & Botica en Triana<br/><b>${shop.address || 'Calle Castilla 24'}</b></p><img src="https://api.qrserver.com/v1/create-qr-code/?size=600x600&margin=10&data=${encodeURIComponent(bookingUrl())}"/><p style="margin-top:20px;font-weight:600">Escanea con tu cámara y pide cita en 30 segundos</p></div><script>onload=()=>print()<\/script></body></html>`);
       w.document.close();
     }
 
@@ -2777,7 +3209,7 @@ END:VCALENDAR`;
       }
 
       const appts = STORE.getAppointments();
-      appts.push({ id: Date.now(), name, phone, service, price: priceOfService(service), date, time, status: 'confirmed' });
+      appts.push({ id: Date.now(), name, phone, service, price: priceOfService(service), addons: [], date, time, status: 'confirmed' });
       STORE.saveAppointments(appts);
 
       closeManualBookingModal();
@@ -2818,7 +3250,7 @@ END:VCALENDAR`;
           <button
             type="button"
             onclick="toggleSlotBlock('${targetDate}', '${time}')"
-            class="h-9 text-xs rounded border transition-colors flex items-center justify-center tracking-tight font-medium spring-btn"
+            class="h-9 text-xs rounded-lg border transition-colors flex items-center justify-center tracking-tight font-semibold spring-btn"
             ${customStyle}
           >
             ${time} ${isBlocked ? '✕' : ''}
@@ -2862,6 +3294,95 @@ END:VCALENDAR`;
       updateFreeSlotsCounter();
     }
 
+    // GESTIÓN DE PRODUCTOS EN PANEL
+    function renderAdminProducts() {
+      const container = document.getElementById('admin-products-list');
+      if (!container) return;
+      const products = STORE.getProducts();
+
+      container.innerHTML = products.map(prod => {
+        return `
+          <div class="p-3 border theme-border rounded-xl flex items-center justify-between gap-2" style="background-color: var(--bg-surface);">
+            <div class="flex items-center gap-2.5 min-w-0 flex-1">
+              <img src="${prod.image || 'https://images.unsplash.com/photo-1597854711516-1b4705007474?auto=format&fit=crop&w=600&q=80'}" class="w-10 h-10 rounded-lg object-cover border theme-border shrink-0" />
+              <div class="min-w-0">
+                <span class="text-xs font-serif font-semibold block truncate" style="color: var(--text-title);">${prod.name}</span>
+                <span class="text-[10px]" style="color: var(--accent-bronze);">${prod.size || '100ml'} · ${prod.badge || ''}</span>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-1 border theme-border rounded-lg px-2 py-1" style="background-color: var(--bg-main);">
+                <input
+                  type="number"
+                  value="${prod.price}"
+                  class="w-10 bg-transparent text-xs font-bold text-right focus:outline-none tracking-tight"
+                  style="color: var(--text-title);"
+                  onchange="updateProductPrice(${prod.id}, this.value)"
+                />
+                <span class="text-xs" style="color: var(--text-muted);">€</span>
+              </div>
+
+              <button
+                onclick="toggleProductActive(${prod.id})"
+                class="px-2 py-1 rounded-lg text-xs font-semibold border theme-border spring-btn"
+                style="${prod.active ? 'color: var(--text-title); background-color: var(--bg-surface);' : 'color: var(--text-muted); opacity: 0.6;'}"
+              >
+                ${prod.active ? 'Activo' : 'Oculto'}
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateProductPrice(id, newPrice) {
+      const products = STORE.getProducts();
+      const p = products.find(item => item.id === id);
+      if (p) {
+        p.price = parseFloat(newPrice) || p.price;
+        STORE.saveProducts(products);
+        renderBoutiqueProducts();
+        renderBookingAddons();
+      }
+    }
+
+    function toggleProductActive(id) {
+      const products = STORE.getProducts();
+      const p = products.find(item => item.id === id);
+      if (p) {
+        p.active = !p.active;
+        STORE.saveProducts(products);
+        renderAdminProducts();
+        renderBoutiqueProducts();
+        renderBookingAddons();
+      }
+    }
+
+    function addNewProductPrompt() {
+      const name = prompt("Nombre del producto artesanal (ej. Cera Brillo Clásica):");
+      if (!name) return;
+      const price = parseFloat(prompt("Precio en euros (ej. 14):")) || 14;
+      const desc = prompt("Descripción breve de ingredientes/acabado:") || "Elaborado en Sevilla con extractos botánicos.";
+
+      const products = STORE.getProducts();
+      products.push({
+        id: Date.now(),
+        name,
+        price,
+        size: "100 ml",
+        desc,
+        badge: "✨ NOVEDAD",
+        image: "https://images.unsplash.com/photo-1597854711516-1b4705007474?auto=format&fit=crop&w=600&q=80",
+        active: true
+      });
+      STORE.saveProducts(products);
+      renderAdminProducts();
+      renderBoutiqueProducts();
+      renderBookingAddons();
+    }
+
+    // GESTIÓN DE SERVICIOS
     function renderAdminServices() {
       const container = document.getElementById('admin-services-list');
       if (!container) return;
@@ -2869,18 +3390,18 @@ END:VCALENDAR`;
 
       container.innerHTML = services.map(service => {
         return `
-          <div class="p-3 border theme-border rounded-lg flex items-center justify-between gap-2" style="background-color: var(--bg-surface);">
+          <div class="p-3 border theme-border rounded-xl flex items-center justify-between gap-2" style="background-color: var(--bg-surface);">
             <div class="flex-1 min-w-0">
-              <span class="text-xs font-serif font-medium block truncate" style="color: var(--text-title);">${service.name}</span>
+              <span class="text-xs font-serif font-semibold block truncate" style="color: var(--text-title);">${service.name}</span>
               <span class="text-[11px]" style="color: var(--text-muted);">${service.duration}</span>
             </div>
 
             <div class="flex items-center gap-2">
-              <div class="flex items-center gap-1 border theme-border rounded px-2 py-1" style="background-color: var(--bg-main);">
+              <div class="flex items-center gap-1 border theme-border rounded-lg px-2 py-1" style="background-color: var(--bg-main);">
                 <input
                   type="number"
                   value="${service.price}"
-                  class="w-10 bg-transparent text-xs font-semibold text-right focus:outline-none tracking-tight"
+                  class="w-10 bg-transparent text-xs font-bold text-right focus:outline-none tracking-tight"
                   style="color: var(--text-title);"
                   onchange="updateServicePrice(${service.id}, this.value)"
                 />
@@ -2889,7 +3410,7 @@ END:VCALENDAR`;
 
               <button
                 onclick="toggleServiceActive(${service.id})"
-                class="px-2 py-1 rounded text-xs font-medium border theme-border spring-btn"
+                class="px-2 py-1 rounded-lg text-xs font-semibold border theme-border spring-btn"
                 style="${service.active ? 'color: var(--text-title); background-color: var(--bg-surface);' : 'color: var(--text-muted); opacity: 0.6;'}"
               >
                 ${service.active ? 'Activo' : 'Oculto'}
@@ -2963,6 +3484,8 @@ END:VCALENDAR`;
 
       updateLanguageTexts();
       renderServices();
+      renderBoutiqueProducts();
+      renderBookingAddons();
       generateCalendarDays();
       validateForm();
 
