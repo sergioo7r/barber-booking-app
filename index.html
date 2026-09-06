@@ -999,8 +999,8 @@
 
     const DEFAULT_SERVICES = [
       { id: 1, name: "Corte clásico", duration: "30 min", price: 12, durationMin: 30, desc: "Lavado artesano, corte a tijera o máquina y peinado", active: true },
-      { id: 2, name: "Corte + Ritual Barba", duration: "45 min", price: 20, durationMin: 45, desc: "Corte completo y afeitado de barba con toalla caliente", active: true },
-      { id: 3, name: "Arreglo de Barba Tradicional", duration: "20 min", price: 10, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y aceite nutritivo", active: true },
+      { id: 2, name: "Corte + Ritual Barba", duration: "45 min", price: 15, durationMin: 45, desc: "Corte completo y arreglo tradicional de barba con toalla caliente", active: true },
+      { id: 3, name: "Arreglo de Barba Tradicional", duration: "20 min", price: 7, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y bálsamo", active: true },
       { id: 4, name: "Corte Junior / Senior", duration: "25 min", price: 10, durationMin: 25, desc: "Menores de 12 años y mayores de 65 años", active: true }
     ];
 
@@ -1027,8 +1027,13 @@
         const data = localStorage.getItem('barber_services');
         if (data) {
           const list = JSON.parse(data);
-          const classic = list.find(s => s.id === 1);
-          if (classic && classic.price === 15) classic.price = 12;
+          // Sincronizar automáticamente con las tarifas solicitadas
+          const s1 = list.find(s => s.id === 1);
+          if (s1 && (s1.price === 15 || s1.price === 14)) s1.price = 12;
+          const s2 = list.find(s => s.id === 2);
+          if (s2 && (s2.price === 20 || s2.price === 18)) s2.price = 15;
+          const s3 = list.find(s => s.id === 3);
+          if (s3 && (s3.price === 10 || s3.price === 8)) s3.price = 7;
           return list;
         }
         return DEFAULT_SERVICES;
