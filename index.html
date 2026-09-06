@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full">
+<html lang="es" class="h-full scroll-smooth">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#121212" id="meta-theme-color" />
-  <title>Barbería El Barrio — Triana, Sevilla · Pedir Cita</title>
+  <meta name="theme-color" content="#0e0d0c" id="meta-theme-color" />
+  <title>Barbería El Barrio — Triana, Sevilla · Corte Tradicional & Afeitado</title>
 
-  <!-- Favicon sencillo y reconocible (Tijeras) -->
+  <!-- Favicon artesano -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>" />
 
-  <!-- Google Font: Plus Jakarta Sans -->
+  <!-- Tipografías: Playfair Display (editorial) & Plus Jakarta Sans (funcional) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -22,7 +22,19 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              bronze: '#c5a072',
+              bronzeHover: '#d8b588',
+              darkBg: '#0e0d0c',
+              surface: '#151413',
+              card: '#1b1a18',
+              cardHover: '#23211e',
+              border: '#2a2825',
+            }
           }
         }
       }
@@ -31,349 +43,440 @@
 
   <style>
     :root {
-      --bg: #121212;
-      --card: #1c1c1c;
-      --card-selected: #2d261e;
-      --card-border: #333333;
-      --border-selected: #e5a93c;
-      --text: #ffffff;
-      --text-muted: #9e9e9e;
-      --accent: #e5a93c;
-      --accent-hover: #f5b94c;
-      --btn-text: #121212;
-      --input-bg: #161616;
-      --success: #22c55e;
+      --bg: #0e0d0c;
+      --surface: #151413;
+      --card: #1b1a18;
+      --card-hover: #22201d;
+      --card-selected: #24201a;
+      --border: #2a2825;
+      --border-accent: rgba(197, 160, 114, 0.45);
+      --text: #f5f2eb;
+      --text-body: #d6cfc4;
+      --text-muted: #8e877c;
+      --accent: #c5a072;
+      --accent-glow: rgba(197, 160, 114, 0.16);
+      --glass-nav: rgba(14, 13, 12, 0.92);
+      --input-bg: #121110;
     }
 
     html.light-mode {
-      --bg: #f4f4f6;
+      --bg: #f9f7f2;
+      --surface: #ffffff;
       --card: #ffffff;
-      --card-selected: #fff9ee;
-      --card-border: #dcdce0;
-      --border-selected: #c48218;
-      --text: #111111;
-      --text-muted: #666666;
-      --accent: #c48218;
-      --accent-hover: #b07212;
-      --btn-text: #ffffff;
+      --card-hover: #f5f2eb;
+      --card-selected: #f7f0e4;
+      --border: #e4decfa0;
+      --border-accent: rgba(156, 117, 70, 0.5);
+      --text: #181716;
+      --text-body: #3c3833;
+      --text-muted: #7c766d;
+      --accent: #9c7546;
+      --accent-glow: rgba(156, 117, 70, 0.12);
+      --glass-nav: rgba(249, 247, 242, 0.94);
       --input-bg: #ffffff;
-      --success: #16a34a;
     }
 
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
-      font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      font-variant-numeric: tabular-nums lining-nums;
     }
 
     body {
       background-color: var(--bg);
-      color: var(--text);
-      transition: background-color 0.2s ease, color 0.2s ease;
+      color: var(--text-body);
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
 
     .num-formal {
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-variant-numeric: tabular-nums lining-nums;
+      font-feature-settings: "tnum" 1, "lnum" 1;
+    }
+
+    .editorial-blur {
+      background: var(--glass-nav);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    .btn-main {
-      background-color: var(--accent);
-      color: var(--btn-text);
-      font-weight: 800;
-      transition: transform 0.1s ease, background-color 0.15s ease;
+    .stamp-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border-accent);
+      color: var(--accent);
+      background: var(--accent-glow);
     }
-    .btn-main:active {
+
+    .btn-gold {
+      background: linear-gradient(135deg, #c5a072 0%, #ad8553 100%);
+      color: #0e0d0c;
+      font-weight: 800;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-gold:hover:not(:disabled) {
+      background: linear-gradient(135deg, #d4af80 0%, #be9460 100%);
+      box-shadow: 0 4px 20px rgba(197, 160, 114, 0.3);
+      transform: translateY(-1px);
+    }
+    .btn-gold:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .spring-btn:active {
       transform: scale(0.98);
+      transition: transform 0.08s ease;
     }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between antialiased selection:bg-amber-500 selection:text-black">
+<body class="min-h-full flex flex-col justify-between antialiased selection:bg-[#c5a072]/30 selection:text-white" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
-       BARRA DE MODO DUEÑO (Solo visible si el barbero entra a su panel)
-       =================================================================================== -->
-  <div id="owner-top-bar" class="hidden sticky top-0 z-50 w-full bg-amber-600 text-stone-950 font-bold px-4 py-2.5 text-xs shadow-md">
-    <div class="max-w-3xl mx-auto flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <span class="w-2.5 h-2.5 rounded-full bg-black"></span>
-        <span class="text-sm font-extrabold uppercase">PANEL DEL BARBERO</span>
-      </div>
-      <div class="flex items-center gap-2">
-        <button onclick="toggleOwnerClientView()" id="btn-toggle-owner-view" class="px-3 py-1 bg-black text-white rounded-lg text-xs font-bold">
-          Ver como Cliente
-        </button>
-        <button onclick="logoutOwnerSession()" class="px-2 py-1 text-black hover:underline text-xs font-extrabold">
-          Salir ✕
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- ===================================================================================
-       VISTA PÚBLICA (NADA MÁS ENTRAR: COGER CITA DIRECTAMENTE)
+       VISTA PÚBLICA (CLIENTES & TURISTAS - DISEÑO ATELIER AUTÉNTICO)
        =================================================================================== -->
   <div id="public-view" class="w-full flex-1">
 
-    <!-- CABECERA LIMPIA -->
-    <header class="border-b sticky top-0 z-30 backdrop-blur-md" style="background-color: var(--bg); border-color: var(--card-border);">
-      <div class="max-w-3xl mx-auto px-4 py-3.5 flex items-center justify-between">
+    <!-- CABECERA PRINCIPAL -->
+    <header class="sticky top-0 z-40 w-full editorial-blur border-b transition-colors" style="border-color: var(--border);">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between">
         
+        <!-- Logotipo de la barbería -->
         <a href="#" class="flex flex-col">
-          <span class="text-2xl font-extrabold tracking-tight" style="color: var(--text);" id="brand-name">
+          <span class="font-serif text-2xl font-bold tracking-tight" style="color: var(--text);" id="brand-name">
             Barbería El Barrio
           </span>
-          <span class="text-xs font-semibold" style="color: var(--accent);">
-            Triana, Sevilla · Calle Castilla 24
+          <span class="text-[10px] uppercase font-bold tracking-[0.2em] mt-0.5" style="color: var(--accent);">
+            Triana · Calle Castilla 24
           </span>
         </a>
 
-        <!-- Opciones: Idioma y Tema -->
-        <div class="flex items-center gap-2">
-          <select
-            id="lang-select"
-            onchange="changeLanguage(this.value)"
-            class="h-9 px-2.5 rounded-xl border text-xs font-bold focus:outline-none cursor-pointer"
-            style="background-color: var(--card); border-color: var(--card-border); color: var(--text);"
-          >
-            <option value="es">🇪🇸 ES</option>
-            <option value="en">🇬🇧 EN</option>
-            <option value="fr">🇫🇷 FR</option>
-            <option value="it">🇮🇹 IT</option>
-            <option value="de">🇩🇪 DE</option>
-          </select>
+        <!-- Controles: Idioma + Tema -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Selector Dropdown Elegante de Idioma -->
+          <div class="relative" id="lang-dropdown-container">
+            <button
+              type="button"
+              onclick="toggleLanguageDropdown(event)"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition-all spring-btn"
+              style="border-color: var(--border); background-color: var(--card); color: var(--text);"
+              aria-label="Seleccionar idioma"
+            >
+              <span id="active-lang-text" class="uppercase font-bold tracking-wider text-[11px]">ES</span>
+              <svg class="w-3 h-3 transition-transform duration-200 opacity-60" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </button>
 
+            <!-- Menú Desplegable -->
+            <div
+              id="lang-dropdown-menu"
+              class="hidden absolute right-0 mt-2 w-36 py-1 rounded-xl border shadow-2xl z-50 overflow-hidden font-sans"
+              style="background-color: var(--card); border-color: var(--border);"
+            >
+              <button onclick="changeLanguage('es')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
+                <span>🇪🇸 Español</span>
+                <span id="check-es" class="font-bold text-amber-500">✓</span>
+              </button>
+              <button onclick="changeLanguage('en')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
+                <span>🇬🇧 English</span>
+                <span id="check-en" class="font-bold text-amber-500 hidden">✓</span>
+              </button>
+              <button onclick="changeLanguage('fr')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
+                <span>🇫🇷 Français</span>
+                <span id="check-fr" class="font-bold text-amber-500 hidden">✓</span>
+              </button>
+              <button onclick="changeLanguage('it')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
+                <span>🇮🇹 Italiano</span>
+                <span id="check-it" class="font-bold text-amber-500 hidden">✓</span>
+              </button>
+              <button onclick="changeLanguage('de')" class="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:opacity-75 transition-colors" style="color: var(--text);">
+                <span>🇩🇪 Deutsch</span>
+                <span id="check-de" class="font-bold text-amber-500 hidden">✓</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Botón de Tema Claro / Oscuro -->
           <button
+            type="button"
             onclick="toggleTheme()"
-            class="w-9 h-9 rounded-xl border flex items-center justify-center font-bold text-sm"
-            style="background-color: var(--card); border-color: var(--card-border); color: var(--text);"
+            class="w-9 h-9 rounded-xl border flex items-center justify-center transition-all spring-btn"
+            style="border-color: var(--border); background-color: var(--card); color: var(--text);"
             title="Cambiar tema"
           >
             <span id="theme-icon">☀️</span>
           </button>
-        </div>
 
+        </div>
       </div>
     </header>
 
-    <main class="max-w-3xl mx-auto px-4 py-5 space-y-6">
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-8">
 
-      <!-- =========================================================================
-           1. LO PRIMERO NADA MÁS ENTRAR: MÓDULO PARA COGER CITA
-           ========================================================================= -->
-
-      <!-- PASO 1: ELEGIR CORTE / SERVICIO -->
-      <section class="space-y-2.5">
+      <!-- ==================== HERO Y ENCABEZADO CÁLIDO ==================== -->
+      <section class="space-y-3">
         <div class="flex items-center justify-between">
-          <h2 class="text-lg sm:text-xl font-extrabold flex items-center gap-2" style="color: var(--text);" id="txt-step1-title">
-            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">1</span>
-            Elige tu corte
-          </h2>
-          <span class="text-xs font-medium" style="color: var(--text-muted);" id="txt-step1-sub">Corte a navaja o tijera</span>
+          <span class="stamp-pill" id="hero-pill">Triana · Desde 2012</span>
+          <span class="text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span id="txt-status-hours">Abierto hoy · 10:00 — 20:00</span>
+          </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="services-container">
-          <!-- Inyectado dinámicamente -->
-        </div>
-      </section>
-
-      <!-- PASO 2: ELEGIR DÍA Y HORA -->
-      <section class="space-y-3 pt-2">
-        <div class="flex items-center justify-between flex-wrap gap-2">
-          <h2 class="text-lg sm:text-xl font-extrabold flex items-center gap-2" style="color: var(--text);" id="txt-step2-title">
-            <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">2</span>
-            Elige día y hora
-          </h2>
-          <span class="text-xs font-bold num-formal" style="color: var(--accent);" id="selected-date-summary"></span>
-        </div>
-
-        <!-- Botones de Días -->
-        <div>
-          <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="days-container"></div>
-        </div>
-
-        <!-- Horas Mañana y Tarde -->
-        <div class="space-y-3 pt-1">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider mb-1.5" style="color: var(--text-muted);" id="txt-lbl-morning">Mañanas (10:00 — 14:00):</p>
-            <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="morning-slots-container"></div>
-          </div>
-
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider mb-1.5" style="color: var(--text-muted);" id="txt-lbl-afternoon">Tardes (16:30 — 20:00):</p>
-            <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="afternoon-slots-container"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PASO 3: NOMBRE Y TELÉFONO -->
-      <section class="space-y-2.5 pt-2">
-        <div class="flex items-center gap-2">
-          <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-extrabold" style="background-color: var(--accent); color: var(--btn-text);">3</span>
-          <h2 class="text-lg sm:text-xl font-extrabold" style="color: var(--text);" id="txt-step3-title">
-            Tu nombre y WhatsApp
-          </h2>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <div>
-            <input
-              type="text"
-              id="client-name"
-              placeholder="Tu nombre completo *"
-              autocomplete="name"
-              class="w-full h-12 border rounded-xl px-3.5 text-sm font-bold focus:outline-none"
-              style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);"
-              oninput="validateForm()"
-            />
-          </div>
-
-          <div>
-            <input
-              type="tel"
-              id="client-phone"
-              placeholder="Teléfono móvil (WhatsApp) *"
-              autocomplete="tel"
-              class="w-full h-12 border rounded-xl px-3.5 text-sm font-bold focus:outline-none num-formal"
-              style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);"
-              oninput="validateForm()"
-            />
-          </div>
-        </div>
-      </section>
-
-      <!-- RESUMEN Y BOTÓN DESTACADO DE PEDIR CITA -->
-      <div class="p-4 sm:p-5 rounded-2xl border space-y-3.5 shadow-lg" style="background-color: var(--card); border-color: var(--border-selected);">
-        <div class="flex items-center justify-between flex-wrap gap-2">
-          <div>
-            <p class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="txt-summary-title">Resumen de tu cita:</p>
-            <p class="text-base sm:text-lg font-extrabold mt-0.5" style="color: var(--text);" id="summary-service-text">Corte de pelo (12 €)</p>
-            <p class="text-xs font-bold num-formal mt-0.5" style="color: var(--accent);" id="summary-datetime-text">Selecciona día y hora arriba</p>
-          </div>
-          <div class="text-right">
-            <span class="text-xs font-bold uppercase tracking-wider block" style="color: var(--text-muted);" id="txt-lbl-pay">Total en el local:</span>
-            <span class="text-2xl font-extrabold num-formal" style="color: var(--text);" id="summary-price-text">12 €</span>
-          </div>
-        </div>
-
-        <button
-          id="btn-submit"
-          type="button"
-          onclick="handleBookingConfirmation()"
-          disabled
-          class="w-full h-14 rounded-xl text-base uppercase tracking-wide font-extrabold flex items-center justify-center gap-2 btn-main disabled:opacity-30 disabled:cursor-not-allowed shadow-md"
-        >
-          <span>📱</span>
-          <span id="txt-cta-button">PEDIR CITA POR WHATSAPP</span>
-        </button>
-
-        <p class="text-xs text-center font-medium" style="color: var(--text-muted);" id="txt-no-pay-notice">
-          ℹ️ No tienes que pagar nada ahora. Pagas en la barbería en efectivo o Bizum.
+        <h1 class="font-serif text-3xl sm:text-4xl font-bold tracking-tight leading-tight" style="color: var(--text);" id="hero-title">
+          Corte clásico y afeitado tradicional a navaja.
+        </h1>
+        <p class="text-sm sm:text-base leading-relaxed font-light" style="color: var(--text-body);" id="hero-desc">
+          Reserva tu hueco en 30 segundos y entra directo al sillón sin esperas. Pago en el local tras tu corte.
         </p>
-      </div>
+      </section>
 
-
-      <!-- =========================================================================
-           2. MÁS ABAJO: FOTOS DEL LOCAL, RESEÑAS Y UBICACIÓN
-           ========================================================================= -->
-      <div class="border-t pt-8 space-y-6" style="border-color: var(--card-border);">
+      <!-- ==================== MÓDULO DE RESERVA DIRECTA ==================== -->
+      <section class="p-5 sm:p-7 rounded-3xl border shadow-xl space-y-7" style="background-color: var(--surface); border-color: var(--border);">
         
-        <!-- FOTOS DEL TALLER -->
+        <!-- PASO 1: SERVICIOS -->
         <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <h3 class="text-base font-extrabold" style="color: var(--text);" id="txt-gallery-title">
-              Así es la barbería
-            </h3>
-            <span class="text-xs font-bold" style="color: var(--accent);">Calle Castilla 24 · Triana</span>
+            <h2 class="text-base sm:text-lg font-bold flex items-center gap-2 font-serif" style="color: var(--text);" id="txt-step1-title">
+              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: #0e0d0c;">1</span>
+              Elige tu servicio
+            </h2>
+            <span class="text-xs font-medium" style="color: var(--text-muted);" id="txt-step1-sub">Precios claros sin sorpresas</span>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            <div class="rounded-xl overflow-hidden aspect-[4/3] border" style="border-color: var(--card-border);">
-              <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=500&q=80" alt="Sillón clásico de barbería" class="w-full h-full object-cover" loading="lazy" />
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="services-container">
+            <!-- Inyectado dinámicamente -->
+          </div>
+        </div>
+
+        <!-- PASO 2: DÍA Y HORA -->
+        <div class="space-y-3 pt-2">
+          <div class="flex items-center justify-between flex-wrap gap-2">
+            <h2 class="text-base sm:text-lg font-bold flex items-center gap-2 font-serif" style="color: var(--text);" id="txt-step2-title">
+              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: #0e0d0c;">2</span>
+              Elige día y hora
+            </h2>
+            <span class="text-xs font-bold num-formal" style="color: var(--accent);" id="selected-date-summary"></span>
+          </div>
+
+          <!-- Días con chips limpios -->
+          <div class="flex gap-2 overflow-x-auto no-scrollbar py-1" id="days-container"></div>
+
+          <!-- Horarios Mañana y Tarde -->
+          <div class="space-y-3 pt-1">
+            <div>
+              <span class="text-[11px] uppercase tracking-wider block mb-1.5 font-bold" style="color: var(--text-muted);" id="txt-lbl-morning">Mañanas (10:00 — 14:00)</span>
+              <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="morning-slots-container"></div>
             </div>
-            <div class="rounded-xl overflow-hidden aspect-[4/3] border" style="border-color: var(--card-border);">
-              <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=500&q=80" alt="Afeitado con toalla caliente" class="w-full h-full object-cover" loading="lazy" />
-            </div>
-            <div class="rounded-xl overflow-hidden aspect-[4/3] border col-span-2 sm:col-span-1" style="border-color: var(--card-border);">
-              <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=500&q=80" alt="Herramientas tradicionales" class="w-full h-full object-cover" loading="lazy" />
+
+            <div>
+              <span class="text-[11px] uppercase tracking-wider block mb-1.5 font-bold" style="color: var(--text-muted);" id="txt-lbl-afternoon">Tardes (16:30 — 20:00)</span>
+              <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="afternoon-slots-container"></div>
             </div>
           </div>
         </div>
 
-        <!-- RESEÑAS DE CLIENTES -->
-        <div class="space-y-3">
+        <!-- PASO 3: DATOS DE CONTACTO -->
+        <div class="space-y-3 pt-2 border-t" style="border-color: var(--border);">
           <div class="flex items-center justify-between">
-            <div class="flex items-center gap-1.5 text-amber-400">
-              <span class="text-sm font-extrabold text-white">4,9</span>
-              <span>★★★★★</span>
-              <span class="text-xs font-semibold" style="color: var(--text-muted);">(320+ reseñas en Google)</span>
-            </div>
+            <h2 class="text-base sm:text-lg font-bold flex items-center gap-2 font-serif" style="color: var(--text);" id="txt-step3-title">
+              <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-sans font-extrabold" style="background-color: var(--accent); color: #0e0d0c;">3</span>
+              Tus datos
+            </h2>
+            <span class="text-xs text-emerald-400 font-medium" id="txt-step3-sub">✓ Para confirmar tu cita</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            <div class="p-3.5 rounded-xl border space-y-1" style="background-color: var(--card); border-color: var(--card-border);">
-              <p class="text-xs leading-relaxed" style="color: var(--text);" id="txt-review-1">“El mejor corte y afeitado tradicional de Sevilla. Llegas a tu hora y entras directo al sillón sin perder la tarde.”</p>
-              <p class="text-[11px] font-bold text-amber-400">— Juan Carlos M. (Triana)</p>
+            <div>
+              <input
+                type="text"
+                id="client-name"
+                placeholder="Nombre y apellidos *"
+                autocomplete="name"
+                class="w-full h-12 border rounded-xl px-4 text-sm font-semibold focus:outline-none transition-colors"
+                style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);"
+                oninput="validateForm()"
+              />
             </div>
-            <div class="p-3.5 rounded-xl border space-y-1" style="background-color: var(--card); border-color: var(--card-border);">
-              <p class="text-xs leading-relaxed" style="color: var(--text);" id="txt-review-2">“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”</p>
-              <p class="text-[11px] font-bold text-amber-400">— James M. (UK)</p>
+
+            <div>
+              <input
+                type="tel"
+                id="client-phone"
+                placeholder="Teléfono móvil (WhatsApp) *"
+                autocomplete="tel"
+                class="w-full h-12 border rounded-xl px-4 text-sm font-semibold focus:outline-none num-formal transition-colors"
+                style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);"
+                oninput="validateForm()"
+              />
             </div>
           </div>
         </div>
 
-        <!-- UBICACIÓN, HORARIO Y ACCESO BARBERO -->
-        <footer class="p-4 rounded-2xl border space-y-3 text-xs" style="background-color: var(--card); border-color: var(--card-border);">
-          <div class="flex items-start justify-between gap-3 flex-wrap">
+        <!-- RESUMEN Y BOTÓN DE ACCIÓN -->
+        <div class="p-4 sm:p-5 rounded-2xl border space-y-3.5" style="background-color: var(--card); border-color: var(--border-accent);">
+          <div class="flex items-center justify-between flex-wrap gap-2">
             <div>
-              <p class="font-extrabold text-sm" style="color: var(--text);" id="txt-footer-address">📍 Calle Castilla 24, Triana, Sevilla</p>
-              <p class="mt-0.5" style="color: var(--text-muted);" id="txt-footer-hours">Lun a Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30</p>
-              <p class="mt-1 font-bold">Teléfono: <a href="tel:+34600112233" class="underline text-amber-400">600 112 233</a></p>
+              <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-muted);" id="txt-summary-title">Resumen de reserva:</span>
+              <p class="text-base sm:text-lg font-bold font-serif mt-0.5" style="color: var(--text);" id="summary-service-text">Corte clásico (12 €)</p>
+              <p class="text-xs font-semibold num-formal mt-0.5" style="color: var(--accent);" id="summary-datetime-text">Selecciona día y hora</p>
             </div>
-            <a href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla" target="_blank" class="px-3 py-2 rounded-xl border font-bold hover:opacity-80" style="border-color: var(--card-border); color: var(--text); background-color: var(--bg);">
-              Cómo llegar (Google Maps)
-            </a>
+            <div class="text-right">
+              <span class="text-xs font-bold uppercase tracking-wider block" style="color: var(--text-muted);" id="txt-lbl-pay">Total en el local:</span>
+              <span class="text-2xl font-bold num-formal" style="color: var(--text);" id="summary-price-text">12 €</span>
+            </div>
           </div>
 
-          <div class="border-t pt-3 flex items-center justify-between" style="border-color: var(--card-border); color: var(--text-muted);">
-            <span>Barbería El Barrio · Triana</span>
-            <button onclick="openPinModal()" class="underline font-bold hover:text-white" style="color: var(--text-muted);">
-              Acceso Barbero 🔒
-            </button>
-          </div>
-        </footer>
+          <button
+            id="btn-submit"
+            type="button"
+            onclick="handleBookingConfirmation()"
+            disabled
+            class="w-full h-14 rounded-xl text-sm sm:text-base uppercase tracking-wider font-extrabold flex items-center justify-center gap-2.5 btn-gold spring-btn disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
+          >
+            <span>📱</span>
+            <span id="txt-cta-button">Reservar Cita por WhatsApp</span>
+          </button>
 
-      </div>
+          <p class="text-[11.5px] text-center font-medium" style="color: var(--text-muted);" id="txt-no-pay-notice">
+            Sin pago por adelantado. Se paga en la barbería en efectivo o Bizum tras tu corte.
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ==================== FOTOS DEL TALLER Y EXPERIENCIA ==================== -->
+      <section class="space-y-3.5 pt-4">
+        <div class="flex items-center justify-between">
+          <h3 class="font-serif text-xl font-bold" style="color: var(--text);" id="txt-gallery-title">
+            El Taller en Triana
+          </h3>
+          <span class="text-xs font-semibold" style="color: var(--accent);">Calle Castilla 24</span>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] border shadow-sm relative group" style="border-color: var(--border);">
+            <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=600&q=80" alt="Sillón de barbería tradicional" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] border shadow-sm relative group" style="border-color: var(--border);">
+            <img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&w=600&q=80" alt="Afeitado clásico y toalla caliente" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="rounded-2xl overflow-hidden aspect-[4/3] border shadow-sm col-span-2 sm:col-span-1 relative group" style="border-color: var(--border);">
+            <img src="https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&w=600&q=80" alt="Herramientas artesanales de barbero" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== RESEÑAS VERIFICADAS ==================== -->
+      <section class="space-y-3">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-1.5 text-amber-400">
+            <span class="text-sm font-extrabold text-white">4,9</span>
+            <span>★★★★★</span>
+            <span class="text-xs font-semibold" style="color: var(--text-muted);">(320+ valoraciones en Google)</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="p-4 rounded-2xl border space-y-1.5" style="background-color: var(--surface); border-color: var(--border);">
+            <p class="text-xs sm:text-[13px] leading-relaxed italic" style="color: var(--text-body);" id="txt-review-1">
+              “El mejor corte y afeitado tradicional de Sevilla. Llegas a tu hora y entras directo al sillón sin perder la tarde.”
+            </p>
+            <p class="text-xs font-bold text-amber-400">— Juan Carlos M. (Triana)</p>
+          </div>
+          <div class="p-4 rounded-2xl border space-y-1.5" style="background-color: var(--surface); border-color: var(--border);">
+            <p class="text-xs sm:text-[13px] leading-relaxed italic" style="color: var(--text-body);" id="txt-review-2">
+              “Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”
+            </p>
+            <p class="text-xs font-bold text-amber-400">— James M. (UK)</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== UBICACIÓN Y FOOTER ==================== -->
+      <footer class="p-5 rounded-3xl border space-y-4 text-xs font-medium" style="background-color: var(--surface); border-color: var(--border);">
+        <div class="flex items-start justify-between gap-4 flex-wrap">
+          <div class="space-y-1">
+            <p class="font-serif text-base font-bold" style="color: var(--text);" id="txt-footer-address">
+              📍 Calle Castilla 24, Triana, Sevilla
+            </p>
+            <p class="num-formal" style="color: var(--text-muted);" id="txt-footer-hours">
+              Lunes a Viernes 10:00–14:00 y 16:30–20:00 · Sábados 10:00–14:30
+            </p>
+            <p class="pt-0.5">
+              Teléfono: <a href="tel:+34600112233" class="underline font-bold text-amber-400 num-formal">600 112 233</a>
+            </p>
+          </div>
+          <a
+            href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-4 py-2.5 rounded-xl border font-bold transition-all spring-btn"
+            style="border-color: var(--border); color: var(--text); background-color: var(--card);"
+          >
+            Cómo llegar en Maps ↗
+          </a>
+        </div>
+
+        <div class="border-t pt-3 flex items-center justify-between" style="border-color: var(--border); color: var(--text-muted);">
+          <span>Barbería El Barrio · Triana, Sevilla</span>
+          <button onclick="openPinModal()" class="underline font-bold hover:text-white transition-colors" style="color: var(--text-muted);">
+            Acceso Barbero 🔒
+          </button>
+        </div>
+      </footer>
 
     </main>
   </div>
 
 
   <!-- ===================================================================================
-       PANEL DEL BARBERO (ADMIN EN PANTALLA COMPLETA)
+       PANEL DEL BARBERO (SUITE EJECUTIVA PROFESIONAL - ACCESO CON PIN O ?admin)
        =================================================================================== -->
   <div id="admin-view" class="w-full max-w-4xl mx-auto px-4 py-6 space-y-6 hidden font-sans">
     
-    <header class="p-6 rounded-3xl border flex items-center justify-between gap-4 flex-wrap" style="background-color: var(--card); border-color: var(--card-border);">
+    <header class="p-6 rounded-3xl border flex items-center justify-between gap-4 flex-wrap" style="background-color: var(--surface); border-color: var(--border);">
       <div>
-        <span class="text-xs font-extrabold uppercase text-emerald-500">Panel de Control</span>
-        <h2 class="text-2xl sm:text-3xl font-extrabold mt-0.5" style="color: var(--text);">Agenda & Citas del Taller</h2>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400">Panel del Barbero</span>
+        </div>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold" style="color: var(--text);">Agenda & Citas del Taller</h2>
       </div>
-      <button
-        onclick="openExpressBookingModal('10:00')"
-        class="h-12 px-5 rounded-2xl font-extrabold text-sm uppercase btn-main flex items-center gap-2 shadow-md"
-      >
-        <span>+ Meter Cita Rápida</span>
-      </button>
+
+      <div class="flex items-center gap-2">
+        <button
+          onclick="openExpressBookingModal('10:00')"
+          class="h-11 px-4 rounded-xl font-bold text-xs uppercase btn-gold spring-btn"
+        >
+          + Meter Cita Rápida
+        </button>
+        <button
+          onclick="exitAdminView()"
+          class="h-11 px-3.5 rounded-xl border text-xs font-semibold spring-btn hover:opacity-80"
+          style="border-color: var(--border); color: var(--text); background-color: var(--card);"
+        >
+          Ver Web ✕
+        </button>
+      </div>
     </header>
 
-    <!-- Pestañas -->
-    <div class="flex rounded-2xl p-1.5 border text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar gap-1.5" style="background-color: var(--card); border-color: var(--card-border);">
-      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-main">
+    <!-- Pestañas de Gestión -->
+    <div class="flex rounded-2xl p-1.5 border text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar gap-1.5" style="background-color: var(--surface); border-color: var(--border);">
+      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-gold">
         📅 Agenda Visual
       </button>
       <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
@@ -390,127 +493,129 @@
       </button>
     </div>
 
-    <!-- PESTAÑA: AGENDA VISUAL -->
+    <!-- PESTAÑA 1: AGENDA VISUAL -->
     <section id="tab-visual" class="space-y-4">
-      <div class="p-5 rounded-2xl border space-y-4" style="background-color: var(--card); border-color: var(--card-border);">
+      <div class="p-5 rounded-2xl border space-y-4" style="background-color: var(--surface); border-color: var(--border);">
         <div class="flex items-center justify-between flex-wrap gap-2">
           <div class="flex items-center gap-2">
-            <button onclick="adminShiftDay(-1)" class="w-10 h-10 rounded-xl border flex items-center justify-center font-bold text-lg" style="border-color: var(--card-border); color: var(--text);">‹</button>
-            <span class="text-lg font-extrabold capitalize" style="color: var(--text);" id="admin-visual-date-label">Hoy</span>
-            <button onclick="adminShiftDay(1)" class="w-10 h-10 rounded-xl border flex items-center justify-center font-bold text-lg" style="border-color: var(--card-border); color: var(--text);">›</button>
+            <button onclick="adminShiftDay(-1)" class="w-9 h-9 rounded-xl border flex items-center justify-center font-bold text-base spring-btn" style="border-color: var(--border); color: var(--text);">‹</button>
+            <span class="text-base sm:text-lg font-bold capitalize font-serif" style="color: var(--text);" id="admin-visual-date-label">Hoy</span>
+            <button onclick="adminShiftDay(1)" class="w-9 h-9 rounded-xl border flex items-center justify-center font-bold text-base spring-btn" style="border-color: var(--border); color: var(--text);">›</button>
           </div>
           <input
             type="date"
             id="admin-visual-date-picker"
             class="h-10 px-3 border rounded-xl font-bold text-xs num-formal"
-            style="background-color: var(--bg); border-color: var(--card-border); color: var(--text);"
+            style="background-color: var(--card); border-color: var(--border); color: var(--text);"
             onchange="onAdminVisualDateChange(this.value)"
           />
         </div>
 
-        <div class="grid grid-cols-3 gap-3 pt-2 text-center">
-          <div class="p-3 rounded-xl border" style="background-color: var(--bg); border-color: var(--card-border);">
-            <div class="text-xs font-bold text-emerald-400">Libres</div>
-            <div class="text-xl font-extrabold num-formal mt-0.5" id="admin-stat-free">0</div>
+        <div class="grid grid-cols-3 gap-2.5 pt-2 text-center">
+          <div class="p-3 rounded-xl border" style="background-color: var(--card); border-color: var(--border);">
+            <div class="text-[11px] font-bold text-emerald-400 uppercase">Huecos Libres</div>
+            <div class="text-xl font-bold num-formal mt-0.5" id="admin-stat-free">0</div>
           </div>
-          <div class="p-3 rounded-xl border" style="background-color: var(--bg); border-color: var(--card-border);">
-            <div class="text-xs font-bold text-amber-400">Citas</div>
-            <div class="text-xl font-extrabold num-formal mt-0.5" id="admin-stat-busy">0</div>
+          <div class="p-3 rounded-xl border" style="background-color: var(--card); border-color: var(--border);">
+            <div class="text-[11px] font-bold text-amber-400 uppercase">Citas Agendadas</div>
+            <div class="text-xl font-bold num-formal mt-0.5" id="admin-stat-busy">0</div>
           </div>
-          <div class="p-3 rounded-xl border" style="background-color: var(--bg); border-color: var(--card-border);">
-            <div class="text-xs font-bold text-stone-400">Caja Prevista</div>
-            <div class="text-xl font-extrabold num-formal mt-0.5 text-amber-400" id="admin-stat-money">~0 €</div>
+          <div class="p-3 rounded-xl border" style="background-color: var(--card); border-color: var(--border);">
+            <div class="text-[11px] font-bold text-stone-400 uppercase">Caja Estimada</div>
+            <div class="text-xl font-bold num-formal mt-0.5 text-amber-300" id="admin-stat-money">0 €</div>
           </div>
         </div>
       </div>
 
-      <div class="space-y-2.5" id="admin-visual-slots-container"></div>
+      <div class="space-y-2" id="admin-visual-slots-container"></div>
     </section>
 
-    <!-- PESTAÑA: LISTA DE CITAS -->
+    <!-- PESTAÑA 2: LISTA DE CITAS & CAJA -->
     <section id="tab-appointments" class="space-y-4 hidden">
-      <div id="admin-day-summary" class="p-4 rounded-xl border grid grid-cols-3 gap-2 text-center" style="background-color: var(--card); border-color: var(--card-border);"></div>
+      <div id="admin-day-summary" class="p-4 rounded-xl border grid grid-cols-3 gap-2 text-center" style="background-color: var(--surface); border-color: var(--border);"></div>
       <div class="flex items-center gap-2">
-        <input type="date" id="admin-appt-date" class="flex-1 h-12 border rounded-xl px-4 text-xs font-bold num-formal" style="background-color: var(--card); border-color: var(--card-border); color: var(--text);" onchange="renderAdminAppointments()" />
-        <button onclick="copyDayPart()" class="h-12 px-4 rounded-xl border font-bold text-xs" style="border-color: var(--card-border); color: var(--text); background-color: var(--card);">Copiar Parte</button>
+        <input type="date" id="admin-appt-date" class="flex-1 h-11 border rounded-xl px-4 text-xs font-bold num-formal" style="background-color: var(--surface); border-color: var(--border); color: var(--text);" onchange="renderAdminAppointments()" />
+        <button onclick="copyDayPart()" class="h-11 px-4 rounded-xl border font-bold text-xs spring-btn" style="border-color: var(--border); color: var(--text); background-color: var(--card);">Copiar Parte</button>
       </div>
       <div class="space-y-2.5" id="admin-appointments-list"></div>
     </section>
 
-    <!-- PESTAÑA: LISTA DE ESPERA -->
+    <!-- PESTAÑA 3: LISTA DE ESPERA -->
     <section id="tab-waitlist" class="space-y-4 hidden">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold" style="color: var(--text);">Clientes en Lista de Espera</h3>
-        <button onclick="openAddWaitlistModal()" class="px-4 py-2 rounded-xl text-xs font-bold btn-main">+ Apuntar</button>
+        <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text);">Clientes en Espera</h3>
+        <button onclick="openAddWaitlistModal()" class="px-3.5 py-2 rounded-xl text-xs font-bold btn-gold spring-btn">+ Apuntar</button>
       </div>
       <div class="space-y-2" id="admin-waitlist-container"></div>
     </section>
 
-    <!-- PESTAÑA: BLOQUEOS -->
+    <!-- PESTAÑA 4: BLOQUEOS -->
     <section id="tab-blocks" class="space-y-4 hidden">
       <div>
-        <h3 class="text-base font-bold mb-1" style="color: var(--text);">Bloquear Horarios y Días</h3>
-        <p class="text-xs" style="color: var(--text-muted);">Toca las horas que quieras cerrar.</p>
+        <h3 class="text-sm font-bold uppercase tracking-wider mb-1" style="color: var(--text);">Bloquear Horarios</h3>
+        <p class="text-xs" style="color: var(--text-muted);">Toca las horas que quieras cerrar en el calendario.</p>
       </div>
-      <input type="date" id="admin-block-date" class="w-full h-12 border rounded-xl px-4 text-xs font-bold num-formal" style="background-color: var(--card); border-color: var(--card-border); color: var(--text);" onchange="renderAdminBlockSlots()" />
-      <div class="p-4 border rounded-xl flex items-center justify-between" style="background-color: var(--card); border-color: var(--card-border);">
-        <span class="text-sm font-bold" style="color: var(--text);">Cerrar día entero</span>
+      <input type="date" id="admin-block-date" class="w-full h-11 border rounded-xl px-4 text-xs font-bold num-formal" style="background-color: var(--surface); border-color: var(--border); color: var(--text);" onchange="renderAdminBlockSlots()" />
+      <div class="p-3.5 border rounded-xl flex items-center justify-between" style="background-color: var(--surface); border-color: var(--border);">
+        <span class="text-xs font-bold" style="color: var(--text);">Cerrar todo el día</span>
         <input type="checkbox" id="admin-toggle-closed-day" class="w-5 h-5 accent-amber-500 cursor-pointer" onchange="toggleAdminClosedDay()" />
       </div>
-      <div class="grid grid-cols-3 sm:grid-cols-5 gap-2" id="admin-slots-grid"></div>
+      <div class="grid grid-cols-4 sm:grid-cols-5 gap-2" id="admin-slots-grid"></div>
     </section>
 
-    <!-- PESTAÑA: SERVICIOS Y PRECIOS -->
+    <!-- PESTAÑA 5: SERVICIOS Y PRECIOS -->
     <section id="tab-services" class="space-y-4 hidden">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-bold" style="color: var(--text);">Precios de los Servicios</h3>
-        <button onclick="addNewServicePrompt()" class="px-4 py-2 rounded-xl text-xs font-bold border" style="border-color: var(--card-border); color: var(--text);">+ Añadir</button>
+        <h3 class="text-sm font-bold uppercase tracking-wider" style="color: var(--text);">Servicios y Precios</h3>
+        <button onclick="addNewServicePrompt()" class="px-3.5 py-2 rounded-xl text-xs font-bold border spring-btn" style="border-color: var(--border); color: var(--text); background-color: var(--card);">+ Añadir</button>
       </div>
-      <div class="space-y-3" id="admin-services-list"></div>
+      <div class="space-y-2.5" id="admin-services-list"></div>
     </section>
 
   </div>
 
 
   <!-- ===================================================================================
-       MODAL DE CITA CONFIRMADA
+       MODALES
        =================================================================================== -->
+  
+  <!-- MODAL DE ÉXITO TRAS PEDIR CITA -->
   <div id="success-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="border rounded-3xl w-full max-w-md p-6 sm:p-8 space-y-4 text-center shadow-2xl" style="background-color: var(--card); border-color: var(--card-border);">
-      <div class="w-14 h-14 rounded-full border mx-auto flex items-center justify-center text-2xl font-bold text-emerald-400" style="background-color: var(--bg); border-color: var(--card-border);">
+    <div class="border rounded-3xl w-full max-w-md p-6 sm:p-7 space-y-4 text-center shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
+      <div class="w-12 h-12 rounded-full border mx-auto flex items-center justify-center text-xl font-bold text-emerald-400" style="background-color: var(--card); border-color: var(--border);">
         ✓
       </div>
-      <h3 class="text-2xl font-extrabold" style="color: var(--text);" id="modal-success-title">Cita Solicitada</h3>
-      <p class="text-sm" style="color: var(--text-muted);" id="modal-success-desc">
-        Hemos abierto tu WhatsApp con los datos de tu reserva para que el peluquero te confirme enseguida.
+      <h3 class="font-serif text-2xl font-bold" style="color: var(--text);" id="modal-success-title">Cita Solicitada</h3>
+      <p class="text-xs sm:text-sm leading-relaxed" style="color: var(--text-muted);" id="modal-success-desc">
+        Se ha abierto tu WhatsApp con los datos de la reserva para enviarla directamente al peluquero.
       </p>
       
-      <div class="p-4 rounded-2xl border text-left space-y-2 text-sm font-semibold" style="background-color: var(--bg); border-color: var(--card-border);">
-        <p><span style="color: var(--text-muted);">Servicio:</span> <b style="color: var(--text);" id="success-summary-service">Corte de pelo (12 €)</b></p>
+      <div class="p-4 rounded-2xl border text-left space-y-2 text-xs font-medium" style="background-color: var(--card); border-color: var(--border);">
+        <p><span style="color: var(--text-muted);">Servicio:</span> <b style="color: var(--text);" id="success-summary-service">Corte clásico (12 €)</b></p>
         <p><span style="color: var(--text-muted);">Fecha y hora:</span> <b class="text-amber-400 num-formal" id="success-summary-datetime">Hoy, 11:30</b></p>
         <p><span style="color: var(--text-muted);">Lugar:</span> <span style="color: var(--text);">Calle Castilla 24, Triana</span></p>
       </div>
 
       <div class="grid grid-cols-2 gap-2 pt-1">
-        <a id="btn-google-cal" href="#" target="_blank" class="h-11 rounded-xl border text-xs font-bold flex items-center justify-center" style="border-color: var(--card-border); color: var(--text); background-color: var(--bg);">
+        <a id="btn-google-cal" href="#" target="_blank" class="h-10 rounded-xl border text-xs font-bold flex items-center justify-center spring-btn" style="border-color: var(--border); color: var(--text); background-color: var(--card);">
           Google Calendar
         </a>
-        <button onclick="downloadIcsFile()" class="h-11 rounded-xl border text-xs font-bold flex items-center justify-center" style="border-color: var(--card-border); color: var(--text); background-color: var(--bg);">
-          Apple Calendar (.ics)
+        <button onclick="downloadIcsFile()" class="h-10 rounded-xl border text-xs font-bold flex items-center justify-center spring-btn" style="border-color: var(--border); color: var(--text); background-color: var(--card);">
+          Apple / Outlook (.ics)
         </button>
       </div>
 
-      <button onclick="closeSuccessModal()" class="w-full h-12 rounded-xl text-sm font-extrabold btn-main mt-2">
+      <button onclick="closeSuccessModal()" class="w-full h-11 rounded-xl text-xs font-extrabold uppercase tracking-wider btn-gold spring-btn mt-2">
         Entendido
       </button>
     </div>
   </div>
 
-
   <!-- MODAL PIN BARBERO -->
   <div id="pin-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="border rounded-3xl w-full max-w-xs p-6 space-y-4 text-center" style="background-color: var(--card); border-color: var(--card-border);">
-      <h3 class="text-lg font-extrabold" style="color: var(--text);">PIN del Barbero</h3>
+    <div class="border rounded-3xl w-full max-w-xs p-6 space-y-4 text-center shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
+      <h3 class="font-serif text-lg font-bold" style="color: var(--text);">Acceso Barbero</h3>
+      <p class="text-xs" style="color: var(--text-muted);">Introduce tu PIN de 4 dígitos</p>
       <input
         type="password"
         id="input-pin"
@@ -518,30 +623,29 @@
         pattern="[0-9]*"
         inputmode="numeric"
         placeholder="••••"
-        class="w-32 h-12 mx-auto text-center tracking-[12px] text-xl font-bold border rounded-xl focus:outline-none num-formal"
-        style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);"
+        class="w-32 h-11 mx-auto text-center tracking-[10px] text-lg font-bold border rounded-xl focus:outline-none num-formal"
+        style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);"
         onkeyup="if(event.key==='Enter') checkAdminPin()"
       />
       <p id="pin-error" class="text-xs text-rose-500 hidden font-bold">PIN incorrecto</p>
       <div class="flex gap-2">
-        <button onclick="closePinModal()" class="flex-1 h-10 rounded-xl border text-xs font-bold" style="border-color: var(--card-border); color: var(--text-muted);">Cancelar</button>
-        <button onclick="checkAdminPin()" class="flex-1 h-10 rounded-xl text-xs font-extrabold btn-main">Entrar</button>
+        <button onclick="closePinModal()" class="flex-1 h-10 rounded-xl border text-xs font-bold spring-btn" style="border-color: var(--border); color: var(--text-muted);">Cancelar</button>
+        <button onclick="checkAdminPin()" class="flex-1 h-10 rounded-xl text-xs font-extrabold btn-gold spring-btn">Entrar</button>
       </div>
     </div>
   </div>
 
-
-  <!-- MODAL EXPRESS: METER CITA -->
+  <!-- MODAL EXPRESS: ASIGNAR CITA RÁPIDA -->
   <div id="express-booking-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="border rounded-3xl w-full max-w-sm p-6 space-y-4" style="background-color: var(--card); border-color: var(--card-border);">
-      <div class="flex items-center justify-between border-b pb-2" style="border-color: var(--card-border);">
-        <h3 class="text-base font-extrabold" style="color: var(--text);" id="express-modal-title">10:00 · Hoy</h3>
+    <div class="border rounded-3xl w-full max-w-sm p-6 space-y-3.5 shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
+      <div class="flex items-center justify-between border-b pb-2.5" style="border-color: var(--border);">
+        <h3 class="font-serif text-base font-bold" style="color: var(--text);" id="express-modal-title">10:00 · Hoy</h3>
         <button onclick="closeExpressBookingModal()" class="text-sm font-bold" style="color: var(--text-muted);">✕</button>
       </div>
 
       <div>
         <label class="block text-xs font-bold mb-1" style="color: var(--text);">Nombre del cliente *</label>
-        <input type="text" id="express-client-name" placeholder="Ej. Antonio" class="w-full h-11 border rounded-xl px-3 text-sm font-bold" style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);" onkeydown="if(event.key==='Enter') saveExpressBooking()" />
+        <input type="text" id="express-client-name" placeholder="Ej. Antonio" class="w-full h-11 border rounded-xl px-3 text-sm font-semibold focus:outline-none" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" onkeydown="if(event.key==='Enter') saveExpressBooking()" />
       </div>
 
       <div>
@@ -551,42 +655,41 @@
 
       <div>
         <label class="block text-xs font-bold mb-1" style="color: var(--text-muted);">Teléfono (opcional):</label>
-        <input type="tel" id="express-client-phone" placeholder="600 112 233" class="w-full h-10 border rounded-xl px-3 text-xs num-formal" style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);" onkeydown="if(event.key==='Enter') saveExpressBooking()" />
+        <input type="tel" id="express-client-phone" placeholder="600 112 233" class="w-full h-10 border rounded-xl px-3 text-xs num-formal focus:outline-none" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" onkeydown="if(event.key==='Enter') saveExpressBooking()" />
       </div>
 
       <div class="flex gap-2 pt-1">
-        <button onclick="blockCurrentExpressSlot()" class="px-3 h-11 rounded-xl border text-xs font-bold" style="border-color: var(--card-border); color: var(--text-muted);">Solo Bloquear</button>
-        <button onclick="saveExpressBooking()" class="flex-1 h-11 rounded-xl text-xs font-extrabold btn-main">Guardar Cita ↵</button>
+        <button onclick="blockCurrentExpressSlot()" class="px-3 h-11 rounded-xl border text-xs font-bold spring-btn" style="border-color: var(--border); color: var(--text-muted);">Solo Bloquear</button>
+        <button onclick="saveExpressBooking()" class="flex-1 h-11 rounded-xl text-xs font-extrabold uppercase btn-gold spring-btn">Guardar Cita ↵</button>
       </div>
     </div>
   </div>
 
-
   <!-- MODAL LISTA DE ESPERA -->
   <div id="waitlist-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-    <div class="border rounded-3xl w-full max-w-sm p-6 space-y-3" style="background-color: var(--card); border-color: var(--card-border);">
-      <div class="flex items-center justify-between border-b pb-2" style="border-color: var(--card-border);">
-        <h3 class="text-base font-extrabold" style="color: var(--text);">Apuntar a Espera</h3>
+    <div class="border rounded-3xl w-full max-w-sm p-6 space-y-3 shadow-2xl" style="background-color: var(--surface); border-color: var(--border);">
+      <div class="flex items-center justify-between border-b pb-2" style="border-color: var(--border);">
+        <h3 class="font-serif text-base font-bold" style="color: var(--text);">Apuntar a Espera</h3>
         <button onclick="closeWaitlistModal()" class="text-sm font-bold" style="color: var(--text-muted);">✕</button>
       </div>
-      <input type="text" id="waitlist-client-name" placeholder="Nombre cliente" class="w-full h-10 border rounded-xl px-3 text-xs" style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);" />
-      <input type="tel" id="waitlist-client-phone" placeholder="Teléfono" class="w-full h-10 border rounded-xl px-3 text-xs num-formal" style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);" />
-      <input type="text" id="waitlist-client-pref" placeholder="Preferencia horaria" class="w-full h-10 border rounded-xl px-3 text-xs" style="background-color: var(--input-bg); border-color: var(--card-border); color: var(--text);" />
+      <input type="text" id="waitlist-client-name" placeholder="Nombre cliente" class="w-full h-10 border rounded-xl px-3 text-xs font-semibold" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" />
+      <input type="tel" id="waitlist-client-phone" placeholder="Teléfono" class="w-full h-10 border rounded-xl px-3 text-xs num-formal" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" />
+      <input type="text" id="waitlist-client-pref" placeholder="Preferencia horaria" class="w-full h-10 border rounded-xl px-3 text-xs" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" />
       <div class="flex gap-2 pt-1">
-        <button onclick="closeWaitlistModal()" class="flex-1 h-10 rounded-xl border text-xs font-bold" style="border-color: var(--card-border); color: var(--text-muted);">Cancelar</button>
-        <button onclick="saveWaitlistClient()" class="flex-1 h-10 rounded-xl text-xs font-extrabold btn-main">Guardar</button>
+        <button onclick="closeWaitlistModal()" class="flex-1 h-10 rounded-xl border text-xs font-bold spring-btn" style="border-color: var(--border); color: var(--text-muted);">Cancelar</button>
+        <button onclick="saveWaitlistClient()" class="flex-1 h-10 rounded-xl text-xs font-extrabold btn-gold spring-btn">Guardar</button>
       </div>
     </div>
   </div>
 
 
   <!-- ===================================================================================
-       JAVASCRIPT SENCILLO, ROBUSTO Y RÁPIDO
+       JAVASCRIPT ROBUSTO
        =================================================================================== -->
   <script>
     const DEFAULT_PIN = "1234";
 
-    // TEMA
+    // MODO CLARO / OSCURO
     function getStoredTheme() {
       return localStorage.getItem('barber_theme') || 'dark';
     }
@@ -599,11 +702,11 @@
       if (theme === 'light') {
         htmlEl.classList.add('light-mode');
         if (themeIcon) themeIcon.textContent = '🌙';
-        if (metaTheme) metaTheme.setAttribute('content', '#f4f4f6');
+        if (metaTheme) metaTheme.setAttribute('content', '#f9f7f2');
       } else {
         htmlEl.classList.remove('light-mode');
         if (themeIcon) themeIcon.textContent = '☀️';
-        if (metaTheme) metaTheme.setAttribute('content', '#121212');
+        if (metaTheme) metaTheme.setAttribute('content', '#0e0d0c');
       }
       localStorage.setItem('barber_theme', theme);
     }
@@ -617,29 +720,32 @@
       if (STORE.isOwnerSession()) renderAdminVisualCalendar();
     }
 
-    // TRADUCCIONES LIMPIAS (ES, EN, FR, IT, DE)
+    // MULTI-IDIOMA (ES, EN, FR, IT, DE)
     const I18N = {
       es: {
-        step1Title: "1. Elige tu corte",
-        step1Sub: "Corte a navaja o tijera",
+        heroTitle: "Corte clásico y afeitado tradicional a navaja.",
+        heroDesc: "Reserva tu hueco en 30 segundos y entra directo al sillón sin esperas. Pago en el local tras tu corte.",
+        step1Title: "1. Elige tu servicio",
+        step1Sub: "Precios claros sin sorpresas",
         step2Title: "2. Elige día y hora",
-        lblMorning: "Mañanas (10:00 — 14:00):",
-        lblAfternoon: "Tardes (16:30 — 20:00):",
-        step3Title: "3. Tu nombre y WhatsApp",
-        namePlaceholder: "Tu nombre completo *",
+        lblMorning: "Mañanas (10:00 — 14:00)",
+        lblAfternoon: "Tardes (16:30 — 20:00)",
+        step3Title: "3. Tus datos",
+        step3Sub: "✓ Para confirmar tu cita",
+        namePlaceholder: "Nombre y apellidos *",
         phonePlaceholder: "Teléfono móvil (WhatsApp) *",
-        summaryTitle: "Resumen de tu cita:",
+        summaryTitle: "Resumen de reserva:",
         lblPay: "Total en el local:",
-        ctaButton: "PEDIR CITA POR WHATSAPP",
-        noPayNotice: "ℹ️ No tienes que pagar nada ahora. Pagas en la barbería en efectivo o Bizum.",
-        galleryTitle: "Así es la barbería",
+        ctaButton: "Reservar Cita por WhatsApp",
+        noPayNotice: "Sin pago por adelantado. Se paga en la barbería en efectivo o Bizum tras tu corte.",
+        galleryTitle: "El Taller en Triana",
         review1: "“El mejor corte y afeitado tradicional de Sevilla. Llegas a tu hora y entras directo al sillón sin perder la tarde.”",
         review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Sevilla",
-        footerHours: "Lun a Vie 10:00–14:00 y 16:30–20:00 · Sáb 10:00–14:30",
-        chooseDatePrompt: "Selecciona día y hora arriba",
+        footerHours: "Lunes a Viernes 10:00–14:00 y 16:30–20:00 · Sábados 10:00–14:30",
+        chooseDatePrompt: "Selecciona día y hora",
         modalSuccessTitle: "Cita Solicitada",
-        modalSuccessDesc: "Hemos abierto tu WhatsApp con los datos de tu reserva para que el peluquero te confirme enseguida.",
+        modalSuccessDesc: "Se ha abierto tu WhatsApp con los datos de la reserva para enviarla directamente al peluquero.",
         closedDay: "Cerrado este día",
         daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"],
         monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -649,24 +755,27 @@
           `Hola, quiero reservar cita para ${s} el ${d} a las ${t}. Nombre: ${n}, Tel: ${ph}. (Barbería El Barrio, Triana)`
       },
       en: {
-        step1Title: "1. Select your cut",
-        step1Sub: "Scissor or razor cut",
+        heroTitle: "Classic haircut and traditional straight-razor shave.",
+        heroDesc: "Book your slot in 30 seconds and walk straight to the chair without waiting. Payment on site.",
+        step1Title: "1. Select your service",
+        step1Sub: "Clear pricing, no surprises",
         step2Title: "2. Choose day & time",
-        lblMorning: "Morning (10:00 AM — 2:00 PM):",
-        lblAfternoon: "Afternoon (4:30 PM — 8:00 PM):",
-        step3Title: "3. Your name & WhatsApp",
-        namePlaceholder: "Your full name *",
+        lblMorning: "Morning (10:00 AM — 2:00 PM)",
+        lblAfternoon: "Afternoon (4:30 PM — 8:00 PM)",
+        step3Title: "3. Your contact details",
+        step3Sub: "✓ Direct confirmation",
+        namePlaceholder: "Full name *",
         phonePlaceholder: "Mobile phone (WhatsApp) *",
         summaryTitle: "Booking summary:",
         lblPay: "Total on site:",
-        ctaButton: "BOOK APPOINTMENT VIA WHATSAPP",
-        noPayNotice: "ℹ️ No deposit needed. You pay at the barbershop in cash or card.",
-        galleryTitle: "Inside the barbershop",
+        ctaButton: "Book Appointment via WhatsApp",
+        noPayNotice: "No deposit needed. You pay at the barbershop in cash or card after your haircut.",
+        galleryTitle: "Inside the Barbershop",
         review1: "“Best traditional fade and hot towel shave in Seville. Right on time without waiting.”",
         review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Seville",
         footerHours: "Mon to Fri 10:00–14:00 & 16:30–20:00 · Sat 10:00–14:30",
-        chooseDatePrompt: "Select date and time above",
+        chooseDatePrompt: "Select date and time",
         modalSuccessTitle: "Booking Requested",
         modalSuccessDesc: "WhatsApp opened with your appointment details so the barber can confirm right away.",
         closedDay: "Closed on this date",
@@ -678,19 +787,22 @@
           `Hello, I would like to book an appointment for ${s} on ${d} at ${t}. Name: ${n}, Phone: ${ph}. (Barbería El Barrio, Triana)`
       },
       fr: {
+        heroTitle: "Coupe classique et rasage traditionnel au rasoir.",
+        heroDesc: "Réservez en 30 secondes et entrez directement sans attente. Paiement sur place après la coupe.",
         step1Title: "1. Choisissez la prestation",
-        step1Sub: "Coupe aux ciseaux ou rasoir",
+        step1Sub: "Tarifs clairs sans surprise",
         step2Title: "2. Date et heure",
-        lblMorning: "Matin (10:00 — 14:00) :",
-        lblAfternoon: "Après-midi (16:30 — 20:00) :",
+        lblMorning: "Matin (10:00 — 14:00)",
+        lblAfternoon: "Après-midi (16:30 — 20:00)",
         step3Title: "3. Vos coordonnées",
-        namePlaceholder: "Votre nom complet *",
+        step3Sub: "✓ Confirmation directe",
+        namePlaceholder: "Nom complet *",
         phonePlaceholder: "Téléphone (WhatsApp) *",
         summaryTitle: "Récapitulatif :",
         lblPay: "Total sur place :",
-        ctaButton: "RÉSERVER PAR WHATSAPP",
-        noPayNotice: "ℹ️ Aucun paiement en ligne. Paiement sur place après la coupe.",
-        galleryTitle: "Le salon",
+        ctaButton: "Réserver par WhatsApp",
+        noPayNotice: "Aucun paiement en ligne. Paiement au salon après votre prestation.",
+        galleryTitle: "Le Salon à Triana",
         review1: "“Superbe coupe et rasage traditionnel à Séville. Ponctuel et chaleureux.”",
         review2: "“Accueil parfait pour les touristes, confirmation WhatsApp rapide.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Séville",
@@ -707,19 +819,22 @@
           `Bonjour, je souhaite réserver pour ${s} le ${d} à ${t}. Nom: ${n}, Tél: ${ph}. (Barbería El Barrio, Triana)`
       },
       it: {
+        heroTitle: "Taglio classico e rasatura tradizionale a rasoio.",
+        heroDesc: "Prenota in 30 secondi ed entra direttamente senza attese. Pagamento in loco.",
         step1Title: "1. Scegli il servizio",
-        step1Sub: "Taglio a forbice o rasoio",
+        step1Sub: "Prezzi trasparenti",
         step2Title: "2. Giorno e ora",
-        lblMorning: "Mattina (10:00 — 14:00):",
-        lblAfternoon: "Pomeriggio (16:30 — 20:00):",
+        lblMorning: "Mattina (10:00 — 14:00)",
+        lblAfternoon: "Pomeriggio (16:30 — 20:00)",
         step3Title: "3. I tuoi dati",
+        step3Sub: "✓ Notifica immediata",
         namePlaceholder: "Nome e cognome *",
         phonePlaceholder: "Telefono (WhatsApp) *",
         summaryTitle: "Riepilogo:",
-        lblPay: "Totale da pagare:",
-        ctaButton: "PRENOTA SU WHATSAPP",
-        noPayNotice: "ℹ️ Nessun pagamento anticipato. Paghi direttamente in negozio.",
-        galleryTitle: "La barberia",
+        lblPay: "Totale in loco:",
+        ctaButton: "Prenota su WhatsApp",
+        noPayNotice: "Nessun pagamento anticipato. Paghi in negozio dopo il taglio.",
+        galleryTitle: "La Barberia a Triana",
         review1: "“Miglior taglio e rasatura di Siviglia. Puntualità e grande professionalità.”",
         review2: "“Ottimo servizio e rapida conferma su WhatsApp.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Siviglia",
@@ -736,19 +851,22 @@
           `Ciao, vorrei prenotare per ${s} il ${d} alle ore ${t}. Nome: ${n}, Tel: ${ph}. (Barbería El Barrio, Triana)`
       },
       de: {
+        heroTitle: "Klassischer Schnitt und traditionelle Messerrasur.",
+        heroDesc: "In 30 Sekunden buchen und direkt drankommen. Zahlung vor Ort im Salon.",
         step1Title: "1. Dienstleistung wählen",
-        step1Sub: "Schnitt mit Schere oder Rasierer",
+        step1Sub: "Feste Preise ohne Überraschungen",
         step2Title: "2. Datum & Uhrzeit",
-        lblMorning: "Vormittag (10:00 — 14:00 Uhr):",
-        lblAfternoon: "Nachmittag (16:30 — 20:00 Uhr):",
-        step3Title: "3. Ihre Daten",
+        lblMorning: "Vormittag (10:00 — 14:00 Uhr)",
+        lblAfternoon: "Nachmittag (16:30 — 20:00 Uhr)",
+        step3Title: "3. Ihre Kontaktdaten",
+        step3Sub: "✓ Schnelle Bestätigung",
         namePlaceholder: "Vollständiger Name *",
         phonePlaceholder: "Mobilnummer (WhatsApp) *",
         summaryTitle: "Zusammenfassung:",
         lblPay: "Gesamtbetrag vor Ort:",
-        ctaButton: "PER WHATSAPP BUCHEN",
-        noPayNotice: "ℹ️ Keine Vorauszahlung nötig. Zahlung vor Ort im Salon.",
-        galleryTitle: "Der Salon",
+        ctaButton: "Per WhatsApp buchen",
+        noPayNotice: "Keine Vorauszahlung nötig. Zahlung vor Ort nach dem Schnitt.",
+        galleryTitle: "Der Salon in Triana",
         review1: "“Erstklassiger Haarschnitt und Heißtuch-Rasur in Sevilla.”",
         review2: "“Sehr freundlich, schnelle Buchung über WhatsApp.”",
         footerAddress: "📍 Calle Castilla 24, Triana, Sevilla",
@@ -768,40 +886,40 @@
 
     const SERVICES_TRANSLATIONS = {
       1: {
-        es: { name: "Corte de pelo", desc: "Lavado artesano, tijera o máquina y peinado" },
-        en: { name: "Haircut", desc: "Wash, scissor or clipper cut and styling" },
-        fr: { name: "Coupe de cheveux", desc: "Shampoing, coupe et coiffage" },
-        it: { name: "Taglio di capelli", desc: "Lavaggio, taglio e rifinitura" },
-        de: { name: "Haarschnitt", desc: "Waschen, Schneiden & Styling" }
+        es: { name: "Corte clásico", desc: "Lavado artesano, corte a tijera o máquina y peinado" },
+        en: { name: "Classic Haircut", desc: "Artisan wash, scissor or clipper cut and styling" },
+        fr: { name: "Coupe classique", desc: "Shampoing, coupe aux ciseaux et coiffage" },
+        it: { name: "Taglio classico", desc: "Lavaggio artigianale, taglio e rifinitura" },
+        de: { name: "Klassischer Haarschnitt", desc: "Haarwäsche, Schnitt & Styling" }
       },
       2: {
-        es: { name: "Corte + Arreglo de Barba", desc: "Corte completo y afeitado de barba con toalla caliente" },
-        en: { name: "Haircut + Beard Trim", desc: "Full haircut and hot-towel beard shave" },
-        fr: { name: "Coupe + Taille de Barbe", desc: "Coupe complète et soin barbe serviette chaude" },
-        it: { name: "Taglio + Barba", desc: "Taglio completo e rasatura panno caldo" },
-        de: { name: "Haarschnitt + Bart", desc: "Komplettschnitt mit Heißtuch-Rasur" }
+        es: { name: "Corte + Ritual Barba", desc: "Corte completo y afeitado de barba con toalla caliente" },
+        en: { name: "Haircut + Beard Ritual", desc: "Full haircut and hot-towel beard shave" },
+        fr: { name: "Coupe + Soin Barbe", desc: "Coupe complète et soin serviette chaude" },
+        it: { name: "Taglio + Rituale Barba", desc: "Taglio completo e rasatura panno caldo" },
+        de: { name: "Haarschnitt + Bartritual", desc: "Komplettschnitt mit Heißtuch-Rasur" }
       },
       3: {
-        es: { name: "Arreglo de Barba", desc: "Perfilado a navaja, toalla caliente y aceite" },
-        en: { name: "Beard Sculpt & Shave", desc: "Razor outline, hot towel and beard oil" },
-        fr: { name: "Taille de Barbe", desc: "Traçage au rasoir et serviette chaude" },
-        it: { name: "Rifinitura Barba", desc: "Modellatura a rasoio e panno caldo" },
-        de: { name: "Bartpflege", desc: "Messerrasur mit Heißtuch & Öl" }
+        es: { name: "Arreglo de Barba Tradicional", desc: "Perfilado a navaja, toalla caliente y aceite nutritivo" },
+        en: { name: "Traditional Beard Trim", desc: "Razor outline, hot towel and beard oil" },
+        fr: { name: "Taille de Barbe Traditionnelle", desc: "Traçage au rasoir et serviette chaude" },
+        it: { name: "Rifinitura Barba Tradizionale", desc: "Modellatura a rasoio e panno caldo" },
+        de: { name: "Traditionelle Bartpflege", desc: "Messerrasur mit Heißtuch & Öl" }
       },
       4: {
-        es: { name: "Jubilados y Niños", desc: "Menores de 12 años y mayores de 65" },
-        en: { name: "Seniors & Kids", desc: "Kids under 12 and seniors 65+" },
-        fr: { name: "Enfants & Seniors", desc: "Moins de 12 ans et plus de 65 ans" },
-        it: { name: "Bambini & Senior", desc: "Under 12 e over 65" },
-        de: { name: "Kinder & Senioren", desc: "Kinder unter 12 und Senioren" }
+        es: { name: "Corte Junior / Senior", desc: "Menores de 12 años y mayores de 65 años" },
+        en: { name: "Junior & Senior Cut", desc: "Kids under 12 and seniors 65+" },
+        fr: { name: "Coupe Enfant / Senior", desc: "Moins de 12 ans et plus de 65 ans" },
+        it: { name: "Taglio Junior / Senior", desc: "Under 12 e over 65" },
+        de: { name: "Kinder- / Seniorenhaarschnitt", desc: "Kinder unter 12 und Senioren" }
       }
     };
 
     const DEFAULT_SERVICES = [
-      { id: 1, name: "Corte de pelo", duration: "30 min", price: 12, durationMin: 30, desc: "Lavado artesano, tijera o máquina y peinado", active: true },
-      { id: 2, name: "Corte + Arreglo de Barba", duration: "45 min", price: 20, durationMin: 45, desc: "Corte completo y afeitado de barba con toalla caliente", active: true },
-      { id: 3, name: "Arreglo de Barba", duration: "20 min", price: 10, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y aceite", active: true },
-      { id: 4, name: "Jubilados y Niños", duration: "25 min", price: 10, durationMin: 25, desc: "Menores de 12 años y mayores de 65", active: true }
+      { id: 1, name: "Corte clásico", duration: "30 min", price: 12, durationMin: 30, desc: "Lavado artesano, corte a tijera o máquina y peinado", active: true },
+      { id: 2, name: "Corte + Ritual Barba", duration: "45 min", price: 20, durationMin: 45, desc: "Corte completo y afeitado de barba con toalla caliente", active: true },
+      { id: 3, name: "Arreglo de Barba Tradicional", duration: "20 min", price: 10, durationMin: 20, desc: "Perfilado a navaja, toalla caliente y aceite nutritivo", active: true },
+      { id: 4, name: "Corte Junior / Senior", duration: "25 min", price: 10, durationMin: 25, desc: "Menores de 12 años y mayores de 65 años", active: true }
     ];
 
     const STORE = {
@@ -847,8 +965,8 @@
       getAppointments() {
         const data = localStorage.getItem('barber_appointments');
         return data ? JSON.parse(data) : [
-          { id: 101, name: "Carlos Mendoza", phone: "612345678", service: "Corte de pelo", price: 12, date: getTodayKey(), time: "11:00", status: "confirmed" },
-          { id: 102, name: "Antonio Jiménez", phone: "655443221", service: "Corte + Arreglo de Barba", price: 20, date: getTodayKey(), time: "12:30", status: "confirmed" }
+          { id: 101, name: "Carlos Mendoza", phone: "612345678", service: "Corte clásico", price: 12, date: getTodayKey(), time: "11:00", status: "confirmed" },
+          { id: 102, name: "Antonio Jiménez", phone: "655443221", service: "Corte + Ritual Barba", price: 20, date: getTodayKey(), time: "12:30", status: "confirmed" }
         ];
       },
       saveAppointments(appts) { localStorage.setItem('barber_appointments', JSON.stringify(appts)); },
@@ -868,11 +986,10 @@
       clientPhone: '',
       lastBooking: null,
       adminVisualDate: getTodayKey(),
-      expressSelectedService: "Corte de pelo",
+      expressSelectedService: "Corte clásico",
       expressCurrentSlotTime: "10:00"
     };
 
-    // IDIOMA
     function autoDetectLanguage() {
       const saved = localStorage.getItem('barber_user_lang');
       if (saved && I18N[saved]) return saved;
@@ -889,13 +1006,50 @@
       return 'es';
     }
 
+    function toggleLanguageDropdown(event) {
+      if (event) event.stopPropagation();
+      const menu = document.getElementById('lang-dropdown-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (!menu) return;
+      const isHidden = menu.classList.contains('hidden');
+
+      if (isHidden) {
+        menu.classList.remove('hidden');
+        if (chevron) chevron.classList.add('rotate-180');
+      } else {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
+    function handleGlobalClick(event) {
+      const container = document.getElementById('lang-dropdown-container');
+      const menu = document.getElementById('lang-dropdown-menu');
+      const chevron = document.getElementById('lang-chevron');
+      if (container && !container.contains(event.target) && menu && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        if (chevron) chevron.classList.remove('rotate-180');
+      }
+    }
+
     function changeLanguage(langCode) {
       if (!I18N[langCode]) return;
       state.lang = langCode;
       localStorage.setItem('barber_user_lang', langCode);
       
-      const select = document.getElementById('lang-select');
-      if (select) select.value = langCode;
+      const langText = document.getElementById('active-lang-text');
+      if (langText) langText.textContent = langCode.toUpperCase();
+
+      ['es', 'en', 'fr', 'it', 'de'].forEach(code => {
+        const check = document.getElementById(`check-${code}`);
+        if (check) {
+          if (code === langCode) check.classList.remove('hidden');
+          else check.classList.add('hidden');
+        }
+      });
+
+      const menu = document.getElementById('lang-dropdown-menu');
+      if (menu) menu.classList.add('hidden');
 
       updateLanguageTexts();
       renderServices();
@@ -908,12 +1062,15 @@
     function updateLanguageTexts() {
       const t = I18N[state.lang] || I18N.es;
       
+      setText('hero-title', t.heroTitle);
+      setText('hero-desc', t.heroDesc);
       setText('txt-step1-title', t.step1Title);
       setText('txt-step1-sub', t.step1Sub);
       setText('txt-step2-title', t.step2Title);
       setText('txt-lbl-morning', t.lblMorning);
       setText('txt-lbl-afternoon', t.lblAfternoon);
       setText('txt-step3-title', t.step3Title);
+      setText('txt-step3-sub', t.step3Sub);
       const cn = document.getElementById('client-name'); if (cn) cn.placeholder = t.namePlaceholder;
       const cp = document.getElementById('client-phone'); if (cp) cp.placeholder = t.phonePlaceholder;
       setText('txt-summary-title', t.summaryTitle);
@@ -961,34 +1118,34 @@
         const service = getLocalizedService(rawService);
         const isSelected = state.selectedServiceId === service.id;
 
-        const style = isSelected
-          ? 'background-color: var(--card-selected); border-color: var(--border-selected); border-width: 2px;'
-          : 'background-color: var(--card); border-color: var(--card-border); border-width: 1px;';
+        const borderStyle = isSelected
+          ? 'border-color: var(--accent); background-color: var(--card-selected); box-shadow: 0 0 0 1px var(--accent);'
+          : 'border-color: var(--border); background-color: var(--card);';
 
         const checkMark = isSelected
-          ? `<span class="w-5 h-5 rounded-full flex items-center justify-center font-extrabold text-xs shrink-0" style="background-color: var(--accent); color: var(--btn-text);">✓</span>`
-          : `<span class="w-5 h-5 rounded-full border flex items-center justify-center shrink-0" style="border-color: var(--card-border);"></span>`;
+          ? `<span class="w-5 h-5 rounded-full flex items-center justify-center font-extrabold text-xs shrink-0" style="background-color: var(--accent); color: #0e0d0c;">✓</span>`
+          : `<span class="w-5 h-5 rounded-full border flex items-center justify-center shrink-0" style="border-color: var(--border);"></span>`;
 
         return `
           <button 
             type="button"
             onclick="selectService(${service.id})"
-            class="p-3.5 sm:p-4 rounded-2xl border text-left transition-all flex items-start justify-between gap-3 cursor-pointer w-full"
-            style="${style}"
+            class="p-4 rounded-2xl border text-left transition-all flex items-start justify-between gap-3 cursor-pointer w-full spring-btn"
+            style="${borderStyle}"
           >
-            <div class="space-y-0.5 flex-1 min-w-0">
+            <div class="space-y-1 flex-1 min-w-0">
               <div class="flex items-center gap-2">
                 ${checkMark}
-                <span class="text-base sm:text-lg font-extrabold truncate" style="color: var(--text);">
+                <span class="text-base sm:text-lg font-bold font-serif truncate" style="color: var(--text);">
                   ${service.name}
                 </span>
               </div>
-              <p class="text-xs pl-7 font-medium leading-snug" style="color: var(--text-muted);">${service.desc || ''}</p>
+              <p class="text-xs pl-7 font-light leading-snug" style="color: var(--text-muted);">${service.desc || ''}</p>
             </div>
 
-            <div class="text-right shrink-0 pl-1">
-              <span class="text-xl sm:text-2xl font-extrabold block num-formal" style="color: var(--text);">${service.price} €</span>
-              <span class="text-[11px] font-bold block num-formal" style="color: var(--accent);">${service.duration}</span>
+            <div class="text-right shrink-0 pl-2">
+              <span class="text-xl sm:text-2xl font-bold block num-formal" style="color: var(--text);">${service.price} €</span>
+              <span class="text-[11px] font-semibold block num-formal" style="color: var(--accent);">${service.duration}</span>
             </div>
           </button>
         `;
@@ -1043,18 +1200,18 @@
         const month = t.monthsShort[d.getMonth()];
 
         const style = isSelected
-          ? 'background-color: var(--accent); color: var(--btn-text); border-color: var(--accent); font-weight: 800;'
-          : 'background-color: var(--card); color: var(--text); border-color: var(--card-border);';
+          ? 'background-color: var(--accent); color: #0e0d0c; border-color: var(--accent); font-weight: 800; shadow-md;'
+          : 'background-color: var(--card); color: var(--text); border-color: var(--border);';
 
         return `
           <button
             type="button"
             onclick="selectDate('${dateKey}')"
-            class="flex-shrink-0 flex flex-col items-center justify-center w-18 sm:w-20 py-2.5 rounded-xl border transition-all"
+            class="flex-shrink-0 flex flex-col items-center justify-center w-18 sm:w-20 py-2.5 rounded-2xl border transition-all spring-btn"
             style="${style}"
           >
             <span class="text-[10px] uppercase font-extrabold">${dayOfWeek}</span>
-            <span class="text-xl font-extrabold my-0.5 num-formal leading-none">${dayNum}</span>
+            <span class="text-xl font-bold my-0.5 num-formal leading-none">${dayNum}</span>
             <span class="text-[10px] font-bold">${month}</span>
           </button>
         `;
@@ -1105,7 +1262,7 @@
 
       const closedDates = STORE.getClosedDates();
       if (closedDates.includes(state.selectedDate)) {
-        morningEl.innerHTML = `<div class="col-span-4 sm:col-span-5 py-3 text-center text-xs font-bold border rounded-xl" style="background-color: var(--card); border-color: var(--card-border); color: var(--text-muted);">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
+        morningEl.innerHTML = `<div class="col-span-4 sm:col-span-5 py-3 text-center text-xs font-bold border rounded-2xl" style="background-color: var(--card); border-color: var(--border); color: var(--text-muted);">${(I18N[state.lang] || I18N.es).closedDay}</div>`;
         afternoonEl.innerHTML = '';
         return;
       }
@@ -1144,18 +1301,18 @@
 
         if (!slot.isAvailable) {
           return `
-            <button type="button" disabled class="h-10 text-xs rounded-xl border line-through cursor-not-allowed font-bold opacity-30 num-formal" style="background-color: var(--bg); border-color: var(--card-border); color: var(--text-muted);">
+            <button type="button" disabled class="h-10 text-xs rounded-xl border line-through cursor-not-allowed font-semibold opacity-25 num-formal" style="background-color: var(--bg); border-color: var(--border); color: var(--text-muted);">
               ${slot.time}
             </button>
           `;
         }
 
         const style = isSelected
-          ? `background-color: var(--accent); color: var(--btn-text); border-color: var(--accent); font-weight: 800;`
-          : `background-color: var(--card); color: var(--text); border-color: var(--card-border); font-weight: 700;`;
+          ? `background-color: var(--accent); color: #0e0d0c; border-color: var(--accent); font-weight: 800;`
+          : `background-color: var(--card); color: var(--text); border-color: var(--border); font-weight: 700;`;
 
         return `
-          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-xs rounded-xl border transition-all flex items-center justify-center num-formal hover:border-amber-400" style="${style}">
+          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-xs rounded-xl border transition-all flex items-center justify-center num-formal spring-btn hover:border-amber-400" style="${style}">
             ${slot.time}
           </button>
         `;
@@ -1374,9 +1531,6 @@ END:VCALENDAR`;
       document.getElementById('public-view').classList.add('hidden');
       document.getElementById('admin-view').classList.remove('hidden');
 
-      const ownerBar = document.getElementById('owner-top-bar');
-      if (ownerBar) ownerBar.classList.remove('hidden');
-
       state.adminVisualDate = getTodayKey();
       const picker = document.getElementById('admin-visual-date-picker');
       if (picker) picker.value = state.adminVisualDate;
@@ -1403,40 +1557,13 @@ END:VCALENDAR`;
       renderTimeSlotsForSelectedDate();
     }
 
-    function toggleOwnerClientView() {
-      const isPublicHidden = document.getElementById('public-view').classList.contains('hidden');
-      const toggleBtn = document.getElementById('btn-toggle-owner-view');
-
-      if (isPublicHidden) {
-        document.getElementById('admin-view').classList.add('hidden');
-        document.getElementById('public-view').classList.remove('hidden');
-        if (toggleBtn) toggleBtn.textContent = 'Volver a Panel';
-        renderServices();
-        generateCalendarDays();
-        renderTimeSlotsForSelectedDate();
-      } else {
-        document.getElementById('public-view').classList.add('hidden');
-        document.getElementById('admin-view').classList.remove('hidden');
-        if (toggleBtn) toggleBtn.textContent = 'Ver como Cliente';
-        renderAdminVisualCalendar();
-      }
-    }
-
-    function logoutOwnerSession() {
-      if (!confirm("¿Cerrar sesión de barbero?")) return;
-      STORE.setOwnerSession(false);
-      const ownerBar = document.getElementById('owner-top-bar');
-      if (ownerBar) ownerBar.classList.add('hidden');
-      exitAdminView();
-    }
-
     function switchAdminTab(tabName) {
       ['visual', 'appointments', 'waitlist', 'blocks', 'services'].forEach(t => {
         const btn = document.getElementById(`tab-btn-${t}`);
         const sec = document.getElementById(`tab-${t}`);
         if (!btn || !sec) return;
         if (t === tabName) {
-          btn.className = "px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-main";
+          btn.className = "px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-gold";
           sec.classList.remove('hidden');
         } else {
           btn.className = "px-4 py-2.5 rounded-xl whitespace-nowrap";
@@ -1502,7 +1629,7 @@ END:VCALENDAR`;
 
       if (isClosedDay) {
         container.innerHTML = `
-          <div class="p-6 text-center border rounded-2xl" style="background-color: var(--card); border-color: var(--card-border);">
+          <div class="p-6 text-center border rounded-2xl" style="background-color: var(--surface); border-color: var(--border);">
             <p class="text-sm font-bold text-rose-500">Día Cerrado / Festivo</p>
           </div>`;
         setText('admin-stat-free', '0');
@@ -1523,23 +1650,23 @@ END:VCALENDAR`;
           const waLink = `https://wa.me/${cleanPhone}?text=${encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita en Barbería El Barrio a las ${appt.time}.`)}`;
 
           return `
-            <div class="p-3.5 rounded-2xl border flex items-center justify-between gap-3" style="background-color: var(--card); border-color: var(--card-border);">
+            <div class="p-3.5 rounded-2xl border flex items-center justify-between gap-3" style="background-color: var(--surface); border-color: var(--border);">
               <div class="flex items-center gap-3 min-w-0 flex-1">
                 <span class="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0"></span>
-                <span class="num-formal text-base font-extrabold" style="color: var(--text);">${time}</span>
+                <span class="num-formal text-base font-bold" style="color: var(--text);">${time}</span>
                 <div class="min-w-0">
-                  <p class="text-sm font-bold truncate" style="color: var(--text);">${appt.name} <span class="text-amber-400 font-extrabold num-formal">(${price}€)</span></p>
+                  <p class="text-sm font-bold truncate" style="color: var(--text);">${appt.name} <span class="text-amber-400 font-bold num-formal">(${price}€)</span></p>
                   <p class="text-xs truncate" style="color: var(--text-muted);">${appt.service}</p>
                 </div>
               </div>
 
               <div class="flex items-center gap-2 shrink-0">
                 ${cleanPhone ? `
-                  <a href="${waLink}" target="_blank" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                    Avisar WhatsApp
+                  <a href="${waLink}" target="_blank" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 spring-btn">
+                    WhatsApp
                   </a>
                 ` : ''}
-                <button onclick="freeAdminSlot(${appt.id}, '${targetDate}', '${time}')" class="px-3 py-1.5 rounded-xl text-xs font-bold border" style="border-color: var(--card-border); color: var(--text-muted);">
+                <button onclick="freeAdminSlot(${appt.id}, '${targetDate}', '${time}')" class="px-3 py-1.5 rounded-xl text-xs font-bold border spring-btn" style="border-color: var(--border); color: var(--text-muted);">
                   Liberar
                 </button>
               </div>
@@ -1548,13 +1675,13 @@ END:VCALENDAR`;
         } else if (isBlocked) {
           busyCount++;
           return `
-            <div class="p-3 rounded-2xl border flex items-center justify-between gap-3" style="background-color: var(--bg); border-color: var(--card-border);">
+            <div class="p-3 rounded-2xl border flex items-center justify-between gap-3" style="background-color: var(--card); border-color: var(--border);">
               <div class="flex items-center gap-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-stone-500"></span>
                 <span class="num-formal text-sm font-bold" style="color: var(--text-muted);">${time}</span>
                 <span class="text-xs font-medium" style="color: var(--text-muted);">Bloqueado</span>
               </div>
-              <button onclick="toggleSlotBlockVisual('${targetDate}', '${time}')" class="px-3 py-1.5 rounded-xl text-xs font-bold border" style="border-color: var(--card-border); color: var(--text);">
+              <button onclick="toggleSlotBlockVisual('${targetDate}', '${time}')" class="px-3 py-1.5 rounded-xl text-xs font-bold border spring-btn" style="border-color: var(--border); color: var(--text);">
                 Desbloquear
               </button>
             </div>
@@ -1562,13 +1689,13 @@ END:VCALENDAR`;
         } else {
           freeCount++;
           return `
-            <div onclick="openExpressBookingModal('${time}')" class="p-3.5 rounded-2xl border flex items-center justify-between gap-3 cursor-pointer hover:border-emerald-500" style="background-color: var(--card); border-color: var(--card-border);">
+            <div onclick="openExpressBookingModal('${time}')" class="p-3.5 rounded-2xl border flex items-center justify-between gap-3 cursor-pointer hover:border-emerald-500 spring-btn" style="background-color: var(--surface); border-color: var(--border);">
               <div class="flex items-center gap-3">
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                <span class="num-formal text-base font-extrabold" style="color: var(--text);">${time}</span>
+                <span class="num-formal text-base font-bold" style="color: var(--text);">${time}</span>
                 <span class="text-xs font-bold text-emerald-400">Hueco Libre</span>
               </div>
-              <button type="button" class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold btn-main">
+              <button type="button" class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold btn-gold">
                 + Meter Cita
               </button>
             </div>
@@ -1578,7 +1705,7 @@ END:VCALENDAR`;
 
       setText('admin-stat-free', `${freeCount}`);
       setText('admin-stat-busy', `${busyCount}`);
-      setText('admin-stat-money', `~${totalCaja} €`);
+      setText('admin-stat-money', `${totalCaja} €`);
     }
 
     function openExpressBookingModal(time) {
@@ -1590,13 +1717,13 @@ END:VCALENDAR`;
       if (nameInp) nameInp.value = '';
       const phoneInp = document.getElementById('express-client-phone');
       if (phoneInp) phoneInp.value = '';
-      state.expressSelectedService = "Corte de pelo";
+      state.expressSelectedService = "Corte clásico";
 
       const chips = document.getElementById('express-service-chips');
       if (chips) {
         const services = STORE.getServices().filter(s => s.active);
         chips.innerHTML = services.map((s, idx) => `
-          <button type="button" onclick="selectExpressService('${s.name}', this)" class="px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip ${idx === 0 ? 'btn-main' : 'border-stone-700'}">
+          <button type="button" onclick="selectExpressService('${s.name}', this)" class="px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip ${idx === 0 ? 'btn-gold' : 'border-stone-700'}">
             <span>${s.name}</span>
           </button>
         `).join('');
@@ -1610,7 +1737,7 @@ END:VCALENDAR`;
     function selectExpressService(name, btn) {
       state.expressSelectedService = name;
       document.querySelectorAll('.express-service-chip').forEach(b => b.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip border-stone-700");
-      btn.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip btn-main";
+      btn.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left express-service-chip btn-gold";
     }
 
     function closeExpressBookingModal() {
@@ -1623,7 +1750,7 @@ END:VCALENDAR`;
       const phone = (document.getElementById('express-client-phone')?.value || '').trim();
       const targetDate = state.adminVisualDate || getTodayKey();
       const time = state.expressCurrentSlotTime;
-      const service = state.expressSelectedService || "Corte de pelo";
+      const service = state.expressSelectedService || "Corte clásico";
 
       if (!name) {
         alert("Introduce el nombre del cliente");
@@ -1634,7 +1761,7 @@ END:VCALENDAR`;
       appts.push({
         id: Date.now(),
         name,
-        phone: phone || "Llamada / Local",
+        phone: phone || "Llamada / Presencial",
         service,
         price: priceOfService(service),
         date: targetDate,
@@ -1680,7 +1807,6 @@ END:VCALENDAR`;
       renderTimeSlotsForSelectedDate();
     }
 
-    // LISTA DE CITAS ADMIN
     function renderAdminAppointments() {
       const container = document.getElementById('admin-appointments-list');
       const sumBox = document.getElementById('admin-day-summary');
@@ -1692,27 +1818,27 @@ END:VCALENDAR`;
 
       if (sumBox) {
         sumBox.innerHTML = `
-          <div><div class="text-xl font-extrabold num-formal" style="color: var(--text);">${dayAppts.length}</div><div class="text-xs font-bold" style="color: var(--text-muted);">Citas</div></div>
-          <div><div class="text-xl font-extrabold num-formal text-amber-400">~${caja}€</div><div class="text-xs font-bold" style="color: var(--text-muted);">Caja</div></div>
-          <div><div class="text-xl font-extrabold num-formal text-emerald-400">${15 - dayAppts.length}</div><div class="text-xs font-bold" style="color: var(--text-muted);">Libres</div></div>
+          <div><div class="text-xl font-bold num-formal" style="color: var(--text);">${dayAppts.length}</div><div class="text-xs font-bold uppercase" style="color: var(--text-muted);">Citas</div></div>
+          <div><div class="text-xl font-bold num-formal text-amber-300">${caja} €</div><div class="text-xs font-bold uppercase" style="color: var(--text-muted);">Caja</div></div>
+          <div><div class="text-xl font-bold num-formal text-emerald-400">${Math.max(0, 15 - dayAppts.length)}</div><div class="text-xs font-bold uppercase" style="color: var(--text-muted);">Libres</div></div>
         `;
       }
 
       if (dayAppts.length === 0) {
-        container.innerHTML = `<div class="p-6 text-center text-xs font-bold border rounded-2xl" style="background-color: var(--card); border-color: var(--card-border); color: var(--text-muted);">Sin citas para este día.</div>`;
+        container.innerHTML = `<div class="p-6 text-center text-xs font-bold border rounded-2xl" style="background-color: var(--surface); border-color: var(--border); color: var(--text-muted);">Sin citas para este día.</div>`;
         return;
       }
 
       container.innerHTML = dayAppts.map(appt => `
-        <div class="p-4 border rounded-2xl flex items-center justify-between gap-3" style="background-color: var(--card); border-color: var(--card-border);">
+        <div class="p-4 border rounded-2xl flex items-center justify-between gap-3" style="background-color: var(--surface); border-color: var(--border);">
           <div>
             <div class="flex items-center gap-2">
-              <span class="text-base font-extrabold num-formal" style="color: var(--text);">${appt.time}</span>
-              <span class="text-xs font-bold px-2 py-0.5 rounded border" style="border-color: var(--card-border); color: var(--text);">${appt.service} · ${appt.price || 12}€</span>
+              <span class="text-base font-bold num-formal" style="color: var(--text);">${appt.time}</span>
+              <span class="text-xs font-bold px-2 py-0.5 rounded border" style="border-color: var(--border); color: var(--text);">${appt.service} · ${appt.price || 12}€</span>
             </div>
             <p class="text-sm font-bold mt-1" style="color: var(--text);">${appt.name} (${appt.phone})</p>
           </div>
-          <button onclick="freeAdminSlot(${appt.id}, '${target}', '${appt.time}')" class="px-3 py-1.5 rounded-xl text-xs font-bold text-rose-400 border border-rose-500/30">Quitar</button>
+          <button onclick="freeAdminSlot(${appt.id}, '${target}', '${appt.time}')" class="px-3 py-1.5 rounded-xl text-xs font-bold text-rose-400 border border-rose-500/30 spring-btn">Quitar</button>
         </div>
       `).join('');
     }
@@ -1722,20 +1848,19 @@ END:VCALENDAR`;
       const dayAppts = STORE.getAppointments().filter(a => a.date === target && a.status !== 'cancelled');
       const lines = dayAppts.map(a => `${a.time} - ${a.name} (${a.service}) ${a.phone}`);
       const txt = `Citas ${target}:\n` + (lines.join('\n') || '(sin citas)');
-      navigator.clipboard.writeText(txt).then(() => alert('Parte copiado')).catch(() => prompt('Copia:', txt));
+      navigator.clipboard.writeText(txt).then(() => alert('Parte copiado al portapapeles')).catch(() => prompt('Copia:', txt));
     }
 
-    // LISTA DE ESPERA
     function renderAdminWaitlist() {
       const container = document.getElementById('admin-waitlist-container');
       if (!container) return;
       const list = STORE.getWaitlist();
       if (list.length === 0) {
-        container.innerHTML = `<div class="p-6 text-center text-xs font-bold border rounded-2xl" style="background-color: var(--card); border-color: var(--card-border); color: var(--text-muted);">No hay nadie en espera.</div>`;
+        container.innerHTML = `<div class="p-6 text-center text-xs font-bold border rounded-2xl" style="background-color: var(--surface); border-color: var(--border); color: var(--text-muted);">No hay clientes en espera.</div>`;
         return;
       }
       container.innerHTML = list.map(item => `
-        <div class="p-4 border rounded-2xl flex items-center justify-between gap-2" style="background-color: var(--card); border-color: var(--card-border);">
+        <div class="p-4 border rounded-2xl flex items-center justify-between gap-2" style="background-color: var(--surface); border-color: var(--border);">
           <div>
             <p class="font-bold text-sm" style="color: var(--text);">${item.name} (${item.phone})</p>
             <p class="text-xs text-amber-400 font-bold">${item.pref || 'Cualquier hora'}</p>
@@ -1769,7 +1894,6 @@ END:VCALENDAR`;
       renderAdminWaitlist();
     }
 
-    // BLOQUEOS
     function renderAdminBlockSlots() {
       const targetDate = document.getElementById('admin-block-date')?.value || getTodayKey();
       const chk = document.getElementById('admin-toggle-closed-day');
@@ -1784,7 +1908,7 @@ END:VCALENDAR`;
       const blocked = STORE.getBlockedSlots()[targetDate] || [];
 
       container.innerHTML = allSlots.map(time => `
-        <button type="button" onclick="toggleSlotBlock('${targetDate}', '${time}')" class="h-11 text-xs rounded-xl border font-bold num-formal ${blocked.includes(time) ? 'bg-rose-500/20 text-rose-400 border-rose-500/40' : 'bg-stone-900 border-stone-800 text-stone-200'}">
+        <button type="button" onclick="toggleSlotBlock('${targetDate}', '${time}')" class="h-10 text-xs rounded-xl border font-bold num-formal spring-btn ${blocked.includes(time) ? 'bg-rose-500/20 text-rose-400 border-rose-500/40' : 'bg-stone-900 border-stone-800 text-stone-200'}">
           ${time} ${blocked.includes(time) ? '✕' : ''}
         </button>
       `).join('');
@@ -1806,18 +1930,17 @@ END:VCALENDAR`;
       renderTimeSlotsForSelectedDate();
     }
 
-    // GESTIÓN DE SERVICIOS
     function renderAdminServices() {
       const container = document.getElementById('admin-services-list');
       if (!container) return;
       container.innerHTML = STORE.getServices().map(s => `
-        <div class="p-4 border rounded-2xl flex items-center justify-between gap-3" style="background-color: var(--card); border-color: var(--card-border);">
+        <div class="p-4 border rounded-2xl flex items-center justify-between gap-3" style="background-color: var(--surface); border-color: var(--border);">
           <div>
-            <p class="text-sm font-bold" style="color: var(--text);">${s.name}</p>
-            <p class="text-xs" style="color: var(--text-muted);">${s.duration}</p>
+            <p class="text-sm font-bold font-serif" style="color: var(--text);">${s.name}</p>
+            <p class="text-xs num-formal" style="color: var(--text-muted);">${s.duration}</p>
           </div>
           <div class="flex items-center gap-2">
-            <input type="number" value="${s.price}" class="w-14 h-9 border rounded-lg text-center font-bold text-sm num-formal" style="background-color: var(--bg); border-color: var(--card-border); color: var(--text);" onchange="updateServicePrice(${s.id}, this.value)" />
+            <input type="number" value="${s.price}" class="w-14 h-9 border rounded-lg text-center font-bold text-sm num-formal" style="background-color: var(--card); border-color: var(--border); color: var(--text);" onchange="updateServicePrice(${s.id}, this.value)" />
             <span class="font-bold text-sm" style="color: var(--text);">€</span>
           </div>
         </div>
@@ -1853,10 +1976,14 @@ END:VCALENDAR`;
       const detected = autoDetectLanguage();
       changeLanguage(detected);
 
+      // Si se abre explícitamente con ?admin, abre el panel de control
       const urlParams = new URLSearchParams(window.location.search);
       if (urlParams.has('admin') || urlParams.has('panel')) {
         STORE.setOwnerSession(true);
         enterAdminView();
+      } else {
+        // En navegación normal de cliente, nunca mostrar la barra naranja de dueño
+        STORE.setOwnerSession(false);
       }
     });
   </script>
