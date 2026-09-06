@@ -324,7 +324,9 @@
             style="border-color: var(--border); background-color: var(--card); color: var(--text);"
             title="Cambiar tema"
           >
-            <span id="theme-icon">☀️</span>
+            <span id="theme-icon" class="flex items-center justify-center">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+            </span>
           </button>
 
         </div>
@@ -455,7 +457,7 @@
             disabled
             class="w-full h-14 rounded-xl text-sm sm:text-base uppercase tracking-wider font-extrabold flex items-center justify-center gap-2.5 btn-gold spring-btn disabled:opacity-30 disabled:cursor-not-allowed shadow-lg"
           >
-            <span>📱</span>
+            <svg class="w-4 h-4 shrink-0 fill-current" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <span id="txt-cta-button">Reservar Cita por WhatsApp</span>
           </button>
 
@@ -491,9 +493,15 @@
       <!-- ==================== RESEÑAS VERIFICADAS ==================== -->
       <section class="space-y-3">
         <div class="flex items-center justify-between">
-          <div class="flex items-center gap-1.5 text-amber-400">
+          <div class="flex items-center gap-2">
             <span class="text-sm font-extrabold" style="color: var(--text);">5,0</span>
-            <span>★★★★★</span>
+            <div class="flex items-center gap-0.5 text-amber-400">
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
             <span class="text-xs font-semibold" style="color: var(--text-muted);">(62 reseñas en Google)</span>
           </div>
         </div>
@@ -509,7 +517,7 @@
             <p class="text-xs sm:text-[13px] leading-relaxed italic" style="color: var(--text-body);" id="txt-review-2">
               “Reserva facilísima por WhatsApp en 30 segundos y corte impecable en Calle Castilla.”
             </p>
-            <p class="text-xs font-bold" style="color: var(--accent-warm);">— Cliente verificado (5.0 ★)</p>
+            <p class="text-xs font-bold" style="color: var(--accent-warm);">— Cliente verificado</p>
           </div>
         </div>
       </section>
@@ -518,8 +526,9 @@
       <footer class="p-5 rounded-3xl border space-y-4 text-xs font-medium" style="background-color: var(--surface); border-color: var(--border);">
         <div class="flex items-start justify-between gap-4 flex-wrap">
           <div class="space-y-1">
-            <p class="font-serif text-base font-bold" style="color: var(--text);" id="txt-footer-address">
-              📍 C. Castilla, 58B, 41010 Sevilla (Triana)
+            <p class="font-serif text-base font-bold flex items-center gap-1.5" style="color: var(--text);">
+              <svg class="w-4 h-4 shrink-0 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span id="txt-footer-address">C. Castilla, 58B, 41010 Sevilla (Triana)</span>
             </p>
             <p class="num-formal" style="color: var(--text-muted);" id="txt-footer-hours">
               Lunes a Viernes 10:00–14:00 y 17:00–22:00 · Sábados 10:00–17:00
@@ -533,17 +542,19 @@
             href="https://maps.google.com/?q=LC+BARBER+TRIANA+C+Castilla+58B+41010+Sevilla"
             target="_blank"
             rel="noopener noreferrer"
-            class="px-4 py-2.5 rounded-xl border font-bold transition-all spring-btn"
+            class="flex items-center gap-1.5 px-4 py-2.5 rounded-xl border font-bold transition-all spring-btn"
             style="border-color: var(--border); color: var(--text); background-color: var(--card);"
           >
-            Cómo llegar en Maps ↗
+            <span>Cómo llegar en Maps</span>
+            <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
           </a>
         </div>
 
         <div class="border-t pt-3 flex items-center justify-between" style="border-color: var(--border); color: var(--text-muted);">
           <span id="txt-footer-brand">LC BARBER TRIANA · Citas Online</span>
-          <button onclick="openPinModal()" class="underline font-bold hover:opacity-100 transition-opacity" style="color: var(--text-muted);">
-            Acceso Barbero 🔒
+          <button onclick="openPinModal()" class="flex items-center gap-1.5 underline font-bold hover:opacity-100 transition-opacity" style="color: var(--text-muted);">
+            <span>Acceso Barbero</span>
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </button>
         </div>
       </footer>
@@ -585,20 +596,25 @@
 
     <!-- Pestañas de Gestión -->
     <div class="flex rounded-2xl p-1.5 border text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar gap-1.5" style="background-color: var(--surface); border-color: var(--border);">
-      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-gold">
-        📅 Agenda Visual
+      <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-gold">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        <span>Agenda Visual</span>
       </button>
-      <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
-        📋 Lista de Citas & Caja
+      <button id="tab-btn-appointments" onclick="switchAdminTab('appointments')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+        <span>Lista de Citas & Caja</span>
       </button>
-      <button id="tab-btn-waitlist" onclick="switchAdminTab('waitlist')" class="px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
-        ⏳ Lista de Espera
+      <button id="tab-btn-waitlist" onclick="switchAdminTab('waitlist')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 22h14M5 2h14M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></svg>
+        <span>Lista de Espera</span>
       </button>
-      <button id="tab-btn-blocks" onclick="switchAdminTab('blocks')" class="px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
-        🔒 Bloquear Horas
+      <button id="tab-btn-blocks" onclick="switchAdminTab('blocks')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <span>Bloquear Horas</span>
       </button>
-      <button id="tab-btn-services" onclick="switchAdminTab('services')" class="px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
-        🏷️ Precios
+      <button id="tab-btn-services" onclick="switchAdminTab('services')" class="flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap" style="color: var(--text-muted);">
+        <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        <span>Precios</span>
       </button>
     </div>
 
@@ -827,11 +843,11 @@
 
       if (theme === 'light') {
         htmlEl.classList.add('light-mode');
-        if (themeIcon) themeIcon.textContent = '🌙';
+        if (themeIcon) themeIcon.innerHTML = `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>`;
         if (metaTheme) metaTheme.setAttribute('content', '#f8fafc');
       } else {
         htmlEl.classList.remove('light-mode');
-        if (themeIcon) themeIcon.textContent = '☀️';
+        if (themeIcon) themeIcon.innerHTML = `<svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>`;
         if (metaTheme) metaTheme.setAttribute('content', '#0c0e12');
       }
       localStorage.setItem('barber_theme', theme);
@@ -876,7 +892,7 @@
         galleryTitle: "El Taller en Triana",
         review1: "“El mejor corte y degradado de Triana. Trato de 10, puntuales y ambiente inmejorable.”",
         review2: "“Reserva facilísima por WhatsApp en 30 segundos y corte impecable en Calle Castilla.”",
-        footerAddress: "📍 C. Castilla, 58B, 41010 Sevilla (Triana)",
+        footerAddress: "C. Castilla, 58B, 41010 Sevilla (Triana)",
         footerHours: "Lunes a Sábado 10:00–14:00 y 17:00–22:00",
         chooseDatePrompt: "Selecciona día y hora",
         modalSuccessTitle: "Cita Solicitada",
@@ -908,7 +924,7 @@
         galleryTitle: "Salonul din Triana",
         review1: "“Cel mai bun tuns și fade din Triana. Punctualitate și servicii de nota 10.”",
         review2: "“Rezervare super simplă pe WhatsApp în 30 de secunde și servicii impecabile.”",
-        footerAddress: "📍 C. Castilla, 58B, 41010 Sevilla (Triana)",
+        footerAddress: "C. Castilla, 58B, 41010 Sevilla (Triana)",
         footerHours: "Luni până Vineri 10:00–14:00 și 17:00–22:00 · Sâmbătă 10:00–17:00",
         chooseDatePrompt: "Selectează ziua și ora",
         modalSuccessTitle: "Programare Trimisă",
@@ -940,7 +956,7 @@
         galleryTitle: "Inside the Barbershop",
         review1: "“Best traditional fade and hot towel shave. Right on time without waiting.”",
         review2: "“Super easy booking via WhatsApp in 30 seconds. Great attention to detail.”",
-        footerAddress: "📍 Main Street 12 · City Center",
+        footerAddress: "Main Street 12 · City Center",
         footerHours: "Mon to Fri 10:00–14:00 & 16:30–20:00 · Sat 10:00–14:30",
         chooseDatePrompt: "Select date and time",
         modalSuccessTitle: "Booking Requested",
@@ -955,7 +971,7 @@
       },
       fr: {
         heroTitle: "Coupe classique et rasage traditionnel au rasoir.",
-        heroDesc: "Réservez en 30 secondes et entrez directement sans attente. Paiement sur place après la coupe.",
+        heroDesc: "Réservez en 30 secondes et entrez directamente sans attente. Paiement sur place après la coupe.",
         step1Title: "1. Choisissez la prestation",
         step1Sub: "Tarifs clairs sans surprise",
         step2Title: "2. Date et heure",
@@ -972,7 +988,7 @@
         galleryTitle: "Le Salon & Expérience",
         review1: "“Superbe coupe et rasage traditionnel. Ponctuel et chaleureux.”",
         review2: "“Accueil parfait et confirmation WhatsApp ultra rapide.”",
-        footerAddress: "📍 Rue Principale 12 · Centre-Ville",
+        footerAddress: "Rue Principale 12 · Centre-Ville",
         footerHours: "Horaires : Lun–Ven 10:00–20:00 · Sam 10:00–14:30",
         chooseDatePrompt: "Choisissez la date et l'heure",
         modalSuccessTitle: "Demande Envoyée",
@@ -1004,7 +1020,7 @@
         galleryTitle: "La Barberia & Esperienza",
         review1: "“Miglior taglio e rasatura tradizionale. Puntualità e grande professionalità.”",
         review2: "“Ottimo servizio e rapida conferma su WhatsApp in 30 secondi.”",
-        footerAddress: "📍 Via Principale 12 · Centro",
+        footerAddress: "Via Principale 12 · Centro",
         footerHours: "Orari: Lun–Ven 10:00–20:00 · Sab 10:00–14:30",
         chooseDatePrompt: "Scegli giorno e ora",
         modalSuccessTitle: "Prenotazione Inviata",
@@ -1036,7 +1052,7 @@
         galleryTitle: "Der Salon & Handwerk",
         review1: "“Erstklassiger Haarschnitt und Heißtuch-Rasur. Pünktlich und professionell.”",
         review2: "“Sehr freundlich, kinderleichte Buchung über WhatsApp.”",
-        footerAddress: "📍 Hauptstraße 12 · Zentrum",
+        footerAddress: "Hauptstraße 12 · Zentrum",
         footerHours: "Öffnungszeiten: Mo–Fr 10:00–20:00 Uhr · Sa 10:00–14:30 Uhr",
         chooseDatePrompt: "Datum und Uhrzeit wählen",
         modalSuccessTitle: "Buchung Gesendet",
@@ -1752,10 +1768,11 @@ END:VCALENDAR`;
         const sec = document.getElementById(`tab-${t}`);
         if (!btn || !sec) return;
         if (t === tabName) {
-          btn.className = "px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-gold";
+          btn.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold whitespace-nowrap btn-gold";
+          btn.style.color = "";
           sec.classList.remove('hidden');
         } else {
-          btn.className = "px-4 py-2.5 rounded-xl whitespace-nowrap";
+          btn.className = "flex items-center gap-2 px-4 py-2.5 rounded-xl whitespace-nowrap";
           btn.style.color = "var(--text-muted)";
           sec.classList.add('hidden');
         }
@@ -2170,7 +2187,7 @@ END:VCALENDAR`;
       setText('brand-subtitle', APP_CONFIG.brandSubtitle);
 
       // Footer
-      setText('txt-footer-address', `📍 ${shop.address || APP_CONFIG.address}`);
+      setText('txt-footer-address', `${shop.address || APP_CONFIG.address}`);
       setText('txt-footer-hours', APP_CONFIG.schedule);
       setText('txt-footer-brand', `${bName} · Citas Online`);
 
