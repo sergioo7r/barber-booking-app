@@ -479,7 +479,7 @@
               📍 C. Castilla, 58B, 41010 Sevilla (Triana)
             </p>
             <p class="num-formal" style="color: var(--text-muted);" id="txt-footer-hours">
-              Lunes a Sábado 10:00–14:00 y 17:00–22:00
+              Lunes a Viernes 10:00–14:00 y 17:00–22:00 · Sábados 10:00–17:00
             </p>
             <p class="pt-0.5">
               Teléfono / WhatsApp: <a id="footer-phone-link" href="tel:+34664616475" class="underline font-bold text-amber-400 num-formal">664 61 64 75</a>
@@ -766,7 +766,7 @@
       phoneDisplay: "664 61 64 75",
       whatsappNumber: "34664616475", // WhatsApp directo de LC Barber Triana
       mapsUrl: "https://maps.google.com/?q=LC+BARBER+TRIANA+C+Castilla+58B+41010+Sevilla",
-      schedule: "Lunes a Sábado 10:00–14:00 y 17:00–22:00",
+      schedule: "Lunes a Viernes 10:00–14:00 y 17:00–22:00 · Sábados 10:00–17:00",
       instagram: "@lcbarbertriana",
     };
 
@@ -1349,10 +1349,24 @@
         return;
       }
 
-      const allSlots = [
-        "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
-        "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
-      ];
+      const [y, m, dNum] = state.selectedDate.split('-').map(Number);
+      const selectedDayObj = new Date(y, m - 1, dNum);
+      const isSaturday = selectedDayObj.getDay() === 6;
+
+      const allSlots = isSaturday
+        ? [
+            "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
+            "14:00", "14:30", "15:00", "15:30", "16:00", "16:30"
+          ]
+        : [
+            "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30",
+            "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30"
+          ];
+
+      const afternoonLbl = document.getElementById('txt-lbl-afternoon');
+      if (afternoonLbl) {
+        afternoonLbl.textContent = isSaturday ? "Tarde (14:00 — 17:00)" : (I18N[state.lang] || I18N.es).lblAfternoon;
+      }
 
       const blockedMap = STORE.getBlockedSlots();
       const blockedForDate = blockedMap[state.selectedDate] || [];
@@ -1364,8 +1378,8 @@
       const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
       const slots = allSlots.map(time => {
-        const [h, m] = time.split(':').map(Number);
-        const slotMin = h * 60 + m;
+        const [h, min] = time.split(':').map(Number);
+        const slotMin = h * 60 + min;
         const isPast = isToday && slotMin <= currentMinutes;
         const isBlocked = blockedForDate.includes(time) || bookedHours.includes(time);
 
@@ -1375,8 +1389,8 @@
         };
       });
 
-      const morningSlots = slots.filter(s => parseInt(s.time.split(':')[0], 10) < 15);
-      const afternoonSlots = slots.filter(s => parseInt(s.time.split(':')[0], 10) >= 15);
+      const morningSlots = slots.filter(s => parseInt(s.time.split(':')[0], 10) < 14);
+      const afternoonSlots = slots.filter(s => parseInt(s.time.split(':')[0], 10) >= 14);
 
       const renderButton = (slot) => {
         const isSelected = state.selectedTime === slot.time;
