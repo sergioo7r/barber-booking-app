@@ -706,8 +706,8 @@
       </div>
 
       <div>
-        <label class="block text-xs font-bold mb-1" style="color: var(--text);">Nombre del cliente *</label>
-        <input type="text" id="express-client-name" placeholder="Ej. Antonio" class="w-full h-11 border rounded-xl px-3 text-sm font-semibold focus:outline-none" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" onkeydown="if(event.key==='Enter') saveExpressBooking()" />
+        <label class="block text-xs font-bold mb-1" style="color: var(--text-muted);">Nombre del cliente (opcional):</label>
+        <input type="text" id="express-client-name" placeholder="Cliente sin nombre / Directo" class="w-full h-11 border rounded-xl px-3 text-sm font-semibold focus:outline-none" style="background-color: var(--input-bg); border-color: var(--border); color: var(--text);" onkeydown="if(event.key==='Enter') saveExpressBooking()" />
       </div>
 
       <div>
@@ -1838,22 +1838,18 @@ END:VCALENDAR`;
     }
 
     function saveExpressBooking() {
-      const name = (document.getElementById('express-client-name')?.value || '').trim();
+      const rawName = (document.getElementById('express-client-name')?.value || '').trim();
       const phone = (document.getElementById('express-client-phone')?.value || '').trim();
       const targetDate = state.adminVisualDate || getTodayKey();
       const time = state.expressCurrentSlotTime;
-      const service = state.expressSelectedService || "Corte clásico";
-
-      if (!name) {
-        alert("Introduce el nombre del cliente");
-        return;
-      }
+      const service = state.expressSelectedService || "Corte";
+      const name = rawName || "Cliente sin nombre";
 
       const appts = STORE.getAppointments();
       appts.push({
         id: Date.now(),
         name,
-        phone: phone || "Llamada / Presencial",
+        phone: phone || "Presencial / Directo",
         service,
         price: priceOfService(service),
         date: targetDate,
