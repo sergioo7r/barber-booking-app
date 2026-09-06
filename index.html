@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
-  <meta name="theme-color" content="#10100f" id="meta-theme-color" />
+  <meta name="theme-color" content="#11100f" id="meta-theme-color" />
   <title>Barbería El Barrio — Triana, Sevilla · Corte Tradicional a Navaja</title>
 
   <!-- Favicon vectorial SVG (Tijeras y navaja artesanas) -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%2310100f'/%3E%3Cpath d='M9 8a3 3 0 1 0 2.2 5l4.8 5 6-7a1 1 0 0 1 1.5 1.3l-5.3 6.2 5.3 6.2a1 1 0 1 1-1.5 1.3l-6-7-4.8 5A3 3 0 1 0 9 24a3 3 0 0 0 2.8-2l4.2-4.4-4.2-4.4A3 3 0 0 0 9 8zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0 12a1 1 0 1 1 0 2 1 1 0 0 1 0-2z' fill='%23c5a072'/%3E%3C/svg%3E" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Crect width='32' height='32' rx='8' fill='%2311100f'/%3E%3Cpath d='M9 8a3 3 0 1 0 2.2 5l4.8 5 6-7a1 1 0 0 1 1.5 1.3l-5.3 6.2 5.3 6.2a1 1 0 1 1-1.5 1.3l-6-7-4.8 5A3 3 0 1 0 9 24a3 3 0 0 0 2.8-2l4.2-4.4-4.2-4.4A3 3 0 0 0 9 8zm0 2a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm0 12a1 1 0 1 1 0 2 1 1 0 0 1 0-2z' fill='%23d4af37'/%3E%3C/svg%3E" />
 
-  <!-- Tipografías: Plus Jakarta Sans & Playfair Display para una estética formal de alta gama -->
+  <!-- Tipografías: Plus Jakarta Sans & Playfair Display -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -24,6 +24,13 @@
           fontFamily: {
             sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', 'sans-serif'],
             serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+          colors: {
+            brand: {
+              gold: '#c5a072',
+              goldLight: '#e4c99b',
+              goldDark: '#9c7546',
+            }
           }
         }
       }
@@ -32,27 +39,25 @@
 
   <style>
     :root {
-      --bg-main: #0f0f0e;
-      --bg-surface: #171615;
-      --bg-card: #1d1c1a;
-      --bg-card-hover: #242220;
-      --bg-input: #121211;
-      --border-color: #272522;
-      --border-subtle: rgba(255, 255, 255, 0.07);
-      --text-title: #fcfbf9;
-      --text-body: #e4decb;
-      --text-muted: #8e887d;
+      --bg-main: #0c0b0a;
+      --bg-surface: #141312;
+      --bg-card: #1a1917;
+      --bg-card-hover: #22201d;
+      --bg-input: #100f0e;
+      --border-color: #262421;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --text-title: #fdfbf7;
+      --text-body: #e5dfd3;
+      --text-muted: #918b7f;
       --accent-bronze: #c5a072;
       --accent-emerald: #10b981;
-      --btn-primary-bg: #ece6dc;
+      --btn-primary-bg: #f5efe6;
       --btn-primary-hover: #ffffff;
-      --btn-primary-text: #0f0f0e;
-      --glass-bg: rgba(15, 15, 14, 0.94);
-      --service-hover: #22201d;
-      --slot-bg: #171615;
-      --slot-text: #e4decb;
-      --day-active-bg: #ece6dc;
-      --day-active-text: #0f0f0e;
+      --btn-primary-text: #0c0b0a;
+      --glass-bg: rgba(12, 11, 10, 0.92);
+      --service-hover: #1f1d1a;
+      --day-active-bg: #f5efe6;
+      --day-active-text: #0c0b0a;
     }
 
     html.light-mode {
@@ -73,8 +78,6 @@
       --btn-primary-text: #f8f6f0;
       --glass-bg: rgba(248, 246, 240, 0.94);
       --service-hover: #ece5d6;
-      --slot-bg: #ffffff;
-      --slot-text: #141312;
       --day-active-bg: #141312;
       --day-active-text: #ffffff;
     }
@@ -119,7 +122,6 @@
       font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
       font-variant-numeric: tabular-nums lining-nums;
       font-feature-settings: 'tnum' 1, 'lnum' 1;
-      letter-spacing: -0.01em;
     }
 
     .stamp-badge {
@@ -156,50 +158,71 @@
     .open-dot {
       width: 7px; height: 7px; border-radius: 9999px; display: inline-block;
     }
-    .open-dot.on { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.18); }
-    .open-dot.off { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.15); }
+    .open-dot.on { background: #10b981; box-shadow: 0 0 0 3px rgba(16,185,129,.22); }
+    .open-dot.off { background: #ef4444; box-shadow: 0 0 0 3px rgba(239,68,68,.18); }
 
     /* Micro-animaciones fluidas */
     @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in-up {
-      animation: fadeInUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeInUp 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     
     .spring-btn:active {
       transform: scale(0.975);
       transition: transform 0.08s ease;
     }
+
+    /* Resaltado especial para CTA */
+    .cta-highlight {
+      background: linear-gradient(135deg, #f5efe6 0%, #e6dcce 100%);
+      color: #0c0b0a;
+      box-shadow: 0 4px 20px rgba(197, 160, 114, 0.18), 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .cta-highlight:hover {
+      background: #ffffff;
+      box-shadow: 0 6px 24px rgba(197, 160, 114, 0.28), 0 3px 8px rgba(0,0,0,0.4);
+    }
+    html.light-mode .cta-highlight {
+      background: #141312;
+      color: #ffffff;
+      box-shadow: 0 4px 18px rgba(20, 19, 18, 0.25);
+    }
+    html.light-mode .cta-highlight:hover {
+      background: #000000;
+    }
   </style>
 </head>
 
-<body class="min-h-full flex flex-col justify-between font-sans antialiased selection:bg-[#c5a072]/25 selection:text-white" onclick="handleGlobalClick(event)">
+<body class="min-h-full flex flex-col justify-between font-sans antialiased selection:bg-[#c5a072]/30 selection:text-white" onclick="handleGlobalClick(event)">
 
   <!-- ===================================================================================
-       BARRA DE MODO DUEÑO (Solo visible cuando el dueño está autenticado)
+       BARRA DE MODO DUEÑO (Sticky superior cuando el barbero está autenticado)
        =================================================================================== -->
-  <div id="owner-top-bar" class="hidden sticky top-0 z-50 w-full bg-stone-950 border-b border-stone-800 text-white px-4 py-2.5 text-xs shadow-xl">
+  <div id="owner-top-bar" class="hidden sticky top-0 z-50 w-full bg-stone-950/95 backdrop-blur-md border-b border-amber-900/40 text-white px-4 py-2 text-xs shadow-2xl">
     <div class="max-w-md mx-auto flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <svg class="w-4 h-4 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M12 2l3 7 7-3-4 12H6L2 6l7 3 3-7z"/>
-        </svg>
-        <span class="font-bold tracking-wider text-stone-200 uppercase text-[11.5px] font-sans">MODO DUEÑO</span>
+        <div class="w-5 h-5 rounded-md bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+          <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2l3 7 7-3-4 12H6L2 6l7 3 3-7z"/>
+          </svg>
+        </div>
+        <span class="font-bold tracking-wider text-amber-200 uppercase text-[11px] font-sans">Panel del Barbero</span>
       </div>
       <div class="flex items-center gap-2">
         <button
           id="btn-toggle-owner-view"
           onclick="toggleOwnerClientView()"
-          class="px-3 py-1 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 border border-stone-700 text-[11.5px] font-semibold spring-btn flex items-center gap-1.5"
+          class="px-2.5 py-1 rounded-lg bg-stone-800/90 hover:bg-stone-700 text-stone-200 border border-stone-700 text-[11px] font-semibold spring-btn flex items-center gap-1.5 transition-colors"
         >
-          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          <svg class="w-3.5 h-3.5 text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
           <span>Ver como Cliente</span>
         </button>
         <button
           onclick="logoutOwnerSession()"
-          class="text-stone-400 hover:text-stone-200 text-sm px-2 py-0.5"
+          class="text-stone-400 hover:text-stone-200 text-sm px-2 py-0.5 rounded hover:bg-stone-800 transition-colors"
           title="Cerrar sesión de dueño"
         >
           ✕
@@ -216,27 +239,27 @@
 
     <!-- CABECERA EDITORIAL -->
     <nav class="sticky top-0 z-40 w-full editorial-blur border-b theme-border transition-colors">
-      <div class="max-w-md mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="max-w-md mx-auto px-4 py-3.5 flex items-center justify-between">
         
         <!-- Logotipo tipográfico minimalista -->
         <a href="#" class="flex flex-col group">
-          <span class="font-serif text-xl font-medium tracking-wide uppercase transition-colors leading-none" style="color: var(--text-title);" id="brand-name">
+          <span class="font-serif text-[22px] font-medium tracking-wide uppercase transition-colors leading-none" style="color: var(--text-title);" id="brand-name">
             El Barrio
           </span>
-          <span class="text-[9.5px] uppercase tracking-[0.22em] mt-1.5 font-bold font-sans" style="color: var(--accent-bronze);">
+          <span class="text-[9.5px] uppercase tracking-[0.24em] mt-1.5 font-bold font-sans" style="color: var(--accent-bronze);">
             Corte Tradicional · Triana
           </span>
         </a>
 
         <!-- Controles: Selector de Tema + Selector de Idioma -->
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2">
           
           <!-- Botón Toggle Modo Claro / Oscuro -->
           <button
             id="theme-toggle-btn"
             type="button"
             onclick="toggleTheme()"
-            class="w-9 h-9 rounded-lg border theme-border hover:opacity-80 flex items-center justify-center transition-all spring-btn"
+            class="w-9 h-9 rounded-xl border theme-border hover:opacity-80 flex items-center justify-center transition-all spring-btn"
             style="color: var(--text-body); background-color: var(--bg-surface);"
             aria-label="Cambiar tema claro/oscuro"
             title="Modo Claro / Oscuro"
@@ -259,13 +282,10 @@
               id="lang-dropdown-btn"
               type="button"
               onclick="toggleLanguageDropdown(event)"
-              class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border theme-border text-xs transition-all font-sans font-bold spring-btn"
+              class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border theme-border text-xs transition-all font-sans font-bold spring-btn"
               style="color: var(--text-body); background-color: var(--bg-surface);"
               aria-label="Seleccionar idioma"
             >
-              <svg class="w-3.5 h-3.5" style="color: var(--accent-bronze);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              </svg>
               <span id="active-lang-text" class="uppercase font-bold tracking-wider text-[11.5px] font-sans">ES</span>
               <svg class="w-3 h-3 transition-transform duration-200" style="color: var(--text-muted);" id="lang-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/>
@@ -308,10 +328,10 @@
     <!-- CONTENEDOR CENTRAL -->
     <main class="max-w-md mx-auto px-4 pt-6 sm:px-5">
 
-      <!-- ==================== 1. HERO SECTION ==================== -->
+      <!-- ==================== 1. HERO SECTION (CTA DESTACADO) ==================== -->
       <section class="w-full pb-8 border-b theme-border animate-fade-in-up">
         <!-- Estado en vivo + sello artesano -->
-        <div class="flex items-center justify-between text-xs pb-4 font-sans font-medium">
+        <div class="flex items-center justify-between text-xs pb-3.5 font-sans font-medium">
           <span class="flex items-center gap-2" style="color: var(--text-body);">
             <span id="open-dot" class="open-dot on"></span>
             <span id="hero-badge-status" class="num-formal font-medium" style="color: var(--text-muted);">Abierto hoy · 10:00 — 20:00</span>
@@ -320,13 +340,13 @@
         </div>
 
         <div class="space-y-3 pt-1">
-          <h1 class="font-serif text-[34px] sm:text-[38px] font-medium tracking-tight leading-[1.08]" style="color: var(--text-title);" id="hero-title">
+          <h1 class="font-serif text-[35px] sm:text-[40px] font-medium tracking-tight leading-[1.06]" style="color: var(--text-title);" id="hero-title">
             Corte a navaja en Triana. Sin esperas.
           </h1>
-          <p class="text-sm leading-relaxed font-light" style="color: var(--text-body);" id="hero-subtitle">
+          <p class="text-[14px] leading-relaxed font-light" style="color: var(--text-body);" id="hero-subtitle">
             Soy el del sillón nº2, te atiendo yo mismo. Reserva abajo en 30 segundos y entra directo — si llegas 10 min tarde, avísame por WhatsApp.
           </p>
-          <div class="flex items-center gap-2 text-xs font-medium pt-1" style="color: var(--text-muted);" id="hero-proof">
+          <div class="flex items-center gap-2 text-xs font-medium pt-0.5" style="color: var(--text-muted);" id="hero-proof">
             <div class="flex text-amber-400">
               <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
               <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
@@ -338,22 +358,22 @@
           </div>
         </div>
 
-        <div class="flex items-center gap-2.5 pt-6">
+        <!-- BOTÓN PRINCIPAL DE COGER CITA (MUY DESTACADO) -->
+        <div class="flex items-center gap-2.5 pt-5">
           <a
             href="#booking-module"
-            class="flex-1 inline-flex items-center justify-center gap-2 h-12 px-5 rounded-xl font-bold text-xs uppercase tracking-wider transition-all shadow-md font-sans spring-btn"
-            style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
+            class="flex-1 inline-flex items-center justify-center gap-2.5 h-13 py-3.5 px-6 rounded-2xl font-bold text-sm tracking-wide transition-all cta-highlight font-sans spring-btn"
             id="hero-cta"
           >
-            <span>Pedir cita</span>
-            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <span>Reservar Cita Ahora</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
             </svg>
           </a>
           <a
             id="hero-call-btn"
             href="tel:+34600112233"
-            class="h-12 px-4 rounded-xl border theme-border flex items-center justify-center text-xs transition-all shrink-0 font-sans font-bold spring-btn"
+            class="h-13 px-4 py-3.5 rounded-2xl border theme-border flex items-center justify-center text-xs transition-all shrink-0 font-sans font-bold spring-btn hover:bg-stone-800"
             style="color: var(--text-body); background-color: var(--bg-surface);"
             title="Llamar"
           >
@@ -363,17 +383,23 @@
             href="https://maps.google.com/?q=Calle+Castilla+Triana+Sevilla"
             target="_blank"
             rel="noopener noreferrer"
-            class="h-12 w-12 rounded-xl border theme-border flex items-center justify-center transition-all shrink-0 spring-btn"
+            class="h-13 w-13 rounded-2xl border theme-border flex items-center justify-center transition-all shrink-0 spring-btn hover:bg-stone-800"
             style="color: var(--text-muted); background-color: var(--bg-surface);"
             title="Cómo llegar"
           >
             <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
           </a>
         </div>
-        <p class="text-xs mt-3.5 font-sans flex items-center gap-2" style="color: var(--text-muted);" id="hero-slots-hint">
-          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          Hoy quedan <b id="hero-slots-left" class="num-formal font-bold text-sm" style="color: var(--text-body);">—</b> huecos libres · se actualiza en vivo
-        </p>
+        
+        <div class="mt-3.5 p-2.5 rounded-xl border theme-border flex items-center justify-between font-sans text-xs" style="background-color: var(--bg-surface);">
+          <span class="flex items-center gap-2" style="color: var(--text-muted);">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Disponibilidad hoy:
+          </span>
+          <a href="#booking-module" class="font-bold text-emerald-400 hover:underline flex items-center gap-1">
+            <span id="hero-slots-left" class="num-formal font-bold text-sm">—</span> huecos libres · Elegir hora →
+          </a>
+        </div>
       </section>
 
       <!-- ==================== 2. EL ESPACIO (GALERÍA EDITORIAL) ==================== -->
@@ -434,19 +460,25 @@
       </section>
 
 
-      <!-- ==================== 3. SELECTOR DE RESERVAS ==================== -->
+      <!-- ==================== 3. SELECTOR DE RESERVAS (MÓDULO DE CITAS) ==================== -->
       <section id="booking-module" class="w-full pt-8 scroll-mt-20">
 
         <div class="mb-5">
-          <span class="text-xs font-bold block mb-1 font-sans uppercase tracking-wider" style="color: var(--accent-bronze);" id="module-pretitle">Pide tu hueco — tardas 30 segundos</span>
-          <h2 class="font-serif text-[30px] font-medium tracking-tight" style="color: var(--text-title);" id="module-title">Precios claros</h2>
+          <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full border border-amber-500/30 bg-amber-500/10 mb-2">
+            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+            <span class="text-[10.5px] font-bold font-sans uppercase tracking-wider text-amber-300" id="module-pretitle">Pide tu hueco en 30 segundos</span>
+          </div>
+          <h2 class="font-serif text-[32px] font-medium tracking-tight" style="color: var(--text-title);" id="module-title">Precios claros</h2>
           <p class="text-xs mt-0.5" style="color: var(--text-muted);" id="module-desc">Sin sorpresas. Se paga en el local, en efectivo o Bizum.</p>
         </div>
 
         <!-- PASO 1: SERVICIOS CON TARJETAS ARTESANALES -->
         <div class="mb-6 font-sans">
           <div class="flex items-center justify-between pb-2 mb-2">
-            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-title);" id="title-step-1">1. Elige qué te hago</span>
+            <span class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style="color: var(--text-title);" id="title-step-1">
+              <span class="w-4 h-4 rounded-full bg-stone-800 border theme-border flex items-center justify-center text-[10px] font-bold text-amber-300">1</span>
+              Elige tu servicio
+            </span>
             <span class="text-xs" style="color: var(--text-muted);" id="sub-step-1">lo que ves es lo que pagas</span>
           </div>
 
@@ -458,7 +490,10 @@
         <!-- PASO 2: DÍA Y HORA -->
         <div class="mb-7 font-sans">
           <div class="flex items-center justify-between pb-2 mb-3">
-            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-title);" id="title-step-2">2. Elige día y hora</span>
+            <span class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style="color: var(--text-title);" id="title-step-2">
+              <span class="w-4 h-4 rounded-full bg-stone-800 border theme-border flex items-center justify-center text-[10px] font-bold text-amber-300">2</span>
+              Elige día y hora
+            </span>
             <span class="text-xs font-bold num-formal" style="color: var(--accent-bronze);" id="selected-date-summary"></span>
           </div>
 
@@ -482,11 +517,14 @@
         <!-- PASO 3: TUS DATOS -->
         <div class="mb-7 font-sans">
           <div class="flex items-center justify-between pb-2 mb-3">
-            <span class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-title);" id="title-step-3">3. Tus datos (solo para avisarte)</span>
+            <span class="text-xs font-bold uppercase tracking-wider flex items-center gap-1.5" style="color: var(--text-title);" id="title-step-3">
+              <span class="w-4 h-4 rounded-full bg-stone-800 border theme-border flex items-center justify-center text-[10px] font-bold text-amber-300">3</span>
+              Tus datos (solo para avisarte)
+            </span>
             <span class="text-xs" style="color: var(--text-muted);" id="lbl-direct-whatsapp">Te llega por WhatsApp</span>
           </div>
 
-          <div class="space-y-3.5 p-4 rounded-xl border theme-border" style="background-color: var(--bg-surface);">
+          <div class="space-y-3.5 p-4 rounded-2xl border theme-border" style="background-color: var(--bg-surface);">
             <div>
               <label for="client-name" class="block text-xs font-bold mb-1.5" style="color: var(--text-muted);" id="lbl-name">Nombre completo *</label>
               <input
@@ -566,14 +604,14 @@
   </div>
 
   <!-- ===================================================================================
-       BARRA FIJA INFERIOR (STICKY BAR)
+       BARRA FIJA INFERIOR (STICKY BAR CON CTA DESTACADO)
        =================================================================================== -->
   <div id="sticky-bar" class="fixed bottom-0 inset-x-0 editorial-blur border-t theme-border p-3.5 sm:p-4 z-40 shadow-2xl font-sans">
     <div class="w-full max-w-md mx-auto flex items-center gap-3">
       <div class="flex-1 min-w-0 pr-1">
         <div class="flex items-center gap-2">
           <span class="text-xs font-serif font-medium tracking-wide truncate" style="color: var(--text-title);" id="sticky-service-label">Corte clásico</span>
-          <span class="text-sm font-bold shrink-0 tracking-tight num-formal" style="color: var(--accent-bronze);" id="sticky-price-label">12 €</span>
+          <span class="text-[15px] font-bold shrink-0 tracking-tight num-formal" style="color: var(--accent-bronze);" id="sticky-price-label">12 €</span>
         </div>
         <p class="text-xs truncate mt-0.5 font-medium num-formal" style="color: var(--text-muted);" id="sticky-date-label">Elige día y hora</p>
       </div>
@@ -583,8 +621,7 @@
         type="button"
         onclick="handleBookingConfirmation()"
         disabled
-        class="h-11 px-4 font-bold rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-25 disabled:cursor-not-allowed shrink-0 shadow-md spring-btn"
-        style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
+        class="h-12 px-5 font-bold rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 disabled:opacity-30 disabled:cursor-not-allowed shrink-0 cta-highlight spring-btn"
       >
         <span id="txt-cta-button">Pedir cita por WhatsApp</span>
       </button>
@@ -702,25 +739,34 @@
 
 
   <!-- ===================================================================================
-       SUITE DEL DUEÑO / PANEL DEL PELUQUERO (ATELIER MINIMALISTA & ELEGANTE)
+       SUITE DEL DUEÑO / PANEL DEL PELUQUERO (REDISEÑO TOTAL ELEGANTE & FUNCIONAL)
        =================================================================================== -->
-  <div id="admin-view" class="w-full max-w-md mx-auto px-4 pt-4 sm:px-5 space-y-4 hidden font-sans">
+  <div id="admin-view" class="w-full max-w-md mx-auto px-4 pt-4 sm:px-5 space-y-4 hidden font-sans pb-12">
 
-    <!-- Header Panel -->
+    <!-- Header Panel con Botón Directo "+ Meter Cita" -->
     <header class="flex items-center justify-between pb-3.5 border-b theme-border">
       <div>
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span class="text-[9.5px] uppercase tracking-[0.25em] font-bold" style="color: var(--accent-bronze);">Control del Local</span>
+          <span class="text-[10px] uppercase tracking-[0.25em] font-bold" style="color: var(--accent-bronze);">Gestión del Taller</span>
         </div>
-        <h1 class="font-serif text-2xl font-normal mt-0.5" style="color: var(--text-title);">Panel de Gestión</h1>
+        <h1 class="font-serif text-2xl font-medium mt-0.5" style="color: var(--text-title);">Agenda & Local</h1>
       </div>
-      <button onclick="exitAdminView()" class="px-3.5 py-1.5 rounded-xl border theme-border text-xs font-semibold hover:opacity-75 spring-btn" style="color: var(--text-body);">
-        Ver Web Cliente
+
+      <!-- BOTÓN DESTACADO PARA EL DUEÑO: METER CITA POR TELÉFONO / WHATSAPP AL INSTANTE -->
+      <button
+        onclick="openExpressBookingModal('10:00')"
+        class="h-10 px-3.5 rounded-xl font-bold text-xs uppercase tracking-wide transition-all cta-highlight flex items-center gap-1.5 shadow-md spring-btn"
+      >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>+ Meter Cita</span>
       </button>
     </header>
 
-    <!-- Pestañas de Navegación del Panel con Iconos Limpios Minimalistas -->
+    <!-- Pestañas de Navegación del Panel con Scroll Suave y sin recortes -->
     <div class="flex rounded-xl p-1 border theme-border text-xs font-semibold overflow-x-auto no-scrollbar gap-1" style="background-color: var(--bg-surface);">
       <button id="tab-btn-visual" onclick="switchAdminTab('visual')" class="px-3 py-2 rounded-lg font-bold shadow-sm transition-all whitespace-nowrap shrink-0 flex items-center gap-1.5" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
         <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -748,49 +794,52 @@
       </button>
     </div>
 
-    <!-- PESTAÑA 1: AGENDA VISUAL EN VIVO (DISEÑO REFINADO, ELEGANTE Y SIN AI-SLOP) -->
+    <!-- PESTAÑA 1: AGENDA VISUAL EN VIVO (DISEÑO ATELIER REFINADO) -->
     <section id="tab-visual" class="space-y-4">
       
-      <!-- Navegador de Días en 1 Toque -->
-      <div class="p-4 rounded-xl border theme-border space-y-3" style="background-color: var(--bg-surface);">
+      <!-- Navegador de Días tipo Apple Scrubber -->
+      <div class="p-4 rounded-2xl border theme-border space-y-3 shadow-sm" style="background-color: var(--bg-surface);">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <button onclick="adminShiftDay(-1)" class="w-8 h-8 rounded-lg border theme-border flex items-center justify-center text-sm font-bold hover:opacity-80 spring-btn num-formal" style="color: var(--text-body);">‹</button>
-            <span class="text-sm font-bold font-sans tracking-tight capitalize" style="color: var(--text-title);" id="admin-visual-date-label">Hoy</span>
-            <button onclick="adminShiftDay(1)" class="w-8 h-8 rounded-lg border theme-border flex items-center justify-center text-sm font-bold hover:opacity-80 spring-btn num-formal" style="color: var(--text-body);">›</button>
+            <button onclick="adminShiftDay(-1)" class="w-8 h-8 rounded-xl border theme-border flex items-center justify-center text-sm font-bold hover:opacity-80 spring-btn num-formal" style="color: var(--text-body);">‹</button>
+            <span class="text-[15px] font-bold font-sans tracking-tight capitalize" style="color: var(--text-title);" id="admin-visual-date-label">Hoy</span>
+            <button onclick="adminShiftDay(1)" class="w-8 h-8 rounded-xl border theme-border flex items-center justify-center text-sm font-bold hover:opacity-80 spring-btn num-formal" style="color: var(--text-body);">›</button>
           </div>
           
           <input
             type="date"
             id="admin-visual-date-picker"
-            class="text-xs font-sans border theme-border rounded-xl px-3 py-1.5 focus:outline-none num-formal"
+            class="text-xs font-sans border theme-border rounded-xl px-3 py-1.5 focus:outline-none num-formal font-medium"
             style="background-color: var(--bg-main); color: var(--text-title);"
             onchange="onAdminVisualDateChange(this.value)"
           />
         </div>
 
         <!-- Chips de Acceso Rápido a Días -->
-        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1" id="admin-quick-day-chips"></div>
+        <div class="flex gap-1.5 overflow-x-auto no-scrollbar pt-0.5" id="admin-quick-day-chips"></div>
 
         <!-- Resumen de Ocupación del Día -->
-        <div class="flex items-center justify-between text-xs pt-2.5 border-t theme-border font-sans">
-          <div class="flex items-center gap-3">
-            <span class="inline-flex items-center gap-1.5 text-emerald-400 font-semibold num-formal">
-              <span class="w-2 h-2 rounded-full bg-emerald-500"></span> <span id="admin-stat-free">0 Libres</span>
-            </span>
-            <span class="inline-flex items-center gap-1.5 text-rose-400 font-semibold num-formal">
-              <span class="w-2 h-2 rounded-full bg-rose-500"></span> <span id="admin-stat-busy">0 Ocupadas</span>
-            </span>
+        <div class="grid grid-cols-3 gap-2 pt-3 border-t theme-border text-center font-sans">
+          <div class="p-2 rounded-xl border theme-border" style="background-color: var(--bg-main);">
+            <div class="text-[10px] uppercase tracking-wider font-bold text-emerald-400">Libres</div>
+            <div class="text-base font-bold num-formal text-white mt-0.5" id="admin-stat-free">0</div>
           </div>
-          <span class="text-xs font-bold num-formal" style="color: var(--accent-bronze);" id="admin-stat-money">~0 € caja</span>
+          <div class="p-2 rounded-xl border theme-border" style="background-color: var(--bg-main);">
+            <div class="text-[10px] uppercase tracking-wider font-bold text-rose-400">Citas</div>
+            <div class="text-base font-bold num-formal text-white mt-0.5" id="admin-stat-busy">0</div>
+          </div>
+          <div class="p-2 rounded-xl border theme-border" style="background-color: var(--bg-main);">
+            <div class="text-[10px] uppercase tracking-wider font-bold" style="color: var(--accent-bronze);">Caja Prevista</div>
+            <div class="text-base font-bold num-formal mt-0.5" style="color: var(--accent-bronze);" id="admin-stat-money">~0 €</div>
+          </div>
         </div>
       </div>
 
-      <!-- Cuadrícula de Franjas Horarias Minimalistas -->
+      <!-- Cuadrícula de Franjas Horarias con botón destacado en cada franja -->
       <div class="space-y-2">
-        <div class="flex items-center justify-between text-[10.5px] uppercase tracking-wider font-bold" style="color: var(--text-muted);">
+        <div class="flex items-center justify-between text-[11px] uppercase tracking-wider font-bold px-0.5" style="color: var(--text-muted);">
           <span>Horario en vivo</span>
-          <span class="normal-case font-medium">Toca para asignar cita al vuelo</span>
+          <span class="normal-case font-medium text-[11.5px] text-amber-300">Toca cualquier hora para meter cita</span>
         </div>
         <div class="space-y-2" id="admin-visual-slots-container"></div>
       </div>
@@ -802,7 +851,7 @@
       <div id="admin-day-summary" class="p-4 rounded-xl border theme-border grid grid-cols-3 gap-2 text-center" style="background-color: var(--bg-surface);"></div>
       <div class="flex items-center gap-2">
         <input type="date" id="admin-appt-date" class="flex-1 h-11 border theme-border rounded-xl px-3.5 text-xs num-formal font-medium" style="background-color: var(--bg-surface); color: var(--text-title);" onchange="renderAdminAppointments()" />
-        <button onclick="openManualBookingModal()" class="h-11 px-4 rounded-xl text-xs font-bold shrink-0 spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="openManualBookingModal()" class="h-11 px-4 rounded-xl text-xs font-bold shrink-0 cta-highlight spring-btn">
           + Apuntar
         </button>
       </div>
@@ -822,7 +871,7 @@
           <h2 class="text-xs font-bold uppercase tracking-wider" style="color: var(--text-body);">Lista de Espera</h2>
           <p class="text-xs" style="color: var(--text-muted);">Apunta a clientes que quieren hueco por si alguien cancela.</p>
         </div>
-        <button onclick="openAddWaitlistModal()" class="px-3 py-2 rounded-xl text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">
+        <button onclick="openAddWaitlistModal()" class="px-3 py-2 rounded-xl text-xs font-bold cta-highlight spring-btn">
           + Apuntar cliente
         </button>
       </div>
@@ -896,7 +945,7 @@
         <div><label class="text-[11px] font-bold" style="color: var(--text-muted);">Enlace Maps</label><input id="set-maps" class="w-full h-10 border theme-border rounded-xl px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
         <div><label class="text-[11px] font-bold" style="color: var(--text-muted);">Instagram</label><input id="set-ig" placeholder="https://instagram.com/..." class="w-full h-10 border theme-border rounded-xl px-3 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);" /></div>
         <div><label class="text-[11px] font-bold" style="color: var(--text-muted);">Aviso del barbero (nota)</label><textarea id="set-notice" rows="2" class="w-full border theme-border rounded-xl px-3 py-2 text-[13px]" style="background-color: var(--bg-input); color: var(--text-title);"></textarea></div>
-        <button onclick="saveShopSettings()" class="w-full h-11 rounded-xl text-xs font-bold uppercase tracking-wider spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Guardar datos del local</button>
+        <button onclick="saveShopSettings()" class="w-full h-11 rounded-xl text-xs font-bold uppercase tracking-wider spring-btn cta-highlight">Guardar datos del local</button>
       </div>
 
       <div class="p-4 rounded-xl border theme-border space-y-3 text-center" style="background-color: var(--bg-surface);">
@@ -905,7 +954,7 @@
         <p class="text-xs" style="color: var(--text-muted);">Apunta a tu web. Imprímelo y pégalo en la puerta de la barbería.</p>
         <div class="grid grid-cols-2 gap-2">
           <button onclick="downloadQr()" class="h-10 rounded-xl border theme-border text-xs font-semibold spring-btn" style="color: var(--text-body);">Descargar QR</button>
-          <button onclick="copyBookingLink()" class="h-10 rounded-xl text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);">Copiar enlace</button>
+          <button onclick="copyBookingLink()" class="h-10 rounded-xl text-xs font-bold spring-btn cta-highlight">Copiar enlace</button>
         </div>
         <button onclick="printQrSheet()" class="w-full h-10 rounded-xl border theme-border text-xs font-medium spring-btn" style="color: var(--text-muted);">Imprimir cartel puerta (A4)</button>
       </div>
@@ -922,9 +971,12 @@
       
       <div class="flex items-start justify-between border-b theme-border pb-3">
         <div>
-          <span class="text-[10px] uppercase font-bold tracking-wider text-emerald-400">Meter Cita al Teléfono</span>
+          <span class="text-[10.5px] uppercase font-bold tracking-wider text-emerald-400 flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Asignar Cita al Teléfono
+          </span>
           <h3 class="font-serif text-lg font-semibold mt-0.5 num-formal" style="color: var(--text-title);" id="express-modal-title">
-            11:30 · Hoy
+            10:00 · Hoy
           </h3>
         </div>
         <button onclick="closeExpressBookingModal()" class="w-7 h-7 rounded-full border theme-border flex items-center justify-center text-xs hover:opacity-75 spring-btn" style="color: var(--text-muted);">✕</button>
@@ -938,7 +990,7 @@
             id="express-client-name"
             placeholder="Ej. Juan Gómez"
             autocomplete="off"
-            class="w-full h-11 border theme-border rounded-xl px-3 text-sm font-medium focus:outline-none"
+            class="w-full h-11 border theme-border rounded-xl px-3.5 text-sm font-medium focus:outline-none"
             style="background-color: var(--bg-input); color: var(--text-title);"
             onkeydown="if(event.key==='Enter') saveExpressBooking()"
           />
@@ -975,8 +1027,7 @@
         <button
           type="button"
           onclick="saveExpressBooking()"
-          class="flex-1 h-11 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg transition-opacity hover:opacity-90 spring-btn"
-          style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);"
+          class="flex-1 h-11 rounded-xl text-xs font-bold uppercase tracking-wider shadow-lg cta-highlight spring-btn"
         >
           Guardar Cita ↵
         </button>
@@ -1013,7 +1064,7 @@
         <button onclick="closeWaitlistModal()" class="flex-1 h-10 rounded-xl border theme-border text-xs font-semibold spring-btn" style="color: var(--text-muted);">
           Cancelar
         </button>
-        <button onclick="saveWaitlistClient()" class="flex-1 h-10 rounded-xl text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);" >
+        <button onclick="saveWaitlistClient()" class="flex-1 h-10 rounded-xl text-xs font-bold spring-btn cta-highlight">
           Guardar en Lista
         </button>
       </div>
@@ -1075,7 +1126,7 @@
         <button onclick="closeManualBookingModal()" class="flex-1 h-10 rounded-xl border theme-border text-xs font-semibold spring-btn" style="color: var(--text-muted);">
           Cancelar
         </button>
-        <button onclick="saveManualBooking()" class="flex-1 h-10 rounded-xl text-xs font-bold spring-btn" style="background-color: var(--btn-primary-bg); color: var(--btn-primary-text);" >
+        <button onclick="saveManualBooking()" class="flex-1 h-10 rounded-xl text-xs font-bold spring-btn cta-highlight">
           Guardar Cita
         </button>
       </div>
@@ -1109,7 +1160,7 @@
         htmlEl.classList.remove('light-mode');
         if (sunIcon) sunIcon.classList.remove('hidden');
         if (moonIcon) moonIcon.classList.add('hidden');
-        if (metaTheme) metaTheme.setAttribute('content', '#0f0f0e');
+        if (metaTheme) metaTheme.setAttribute('content', '#0c0b0a');
       }
       localStorage.setItem('barber_theme', theme);
     }
@@ -1131,20 +1182,20 @@
         heroTitle: 'Corte a navaja en Triana. Sin esperas.',
         heroSubtitle: "Soy el del sillón nº2, te atiendo yo mismo. Reserva abajo en 30 segundos y entra directo — si llegas 10 min tarde, avísame por WhatsApp.",
         heroProof: "4,9 Google · 320 reseñas · Calle Castilla 24",
-        heroCta: "Pedir cita",
+        heroCta: "Reservar Cita Ahora",
         heroCall: "Llamar",
         galleryTitle: "Así es el taller",
         galleryTag: "Castilla 24 · Triana",
         photoTag1: "El sillón nº2, el de siempre",
         review1: "“Me dejó el degradado perfecto antes de la boda. Sin esperas porque reservé aquí.”",
         review2: "“Tourist-friendly, quick WhatsApp confirmation. Great hot-towel shave in Seville.”",
-        modulePretitle: "Pide tu hueco — tardas 30 segundos",
+        modulePretitle: "Pide tu hueco en 30 segundos",
         moduleTitle: "Precios claros",
         moduleDesc: "Sin sorpresas. Se paga en el local, en efectivo o Bizum.",
-        step1Title: "1. Elige qué te hago",
+        step1Title: "Elige tu servicio",
         subStep1: "lo que ves es lo que pagas",
-        step2Title: "2. Elige día y hora",
-        step3Title: "3. Tus datos (solo para avisarte)",
+        step2Title: "Elige día y hora",
+        step3Title: "Tus datos (solo para avisarte)",
         lblDirectWhatsapp: "Te llega por WhatsApp",
         lblName: "Nombre completo *",
         namePlaceholder: "Ej. Carlos Mendoza",
@@ -1181,7 +1232,7 @@
         heroTitle: 'Classic razor haircut in Triana. No waiting.',
         heroSubtitle: "Traditional barbershop chair #2, personally taking care of you. Book below in 30 seconds and walk straight in.",
         heroProof: "4.9 Google · 320 reviews · Calle Castilla 24",
-        heroCta: "Book appointment",
+        heroCta: "Book Appointment Now",
         heroCall: "Call",
         galleryTitle: "The barbershop",
         galleryTag: "Castilla 24 · Triana",
@@ -1191,10 +1242,10 @@
         modulePretitle: "Reserve your slot in 30 seconds",
         moduleTitle: "Clear pricing",
         moduleDesc: "No surprises. Payment on-site in cash or card.",
-        step1Title: "1. Select your service",
+        step1Title: "Select your service",
         subStep1: "transparent rates",
-        step2Title: "2. Choose date & time",
-        step3Title: "3. Your details (for reminder)",
+        step2Title: "Choose date & time",
+        step3Title: "Your details (for reminder)",
         lblDirectWhatsapp: "Direct WhatsApp",
         lblName: "Full name *",
         namePlaceholder: "e.g. John Miller",
@@ -1231,7 +1282,7 @@
         heroTitle: 'Coupe au rasoir à Triana. Sans attente.',
         heroSubtitle: "Fauteuil traditionnel nº2. Réservez en 30 secondes et entrez directamente au salon.",
         heroProof: "4,9 Google · 320 avis · Calle Castilla 24",
-        heroCta: "Prendre RDV",
+        heroCta: "Prendre RDV Maintenant",
         heroCall: "Appeler",
         galleryTitle: "Le salon",
         galleryTag: "Castilla 24 · Triana",
@@ -1241,10 +1292,10 @@
         modulePretitle: "Réservez en 30 secondes",
         moduleTitle: "Tarifs clairs",
         moduleDesc: "Paiement sur place en espèces ou carte.",
-        step1Title: "1. Choisissez la prestation",
+        step1Title: "Choisissez la prestation",
         subStep1: "tarifs nets",
-        step2Title: "2. Date et heure",
-        step3Title: "3. Vos coordonnées",
+        step2Title: "Date et heure",
+        step3Title: "Vos coordonnées",
         lblDirectWhatsapp: "WhatsApp direct",
         lblName: "Nom complet *",
         namePlaceholder: "Ex. Jean Dupont",
@@ -1281,7 +1332,7 @@
         heroTitle: 'Taglio a rasoio a Triana. Senza attese.',
         heroSubtitle: "Poltrona tradizionale nº2. Prenota il tuo turno in 30 secondi ed entra direttamente.",
         heroProof: "4,9 Google · 320 recensioni · Calle Castilla 24",
-        heroCta: "Prenota ora",
+        heroCta: "Prenota Turno Ora",
         heroCall: "Chiama",
         galleryTitle: "La barberia",
         galleryTag: "Castilla 24 · Triana",
@@ -1291,10 +1342,10 @@
         modulePretitle: "Prenota in 30 secondi",
         moduleTitle: "Listino trasparente",
         moduleDesc: "Pagamento in loco in contanti o carta.",
-        step1Title: "1. Scegli il servizio",
+        step1Title: "Scegli il servizio",
         subStep1: "prezzi chiari",
-        step2Title: "2. Scegli giorno e ora",
-        step3Title: "3. I tuoi dati",
+        step2Title: "Scegli giorno e ora",
+        step3Title: "I tuoi dati",
         lblDirectWhatsapp: "WhatsApp diretto",
         lblName: "Nome completo *",
         namePlaceholder: "Es. Marco Rossi",
@@ -1331,7 +1382,7 @@
         heroTitle: 'Klassischer Schnitt in Triana. Ohne Wartezeit.',
         heroSubtitle: "Traditioneller Barbiersessel Nr. 2. Buchen Sie Ihren Termin in 30 Sekunden online.",
         heroProof: "4,9 Google · 320 Bewertungen · Calle Castilla 24",
-        heroCta: "Termin buchen",
+        heroCta: "Jetzt Termin buchen",
         heroCall: "Anrufen",
         galleryTitle: "Der Salon",
         galleryTag: "Castilla 24 · Triana",
@@ -1341,10 +1392,10 @@
         modulePretitle: "In 30 Sekunden buchen",
         moduleTitle: "Transparente Preise",
         moduleDesc: "Zahlung vor Ort in bar oder mit Karte.",
-        step1Title: "1. Dienstleistung wählen",
+        step1Title: "Dienstleistung wählen",
         subStep1: "Feste Preise",
-        step2Title: "2. Datum & Uhrzeit",
-        step3Title: "3. Ihre Kontaktdaten",
+        step2Title: "Datum & Uhrzeit",
+        step3Title: "Ihre Kontaktdaten",
         lblDirectWhatsapp: "Direkt per WhatsApp",
         lblName: "Vollständiger Name *",
         namePlaceholder: "z.B. Max Mustermann",
@@ -1377,7 +1428,7 @@
       }
     };
 
-    // SERVICIOS DE CORTE Y TRATAMIENTOS (CORTE A 12€)
+    // SERVICIOS DE CORTE Y TRATAMIENTOS
     const SERVICES_TRANSLATIONS = {
       1: {
         es: { name: "Corte clásico", desc: "Lavado artesano, corte a tijera o máquina y peinado profesional", duration: "30 min", tag: "MÁS PEDIDO" },
@@ -1449,7 +1500,6 @@
         const data = localStorage.getItem('barber_services');
         if (data) {
           const list = JSON.parse(data);
-          // Garantizar que si el usuario no modificó manualmente, tenga el corte a 12€
           const classic = list.find(s => s.id === 1);
           if (classic && classic.price === 15) classic.price = 12;
           return list;
@@ -1504,7 +1554,7 @@
       lastBooking: null,
       adminVisualDate: getTodayKey(),
       expressSelectedService: "Corte clásico",
-      expressCurrentSlotTime: "11:00",
+      expressCurrentSlotTime: "10:00",
       ownerViewingClientMode: false
     };
 
@@ -1663,7 +1713,7 @@
         const isSelected = state.selectedServiceId === service.id;
 
         const borderStyle = isSelected
-          ? 'border-emerald-500/80 shadow-[0_0_20px_rgba(16,185,129,0.12)] ring-1 ring-emerald-500/30'
+          ? 'border-amber-500/80 shadow-[0_0_22px_rgba(197,160,114,0.18)] ring-1 ring-amber-500/40'
           : 'theme-border hover:border-stone-500/50';
 
         const customBg = isSelected
@@ -1671,13 +1721,13 @@
           : 'style="background-color: var(--bg-surface);"';
 
         const radioDot = isSelected
-          ? `<div class="w-4 h-4 rounded-full border-2 border-emerald-500 flex items-center justify-center bg-emerald-500/20"><div class="w-2 h-2 rounded-full bg-emerald-400"></div></div>`
+          ? `<div class="w-4 h-4 rounded-full border-2 border-amber-400 flex items-center justify-center bg-amber-400/20"><div class="w-2 h-2 rounded-full bg-amber-400"></div></div>`
           : `<div class="w-4 h-4 rounded-full border border-stone-600"></div>`;
 
         return `
           <div 
             onclick="selectService(${service.id})"
-            class="p-4 rounded-xl border transition-all duration-200 cursor-pointer flex items-start justify-between gap-3.5 spring-btn ${borderStyle}"
+            class="p-4 rounded-2xl border transition-all duration-200 cursor-pointer flex items-start justify-between gap-3.5 spring-btn ${borderStyle}"
             ${customBg}
           >
             <div class="space-y-1 min-w-0 flex-1">
@@ -1696,7 +1746,7 @@
             </div>
 
             <div class="text-right shrink-0 font-sans pl-2">
-              <span class="text-[18px] font-bold tracking-tight block num-formal" style="color: var(--text-title);">${service.price} €</span>
+              <span class="text-[19px] font-bold tracking-tight block num-formal" style="color: var(--text-title);">${service.price} €</span>
               <span class="text-[10.5px] font-semibold block uppercase tracking-wider mt-0.5 num-formal" style="color: var(--text-muted);">${service.duration}</span>
             </div>
           </div>
@@ -1877,7 +1927,7 @@
 
         if (!slot.isAvailable) {
           return `
-            <button type="button" disabled class="h-10 text-xs rounded-xl border theme-border line-through cursor-not-allowed select-none font-sans font-medium opacity-25 num-formal" style="background-color: var(--bg-main); color: var(--text-muted);">
+            <button type="button" disabled class="h-11 text-xs rounded-xl border theme-border line-through cursor-not-allowed select-none font-sans font-medium opacity-25 num-formal" style="background-color: var(--bg-main); color: var(--text-muted);">
               ${slot.time}
             </button>
           `;
@@ -1888,7 +1938,7 @@
           : `style="background-color: var(--bg-surface); color: var(--text-body); border-color: var(--border-color);"`;
 
         return `
-          <button type="button" onclick="selectTime('${slot.time}')" class="h-10 text-xs rounded-xl border transition-all flex items-center justify-center tracking-tight font-bold spring-btn num-formal ${isSelected ? 'shadow-md' : 'hover:opacity-80'}" ${activeCustomStyle}>
+          <button type="button" onclick="selectTime('${slot.time}')" class="h-11 text-xs rounded-xl border transition-all flex items-center justify-center tracking-tight font-bold spring-btn num-formal ${isSelected ? 'shadow-md ring-2 ring-amber-400/40' : 'hover:border-stone-500/70'}" ${activeCustomStyle}>
             ${slot.time}
           </button>
         `;
@@ -2154,23 +2204,21 @@ END:VCALENDAR`;
       const toggleBtn = document.getElementById('btn-toggle-owner-view');
 
       if (isPublicHidden) {
-        // Pasar a ver la web como cliente
         document.getElementById('admin-view').classList.add('hidden');
         document.getElementById('public-view').classList.remove('hidden');
         document.getElementById('sticky-bar').classList.remove('hidden');
         if (toggleBtn) {
-          toggleBtn.innerHTML = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7 7-3-4 12H6L2 6l7 3 3-7z"/></svg><span>Volver a Panel</span>`;
+          toggleBtn.innerHTML = `<svg class="w-3.5 h-3.5 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7 7-3-4 12H6L2 6l7 3 3-7z"/></svg><span>Volver a Panel</span>`;
         }
         renderServices();
         generateCalendarDays();
         renderTimeSlotsForSelectedDate();
       } else {
-        // Volver al panel de operaciones
         document.getElementById('public-view').classList.add('hidden');
         document.getElementById('sticky-bar').classList.add('hidden');
         document.getElementById('admin-view').classList.remove('hidden');
         if (toggleBtn) {
-          toggleBtn.innerHTML = `<svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span>Ver como Cliente</span>`;
+          toggleBtn.innerHTML = `<svg class="w-3.5 h-3.5 text-stone-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg><span>Ver como Cliente</span>`;
         }
         renderAdminVisualCalendar();
       }
@@ -2268,13 +2316,13 @@ END:VCALENDAR`;
 
         chipsContainer.innerHTML = quickDays.map(qd => {
           const style = qd.isSelected
-            ? 'bg-stone-200 text-stone-900 font-bold shadow-sm'
+            ? 'bg-stone-200 text-stone-900 font-bold shadow-sm ring-1 ring-white/50'
             : 'border theme-border text-stone-400 hover:text-white';
           return `
             <button
               type="button"
               onclick="setAdminVisualDay('${qd.key}')"
-              class="px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all spring-btn num-formal ${style}"
+              class="px-3.5 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all spring-btn num-formal ${style}"
             >
               ${qd.label}
             </button>
@@ -2300,17 +2348,17 @@ END:VCALENDAR`;
 
       if (isClosedDay) {
         container.innerHTML = `
-          <div class="p-6 text-center border theme-border rounded-xl space-y-2" style="background-color: var(--bg-surface);">
+          <div class="p-6 text-center border theme-border rounded-2xl space-y-2" style="background-color: var(--bg-surface);">
             <p class="text-sm font-bold text-rose-400">Día Completo Cerrado / Festivo</p>
             <p class="text-xs" style="color: var(--text-muted);">No hay turnos disponibles para este día.</p>
-            <button onclick="toggleAdminClosedDayVisual('${targetDate}')" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-stone-200 text-stone-900 mt-2 spring-btn">
+            <button onclick="toggleAdminClosedDayVisual('${targetDate}')" class="px-3.5 py-2 rounded-xl text-xs font-bold bg-stone-200 text-stone-900 mt-2 spring-btn">
               Abrir este día
             </button>
           </div>
         `;
-        setText('admin-stat-free', '0 Libres');
+        setText('admin-stat-free', '0');
         setText('admin-stat-busy', 'Cerrado');
-        setText('admin-stat-money', '0 € caja');
+        setText('admin-stat-money', '0 €');
         return;
       }
 
@@ -2328,18 +2376,18 @@ END:VCALENDAR`;
           const waMsg = encodeURIComponent(`Hola ${appt.name}, te confirmo tu cita para el ${d} de ${monthsNames[dateObj.getMonth()]} a las ${appt.time} en ${shop.shop || 'Barbería El Barrio'} (${shop.address || 'Triana'}). ¡Te esperamos!`);
           const waLink = `https://wa.me/${cleanPhone}?text=${waMsg}`;
           const st = appt.status || 'confirmed';
-          const stLabel = st === 'done' ? 'Completado' : (st === 'noshow' ? 'No asistió' : 'Pendiente');
-          const stBadgeClass = st === 'done' ? 'text-emerald-400 border-emerald-500/30' : (st === 'noshow' ? 'text-rose-400 border-rose-500/30' : 'text-amber-400 border-amber-500/30');
+          const stLabel = st === 'done' ? 'Completado' : (st === 'noshow' ? 'No asistió' : 'Confirmada');
+          const stBadgeClass = st === 'done' ? 'text-emerald-400 border-emerald-500/30' : (st === 'noshow' ? 'text-rose-400 border-rose-500/30' : 'text-amber-300 border-amber-500/30 bg-amber-500/10');
 
           return `
-            <div class="p-3.5 rounded-xl border border-rose-500/25 bg-rose-950/15 transition-all flex items-center justify-between gap-2.5 ${st === 'noshow' ? 'opacity-40' : ''}">
+            <div class="p-3.5 rounded-2xl border border-stone-800 bg-stone-900/50 hover:border-stone-700 transition-all flex items-center justify-between gap-2.5 ${st === 'noshow' ? 'opacity-40' : ''}">
               <div class="flex items-center gap-3 min-w-0 flex-1">
                 <div class="flex items-center gap-2 shrink-0">
-                  <span class="w-2 h-2 rounded-full bg-rose-500"></span>
-                  <span class="num-formal text-sm font-bold tracking-tight text-white">${time}</span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
+                  <span class="num-formal text-[15px] font-bold tracking-tight text-white">${time}</span>
                 </div>
                 <div class="min-w-0">
-                  <p class="text-[13.5px] font-semibold text-white truncate">${appt.name} <span class="text-xs font-semibold text-rose-300 num-formal">(${price}€)</span></p>
+                  <p class="text-[14px] font-semibold text-white truncate">${appt.name} <span class="text-xs font-semibold text-amber-200/90 num-formal font-bold">(${price}€)</span></p>
                   <p class="text-xs text-stone-400 truncate">${appt.service}</p>
                 </div>
               </div>
@@ -2347,7 +2395,7 @@ END:VCALENDAR`;
               <div class="flex items-center gap-1.5 shrink-0">
                 <button
                   onclick="toggleVisualApptStatus(${appt.id})"
-                  class="px-2.5 py-1 rounded-lg text-[11px] font-medium border bg-stone-900/60 hover:text-white spring-btn ${stBadgeClass}"
+                  class="px-2.5 py-1 rounded-lg text-[11px] font-medium border hover:text-white spring-btn ${stBadgeClass}"
                   title="Cambiar estado"
                 >
                   ${stLabel}
@@ -2356,7 +2404,7 @@ END:VCALENDAR`;
                   <a
                     href="${waLink}"
                     target="_blank"
-                    class="p-1.5 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/25 rounded-lg text-xs font-bold inline-flex items-center spring-btn"
+                    class="p-2 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 border border-emerald-500/25 rounded-xl text-xs font-bold inline-flex items-center spring-btn"
                     title="Avisar por WhatsApp"
                   >
                     <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
@@ -2364,7 +2412,7 @@ END:VCALENDAR`;
                 ` : ''}
                 <button
                   onclick="freeAdminSlot(${appt.id}, '${targetDate}', '${time}')"
-                  class="px-2 py-1 bg-stone-900/60 hover:bg-rose-950/40 text-stone-400 hover:text-rose-300 border theme-border rounded-lg text-xs font-medium spring-btn"
+                  class="px-2 py-1 bg-stone-900 hover:bg-rose-950/40 text-stone-400 hover:text-rose-300 border theme-border rounded-lg text-xs font-medium spring-btn"
                   title="Liberar turno"
                 >
                   Liberar
@@ -2375,9 +2423,9 @@ END:VCALENDAR`;
         } else if (isBlocked) {
           busyCount++;
           return `
-            <div class="p-3 rounded-xl border theme-border bg-stone-900/30 transition-all flex items-center justify-between gap-3">
+            <div class="p-3 rounded-2xl border theme-border bg-stone-900/30 transition-all flex items-center justify-between gap-3">
               <div class="flex items-center gap-3">
-                <span class="w-2 h-2 rounded-full bg-stone-500"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-stone-500"></span>
                 <span class="num-formal text-sm font-medium text-stone-400">${time}</span>
                 <span class="text-xs text-stone-500 font-medium">Descanso / Bloqueado</span>
               </div>
@@ -2394,30 +2442,34 @@ END:VCALENDAR`;
           return `
             <div
               onclick="openExpressBookingModal('${time}')"
-              class="p-3.5 rounded-xl border theme-border hover:border-emerald-500/40 hover:bg-emerald-500/[0.04] transition-all cursor-pointer flex items-center justify-between gap-3 group spring-btn"
+              class="p-3.5 rounded-2xl border border-stone-800/90 hover:border-emerald-500/50 hover:bg-emerald-500/[0.04] transition-all cursor-pointer flex items-center justify-between gap-3 group spring-btn"
               style="background-color: var(--bg-surface);"
             >
               <div class="flex items-center gap-3">
                 <div class="flex items-center gap-2">
-                  <span class="w-2 h-2 rounded-full bg-emerald-500/80"></span>
-                  <span class="num-formal text-sm font-semibold text-stone-200 tracking-tight">${time}</span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(16,185,129,0.5)]"></span>
+                  <span class="num-formal text-[15px] font-bold text-stone-200 tracking-tight">${time}</span>
                 </div>
-                <span class="text-xs font-normal text-stone-400">Disponible</span>
+                <span class="text-xs font-medium text-emerald-400/90">Hueco Libre</span>
               </div>
 
               <div class="shrink-0">
-                <span class="px-2.5 py-1 rounded-lg text-xs font-medium border theme-border text-stone-300 group-hover:border-emerald-500/40 group-hover:text-emerald-300 transition-colors">
-                  + Asignar
-                </span>
+                <button
+                  type="button"
+                  class="px-3 py-1.5 rounded-xl text-xs font-bold bg-stone-800 text-stone-200 border border-stone-700 group-hover:bg-emerald-500 group-hover:text-black group-hover:border-emerald-400 transition-all shadow-sm flex items-center gap-1"
+                >
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                  <span>Coger cita</span>
+                </button>
               </div>
             </div>
           `;
         }
       }).join('');
 
-      setText('admin-stat-free', `${freeCount} Libres`);
-      setText('admin-stat-busy', `${busyCount} Ocupadas`);
-      setText('admin-stat-money', `~${totalCaja} € caja`);
+      setText('admin-stat-free', `${freeCount}`);
+      setText('admin-stat-busy', `${busyCount}`);
+      setText('admin-stat-money', `~${totalCaja} €`);
     }
 
     function toggleVisualApptStatus(id) {
@@ -2427,13 +2479,13 @@ END:VCALENDAR`;
 
     // MODAL EXPRESS: METER CITA EN 2 CLICS
     function openExpressBookingModal(time) {
-      state.expressCurrentSlotTime = time;
+      state.expressCurrentSlotTime = time || "10:00";
       const targetDate = state.adminVisualDate || getTodayKey();
       const [y, m, d] = targetDate.split('-').map(Number);
       const dateObj = new Date(y, m - 1, d);
       const monthsNames = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
 
-      setText('express-modal-title', `${time} · ${d} ${monthsNames[dateObj.getMonth()]}`);
+      setText('express-modal-title', `${state.expressCurrentSlotTime} · ${d} ${monthsNames[dateObj.getMonth()]}`);
       
       const nameInp = document.getElementById('express-client-name');
       if (nameInp) nameInp.value = '';
@@ -2453,7 +2505,7 @@ END:VCALENDAR`;
             <button
               type="button"
               onclick="selectExpressService('${s.name}', this)"
-              class="px-3 py-2 rounded-xl text-xs font-semibold border text-left transition-all express-service-chip spring-btn ${isSelected ? 'bg-stone-200 text-stone-900 border-stone-200 font-bold' : 'border-stone-800 text-stone-300 hover:border-stone-600'}"
+              class="px-3 py-2 rounded-xl text-xs font-semibold border text-left transition-all express-service-chip spring-btn ${isSelected ? 'bg-stone-200 text-stone-900 border-stone-200 font-bold shadow-sm' : 'border-stone-800 text-stone-300 hover:border-stone-600'}"
             >
               <span class="block truncate">${s.name}</span>
               <span class="text-[11px] opacity-80 num-formal font-bold">${s.price} €</span>
@@ -2472,7 +2524,7 @@ END:VCALENDAR`;
       document.querySelectorAll('.express-service-chip').forEach(b => {
         b.className = "px-3 py-2 rounded-xl text-xs font-semibold border text-left transition-all express-service-chip border-stone-800 text-stone-300 hover:border-stone-600 spring-btn";
       });
-      btnEl.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left transition-all express-service-chip bg-stone-200 text-stone-900 border-stone-200 spring-btn";
+      btnEl.className = "px-3 py-2 rounded-xl text-xs font-bold border text-left transition-all express-service-chip bg-stone-200 text-stone-900 border-stone-200 spring-btn shadow-sm";
     }
 
     function closeExpressBookingModal() {
