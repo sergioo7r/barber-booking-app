@@ -1,0 +1,26 @@
+{
+  "name": "LC BARBER TRIANA — Citas Online",
+  "short_name": "LC BARBER",
+  "description": "Barbería clásica y afeitado tradicional en Triana, Calle Castilla 58B, Sevilla.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0c0e12",
+  "theme_color": "#0c0e12",
+  "orientation": "portrait-primary",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
