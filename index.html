@@ -988,8 +988,9 @@
 
 
   <!-- ===================================================================================
-       JAVASCRIPT ROBUSTO (MOTOR DE PLANTILLA WHITE-LABEL)
+       JAVASCRIPT ROBUSTO (MOTOR DE PLANTILLA WHITE-LABEL & CLIENTE API)
        =================================================================================== -->
+  <script src="api-client.js"></script>
   <script>
     /* =========================================================================
        ⚙️ CONFIGURACIÓN DE PLANTILLA / WHITE-LABEL (PERSONALIZABLE EN 30 SEGUNDOS)
@@ -1007,8 +1008,6 @@
       schedule: "Lunes a Viernes 10:00–14:00 y 17:00–22:00 · Sábados 10:00–17:00",
       instagramHandle: "LCBARBERTRIANA",
       instagramUrl: "https://www.instagram.com/lcbarbertriana/",
-      facebookHandle: "LCBARBER",
-      facebookUrl: "https://www.facebook.com/lcbarber/",
     };
 
     const DEFAULT_PIN = "1234";
@@ -1913,6 +1912,9 @@
       };
       appts.push(newAppt);
       STORE.saveAppointments(appts);
+      if (window.ApiClient && typeof window.ApiClient.createBooking === 'function') {
+        window.ApiClient.createBooking(newAppt);
+      }
 
       state.lastBooking = {
         serviceName: service.name,
@@ -2486,6 +2488,9 @@ END:VCALENDAR`;
       if (s) {
         s.price = parseFloat(newPrice) || s.price;
         STORE.saveServices(list);
+        if (window.ApiClient && typeof window.ApiClient.updateServicePrice === 'function') {
+          window.ApiClient.updateServicePrice(id, s.price);
+        }
         renderServices();
         renderAdminVisualCalendar();
       }
